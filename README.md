@@ -39,10 +39,8 @@ After the dependencies has been installed, build the Laravel Mix assets.
 
 ## Contributing
 
-Contributions are always welcome!
+Contributions are always welcome! Create a pull request **[here](https://github.com/qctfw/wibulist/pulls)**!
 
-See `contributing.md` for ways to get started.
-
-Please adhere to this project's `code of conduct`.
+Please make sure to check the existing pull request to avoid duplication.
 
   
