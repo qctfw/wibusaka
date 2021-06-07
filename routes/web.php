@@ -16,3 +16,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [AnimeController::class, 'index']);
+
+Route::view('/anime', 'animes.single');
