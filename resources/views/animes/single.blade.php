@@ -2,7 +2,7 @@
     <x-slot name="title">Single Anime</x-slot>
 
     <div class="container mx-auto flex flex-col md:flex-row px-4 pt-12">
-        <div class="flex-none grid grid-cols-1 justify-between items-center w-full md:w-72">
+        <div class="flex-none grid grid-cols-1 justify-between items-center w-full md:w-72 md:h-64">
             <div class="text-center w-full">
                 <img src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx104578-LaZYFkmhinfB.jpg" alt="Poster Anime" class="w-64 mx-auto">
             </div>
@@ -64,7 +64,7 @@
                 </div>
             </div>
 
-            <h3 class="text-2xl font-semibold border-b border-dashed border-gray-400 border-opacity-50 pb-4">Sinopsis</h3>
+            <h3 class="text-2xl font-semibold border-b border-dashed border-gray-400 border-opacity-50 pb-3">Sinopsis</h3>
             <div class="mt-3">
                 Gabii Braun and Falco Grice have been training their entire lives to inherit one of the seven titans under Marley's control and aid their nation in eradicating the Eldians on Paradis. However, just as all seems well for the two cadets, their peace is suddenly shaken by the arrival of Eren Yeager and the remaining members of the Survey Corps. Having finally reached the Yeager family basement and learned about the dark history surrounding the titans, the Survey Corps has at long last found the answer they so desperately fought to uncover. With the truth now in their hands, the group set out for the world beyond the walls. In Shingeki no Kyojin: The Final Season, two utterly different worlds collide as each party pursues its own agenda in the long-awaited conclusion to Paradis' fight for freedom. [Written by MAL Rewrite]
             </div>
@@ -81,8 +81,44 @@
                 </div>
             </a>
 
+            <h3 class="text-2xl font-semibold border-b border-dashed border-gray-400 border-opacity-50 py-3">Anime Terkait</h3>
+            <table class="table-auto w-full mt-4">
+                <tbody>
+                    <tr class="border-b border-dashed border-gray-400 border-opacity-30">
+                        <td class="font-semibold align-top">Adaptation</td>
+                        <td>:</td>
+                        <td class="pl-1">Naruto Naruto Naruto Naruto Naruto Naruto Naruto Naruto Naruto Naruto Naruto Naruto</td>
+                    </tr>
+                    <tr class="border-b border-dashed border-gray-400 border-opacity-30">
+                        <td class="font-semibold align-top">Other</td>
+                        <td>:</td>
+                        <td class="pl-1">Naruto</td>
+                    </tr>
+                    <tr class="border-b border-dashed border-gray-400 border-opacity-30">
+                        <td class="font-semibold align-top">Prequel</td>
+                        <td>:</td>
+                        <td class="pl-1">Naruto</td>
+                    </tr>
+                    <tr class="border-b border-dashed border-gray-400 border-opacity-30">
+                        <td class="font-semibold align-top">Sequel</td>
+                        <td>:</td>
+                        <td class="pl-1">Naruto</td>
+                    </tr>
+                    <tr class="border-b border-dashed border-gray-400 border-opacity-30">
+                        <td class="font-semibold align-top">Side Story</td>
+                        <td>:</td>
+                        <td class="pl-1">Naruto</td>
+                    </tr>
+                    <tr class="border-b border-dashed border-gray-400 border-opacity-30">
+                        <td class="font-semibold align-top">Alternative Setting</td>
+                        <td>:</td>
+                        <td class="pl-1">Naruto</td>
+                    </tr>
+                </tbody>
+            </table>
+
             <div class="flex flex-col mt-4">
-                <h3 class="text-2xl font-semibold border-b border-dashed border-gray-400 border-opacity-50 pb-4">Tonton Di</h3>
+                <h3 class="text-2xl font-semibold border-b border-dashed border-gray-400 border-opacity-50 pb-3">Tonton Di</h3>
                 <div class="grid grid-cols-1 lg:grid-cols-2 rounded-xl bg-gray-200 dark:bg-gray-900 items-center mt-4">
                     <a href="#" class="flex flex-row items-center justify-between rounded-xl p-4 transition-colors duration-200 hover:bg-gray-300 dark:hover:bg-gray-700">
                         <div class="flex-none">
@@ -136,6 +172,44 @@
                             <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
                         </svg>
                     </a>
+                </div>
+            </div>
+
+            <h3 class="text-2xl font-semibold border-b border-dashed border-gray-400 border-opacity-50 py-3">Tema Lagu</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 justify-between">
+                <div class="mt-3">
+                    <h4 class="text-lg font-semibold">Pembuka</h4>
+                    <p class="mt-1">
+                        #01: "R★O★C★K★S by Hound Dog (eps 1-25)<br />
+                        #02: "Haruka Kanata (遥か彼方)" by Asian Kung-fu Generation (eps 26-53)<br />
+                        #03: "Kanashimi wo Yasashisa ni (悲しみをやさしさに)" by little by little (eps 54-77)<br />
+                        #04: "GO!!!" by FLOW (eps 78-103)<br />
+                        #05: "Seishun Kyosokyoku (青春狂騒曲)" by Sambomaster (eps 104-128)<br />
+                        #06: "No Boy, No Cry (ノーボーイ・ノークライ)" by Stance Punks (eps 129-153)<br />
+                        #07: "Namikaze Satellite (波風サテライト)" by Snowkel (eps 154-178)<br />
+                        #08: "Re:member" by FLOW (eps 179-202)<br />
+                        #09: "YURA YURA (ユラユラ)" by Hearts Grow (eps 203-220)
+                    </p>
+                </div>
+                <div class="mt-3">
+                    <h4 class="text-lg font-semibold">Penutup</h4>
+                    <p class="mt-1">
+                        #01: "Wind" by Akeboshi (eps 1-25)<br />
+                        #02: "Harmonia" by Rythem (eps 26-51)<br />
+                        #03: "Viva Rock ~Japanese Side~" by Orange Range (eps 52-64)<br />
+                        #04: "ALIVE" by Raiko (eps 65-77)<br />
+                        #05: "Ima made Nando mo" by the Mass Missile (eps 78-89)<br />
+                        #06: "Ryusei" by Tia (eps 90-103)<br />
+                        #07: "Mountain A Go Go Too" by Captain Straydum (eps 104-115)<br />
+                        #08: "Hajimete Kimi to Shabetta" by GagagaSP (eps 116-128)<br />
+                        #09: "Nakushita Kotoba" by No Regret Life (eps 129-141)<br />
+                        #10: "Speed" by Analogfish (eps 142-153)<br />
+                        #11: "Soba ni Iru Kara" by Amadori (eps 154-165)<br />
+                        #12: "Parade" by CHABA (eps 166-178)<br />
+                        #13: "Yellow Moon" by Akeboshi (eps 179-191)<br />
+                        #14: "Pinocchio" by Ore Ska Band (eps 192-202)<br />
+                        #15: "Scenario" by SABOTEN (eps 203-220)
+                    </p>
                 </div>
             </div>
         </div>
