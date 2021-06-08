@@ -2,7 +2,7 @@
     <img class="w-40 md:w-44 h-auto rounded-l-xl bg-gray-900" src="{{ $anime['image_url'] }}" loading="lazy" alt="Anime Name">
     <div class="grid grid-cols-1 p-2 md:p-3 w-full h-64">
         <div class="relative overflow-y-auto h-auto scrollbar scrollbar-thumb-gray-400 scrollbar-track-gray-300 dark:scrollbar-thumb-gray-500 dark:scrollbar-track-gray-700">
-            <h3 class="text-lg text-center font-semibold pb-0">{{ $anime['title'] }}</h3>
+            <a href="anime"><h3 class="text-lg text-center font-semibold pb-0">{{ $anime['title'] }}</h3></a>
             <div class="grid grid-cols-2 text-sm text-center border-b border-dashed border-gray-700 pb-2">
                 <div class="pt-1">
                     @foreach ($anime['producers'] as $producer)
