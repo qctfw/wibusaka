@@ -2,69 +2,78 @@
     <x-slot name="title">Single Anime</x-slot>
 
     <div class="container mx-auto flex flex-col md:flex-row px-4 pt-12">
-        <div class="flex-none grid grid-cols-1 justify-between items-center w-full md:w-72 md:h-64">
+        <div class="flex-none grid grid-cols-2 md:grid-cols-1 justify-between md:items-center w-full md:w-72 md:h-64">
             <div class="text-center w-full">
                 <img src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx104578-LaZYFkmhinfB.jpg" alt="Poster Anime" class="w-64 mx-auto">
+                <div class="grid grid-cols-2 rounded-xl bg-gray-200 dark:bg-gray-900 w-auto py-2 my-3">
+                    <div class="text-center">
+                        <span class="text-lg font-semibold md:text-2xl">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 md:w-5 md:h-5 inline-block" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                            9.00
+                        </span>
+                        <p class="text-sm md:text-md">Skor</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-lg font-semibold md:text-2xl">#9</p>
+                        <p class="text-sm md:text-md">Terpopuler</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-lg font-semibold md:text-2xl">1.17 jt</p>
+                        <p class="text-sm hidden md:block">Jumlah Penonton</p>
+                        <p class="text-sm md:hidden">Penonton</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-lg font-semibold md:text-2xl">R</p>
+                        <p class="text-sm md:text-md">Rating</p>
+                    </div>
+                </div>
             </div>
-            <div class="mt-3 pt-2 border-t border-dashed border-gray-400 border-opacity-50">
-                <p class="text-lg font-semibold">Judul Lain</p>
-                <p>Attack on Titan, 進撃の巨人</p>
-            </div>
-            <div class="pt-2">
-                <p class="text-lg font-semibold">Status</p>
-                <p>Sedang Tayang</p>
-                {{-- <p>Akan Tayang</p> --}}
-                {{-- <p>Sudah Tayang</p> --}}
-            </div>
-            <div class="pt-2">
-                <p class="text-lg font-semibold">Tanggal Tayang</p>
-                <p>1 Juli 2020 s.d 30 September 2020</p>
-                <p class="text-xs">(Summer 2020)</p>
-            </div>
-            <div class="pt-2">
-                <p class="text-lg font-semibold">Studio</p>
-                <p>MAPPA</p>
-            </div>
-            <div class="pt-2">
-                <p class="text-lg font-semibold">Sumber</p>
-                <p>Manga</p>
-            </div>
-            <div class="pt-2">
-                <div class="text-lg font-semibold">Genre</div>
-                <p>Action, Military, Mystery, Super Power, Drama, Fantasy, Shounen</p>
+            <div class="grid grid-cols-1 pl-2 md:mt-3 md:border-t border-dashed border-gray-400 border-opacity-50">
+                <div class="md:hidden pb-2 border-b border-dashed border-gray-400 border-opacity-50">
+                    <h2 class="text-lg font-bold">Shingeki no Kyojin</h2>
+                    <p class="text-sm italic">Attack on Titan / 進撃の巨人</p>
+                </div>
+                <div class="pt-2 hidden md:block">
+                    <p class="text-lg font-semibold">Judul Lain</p>
+                    <p class="text-sm md:text-md">Attack on Titan, 進撃の巨人</p>
+                </div>
+                <div class="pt-2">
+                    <p class="md:text-lg font-semibold">Jumlah Episode</p>
+                    <p class="text-sm md:text-md">250</p>
+                </div>
+                <div class="pt-2">
+                    <p class="md:text-lg font-semibold">Status</p>
+                    <p class="text-sm md:text-md">Sedang Tayang</p>
+                    {{-- <p>Akan Tayang</p> --}}
+                    {{-- <p>Sudah Tayang</p> --}}
+                </div>
+                <div class="pt-2">
+                    <p class="md:text-lg font-semibold">Tanggal Tayang</p>
+                    <p class="text-sm md:text-md">1 Juli 2020 s.d 30 September 2020</p>
+                    <p class="text-xs">(Summer 2020)</p>
+                </div>
+                <div class="pt-2">
+                    <p class="md:text-lg font-semibold">Studio</p>
+                    <p class="text-sm md:text-md">MAPPA</p>
+                </div>
+                <div class="pt-2">
+                    <p class="md:text-lg font-semibold">Sumber</p>
+                    <p class="text-sm md:text-md">Manga</p>
+                </div>
+                <div class="pt-2">
+                    <div class="md:text-lg font-semibold">Genre</div>
+                    <p class="text-sm md:text-md">Action, Military, Mystery, Super Power, Drama, Fantasy, Shounen</p>
+                </div>
             </div>
         </div>
 
-        <div class="md:ml-12 border-t md:border-0 border-dashed border-gray-400 border-opacity-50 mt-3 md:mt-0 pt-2 md:pt-0">
-            <h2 class="text-3xl lg:text-5xl font-bold text-center md:text-left">Shingeki no Kyojin</h2>
-            <p class="text-sm italic pt-2 text-center md:text-left">Attack on Titan / 進撃の巨人</p>
-            
-            <div class="flex justify-between items-center rounded-xl bg-gray-200 dark:bg-gray-900 w-auto h-16 my-3">
-                <div class="flex-auto text-center">
-                    <span class="text-lg md:text-2xl">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 md:w-5 md:h-5 inline-block" viewBox="0 0 20 20" fill="currentColor">
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                        </svg>
-                    9.00
-                    </span>
-                    <p class="text-sm md:text-md">Skor</p>
-                </div>
-                <div class="flex-auto text-center">
-                    <p class="text-lg md:text-2xl">#9</p>
-                    <p class="text-sm md:text-md">Terpopuler</p>
-                </div>
-                <div class="flex-auto text-center">
-                    <p class="text-lg md:text-2xl">1.17 jt</p>
-                    <p class="text-md hidden md:block">Jumlah Penonton</p>
-                    <p class="md:hidden">Penonton</p>
-                </div>
-                <div class="flex-auto text-center">
-                    <p class="text-lg md:text-2xl">R</p>
-                    <p class="text-sm md:text-md">Rating</p>
-                </div>
-            </div>
+        <div class="md:ml-12">
+            <h2 class="hidden md:block text-3xl lg:text-5xl font-bold text-left">Shingeki no Kyojin</h2>
+            <p class="hidden md:block text-sm italic pt-2 text-left">Attack on Titan / 進撃の巨人</p>
 
-            <h3 class="text-2xl font-semibold border-b border-dashed border-gray-400 border-opacity-50 pb-3">Sinopsis</h3>
+            <h3 class="text-2xl font-semibold border-b border-dashed border-gray-400 border-opacity-50 py-3">Sinopsis</h3>
             <div class="mt-3">
                 Gabii Braun and Falco Grice have been training their entire lives to inherit one of the seven titans under Marley's control and aid their nation in eradicating the Eldians on Paradis. However, just as all seems well for the two cadets, their peace is suddenly shaken by the arrival of Eren Yeager and the remaining members of the Survey Corps. Having finally reached the Yeager family basement and learned about the dark history surrounding the titans, the Survey Corps has at long last found the answer they so desperately fought to uncover. With the truth now in their hands, the group set out for the world beyond the walls. In Shingeki no Kyojin: The Final Season, two utterly different worlds collide as each party pursues its own agenda in the long-awaited conclusion to Paradis' fight for freedom. [Written by MAL Rewrite]
             </div>
@@ -86,33 +95,33 @@
                 <tbody>
                     <tr class="border-b border-dashed border-gray-400 border-opacity-30">
                         <td class="font-semibold align-top">Adaptation</td>
-                        <td>:</td>
-                        <td class="pl-1">Naruto Naruto Naruto Naruto Naruto Naruto Naruto Naruto Naruto Naruto Naruto Naruto</td>
+                        <td class="align-top">:</td>
+                        <td class="align-top pl-1">Naruto Naruto Naruto Naruto Naruto Naruto Naruto Naruto Naruto Naruto Naruto Naruto</td>
                     </tr>
                     <tr class="border-b border-dashed border-gray-400 border-opacity-30">
                         <td class="font-semibold align-top">Other</td>
-                        <td>:</td>
-                        <td class="pl-1">Naruto</td>
+                        <td class="align-top">:</td>
+                        <td class="align-top pl-1">Naruto</td>
                     </tr>
                     <tr class="border-b border-dashed border-gray-400 border-opacity-30">
                         <td class="font-semibold align-top">Prequel</td>
-                        <td>:</td>
-                        <td class="pl-1">Naruto</td>
+                        <td class="align-top">:</td>
+                        <td class="align-top pl-1">Naruto</td>
                     </tr>
                     <tr class="border-b border-dashed border-gray-400 border-opacity-30">
                         <td class="font-semibold align-top">Sequel</td>
-                        <td>:</td>
-                        <td class="pl-1">Naruto</td>
+                        <td class="align-top">:</td>
+                        <td class="align-top pl-1">Naruto</td>
                     </tr>
                     <tr class="border-b border-dashed border-gray-400 border-opacity-30">
                         <td class="font-semibold align-top">Side Story</td>
-                        <td>:</td>
-                        <td class="pl-1">Naruto</td>
+                        <td class="align-top">:</td>
+                        <td class="align-top pl-1">Naruto</td>
                     </tr>
                     <tr class="border-b border-dashed border-gray-400 border-opacity-30">
                         <td class="font-semibold align-top">Alternative Setting</td>
-                        <td>:</td>
-                        <td class="pl-1">Naruto</td>
+                        <td class="align-top">:</td>
+                        <td class="align-top pl-1">Naruto</td>
                     </tr>
                 </tbody>
             </table>
