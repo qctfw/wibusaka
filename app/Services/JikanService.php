@@ -17,12 +17,7 @@ class JikanService implements JikanServiceInterface
 
     public function getCurrentSeason()
     {
-        $response = Http::acceptJson()->get($this->base_uri . 'season');
-
-        if ($response->failed())
-            throw new JikanException();
-
-        $result = $response->json();
+        $result = $this->requestJikan('season');
 
         $animes = collect($result['anime'])->where('continuing', false)->where('members', '>', 30000)->values();
 
@@ -34,5 +29,23 @@ class JikanService implements JikanServiceInterface
             'season_year' => $result['season_year'],
             'animes' => $animes
         ];
+    }
+
+    public function getAnime(string $id)
+    {
+        $result = $this->requestJikan('anime/' . $id);
+
+        return $result;
+    }
+
+    private function requestJikan(string $uri)
+    {
+        $uri = ltrim($uri, '/');
+        $response = Http::acceptJson()->get($this->base_uri . $uri);
+
+        if ($response->failed())
+            throw new JikanException();
+
+        return $response->collect();
     }
 }

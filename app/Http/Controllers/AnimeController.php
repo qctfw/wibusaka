@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\Contracts\JikanServiceInterface;
+use App\ViewModels\AnimeViewModel;
 use Illuminate\Http\Request;
 
 class AnimeController extends Controller
@@ -60,7 +61,11 @@ class AnimeController extends Controller
      */
     public function show($id)
     {
-        //
+        $result = $this->jikan_service->getAnime($id);
+
+        $anime_view_model = new AnimeViewModel($result);
+
+        return view('animes.single', $anime_view_model);
     }
 
     /**

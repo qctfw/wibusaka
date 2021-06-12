@@ -19,4 +19,4 @@ Route::view('/', 'animes.top');
 
 Route::get('/season', [AnimeController::class, 'index']);
 
-Route::view('/anime', 'animes.single');
+Route::get('/anime/{id}', [AnimeController::class, 'show'])->name('anime.show');

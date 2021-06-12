@@ -7,7 +7,7 @@
             @for ($i=0;$i<10;$i++)
             <div class="flex flex-col bg-gray-200 dark:bg-gray-900 rounded-lg">
                 <a href="anime" class="w-full mx-auto rounded-lg">
-                    <img src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx104578-LaZYFkmhinfB.jpg" alt="Single Anime" class="w-full mx-auto rounded-lg" />
+                    <img src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx104578-LaZYFkmhinfB.jpg" alt="Single Anime" class="w-full mx-auto rounded-lg" loading="lazy" />
                 </a>
                 <a href="anime">
                     <h4 class="text-lg text-center leading-tight font-semibold py-1 border-b border-dashed border-gray-400 border-opacity-50">
@@ -54,7 +54,7 @@
             @for ($i=0;$i<10;$i++)
             <div class="flex flex-col bg-gray-200 dark:bg-gray-900 rounded-lg">
                 <a href="anime" class="w-full mx-auto rounded-lg">
-                    <img src="https://cdn.myanimelist.net/images/anime/1245/111800.jpg?s=7302aaeb3bc4e1433b32d094e9d6f6f0" alt="Single Anime" class="w-full mx-auto rounded-lg" />
+                    <img src="https://cdn.myanimelist.net/images/anime/1245/111800.jpg?s=7302aaeb3bc4e1433b32d094e9d6f6f0" alt="Single Anime" class="w-full mx-auto rounded-lg" loading="lazy" />
                 </a>
                 <a href="anime">
                     <h4 class="text-lg text-center font-semibold leading-tight py-1 border-b border-dashed border-gray-400 border-opacity-50">
