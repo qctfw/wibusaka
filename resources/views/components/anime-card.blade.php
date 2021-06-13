@@ -1,4 +1,4 @@
-<div class="relative flex bg-gray-200 dark:bg-gray-900 rounded-xl p-0 mt-8">
+<div class="relative flex items-start bg-gray-200 dark:bg-gray-900 rounded-xl p-0 mt-8">
     <img class="w-40 md:w-44 h-auto rounded-l-xl bg-gray-900" src="{{ $anime['image_url'] }}" loading="lazy" alt="Anime Name">
     <div class="grid grid-cols-1 p-2 md:p-3 w-full h-64">
         <div class="relative overflow-y-auto h-auto scrollbar scrollbar-thumb-gray-400 scrollbar-track-gray-300 dark:scrollbar-thumb-gray-500 dark:scrollbar-track-gray-700">
