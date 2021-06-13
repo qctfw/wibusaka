@@ -56,6 +56,7 @@
                 <div class="pt-2">
                     <p class="md:text-lg font-semibold">Studio</p>
                     <p class="text-sm md:text-md">
+                        @if (count($anime['studios']) <= 0) - @endif
                         @foreach ($anime['studios'] as $studio)
                             {{ $studio['name'] }}{{ (!$loop->last) ? ', ' : '' }}
                         @endforeach

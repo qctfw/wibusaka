@@ -15,6 +15,20 @@ class JikanService implements JikanServiceInterface
         $this->base_uri = 'https://api.jikan.moe/v3/';
     }
 
+    public function getTopAnimes(int $page = 1)
+    {
+        $result = $this->requestJikan('top/anime/' . $page . '/bypopularity');
+        
+        return $result['top'];
+    }
+
+    public function getTopUpcomingAnimes(int $page = 1)
+    {
+        $result = $this->requestJikan('top/anime/' . $page . '/upcoming');
+        
+        return $result['top'];
+    }
+
     public function getCurrentSeason()
     {
         $result = $this->requestJikan('season');
@@ -29,6 +43,11 @@ class JikanService implements JikanServiceInterface
             'season_year' => $result['season_year'],
             'animes' => $animes
         ];
+    }
+
+    public function getAnimesBySeason(int $year, string $season)
+    {
+        
     }
 
     public function getAnime(string $id)

@@ -28,14 +28,14 @@
         </div>
     </div>
     @if (rand(1,2) == 1)
-        <div class="absolute flex flex-row items-center justify-start gap-2 text-sm bottom-0 left-0 bg-gray-200 bg-opacity-60 dark:bg-gray-900 dark:bg-opacity-50 rounded-tr-lg text-sm px-2 py-1">
+        <div class="absolute flex flex-row items-center justify-start gap-2 text-sm bottom-0 left-0 bg-gray-200 bg-opacity-60 dark:bg-gray-900 dark:bg-opacity-50 rounded-bl-lg rounded-tr-lg text-sm px-2 py-1">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
             </svg>
             <span>Tersedia</span>
         </div>    
     @else
-        <div class="absolute flex flex-row items-center justify-start gap-2 text-sm bottom-0 left-0 bg-gray-200 bg-opacity-60 dark:bg-gray-900 dark:bg-opacity-50 rounded-tr-lg text-sm px-2 py-1">
+        <div class="absolute flex flex-row items-center justify-start gap-2 text-sm bottom-0 left-0 bg-gray-200 bg-opacity-60 dark:bg-gray-900 dark:bg-opacity-50 rounded-bl-lg rounded-tr-lg text-sm px-2 py-1">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
             </svg>

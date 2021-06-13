@@ -12,13 +12,13 @@
         <div class="container mx-auto flex flex-col md:flex-row items-center justify-between px-4 py-6">
             <ul class="flex flex-col md:flex-row items-center">
                 <li class="mt-0">
-                    <a href="#" class="font-bold text-xl">Logo</a>
+                    <a href="/" class="font-bold text-xl">Logo</a>
                 </li>
                 <li class="md:ml-6 mt-0">
                     <a href="#" class="font-medium hover:text-blue-300">Top Anime</a>
                 </li>
                 <li class="md:ml-6 mt-0">
-                    <a href="#" class="font-medium hover:text-blue-300">Anime Musim Ini</a>
+                    <a href="{{ route('anime.season-current') }}" class="font-medium hover:text-blue-300">Anime Musim Ini</a>
                 </li>
                 <li class="md:ml-6 mt-0">
                     <a href="#" class="font-medium hover:text-blue-300">Anime Musim Depan</a>

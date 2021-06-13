@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Services\Contracts\JikanServiceInterface;
 use App\ViewModels\AnimeViewModel;
+use App\ViewModels\SeasonViewModel;
+use App\ViewModels\TopIndexViewModel;
 use Illuminate\Http\Request;
 
 class AnimeController extends Controller
@@ -19,17 +21,32 @@ class AnimeController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
+     * Display the main page.
+     * 
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
+        $top = $this->jikan_service->getTopAnimes();
+        $upcoming = $this->jikan_service->getTopUpcomingAnimes();
+
+        $top_index_view_model = new TopIndexViewModel($top, $upcoming);
+
+        return view('animes.top', $top_index_view_model);
+    }
+
+    /**
+     * Display inputted season.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function season()
+    {
         $result = $this->jikan_service->getCurrentSeason();
 
-        return view('index', [
-            'result' => $result
-        ]);
+        $season_view_model = new SeasonViewModel($result['season_year'], $result['season_name'], $result['animes']);
+
+        return view('animes.season', $season_view_model);
     }
 
     /**
