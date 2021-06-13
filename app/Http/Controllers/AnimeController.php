@@ -34,7 +34,7 @@ class AnimeController extends Controller
 
         $top_index_view_model = new TopIndexViewModel($top, $upcoming);
 
-        return view('animes.top', $top_index_view_model);
+        return view('index', $top_index_view_model);
     }
 
     /**
@@ -59,7 +59,7 @@ class AnimeController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified anime.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
