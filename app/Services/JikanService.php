@@ -47,7 +47,16 @@ class JikanService implements JikanServiceInterface
 
     public function getAnimesBySeason(int $year, string $season)
     {
-        
+        $result = $this->requestJikan('season/' . $year . '/' . $season);
+
+        $animes = collect($result['anime'])->where('continuing', false)->where('members', '>', 30000)->values();
+
+        // $mal_ids = $animes->pluck('mal_id');
+        return [
+            'season_name' => $result['season_name'],
+            'season_year' => $result['season_year'],
+            'animes' => $animes
+        ];
     }
 
     public function getAnime(string $id)

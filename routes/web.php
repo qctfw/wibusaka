@@ -18,5 +18,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [AnimeController::class, 'index']);
 
 Route::get('/season', [AnimeController::class, 'season'])->name('anime.season-current');
+Route::get('/season/{year}/{season}', [AnimeController::class, 'season'])->name('anime.season')->where(['year' => '[0-9]+', 'season' => '[a-z]+']);
 
 Route::get('/anime/{id}', [AnimeController::class, 'show'])->name('anime.show');
