@@ -18,7 +18,7 @@
             </div>
             <div class="text-sm text-center border-b border-dashed border-gray-700 py-2">
                 @foreach ($anime['genres'] as $genre)
-                        {{ $genre['name'] . ', ' }}
+                    {{ $genre['name'] }}{{ (!$loop->last) ? ', ' : '' }}
                 @endforeach
             </div>
             <p class="text-xs pt-2 pb-2">
