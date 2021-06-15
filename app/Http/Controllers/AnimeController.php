@@ -38,6 +38,16 @@ class AnimeController extends Controller
     }
 
     /**
+     * Display top anime.
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function top()
+    {
+        return view('animes.top');
+    }
+
+    /**
      * Display animes by season.
      *
      * @return \Illuminate\Http\Response

@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [AnimeController::class, 'index']);
 
 Route::group(['name' => 'top', 'prefix' => 'top'], function () {
-    // Route::get('');
+    Route::get('/', [AnimeController::class, 'top']);
     // Route::get('airing');
     // Route::get('popular', [AnimeController::class, 'popular']);
     // Route::get('upcoming');
