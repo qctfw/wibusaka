@@ -3,7 +3,7 @@
         #{{ $anime['rank'] }}
     </div>
     <a href="{{ route('anime.show', ['id' => $anime['mal_id']]) }}" class="flex flex-row w-full items-center md:w-20 md:pl-4">
-        <img src="{{ $anime['image_url'] }}" alt="'{{ $anime['title'] }}' Anime Poster" class="mx-auto" />
+        <img src="{{ $anime['image_url'] }}" alt="'{{ $anime['title'] }}' Anime Poster" loading="lazy" class="mx-auto" />
     </a>
     <div class="w-full grid grid-cols-1 items-center md:items-baseline md:flex md:flex-auto md:flex-col md:ml-3 border-b md:border-none border-dashed border-gray-400 border-opacity-50 pb-2 md:pb-0">
         <a href="{{ route('anime.show', ['id' => $anime['mal_id']]) }}" class="flex flex-row items-center justify-center font-semibold text-lg text-center md:text-left py-2 md:py-0 border-b md:border-none border-dashed border-gray-400 border-opacity-50 transition-colors duration-200 hover:text-blue-700 dark:hover:text-blue-300">
