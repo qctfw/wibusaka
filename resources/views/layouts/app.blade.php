@@ -15,7 +15,7 @@
                     <a href="/" class="font-bold text-xl">Logo</a>
                 </li>
                 <li class="md:ml-6 mt-0">
-                    <a href="#" class="font-medium hover:text-blue-300">Top Anime</a>
+                    <a href="{{ route('top.rated') }}" class="font-medium hover:text-blue-300">Top Anime</a>
                 </li>
                 <li class="md:ml-6 mt-0">
                     <a href="{{ route('anime.season-current') }}" class="font-medium hover:text-blue-300">Anime Musim Ini</a>
@@ -28,7 +28,7 @@
                 <div class="relative mt-3 md:mt-0">
                     <input type="text" class="bg-gray-300 dark:bg-gray-900 text-sm rounded-full w-64 px-4 pl-8 py-1 focus:outline-none focus:ring focus:border-blue-300" placeholder="Cari...">
                     <div class="absolute top-0">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 text-gray-500 dark:text-white mt-1.5 ml-2" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 text-gray-500 dark:text-white mt-1.5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
                     </div>

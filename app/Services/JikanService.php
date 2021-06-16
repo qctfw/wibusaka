@@ -15,7 +15,14 @@ class JikanService implements JikanServiceInterface
         $this->base_uri = 'https://api.jikan.moe/v3/';
     }
 
-    public function getTopAnimes(int $page = 1)
+    public function getTopRatedAnimes(int $page = 1)
+    {
+        $result = $this->requestJikan('top/anime/' . $page);
+        
+        return $result['top'];
+    }
+
+    public function getTopPopularityAnimes(int $page = 1)
     {
         $result = $this->requestJikan('top/anime/' . $page . '/bypopularity');
         

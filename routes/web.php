@@ -17,11 +17,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [AnimeController::class, 'index']);
 
-Route::group(['name' => 'top', 'prefix' => 'top'], function () {
-    Route::get('/', [AnimeController::class, 'top']);
+Route::group(['as' => 'top.', 'prefix' => 'top'], function () {
+    Route::get('rated/{page?}', [AnimeController::class, 'topRated'])->name('rated');
     // Route::get('airing');
-    // Route::get('popular', [AnimeController::class, 'popular']);
-    // Route::get('upcoming');
+    Route::get('popular/{page?}', [AnimeController::class, 'topPopular'])->name('popular');
+    Route::get('upcoming/{page?}', [AnimeController::class, 'topUpcoming'])->name('upcoming');
     // Route::get('tv');
     // Route::get('movies');
 });

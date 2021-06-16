@@ -7,6 +7,7 @@ use App\Services\Contracts\JikanServiceInterface;
 use App\ViewModels\AnimeViewModel;
 use App\ViewModels\SeasonViewModel;
 use App\ViewModels\TopIndexViewModel;
+use App\ViewModels\TopViewModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -29,7 +30,7 @@ class AnimeController extends Controller
      */
     public function index()
     {
-        $top = $this->jikan_service->getTopAnimes();
+        $top = $this->jikan_service->getTopPopularityAnimes();
         $upcoming = $this->jikan_service->getTopUpcomingAnimes();
 
         $top_index_view_model = new TopIndexViewModel($top, $upcoming);
@@ -38,13 +39,45 @@ class AnimeController extends Controller
     }
 
     /**
-     * Display top anime.
+     * Display top rated anime.
      * 
      * @return \Illuminate\Http\Response
      */
-    public function top()
+    public function topRated($page = 1)
     {
-        return view('animes.top');
+        $top = $this->jikan_service->getTopRatedAnimes($page);
+
+        $top_view_model = new TopViewModel('Terbaik', $top);
+
+        return view('animes.top', $top_view_model);
+    }
+
+    /**
+     * Display top rated anime.
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function topPopular($page = 1)
+    {
+        $top = $this->jikan_service->getTopPopularityAnimes($page);
+
+        $top_view_model = new TopViewModel('Terpopuler', $top);
+
+        return view('animes.top', $top_view_model);
+    }
+
+    /**
+     * Display top rated anime.
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function topUpcoming($page = 1)
+    {
+        $top = $this->jikan_service->getTopUpcomingAnimes($page);
+
+        $top_view_model = new TopViewModel('Paling Dinantikan', $top);
+
+        return view('animes.top', $top_view_model);
     }
 
     /**
