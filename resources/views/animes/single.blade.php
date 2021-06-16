@@ -116,7 +116,7 @@
                         <td class="align-top">:</td>
                         <td class="align-top pl-2">
                         @foreach ($relate as $mal)
-                            <a href="{{ ($mal['type'] == 'anime') ? route('anime.show', ['id' => $mal['mal_id']]) : $mal['url'] }}" class="transition-colors duration-200 hover:text-blue-300">{{ $mal['name'] }}</a>{{ (!$loop->last) ? ', ' : '' }}
+                            <a href="{{ ($mal['type'] == 'anime') ? route('anime.show', ['id' => $mal['mal_id']]) : $mal['url'] }}" class="transition-colors duration-200 hover:text-blue-700">{{ $mal['name'] }}</a>{{ (!$loop->last) ? ', ' : '' }}
                         @endforeach
                         </td>
                     </tr>
