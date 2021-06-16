@@ -3,7 +3,7 @@
         <img src="{{ $anime['image_url'] }}" alt="{{ $anime['title'] }} Anime Poster" class="w-full mx-auto rounded-lg" loading="lazy" />
     </a>
     <a href="{{ route('anime.show', ['id' => $anime['mal_id']]) }}">
-        <h4 class="text-lg text-center leading-tight font-semibold py-1 border-b border-dashed border-gray-400 border-opacity-50 transition-colors duration-200 hover:text-blue-700">
+        <h4 class="text-lg text-center leading-tight font-semibold py-1 border-b border-dashed border-gray-400 border-opacity-50 transition-colors duration-200 hover:text-blue-700 dark:hover:text-blue-300">
             {{ $anime['title'] }}
         </h4>
     </a>

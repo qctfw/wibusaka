@@ -2,11 +2,11 @@
     <div class="absolute left-0 top-0 md:static md:block md:flex-none w-auto md:w-12 px-2 md:px-0 bg-gray-200 dark:bg-gray-900 rounded-lg md:rounded-none text-center text-xl md:text-2xl md:font-bold">
         #{{ $anime['rank'] }}
     </div>
-    <div class="flex flex-row w-full items-center md:w-20 md:pl-4">
+    <a href="{{ route('anime.show', ['id' => $anime['mal_id']]) }}" class="flex flex-row w-full items-center md:w-20 md:pl-4">
         <img src="{{ $anime['image_url'] }}" alt="'{{ $anime['title'] }}' Anime Poster" class="mx-auto" />
-    </div>
+    </a>
     <div class="w-full grid grid-cols-1 items-center md:items-baseline md:flex md:flex-auto md:flex-col md:ml-3 border-b md:border-none border-dashed border-gray-400 border-opacity-50 pb-2 md:pb-0">
-        <a href="{{ route('anime.show', ['id' => $anime['mal_id']]) }}" class="flex flex-row items-center justify-center font-semibold text-lg text-center md:text-left py-2 md:py-0 border-b md:border-none border-dashed border-gray-400 border-opacity-50 transition-colors duration-200 hover:text-blue-700">
+        <a href="{{ route('anime.show', ['id' => $anime['mal_id']]) }}" class="flex flex-row items-center justify-center font-semibold text-lg text-center md:text-left py-2 md:py-0 border-b md:border-none border-dashed border-gray-400 border-opacity-50 transition-colors duration-200 hover:text-blue-700 dark:hover:text-blue-300">
             {{ $anime['title'] }}
         </a>
         <div class="flex flex-row items-center justify-center gap-0 md:gap-2 text-center md:text-left text-md md:text-sm pt-2 md:pt-0">

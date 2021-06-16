@@ -15,13 +15,13 @@
                     <a href="/" class="font-bold text-xl">Logo</a>
                 </li>
                 <li class="md:ml-6 mt-0">
-                    <a href="{{ route('top.rated') }}" class="font-medium hover:text-blue-700">Top Anime</a>
+                    <a href="{{ route('top.rated') }}" class="font-medium hover:text-blue-700 dark:hover:text-blue-300">Top Anime</a>
                 </li>
                 <li class="md:ml-6 mt-0">
-                    <a href="{{ route('anime.season-current') }}" class="font-medium hover:text-blue-700">Anime Musim Ini</a>
+                    <a href="{{ route('anime.season-current') }}" class="font-medium hover:text-blue-700 dark:hover:text-blue-300">Anime Musim Ini</a>
                 </li>
                 <li class="md:ml-6 mt-0">
-                    <a href="#" class="font-medium hover:text-blue-700">Anime Musim Depan</a>
+                    <a href="#" class="font-medium hover:text-blue-700 dark:hover:text-blue-300">Anime Musim Depan</a>
                 </li>
             </ul>
             <div class="flex flex-col md:flex-row items-center">
