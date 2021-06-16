@@ -29,6 +29,17 @@
                         <p class="text-sm md:text-md">Rating</p>
                     </div>
                 </div>
+                <a href="{{ $anime['url'] }}" class="flex justify-between items-center rounded-xl bg-gray-200 dark:bg-gray-900 w-full h-16 mt-4 transition-colors duration-200 hover:bg-gray-300 dark:hover:bg-gray-700">
+                    <div class="flex-auto pl-4">
+                        <p class="text-lg md:text-xl font-semibold">MyAnimeList</p>
+                    </div>
+                    <div class="flex-none pr-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                            <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                        </svg>
+                    </div>
+                </a>
             </div>
             <div class="grid grid-cols-1 pl-2 md:mt-3 md:border-t border-dashed border-gray-400 border-opacity-50">
                 <div class="md:hidden pb-2 border-b border-dashed border-gray-400 border-opacity-50">
@@ -83,20 +94,9 @@
 
             <h3 class="text-2xl font-semibold border-b border-dashed border-gray-400 border-opacity-50 py-3">Sinopsis</h3>
             <div class="mt-3">
-                {{ $anime['synopsis'] }}
+                @if (!empty($anime['synopsis'])) {{ $anime['synopsis'] }} @else <i>Tidak ada sinopsis.</i> @endif
             </div>
 
-            <a href="{{ $anime['url'] }}" class="flex justify-between items-center rounded-xl bg-gray-200 dark:bg-gray-900 lg:w-96 h-16 mt-4 transition-colors duration-200 hover:bg-gray-300 dark:hover:bg-gray-700">
-                <div class="flex-auto pl-4">
-                    <p class="text-xl font-semibold">Lihat lebih lanjut di MyAnimeList</p>
-                </div>
-                <div class="flex-none pr-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
-                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
-                    </svg>
-                </div>
-            </a>
             @if (!empty($anime['related']))
             <h3 class="text-2xl font-semibold border-b border-dashed border-gray-400 border-opacity-50 py-3">Anime Terkait</h3>
             <table class="table-fixed w-full mt-4">
