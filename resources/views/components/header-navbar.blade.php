@@ -9,7 +9,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
         </button>
-        <nav class="absolute left-0 z-20 flex-col flex-auto w-full font-semibold bg-gray-100 rounded-lg shadow-md dark:bg-gray-800 md:relative top-16 md:top-0 md:flex md:flex-row md:space-x-2 md:w-auto md:bg-transparent md:shadow-none" :class="{ 'flex' : mobileMenuOpen , 'hidden' : !mobileMenuOpen}">
+        <nav class="absolute left-0 z-20 flex-col flex-auto w-full ml-4 font-semibold bg-gray-100 rounded-lg shadow-md dark:bg-gray-800 md:relative top-16 md:top-0 md:flex md:flex-row md:space-x-2 md:w-auto md:bg-transparent md:shadow-none" :class="{ 'flex' : mobileMenuOpen , 'hidden' : !mobileMenuOpen}">
             <div @click="topMenuOpen = !topMenuOpen" @click.away="topMenuOpen = false" class="relative text-gray-600 rounded-lg cursor-pointer dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-900">
                 <div class="flex flex-row items-center justify-between p-3 rounded-lg dark:bg-gray-800 hover:text-blue-700 dark:hover:text-blue-300 dark:hover:bg-gray-900 dark:text-white" :class="{'bg-gray-300 text-blue-700 dark:text-blue-300 dark:bg-gray-900': topMenuOpen}">
                     <p>Top Anime</p>
@@ -40,7 +40,7 @@
             </a>
         </nav>
         <div class="flex flex-col items-center w-full md:w-auto md:flex-row">
-            <div class="relative px-2 mt-3 md:mt-0">
+            <div class="relative w-full px-2 mt-3 md:mt-0">
                 <input type="text" class="w-full px-4 py-1 pl-8 text-sm bg-gray-300 rounded-full dark:bg-gray-900 focus:outline-none focus:ring focus:border-blue-300" placeholder="Cari...">
                 <div class="absolute top-0">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 text-gray-500 dark:text-white mt-1.5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
