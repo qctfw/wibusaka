@@ -21,32 +21,23 @@ class TopIndexViewModel extends ViewModel
     public function top_animes()
     {
         return collect($this->top_animes)->take(10)->map(function ($item, $key) {
-            return $this->formatAnime($item);
+            return collect($item)->merge([
+                'start_date' => (!is_null($item['start_date'])) ? Carbon::parse($item['start_date'])->translatedFormat('M Y') : '?',
+                'end_date' => (!is_null($item['end_date'])) ? Carbon::parse($item['end_date'])->translatedFormat('M Y') : '?',
+                'members' => $this->abbreviateNumber($item['members']),
+            ]);
         });
     }
 
     public function upcoming_animes()
     {
         return collect($this->upcoming_animes)->take(10)->map(function ($item, $key) {
-            return $this->formatAnime($item);
+            return collect($item)->merge([
+                'start_date' => (!is_null($item['start_date'])) ? Carbon::parse($item['start_date'])->translatedFormat('M Y') : '?',
+                'end_date' => (!is_null($item['end_date'])) ? Carbon::parse($item['end_date'])->translatedFormat('M Y') : '?',
+                'members' => $this->abbreviateNumber($item['members']),
+            ]);
         });
-    }
-
-    public function formatAnime($item)
-    {
-        return [
-            'mal_id' => $item['mal_id'],
-            'rank' => $item['rank'],
-            'title' => $item['title'],
-            'url' => $item['url'],
-            'image_url' => $item['image_url'],
-            'type' => $item['type'],
-            'episodes' => $item['episodes'],
-            'start_date' => (!is_null($item['start_date'])) ? Carbon::parse($item['start_date'])->translatedFormat('M Y') : '?',
-            'end_date' => (!is_null($item['end_date'])) ? Carbon::parse($item['end_date'])->translatedFormat('M Y') : '?',
-            'members' => $this->abbreviateNumber($item['members']),
-            'score' => $item['score']
-        ];
     }
     
     private function abbreviateNumber($number): string
