@@ -1,22 +1,22 @@
-<div class="relative md:static flex flex-col md:flex-row items-center justify-between bg-gray-200 dark:bg-gray-900 rounded-lg p-2 md:h-auto">
-    <div class="absolute left-0 top-0 md:static md:block md:flex-none w-auto md:w-12 px-2 md:px-0 bg-gray-200 dark:bg-gray-900 rounded-lg md:rounded-none text-center text-xl md:text-2xl md:font-bold">
+<div class="relative flex flex-col items-center justify-between p-2 bg-gray-200 rounded-lg md:static md:flex-row dark:bg-gray-900 md:h-auto">
+    <div class="absolute top-0 left-0 w-auto px-2 text-xl text-center bg-gray-200 rounded-lg md:static md:block md:flex-none md:w-12 md:px-0 dark:bg-gray-900 md:rounded-none md:text-2xl md:font-bold">
         #{{ $anime['rank'] }}
     </div>
-    <a href="{{ route('anime.show', ['id' => $anime['mal_id']]) }}" class="flex flex-row w-full items-center md:w-20 md:pl-4">
+    <a href="{{ route('anime.show', ['id' => $anime['mal_id']]) }}" class="flex flex-row items-center w-full md:w-20 md:pl-4">
         <img src="{{ $anime['image_url'] }}" alt="'{{ $anime['title'] }}' Anime Poster" loading="lazy" class="mx-auto" />
     </a>
-    <div class="w-full grid grid-cols-1 items-center md:items-baseline md:flex md:flex-auto md:flex-col md:ml-3 border-b md:border-none border-dashed border-gray-400 border-opacity-50 pb-2 md:pb-0">
-        <a href="{{ route('anime.show', ['id' => $anime['mal_id']]) }}" class="flex flex-row items-center justify-center font-semibold text-lg text-center md:text-left py-2 md:py-0 border-b md:border-none border-dashed border-gray-400 border-opacity-50 transition-colors duration-200 hover:text-blue-700 dark:hover:text-blue-300">
+    <div class="grid items-center w-full grid-cols-1 pb-2 border-b border-gray-400 border-opacity-50 border-dashed md:items-baseline md:flex md:flex-auto md:flex-col md:ml-3 md:border-none md:pb-0">
+        <a href="{{ route('anime.show', ['id' => $anime['mal_id']]) }}" class="flex flex-row items-center justify-center py-2 text-lg font-semibold text-center transition-colors duration-200 border-b border-gray-400 border-opacity-50 border-dashed md:text-left md:py-0 md:border-none hover:text-blue-700 dark:hover:text-blue-300">
             {{ $anime['title'] }}
         </a>
-        <div class="flex flex-row items-center justify-center gap-0 md:gap-2 text-center md:text-left text-md md:text-sm pt-2 md:pt-0">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-none" viewBox="0 0 20 20" fill="currentColor">
+        <div class="flex flex-row items-center justify-center gap-0 pt-2 text-center md:gap-2 md:text-left text-md md:text-sm md:pt-0">
+            <svg xmlns="http://www.w3.org/2000/svg" class="flex-none w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
                 <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z" />
             </svg>
             <p class="flex-auto">{{ $anime['type'] }}{{ ($anime['episodes'] > 1) ? ' ('.$anime['episodes'].' ep)' : '' }}</p>
         </div>
-        <div class="flex flex-row items-center justify-center gap-0 md:gap-2 text-center md:text-left text-md md:text-sm">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-none" viewBox="0 0 20 20" fill="currentColor">
+        <div class="flex flex-row items-center justify-center gap-0 text-center md:gap-2 md:text-left text-md md:text-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" class="flex-none w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
             </svg>
             <p class="flex-auto">
@@ -26,17 +26,17 @@
                 @endif
             </p>
         </div>
-        <div class="flex flex-row items-center justify-center gap-0 md:gap-2 text-center md:text-left text-md md:text-sm">
+        <div class="flex flex-row items-center justify-center gap-0 text-center md:gap-2 md:text-left text-md md:text-sm">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
             </svg>
             <p class="flex-auto">{{ $anime['members'] }}</p>
         </div>
     </div>
-    <div class="flex-none grid grid-cols-1 md:grid-cols-2">
-        <div class="hidden md:flex flex-row items-center justify-center mx-4">
-            <div class="flex flex-row text-center items-center justify-center gap-2 text-sm py-1">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <div class="grid flex-none grid-cols-1 md:grid-cols-2">
+        <div class="flex-row items-center justify-center hidden mx-4 md:flex">
+            <div class="flex flex-row items-center justify-center gap-2 py-1 text-sm text-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                 </svg>
                 <span>Tersedia</span>
@@ -49,8 +49,8 @@
             <span class="text-xl font-semibold">{{ $anime['score'] }}</span>
         </div>
         <div class="flex flex-row items-center justify-center mx-4">
-            <div class="md:hidden flex flex-row text-center items-center justify-center gap-2 text-sm pt-2">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div class="flex flex-row items-center justify-center gap-2 pt-2 text-sm text-center md:hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                 </svg>
                 <span>Tersedia</span>

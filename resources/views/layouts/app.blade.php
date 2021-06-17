@@ -11,8 +11,8 @@
 <body class="font-sans dark:bg-gray-800 dark:text-white">
     <x-header-navbar />
     {{ $slot }}
-    <footer class="footer border-t border-gray-200 dark:border-gray-700 mt-4">
-        <div class="container mx-auto flex flex-col md:flex-row items-center justify-between px-4 py-6">
+    <footer class="mt-4 border-t border-gray-200 footer dark:border-gray-700">
+        <div class="container flex flex-col items-center justify-between px-4 py-6 mx-auto md:flex-row">
             <p>2021 &bull; WibuList</p>
             <p>Powered by <a href="https://jikan.moe">Jikan.moe</a> API</p>
         </div>
