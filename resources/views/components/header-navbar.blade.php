@@ -1,4 +1,4 @@
-<header x-data="{ mobileMenuOpen: false, topMenuOpen: false }" class="relative flex flex-row flex-wrap items-center justify-between p-4 bg-white border-b border-gray-700 md:space-x-4" @click.away="mobileMenuOpen = false">
+<header x-data="{ mobileMenuOpen: false, topMenuOpen: false }" class="relative flex flex-row flex-wrap items-center justify-between p-4 bg-white border-b border-gray-300 md:space-x-4" @click.away="mobileMenuOpen = false">
     <a href="{{ config('app.url') }}" class="block font-bold">
         <span class="sr-only">Logo</span>
         <img src="https://placeholder.com/wp-content/uploads/2018/10/placeholder.com-logo1.png" alt="Logo" class="h-10" />
@@ -8,7 +8,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
     </button>
-    <nav class="absolute left-0 z-20 flex-col flex-auto w-full font-semibold bg-gray-100 rounded-lg shadow-md md:relative top-16 md:top-0 md:flex md:flex-row md:space-x-6 md:w-auto md:bg-transparent md:shadow-none" :class="{ 'flex' : mobileMenuOpen , 'hidden' : !mobileMenuOpen}">
+    <nav class="absolute left-0 z-20 flex-col flex-auto w-full font-semibold bg-gray-100 rounded-lg shadow-md md:relative top-16 md:top-0 md:flex md:flex-row md:space-x-2 md:w-auto md:bg-transparent md:shadow-none" :class="{ 'flex' : mobileMenuOpen , 'hidden' : !mobileMenuOpen}">
         <div @click="topMenuOpen = !topMenuOpen" @click.away="topMenuOpen = false" class="relative text-gray-600 rounded-lg cursor-pointer hover:bg-gray-300">
             <div class="flex flex-row items-center justify-between p-3 rounded-lg hover:text-blue-700 dark:hover:text-blue-300 dark:text-white" :class="{'bg-gray-300 text-blue-700 dark:text-blue-300': topMenuOpen}">
                 <p>Top Anime</p>
