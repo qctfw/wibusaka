@@ -1,5 +1,5 @@
-<div class="relative flex flex-col items-center justify-between p-2 bg-gray-200 rounded-lg md:static md:flex-row dark:bg-gray-900 md:h-auto">
-    <div class="absolute top-0 left-0 w-auto px-2 text-xl text-center bg-gray-200 rounded-lg md:static md:block md:flex-none md:w-12 md:px-0 dark:bg-gray-900 md:rounded-none md:text-2xl md:font-bold">
+<div class="relative flex flex-col items-center justify-between p-2 bg-gray-200 rounded-lg hover:bg-gray-300 md:static md:flex-row dark:bg-gray-900 md:h-auto">
+    <div class="absolute top-0 left-0 w-auto px-2 text-xl text-center bg-gray-200 rounded-lg md:bg-transparent md:static md:block md:flex-none md:w-12 md:px-0 dark:bg-gray-900 md:rounded-none md:text-2xl md:font-bold">
         #{{ $anime['rank'] }}
     </div>
     <a href="{{ route('anime.show', ['id' => $anime['mal_id']]) }}" class="flex flex-row items-center w-full md:w-20 md:pl-4">
