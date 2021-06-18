@@ -39,7 +39,7 @@
                 Anime Musim Depan
             </a>
         </nav>
-        <div class="flex flex-col items-center w-full md:w-auto md:flex-row">
+        <div class="flex flex-col items-center w-full md:w-64 lg:w-72 md:flex-row">
             <livewire:search-navbar />
         </div>
     </div>

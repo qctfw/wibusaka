@@ -13,10 +13,10 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
         </svg>
     </div>
-    <div x-show="searchOpen" class="absolute left-0 z-40 w-full mt-2 bg-gray-300 rounded-lg">
-        <div class="grid h-64 grid-cols-1 overflow-y-auto divide-y-2 divide-gray-100 divide-solid scrollbar scrollbar-thumb-gray-400 scrollbar-track-gray-300 dark:scrollbar-thumb-gray-500 dark:scrollbar-track-gray-700">
+    <div x-show="searchOpen" class="absolute left-0 z-40 w-full mt-2 bg-gray-300 rounded-lg dark:bg-gray-800">
+        <div class="grid h-64 grid-cols-1 overflow-y-auto border border-gray-400 divide-y-2 divide-gray-100 rounded-lg shadow-md divide-solid scrollbar dark:border-gray-700 md:shadow-lg scrollbar-thumb-gray-400 scrollbar-track-gray-300 dark:scrollbar-thumb-gray-500 dark:scrollbar-track-gray-700 dark:divide-gray-700">
             @for ($i = 1; $i <= 6; $i++)
-            <a href="#" @if ($i==6) @keydown.tab="searchOpen = false" @endif class="flex flex-row items-center justify-between p-3 rounded-lg hover:bg-gray-400">
+            <a href="#" @if ($i==6) @keydown.tab="searchOpen = false" @endif class="flex flex-row items-center justify-between p-3 rounded-lg hover:bg-gray-400 dark:hover:bg-gray-600">
                 <img src="https://cdn.myanimelist.net/images/anime/9/9453.jpg" alt="" class="w-12">
                 <div class="grid flex-auto grid-cols-1 ml-3 text-xs">
                     <div class="text-sm font-semibold">
