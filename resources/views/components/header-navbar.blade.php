@@ -18,7 +18,7 @@
                         <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                     </svg>
                 </div>
-                <div x-show="topMenuOpen" class="relative left-0 w-full bg-gray-300 border-gray-600 rounded-lg shadow-xl md:border md:origin-top-left md:absolute md:w-56 dark:bg-gray-800 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+                <div x-show="topMenuOpen" class="relative left-0 w-full bg-gray-300 border-gray-400 dark:border-gray-600 rounded-lg shadow-xl md:border md:origin-top-left md:absolute md:w-56 dark:bg-gray-800 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
                     <div role="none">
                         <a href="{{ route('top.rated') }}" class="block px-4 py-2 text-sm rounded-lg hover:text-blue-700 dark:hover:text-blue-300 dark:text-white hover:bg-gray-400 dark:hover:bg-gray-900" role="menuitem" tabindex="-1" >
                             Anime Terbaik
@@ -40,14 +40,7 @@
             </a>
         </nav>
         <div class="flex flex-col items-center w-full md:w-auto md:flex-row">
-            <div class="relative w-full px-2 mt-3 md:mt-0">
-                <input type="text" class="w-full px-4 py-1 pl-8 text-sm bg-gray-300 rounded-full dark:bg-gray-900 focus:outline-none focus:ring focus:border-blue-300" placeholder="Cari...">
-                <div class="absolute top-0">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 text-gray-500 dark:text-white mt-1.5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
-                </div>
-            </div>
+            <livewire:search-navbar />
         </div>
     </div>
 </header>
