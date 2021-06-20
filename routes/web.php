@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [AnimeController::class, 'index']);
+Route::get('/', [AnimeController::class, 'index'])->name('index');
 
 Route::group(['as' => 'top.', 'prefix' => 'top'], function () {
     Route::get('rated/{page?}', [AnimeController::class, 'topRated'])->name('rated');

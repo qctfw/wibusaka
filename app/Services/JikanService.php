@@ -73,10 +73,20 @@ class JikanService implements JikanServiceInterface
         return $result;
     }
 
-    private function requestJikan(string $uri)
+    public function searchAnime(string $query)
+    {
+        $result = $this->requestJikan('search/anime', [
+            'q' => $query,
+            'limit' => 6,
+        ]);
+
+        return $result['results'];
+    }
+
+    private function requestJikan(string $uri, array $query = null)
     {
         $uri = ltrim($uri, '/');
-        $response = Http::acceptJson()->get($this->base_uri . $uri);
+        $response = Http::acceptJson()->get($this->base_uri . $uri, $query);
 
         if ($response->failed())
             throw new JikanException();
