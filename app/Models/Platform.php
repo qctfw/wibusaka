@@ -32,15 +32,6 @@ class Platform extends Model
     public $incrementing = false;
 
     /**
-     * The attributes that should be cast.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'paid' => 'boolean',
-    ];
-
-    /**
      * Get the resources that owns the platform.
      */
     public function resource()

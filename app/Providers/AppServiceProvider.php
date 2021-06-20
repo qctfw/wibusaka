@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Services\Contracts\JikanServiceInterface;
+use App\Services\Contracts\ResourceServiceInterface;
 use App\Services\JikanService;
+use App\Services\ResourceService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -16,6 +18,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(JikanServiceInterface::class, JikanService::class);
+        $this->app->bind(ResourceServiceInterface::class, ResourceService::class);
     }
 
     /**

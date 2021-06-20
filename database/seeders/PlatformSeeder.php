@@ -32,39 +32,39 @@ class PlatformSeeder extends Seeder
         return [
             [
                 'name' => 'YouTube',
-                'icon_url' => 'icons/youtube.png'
+                'icon_url' => 'icons/youtube.webp'
             ],
             [
                 'name' => 'Crunchyroll',
-                'icon_url' => 'icons/crunchyroll.png'
+                'icon_url' => 'icons/crunchyroll.webp'
             ],
             [
                 'name' => 'Netflix',
-                'icon_url' => 'icons/netflix.png'
+                'icon_url' => 'icons/netflix.webp'
             ],
             [
                 'name' => 'Sushiroll',
-                'icon_url' => 'icons/sushiroll.png'
+                'icon_url' => 'icons/sushiroll.webp'
             ],
             [
                 'name' => 'iQIYI',
-                'icon_url' => 'icons/iqiyi.png'
+                'icon_url' => 'icons/iqiyi.webp'
             ],
             [
                 'name' => 'iFlix',
-                'icon_url' => 'icons/iflix.png'
+                'icon_url' => 'icons/iflix.webp'
             ],
             [
                 'name' => 'CATCHPLAY+',
-                'icon_url' => 'icons/catchplay-plus.png'
+                'icon_url' => 'icons/catchplay-plus.webp'
             ],
             [
                 'name' => 'VIU',
-                'icon_url' => 'icons/viu.png'
+                'icon_url' => 'icons/viu.webp'
             ],
             [
                 'name' => 'Spotify',
-                'icon_url' => 'icons/spotify.png'
+                'icon_url' => 'icons/spotify.webp'
             ],
         ];
     }

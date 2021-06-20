@@ -127,60 +127,7 @@
 
             <div class="flex flex-col mt-4">
                 <h3 class="pb-3 text-2xl font-semibold border-b border-gray-400 border-opacity-50 border-dashed">Tonton Di</h3>
-                <div class="grid items-center grid-cols-1 mt-4 bg-gray-200 lg:grid-cols-2 rounded-xl dark:bg-gray-900">
-                    <a href="#" class="flex flex-row items-center justify-between p-4 transition-colors duration-200 rounded-xl hover:bg-gray-300 dark:hover:bg-gray-700">
-                        <div class="flex-none">
-                            <img src="https://www.iconpacks.net/icons/2/free-youtube-logo-icon-2431-thumb.png" alt="YouTube Icon" class="w-16 h-16">
-                        </div>
-                        <div class="flex flex-col flex-auto pl-4">
-                            <p class="text-lg font-semibold">YouTube</p>
-                            <p class="text-sm italic">Hanya tersedia untuk member</p>
-                        </div>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 20 20" fill="currentColor">
-                            <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
-                            <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
-                        </svg>
-                    </a>
-                    <a href="#" class="flex flex-row items-center justify-between p-4 transition-colors duration-200 rounded-xl hover:bg-gray-300 dark:hover:bg-gray-700">
-                        <div class="flex-none">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Cib-crunchyroll_%28CoreUI_Icons_v1.0.0%29_orange.svg/1024px-Cib-crunchyroll_%28CoreUI_Icons_v1.0.0%29_orange.svg.png" alt="Crunchyroll Icon" class="w-16 h-16">
-                        </div>
-                        <div class="flex flex-col flex-auto pl-4">
-                            <p class="text-lg font-semibold">Crunchyroll</p>
-                            <p class="text-sm italic">Berbayar, Hanya tersedia takarir Inggris</p>
-                        </div>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 20 20" fill="currentColor">
-                            <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
-                            <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
-                        </svg>
-                    </a>
-                    <a href="#" class="flex flex-row items-center justify-between p-4 transition-colors duration-200 rounded-xl hover:bg-gray-300 dark:hover:bg-gray-700">
-                        <div class="flex-none">
-                            <img src="https://cdn.iconscout.com/icon/free/png-512/iqiyi-2270642-1891169.png" alt="iQIYI Icon" class="w-16 h-16">
-                        </div>
-                        <div class="flex flex-col flex-auto pl-4">
-                            <p class="text-lg font-semibold">iQIYI</p>
-                            <p class="text-sm italic"></p>
-                        </div>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 20 20" fill="currentColor">
-                            <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
-                            <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
-                        </svg>
-                    </a>
-                    <a href="#" class="flex flex-row items-center justify-between p-4 transition-colors duration-200 rounded-xl hover:bg-gray-300 dark:hover:bg-gray-700">
-                        <div class="flex-none">
-                            <img src="https://play-lh.googleusercontent.com/axmzJq96GZvxoucDaMexANY0UD97-Loj6LJTN0hycbXVj6PySGECoVJcCS3v7Eh-wc0" alt="Sushiroll Icon" class="w-16 h-16">
-                        </div>
-                        <div class="flex flex-col flex-auto pl-4">
-                            <p class="text-lg font-semibold">Sushiroll</p>
-                            <p class="text-sm italic">Berbayar</p>
-                        </div>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 20 20" fill="currentColor">
-                            <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
-                            <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
-                        </svg>
-                    </a>
-                </div>
+                <livewire:availability-grid :mal="$anime['mal_id']" />
             </div>
 
             @if (count($anime['opening_themes']) > 0 && count($anime['ending_themes']) > 0)

@@ -32,11 +32,39 @@ class Resource extends Model
     public $incrementing = false;
 
     /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'paid' => 'boolean',
+    ];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = ['created_at', 'updated_at'];
+
+    /**
      * Get the platform associated with the anime resource.
      */
     public function platform()
     {
         return $this->belongsTo(Platform::class);
+    }
+
+    /**
+     * Scope a query to only include resources of a given MyAnimeList ID.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param  mixed  $mal_id
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfMalId($query, $mal_id)
+    {
+        return $query->where('mal_id', $mal_id);
     }
 
     /**
