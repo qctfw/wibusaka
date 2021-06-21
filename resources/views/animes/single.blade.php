@@ -125,10 +125,12 @@
             </table>
             @endif
 
+            @if ($anime['status'] != 'Belum Tayang')
             <div class="flex flex-col mt-4">
                 <h3 class="pb-3 text-2xl font-semibold border-b border-gray-400 border-opacity-50 border-dashed">Tonton Di</h3>
                 <livewire:availability-grid :mal="$anime['mal_id']" />
             </div>
+            @endif
 
             @if (count($anime['opening_themes']) > 0 && count($anime['ending_themes']) > 0)
             <h3 class="py-3 text-2xl font-semibold border-b border-gray-400 border-opacity-50 border-dashed">Tema Lagu</h3>
