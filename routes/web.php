@@ -18,10 +18,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [AnimeController::class, 'index'])->name('index');
 
 Route::group(['as' => 'top.', 'prefix' => 'top'], function () {
-    Route::get('rated/{page?}', [AnimeController::class, 'topRated'])->name('rated');
+    Route::get('rated/{page?}', [AnimeController::class, 'topRated'])->name('rated')->where('page', '[0-9]+');
     // Route::get('airing');
-    Route::get('popular/{page?}', [AnimeController::class, 'topPopular'])->name('popular');
-    Route::get('upcoming/{page?}', [AnimeController::class, 'topUpcoming'])->name('upcoming');
+    Route::get('popular/{page?}', [AnimeController::class, 'topPopular'])->name('popular')->where('page', '[0-9]+');
+    Route::get('upcoming/{page?}', [AnimeController::class, 'topUpcoming'])->name('upcoming')->where('page', '[0-9]+');
     // Route::get('tv');
     // Route::get('movies');
 });
@@ -29,4 +29,4 @@ Route::group(['as' => 'top.', 'prefix' => 'top'], function () {
 Route::get('/season', [AnimeController::class, 'season'])->name('anime.season-current');
 Route::get('/season/{year}/{season}', [AnimeController::class, 'season'])->name('anime.season')->where(['year' => '[0-9]+', 'season' => '[a-z]+']);
 
-Route::get('/anime/{id}', [AnimeController::class, 'show'])->name('anime.show');
+Route::get('/anime/{id}', [AnimeController::class, 'show'])->name('anime.show')->where('id', '[0-9]+');

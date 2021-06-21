@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\HttpRequestException;
+use App\Exceptions\JikanException;
 use App\Services\Contracts\JikanServiceInterface;
 use App\ViewModels\AnimeViewModel;
 use App\ViewModels\SeasonViewModel;
@@ -30,8 +31,14 @@ class AnimeController extends Controller
      */
     public function index()
     {
-        $top = $this->jikan_service->getTopPopularityAnimes();
-        $upcoming = $this->jikan_service->getTopUpcomingAnimes();
+        try
+        {
+            $top = $this->jikan_service->getTopPopularityAnimes();
+            $upcoming = $this->jikan_service->getTopUpcomingAnimes();
+        } catch (JikanException $e)
+        {
+            abort($e->getHttpCode());
+        }
 
         $top_index_view_model = new TopIndexViewModel($top, $upcoming);
 
@@ -45,7 +52,13 @@ class AnimeController extends Controller
      */
     public function topRated($page = 1)
     {
-        $top = $this->jikan_service->getTopRatedAnimes($page);
+        try
+        {
+            $top = $this->jikan_service->getTopRatedAnimes($page);
+        } catch (JikanException $e)
+        {
+            abort($e->getHttpCode());
+        }
 
         $top_view_model = new TopViewModel('Terbaik', $top);
 
@@ -59,7 +72,13 @@ class AnimeController extends Controller
      */
     public function topPopular($page = 1)
     {
-        $top = $this->jikan_service->getTopPopularityAnimes($page);
+        try
+        {
+            $top = $this->jikan_service->getTopPopularityAnimes($page);
+        } catch (JikanException $e)
+        {
+            abort($e->getHttpCode());
+        }
 
         $top_view_model = new TopViewModel('Terpopuler', $top);
 
@@ -73,7 +92,13 @@ class AnimeController extends Controller
      */
     public function topUpcoming($page = 1)
     {
-        $top = $this->jikan_service->getTopUpcomingAnimes($page);
+        try
+        {
+            $top = $this->jikan_service->getTopUpcomingAnimes($page);
+        } catch (JikanException $e)
+        {
+            abort($e->getHttpCode());
+        }
 
         $top_view_model = new TopViewModel('Paling Dinantikan', $top);
 
@@ -94,7 +119,13 @@ class AnimeController extends Controller
         else
             $season = $this->getSeason(now());
 
-        $result = $this->jikan_service->getAnimesBySeason($date->year, $season);
+        try
+        {
+            $result = $this->jikan_service->getAnimesBySeason($date->year, $season);
+        } catch (JikanException $e)
+        {
+            abort($e->getHttpCode());
+        }
 
         $season_view_model = new SeasonViewModel($result['season_year'], $result['season_name'], $result['animes']);
 
@@ -109,7 +140,13 @@ class AnimeController extends Controller
      */
     public function show($id)
     {
-        $result = $this->jikan_service->getAnime($id);
+        try
+        {
+            $result = $this->jikan_service->getAnime(intval($id));
+        } catch (JikanException $e)
+        {
+            abort($e->getHttpCode());
+        }
 
         $anime_view_model = new AnimeViewModel($result);
 
