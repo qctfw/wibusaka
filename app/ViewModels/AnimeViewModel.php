@@ -69,10 +69,10 @@ class AnimeViewModel extends ViewModel
                 $rating['note'] = 'Anime ini dapat ditonton oleh remaja diatas 13 tahun.';
                 break;
             case 'R':
-                $rating['note'] = 'Anime ini mengandung unsur kekerasan dan bahasa kasar yang hanya dapat ditonton diatas 17 tahun.';
+                $rating['note'] = 'Anime ini mengandung unsur kekerasan dan bahasa kasar yang hanya dapat ditonton oleh penonton dewasa berusia diatas 17 tahun.';
                 break;
             case 'R+':
-                $rating['note'] = 'Anime ini mengandung sedikit unsur ketelanjangan yang hanya dapat ditonton diatas 17 tahun.';
+                $rating['note'] = 'Anime ini mengandung sedikit unsur ketelanjangan yang hanya dapat ditonton oleh penonton dewasa berusia diatas 17 tahun.';
                 break;
             case 'Rx':
                 $rating['note'] = 'Anime ini mengandung banyak unsur ketelanjangan (Hentai).';
