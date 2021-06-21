@@ -52,8 +52,10 @@
                     <p class="text-sm md:text-md">{{ (count($anime['title_synonyms']) > 0) ? implode(', ', $anime['title_synonyms']) : '-' }}</p>
                 </div>
                 <div class="pt-2">
-                    <p class="font-semibold md:text-lg">Jumlah Episode</p>
-                    <p class="text-sm md:text-md">{{ $anime['episodes'] ?? '?' }}</p>
+                    <p class="font-semibold md:text-lg">Tipe Anime</p>
+                    <p class="text-sm md:text-md">
+                        {{ $anime['type'] }} @if ($anime['episodes'] > 1) ({{ $anime['episodes'] }} episode) @endif
+                    </p>
                 </div>
                 <div class="pt-2">
                     <p class="font-semibold md:text-lg">Status</p>
