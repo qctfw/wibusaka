@@ -19,6 +19,4 @@ mix.js('resources/js/app.js', 'public/js')
             require('tailwindcss')
         ]
     })
-    .purgeCss({
-        enabled: true,
-    });
+    .purgeCss();

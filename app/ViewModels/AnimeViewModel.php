@@ -24,7 +24,7 @@ class AnimeViewModel extends ViewModel
                         'to' => (!is_null($this->anime['aired']['to'])) ? Carbon::parse($this->anime['aired']['to'])->translatedFormat('d F Y') : '?'
                     ],
                     'status' => $this->formatStatus($this->anime['status']),
-                    'rating' => explode(' - ', $this->anime['rating'])[0],
+                    'rating' => $this->formatRating($this->anime['rating']),
                     'scored_by' => $this->abbreviateNumber($this->anime['scored_by']),
                     'rank' => $this->abbreviateNumber($this->anime['rank']),
                     'popularity' => $this->abbreviateNumber($this->anime['popularity']),
@@ -51,6 +51,35 @@ class AnimeViewModel extends ViewModel
         }
 
         return $result;
+    }
+
+    private function formatRating(string $rating_input)
+    {
+        $rating['rating'] = explode(' - ', $rating_input)[0];
+
+        $rating['note'] = null;
+        switch ($rating['rating']) {
+            case 'G':
+                $rating['note'] = 'Anime ini dapat ditonton oleh semua umur.';
+                break;
+            case 'PG':
+                $rating['note'] = 'Anime ini dapat ditonton oleh anak-anak dengan bimbingan orang tua.';
+                break;
+            case 'PG-13':
+                $rating['note'] = 'Anime ini dapat ditonton oleh remaja diatas 13 tahun.';
+                break;
+            case 'R':
+                $rating['note'] = 'Anime ini mengandung unsur kekerasan dan bahasa kasar yang hanya dapat ditonton diatas 17 tahun.';
+                break;
+            case 'R+':
+                $rating['note'] = 'Anime ini mengandung sedikit unsur ketelanjangan yang hanya dapat ditonton diatas 17 tahun.';
+                break;
+            case 'Rx':
+                $rating['note'] = 'Anime ini mengandung banyak unsur ketelanjangan (Hentai).';
+                break;
+        }
+
+        return $rating;
     }
 
     private function abbreviateNumber($number): string
