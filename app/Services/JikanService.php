@@ -4,7 +4,9 @@ namespace App\Services;
 
 use App\Exceptions\JikanException;
 use App\Services\Contracts\JikanServiceInterface;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 
 class JikanService implements JikanServiceInterface
 {
@@ -86,11 +88,24 @@ class JikanService implements JikanServiceInterface
     private function requestJikan(string $uri, array $query = null)
     {
         $uri = ltrim($uri, '/');
-        $response = Http::acceptJson()->get($this->base_uri . $uri, $query);
 
-        if ($response->failed())
-            throw new JikanException();
+        $cache_key = Str::lower(config('app.name')) . ':jikan:' . Str::replace('/', '-', $uri);
+        if ($query)
+            $cache_key .= ':' . implode('-', $query);
 
-        return $response->collect();
+        $cache_time = Str::contains($uri, 'search') ? now()->addDays(2) : now()->addHours(12);
+
+        $response = Cache::remember($cache_key, $cache_time, function () use ($uri, $query) {
+            $response = Http::acceptJson()->get($this->base_uri . $uri, $query);
+
+            if ($response->clientError())
+            {
+                throw new JikanException($response->status());
+            }
+            
+            return $response->body();
+        });
+
+        return collect(json_decode($response, true));
     }
 }
