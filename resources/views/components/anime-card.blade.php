@@ -2,7 +2,7 @@
     <img class="w-40 h-auto bg-gray-900 md:w-44 rounded-l-xl" src="{{ $anime['image_url'] }}" loading="lazy" alt="Anime Name">
     <div class="grid w-full h-64 grid-cols-1 p-2 md:p-3">
         <div class="relative h-auto overflow-y-auto scrollbar scrollbar-thumb-gray-400 scrollbar-track-gray-300 dark:scrollbar-thumb-gray-500 dark:scrollbar-track-gray-700">
-            <a href="{{ route('anime.show', ['id' => $anime['mal_id']]) }}">
+            <a href="{{ route('anime.show', $anime['mal_id']) }}">
                 <h3 class="pb-0 text-lg font-semibold text-center transition-colors duration-200 hover:text-blue-700 dark:hover:text-blue-300">{{ $anime['title'] }}</h3>
             </a>
             <div class="grid grid-cols-2 pb-2 text-sm text-center border-b border-gray-700 border-dashed">

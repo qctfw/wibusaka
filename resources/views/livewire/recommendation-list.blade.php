@@ -8,10 +8,10 @@
                     <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
                 </svg>
             </div>
-            <a href="{{ route('anime.show', ['id' => $anime['mal_id']]) }}" class="w-full mx-auto rounded-lg">
+            <a href="{{ route('anime.show', $anime['mal_id']) }}" class="w-full mx-auto rounded-lg">
                 <img src="{{ $anime['image_url'] }}" alt="{{ $anime['title'] }} Anime Poster" class="w-full mx-auto rounded-lg" loading="lazy" />
             </a>
-            <a href="{{ route('anime.show', ['id' => $anime['mal_id']]) }}">
+            <a href="{{ route('anime.show', $anime['mal_id']) }}">
                 <p class="py-1 text-md font-semibold leading-tight text-center transition-colors duration-200 border-dashed group-hover:text-blue-700 dark:group-hover:text-blue-300">
                     {{ $anime['title'] }}
                 </p>

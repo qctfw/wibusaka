@@ -34,7 +34,7 @@
                     
                     @foreach ($results as $anime)
                     <a
-                        href="{{ route('anime.show', ['id' => $anime['mal_id']]) }}"
+                        href="{{ route('anime.show', $anime['mal_id']) }}"
                         @if ($loop->last) @keydown.tab="searchOpen = false" @endif
                         class="flex flex-row items-center justify-between p-3 rounded-lg hover:bg-gray-400 dark:hover:bg-gray-600"
                         wire:loading.remove
