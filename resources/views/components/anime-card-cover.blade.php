@@ -1,9 +1,9 @@
-<div class="flex flex-col bg-gray-200 rounded-lg dark:bg-gray-900">
+<div class="flex flex-col bg-gray-200 rounded-lg group dark:bg-gray-900">
     <a href="{{ route('anime.show', ['id' => $anime['mal_id']]) }}" class="w-full mx-auto rounded-lg">
         <img src="{{ $anime['image_url'] }}" alt="{{ $anime['title'] }} Anime Poster" class="w-full mx-auto rounded-lg" loading="lazy" />
     </a>
     <a href="{{ route('anime.show', ['id' => $anime['mal_id']]) }}">
-        <h4 class="py-1 text-lg font-semibold leading-tight text-center transition-colors duration-200 border-b border-gray-400 border-opacity-50 border-dashed hover:text-blue-700 dark:hover:text-blue-300">
+        <h4 class="py-1 text-lg font-semibold leading-tight text-center transition-colors duration-200 border-b border-gray-400 border-opacity-50 border-dashed group-hover:text-blue-700 dark:group-hover:text-blue-300">
             {{ $anime['title'] }}
         </h4>
     </a>
