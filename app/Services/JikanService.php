@@ -75,6 +75,13 @@ class JikanService implements JikanServiceInterface
         return $result;
     }
 
+    public function getAnimeRecommendations(string $id)
+    {
+        $result = $this->requestJikan('anime/' . $id . '/recommendations');
+
+        return collect($result['recommendations'])->take(5);
+    }
+
     public function searchAnime(string $query)
     {
         $result = $this->requestJikan('search/anime', [

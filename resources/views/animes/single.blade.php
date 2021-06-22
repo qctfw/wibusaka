@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="title">{{ $anime['title'] }}</x-slot>
 
-    <div class="container flex flex-col px-4 pt-12 mx-auto md:flex-row">
+    <div class="container flex flex-col px-4 py-4 mx-auto md:pt-12 md:flex-row">
         <div class="grid justify-between flex-none w-full grid-cols-2 md:grid-cols-1 md:items-center md:w-72 md:h-full">
             <div class="w-full text-center">
                 <img src="{{ $anime['image_url'] }}" alt="'{{ $anime['title'] }}' anime poster" class="w-64 mx-auto">
@@ -25,7 +25,7 @@
                         <p class="text-sm md:hidden">Penonton</p>
                     </div>
                     <div class="text-center">
-                        <div class="flex flex-row items-center justify-center gap-1">
+                        <div class="flex flex-row items-center justify-center md:gap-1">
                             <p class="text-lg font-semibold md:text-2xl">{{ $anime['rating']['rating'] ?? 'N/A' }}</p>
                             @if (!empty($anime['rating']['note']))
                             <div class="relative flex flex-col items-center mt-1 group">
@@ -39,7 +39,7 @@
                                 </svg>
                                 @endif
                                 <div class="absolute bottom-0 flex-col items-center hidden w-48 mb-6 group-hover:flex">
-                                    <div class="relative z-20 p-2 text-sm leading-none text-white whitespace-no-wrap bg-black shadow-xl rounded-xl">
+                                    <div class="relative z-20 p-2 text-sm leading-4 text-white whitespace-no-wrap bg-black shadow-xl rounded-xl">
                                         {{ $anime['rating']['note'] }}
                                     </div>
                                     <div class="w-3 h-3 -mt-2 transform rotate-45 bg-black"></div>
@@ -50,14 +50,6 @@
                         <p class="text-sm md:text-md">Rating</p>
                     </div>
                 </div>
-                @if (!empty($anime['rating']['note']) && in_array($anime['rating']['rating'], ['R', 'R+', 'Rx']))
-                <div class="flex flex-col items-center w-auto gap-2 p-2 my-4 bg-gray-200 md:hidden rounded-xl dark:bg-gray-900">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
-                    </svg>
-                    <p class="text-sm">{{ $anime['rating']['note'] }}</p>
-                </div>
-                @endif
                 <a href="{{ $anime['url'] }}" class="flex items-center justify-between w-full h-16 transition-colors duration-200 bg-gray-200 rounded-xl dark:bg-gray-900 hover:bg-gray-300 dark:hover:bg-gray-700">
                     <div class="flex-auto pl-4">
                         <p class="text-lg font-semibold md:text-xl">MyAnimeList</p>
@@ -118,6 +110,15 @@
                 </div>
             </div>
         </div>
+
+        @if (!empty($anime['rating']['note']) && in_array($anime['rating']['rating'], ['R', 'R+', 'Rx']))
+        <div class="flex flex-col items-center w-auto gap-2 p-2 my-4 bg-gray-200 md:hidden rounded-xl dark:bg-gray-900">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+            </svg>
+            <p class="text-sm text-center">{{ $anime['rating']['note'] }}</p>
+        </div>
+        @endif
 
         <div class="flex-grow md:ml-12">
             <h2 class="hidden text-3xl font-bold text-left md:block lg:text-5xl">{{ $anime['title'] }}</h2>
@@ -180,6 +181,11 @@
                 </div>
             </div>
             @endif
+
+            <div class="flex flex-col mt-4">
+                <h3 class="py-3 text-2xl font-semibold border-b border-gray-400 border-opacity-50 border-dashed">Rekomendasi</h3>
+                <livewire:recommendation-list :mal="$anime['mal_id']" />
+            </div>
         </div>
     </div>
 </x-app-layout>
