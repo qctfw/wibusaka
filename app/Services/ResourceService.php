@@ -9,7 +9,7 @@ class ResourceService implements ResourceServiceInterface
 {
     public function getByMalId(int $mal_id)
     {
-        $resources = Resource::with('platform')->ofMalId($mal_id)->get();
+        $resources = Resource::with('platform')->ofMalId($mal_id)->get()->sortBy('platform.name', SORT_NATURAL|SORT_FLAG_CASE);
 
         return $resources;
     }
