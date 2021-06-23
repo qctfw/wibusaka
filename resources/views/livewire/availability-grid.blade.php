@@ -1,7 +1,7 @@
 <div wire:init="loadResources" class="grid items-center grid-cols-1 gap-4 mt-4 lg:grid-cols-2 rounded-xl">
     @if ($loaded)
         @forelse ($resources as $resource)
-        <a href="{{ $resource->link }}" class="flex flex-row items-center justify-between h-24 p-4 transition-colors duration-200 bg-gray-200 rounded-xl dark:bg-gray-900 hover:bg-gray-300 dark:hover:bg-gray-700">
+        <a href="{{ $resource->link }}" target="_blank" class="flex flex-row items-center justify-between h-24 p-4 transition-colors duration-200 bg-gray-200 rounded-xl dark:bg-gray-900 hover:bg-gray-300 dark:hover:bg-gray-700">
             <div class="flex flex-none w-16 mx-auto">
                 <img src="{{ asset($resource->platform->icon_url) }}" alt="{{ $resource->platform->name }} Icon" class="mx-auto">
             </div>
