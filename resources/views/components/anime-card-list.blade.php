@@ -5,7 +5,7 @@
     <a href="{{ route('anime.show', $anime['mal_id']) }}" class="flex flex-row items-center w-full md:w-20 md:pl-4">
         <img src="{{ $anime['image_url'] }}" alt="'{{ $anime['title'] }}' Anime Poster" loading="lazy" class="mx-auto" />
     </a>
-    <div class="grid items-center w-full grid-cols-1 pb-2 border-b border-gray-400 border-opacity-50 border-dashed md:items-baseline md:flex md:flex-auto md:flex-col md:ml-3 md:border-none md:pb-0">
+    <div class="grid items-center flex-auto w-full grid-cols-1 pb-2 border-b border-gray-400 border-opacity-50 border-dashed md:w-auto md:items-baseline md:flex md:flex-auto md:flex-col md:ml-3 md:border-none md:pb-0">
         <a href="{{ route('anime.show', $anime['mal_id']) }}" class="flex flex-row items-center justify-center py-2 text-lg font-semibold text-center transition-colors duration-200 border-b border-gray-400 border-opacity-50 border-dashed md:text-left md:py-0 md:border-none hover:text-blue-700 dark:hover:text-blue-300">
             {{ $anime['title'] }}
         </a>
@@ -33,27 +33,25 @@
             <p class="flex-auto">{{ $anime['members'] }}</p>
         </div>
     </div>
-    <div class="grid flex-none grid-cols-1 md:grid-cols-2">
-        <div class="flex-row items-center justify-center hidden mx-4 md:flex">
-            <div class="flex flex-row items-center justify-center gap-2 py-1 text-sm text-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                <span>Tersedia</span>
-            </div>
+    <div class="flex-row items-center justify-center hidden mx-4 md:flex">
+        <div class="flex flex-row items-center justify-center gap-2 py-1 text-sm text-center">
+            @foreach ($resources as $resource)
+            <img src="{{ asset($resource->platform->icon_url) }}" alt="{{ $resource->platform->name }} Logo" class="w-6 h-6" />
+            @endforeach
         </div>
-        <div class="{{ ($anime['score'] == 'N/A') ? 'hidden md:flex' : 'flex'}} flex-row items-center justify-center pt-2 md:pt-0">
+    </div>
+    <div class="grid flex-none grid-cols-1 md:grid-cols-2">
+        <div class="{{ ($anime['score'] == 'N/A') ? 'hidden md:flex' : 'flex'}} flex-row items-center justify-center pt-2 md:pt-0 md:col-span-2 md:mr-4">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 pr-1" viewBox="0 0 20 20" fill="currentColor">
                 <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
             </svg>
             <span class="text-xl font-semibold">{{ $anime['score'] }}</span>
         </div>
-        <div class="flex flex-row items-center justify-center mx-4">
-            <div class="flex flex-row items-center justify-center gap-2 pt-2 text-sm text-center md:hidden">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                <span>Tersedia</span>
+        <div class="flex-row items-center justify-center mx-4 md:hidden">
+            <div class="flex flex-row items-center justify-center gap-2 pt-2 text-sm text-center">
+                @foreach ($resources as $resource)
+                <img src="{{ asset($resource->platform->icon_url) }}" alt="{{ $resource->platform->name }} Logo" class="w-6 h-6" />
+                @endforeach
             </div>
         </div>
     </div>

@@ -21,21 +21,21 @@ class JikanService implements JikanServiceInterface
     {
         $result = $this->requestJikan('top/anime/' . $page);
         
-        return $result['top'];
+        return collect($result['top']);
     }
 
     public function getTopPopularityAnimes(int $page = 1)
     {
         $result = $this->requestJikan('top/anime/' . $page . '/bypopularity');
         
-        return $result['top'];
+        return collect($result['top']);
     }
 
     public function getTopUpcomingAnimes(int $page = 1)
     {
         $result = $this->requestJikan('top/anime/' . $page . '/upcoming');
         
-        return $result['top'];
+        return collect($result['top']);
     }
 
     public function getCurrentSeason()

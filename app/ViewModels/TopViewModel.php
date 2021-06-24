@@ -9,16 +9,18 @@ class TopViewModel extends ViewModel
 {
     public $type;
     public $top_animes;
+    public $resources;
 
-    public function __construct($type, $top_animes)
+    public function __construct($type, $top_animes, $resources)
     {
         $this->type = $type;
         $this->top_animes = $top_animes;
+        $this->resources = $resources;
     }
 
     public function top_animes()
     {
-        return collect($this->top_animes)->map(function ($item, $key) {
+        return $this->top_animes->map(function ($item, $key) {
             return collect($item)->merge([
                 'members' => $this->abbreviateNumber($item['members']),
                 'score' => ($item['score'] > 0) ? number_format($item['score'], 2, '.', '') : 'N/A'

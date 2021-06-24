@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Exceptions\HttpRequestException;
 use App\Exceptions\JikanException;
 use App\Services\Contracts\JikanServiceInterface;
+use App\Services\Contracts\ResourceServiceInterface;
 use App\ViewModels\AnimeViewModel;
 use App\ViewModels\SeasonViewModel;
 use App\ViewModels\TopIndexViewModel;
 use App\ViewModels\TopViewModel;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 
 class AnimeController extends Controller
 {
@@ -19,9 +18,15 @@ class AnimeController extends Controller
      */
     private $jikan_service;
 
-    public function __construct(JikanServiceInterface $jikan_service)
+    /**
+     * @var ResourceServiceInterface
+     */
+    private $resource_service;
+
+    public function __construct(JikanServiceInterface $jikan_service, ResourceServiceInterface $resource_service)
     {
         $this->jikan_service = $jikan_service;
+        $this->resource_service = $resource_service;
     }
 
     /**
@@ -39,8 +44,9 @@ class AnimeController extends Controller
         {
             abort($e->getHttpCode());
         }
+        $top_resources = $this->resource_service->getByMalIds($top->pluck('mal_id')->sort()->toArray());
 
-        $top_index_view_model = new TopIndexViewModel($top, $upcoming);
+        $top_index_view_model = new TopIndexViewModel($top, $top_resources, $upcoming);
 
         return view('index', $top_index_view_model);
     }
@@ -59,8 +65,9 @@ class AnimeController extends Controller
         {
             abort($e->getHttpCode());
         }
+        $top_resources = $this->resource_service->getByMalIds($top->pluck('mal_id')->sort()->toArray());
 
-        $top_view_model = new TopViewModel('Terbaik', $top);
+        $top_view_model = new TopViewModel('Terbaik', $top, $top_resources);
 
         return view('animes.top', $top_view_model);
     }
@@ -79,8 +86,9 @@ class AnimeController extends Controller
         {
             abort($e->getHttpCode());
         }
+        $top_resources = $this->resource_service->getByMalIds($top->pluck('mal_id')->sort()->toArray());
 
-        $top_view_model = new TopViewModel('Terpopuler', $top);
+        $top_view_model = new TopViewModel('Terpopuler', $top, $top_resources);
 
         return view('animes.top', $top_view_model);
     }
@@ -99,8 +107,9 @@ class AnimeController extends Controller
         {
             abort($e->getHttpCode());
         }
+        $top_resources = $this->resource_service->getByMalIds($top->pluck('mal_id')->sort()->toArray());
 
-        $top_view_model = new TopViewModel('Paling Dinantikan', $top);
+        $top_view_model = new TopViewModel('Paling Dinantikan', $top, $top_resources);
 
         return view('animes.top', $top_view_model);
     }

@@ -59,11 +59,16 @@ class Resource extends Model
      * Scope a query to only include resources of a given MyAnimeList ID.
      *
      * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @param  mixed  $mal_id
+     * @param  array|int  $mal_id
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeOfMalId($query, $mal_id)
+    public function scopeByMalId($query, $mal_id)
     {
+        if (is_array($mal_id))
+        {
+            return $query->whereIn('mal_id', $mal_id);
+        }
+
         return $query->where('mal_id', $mal_id);
     }
 

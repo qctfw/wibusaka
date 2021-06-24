@@ -10,11 +10,14 @@ class TopIndexViewModel extends ViewModel
 {
     public $top_animes;
 
+    public $top_resources;
+
     public $upcoming_animes;
 
-    public function __construct($top_animes, $upcoming_animes)
+    public function __construct($top_animes, $top_resources, $upcoming_animes)
     {
         $this->top_animes = $top_animes;
+        $this->top_resources = $top_resources;
         $this->upcoming_animes = $upcoming_animes;
     }
 

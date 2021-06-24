@@ -10,15 +10,21 @@ class AnimeCardList extends Component
      * @var array
      */
     private $anime;
+    
+    /**
+     * @var array
+     */
+    private $resources;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($anime)
+    public function __construct($anime, $resources)
     {
         $this->anime = $anime;
+        $this->resources = $resources;
     }
 
     /**
@@ -29,7 +35,8 @@ class AnimeCardList extends Component
     public function render()
     {
         return view('components.anime-card-list', [
-            'anime' => $this->anime
+            'anime' => $this->anime,
+            'resources' => $this->resources
         ]);
     }
 }

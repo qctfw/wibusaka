@@ -5,7 +5,7 @@
         <h2 class="text-lg font-semibold tracking-wider text-blue-700 uppercase dark:text-blue-300">Anime {{ $type }}</h2>
         <div class="grid items-start grid-cols-2 gap-4 mt-4 md:grid-cols-1">
             @foreach ($top_animes as $anime)
-            <x-anime-card-list :anime="$anime" />
+            <x-anime-card-list :anime="$anime" :resources="$resources[$anime['mal_id']]" />
             @endforeach
         </div>
     </div>

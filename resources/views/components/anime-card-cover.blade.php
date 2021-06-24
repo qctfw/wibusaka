@@ -1,13 +1,13 @@
-<div class="flex flex-col bg-gray-200 rounded-lg group dark:bg-gray-900">
+<div class="flex flex-col bg-gray-200 rounded-lg group dark:bg-gray-900 divide-y divide-gray-400 divide-opacity-50 divide-dashed">
     <a href="{{ route('anime.show', $anime['mal_id']) }}" class="w-full mx-auto rounded-lg">
         <img src="{{ $anime['image_url'] }}" alt="{{ $anime['title'] }} Anime Poster" class="w-full mx-auto rounded-lg" loading="lazy" />
     </a>
-    <a href="{{ route('anime.show', $anime['mal_id']) }}">
-        <h4 class="py-1 text-lg font-semibold leading-tight text-center transition-colors duration-200 border-b border-gray-400 border-opacity-50 border-dashed group-hover:text-blue-700 dark:group-hover:text-blue-300">
+    <a href="{{ route('anime.show', $anime['mal_id']) }}" class="my-1">
+        <h4 class="p-1 text-lg font-semibold leading-tight text-center transition-colors duration-200 group-hover:text-blue-700 dark:group-hover:text-blue-300">
             {{ $anime['title'] }}
         </h4>
     </a>
-    <div class="grid items-center justify-center grid-cols-2 py-1 text-center border-b border-gray-400 border-opacity-50 border-dashed">
+    <div class="grid items-center justify-center grid-cols-2 py-1 text-center">
         <div class="flex flex-row items-center justify-center gap-2 text-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
@@ -40,10 +40,17 @@
             <span>{{ $anime['episodes'] ?? '?' }} ep</span>
         </div>
     </div>
+
+    @if (!is_null($resources))
     <div class="flex flex-row items-center justify-center gap-2 py-1 text-sm text-center">
+        @forelse ($resources as $resource)
+        <img src="{{ asset($resource->platform->icon_url) }}" alt="{{ $resource->platform->name }} Logo" class="w-6 h-6" />
+        @empty
         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
         </svg>
-        <span>Tersedia</span>
+        <span>Tidak Tersedia</span>
+        @endforelse
     </div>
+    @endif
 </div>

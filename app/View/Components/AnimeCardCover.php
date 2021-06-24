@@ -12,13 +12,19 @@ class AnimeCardCover extends Component
     private $anime;
 
     /**
+     * @var array
+     */
+    private $resources;
+
+    /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($anime)
+    public function __construct($anime, $resources = null)
     {
         $this->anime = $anime;
+        $this->resources = $resources;
     }
 
     /**
@@ -29,7 +35,8 @@ class AnimeCardCover extends Component
     public function render()
     {
         return view('components.anime-card-cover', [
-            'anime' => $this->anime
+            'anime' => $this->anime,
+            'resources' => $this->resources
         ]);
     }
 }
