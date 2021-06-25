@@ -16,8 +16,17 @@
         <div class="px-2 bg-gray-300 rounded-lg dark:bg-gray-800">{{ $genre['name'] }}</div>
         @endforeach
     </div>
-    <div class="grid grid-cols-2 h-72 md:h-64 lg:h-80">
-        <a href="{{ route('anime.show', $anime['mal_id']) }}" class="mx-auto">
+    <div class="relative grid grid-cols-2 h-72 md:h-64 lg:h-80">
+        @if ($resources->count() > 0)
+        <div class="absolute inset-x-0 bottom-0 flex flex-row items-center justify-center w-1/2 gap-3 bg-gray-900 bg-opacity-60 py-1">
+            @foreach ($resources as $resource)
+            <a href="{{ $resource->link }}" target="_blank" class="w-6 h-6">
+                <img src="{{ asset($resource->platform->icon_url) }}" alt="{{ $resource->platform->name }} Logo" />
+            </a>
+            @endforeach
+        </div>
+        @endif
+        <a href="{{ route('anime.show', $anime['mal_id']) }}" class="mx-auto h-72 md:h-64 lg:h-80">
             <img class="max-w-full max-h-full" src="{{ $anime['image_url'] }}" loading="lazy" alt="Anime Name">
         </a>
         <div class="px-1 mt-1 overflow-y-auto scrollbar scrollbar-thumb-gray-400 scrollbar-track-gray-300 dark:scrollbar-thumb-gray-500 dark:scrollbar-track-gray-700">

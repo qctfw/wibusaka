@@ -44,7 +44,7 @@ class AnimeController extends Controller
         {
             abort($e->getHttpCode());
         }
-        $top_resources = $this->resource_service->getByMalIds($top->pluck('mal_id')->sort()->toArray());
+        $top_resources = $this->resource_service->getByMalIds($top->pluck('mal_id'));
 
         $top_index_view_model = new TopIndexViewModel($top, $top_resources, $upcoming);
 
@@ -65,7 +65,7 @@ class AnimeController extends Controller
         {
             abort($e->getHttpCode());
         }
-        $top_resources = $this->resource_service->getByMalIds($top->pluck('mal_id')->sort()->toArray());
+        $top_resources = $this->resource_service->getByMalIds($top->pluck('mal_id'));
 
         $top_view_model = new TopViewModel('Terbaik', $top, $top_resources);
 
@@ -86,7 +86,7 @@ class AnimeController extends Controller
         {
             abort($e->getHttpCode());
         }
-        $top_resources = $this->resource_service->getByMalIds($top->pluck('mal_id')->sort()->toArray());
+        $top_resources = $this->resource_service->getByMalIds($top->pluck('mal_id'));
 
         $top_view_model = new TopViewModel('Terpopuler', $top, $top_resources);
 
@@ -107,7 +107,7 @@ class AnimeController extends Controller
         {
             abort($e->getHttpCode());
         }
-        $top_resources = $this->resource_service->getByMalIds($top->pluck('mal_id')->sort()->toArray());
+        $top_resources = $this->resource_service->getByMalIds($top->pluck('mal_id'));
 
         $top_view_model = new TopViewModel('Paling Dinantikan', $top, $top_resources);
 
@@ -135,8 +135,9 @@ class AnimeController extends Controller
         {
             abort($e->getHttpCode());
         }
+        $season_resources = $this->resource_service->getByMalIds($result['animes']->pluck('mal_id'));
 
-        $season_view_model = new SeasonViewModel($result['season_year'], $result['season_name'], $result['animes']);
+        $season_view_model = new SeasonViewModel($result['season_year'], $result['season_name'], $result['animes'], $season_resources);
 
         return view('animes.season', $season_view_model);
     }

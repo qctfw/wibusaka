@@ -14,11 +14,14 @@ class SeasonViewModel extends ViewModel
 
     public $animes;
 
-    public function __construct($season_year, $season_name, $animes)
+    public $resources;
+
+    public function __construct($season_year, $season_name, $animes, $resources)
     {
         $this->season_year = $season_year;
         $this->season_name = $season_name;
         $this->animes = $animes;
+        $this->resources = $resources;
     }
 
     public function animes()

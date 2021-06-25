@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Resource;
 use App\Services\Contracts\ResourceServiceInterface;
+use Illuminate\Support\Collection;
 
 class ResourceService implements ResourceServiceInterface
 {
@@ -14,8 +15,12 @@ class ResourceService implements ResourceServiceInterface
         return $resources;
     }
 
-    public function getByMalIds(array $mal_ids)
+    public function getByMalIds($mal_ids)
     {
+        if ($mal_ids instanceof Collection) {
+            $mal_ids = $mal_ids->sort()->toArray();
+        }
+
         $resources = Resource::with('platform')->byMalId($mal_ids)->get();
 
         $resources_result = collect();

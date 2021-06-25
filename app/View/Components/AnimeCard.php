@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use Illuminate\Support\Collection;
 use Illuminate\View\Component;
 
 class AnimeCard extends Component
@@ -12,13 +13,19 @@ class AnimeCard extends Component
     private $anime;
 
     /**
+     * @var Collection
+     */
+    private $resources;
+
+    /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($anime)
+    public function __construct($anime, $resources)
     {
         $this->anime = $anime;
+        $this->resources = $resources;
     }
 
     /**
@@ -29,7 +36,8 @@ class AnimeCard extends Component
     public function render()
     {
         return view('components.anime-card', [
-            'anime' => $this->anime
+            'anime' => $this->anime,
+            'resources' => $this->resources
         ]);
     }
 }
