@@ -1,6 +1,6 @@
 <header x-data="{ mobileMenuOpen: false, topMenuOpen: false }" class="relative w-full p-4 bg-white border-b border-gray-300 dark:border-gray-700 dark:bg-gray-800 md:space-x-4" @click.away="mobileMenuOpen = false">
     <div class="container flex flex-row flex-wrap items-center justify-between mx-auto">
-        <a href="{{ config('app.url') }}" class="block font-bold">
+        <a href="{{ route('index') }}" class="block font-bold">
             <span class="sr-only">Logo</span>
             <img src="https://placeholder.com/wp-content/uploads/2018/10/placeholder.com-logo1.png" alt="Logo" class="h-10" />
         </a>
