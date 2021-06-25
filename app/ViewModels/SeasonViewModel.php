@@ -24,20 +24,11 @@ class SeasonViewModel extends ViewModel
     public function animes()
     {
         $animes = collect($this->animes)->map(function ($item, $key) {
-            return [
-                "mal_id" => $item['mal_id'],
-                "title" => $item['title'],
-                "image_url" => $item['image_url'],
-                "synopsis" => $item['synopsis'],
-                "type" => $item['type'],
+            return collect($item)->merge([
                 "airing_start" => (!is_null($item['airing_start'])) ? Carbon::parse($item['airing_start'])->translatedFormat('d F Y') : '?',
-                "episodes" => $item['episodes'],
                 "members" => $this->abbreviateNumber($item['members']),
-                "genres" => $item['genres'],
-                "source" => $item['source'],
-                "producers" => $item['producers'],
-                "score" => $item['score']
-            ];
+                "score" => ($item['score'] > 0) ? number_format($item['score'], 2, '.', '') : 'N/A'
+            ]);
         });
         return $animes;
     }
