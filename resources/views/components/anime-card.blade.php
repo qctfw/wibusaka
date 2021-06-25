@@ -11,7 +11,7 @@
         <span>&bull;</span>
         <div class="text-center">{{ $anime['source'] }}</div>
     </div>
-    <div class="flex flex-row flex-wrap justify-center gap-2 py-1 text-xs">
+    <div class="flex flex-row flex-wrap justify-center gap-2 p-1 text-xs">
         @foreach ($anime['genres'] as $genre)
         <div class="px-2 bg-gray-300 rounded-lg dark:bg-gray-800">{{ $genre['name'] }}</div>
         @endforeach
