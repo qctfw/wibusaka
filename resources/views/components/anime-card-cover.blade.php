@@ -42,9 +42,11 @@
     </div>
 
     @if (!is_null($resources))
-    <div class="flex flex-row items-center justify-center gap-2 py-1 text-sm text-center">
+    <div class="flex flex-row items-center justify-center gap-3 py-1 text-sm text-center">
         @forelse ($resources as $resource)
-        <img src="{{ asset($resource->platform->icon_url) }}" alt="{{ $resource->platform->name }} Logo" class="w-6 h-6" />
+        <a href="{{ $resource->link }}" target="_blank" class="w-6 h-6">
+            <img src="{{ asset($resource->platform->icon_url) }}" alt="{{ $resource->platform->name }} Logo" />
+        </a>
         @empty
         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />

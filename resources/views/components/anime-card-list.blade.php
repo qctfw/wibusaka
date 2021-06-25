@@ -1,4 +1,4 @@
-<div class="relative flex flex-col items-center justify-between p-2 bg-gray-200 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-700 md:static md:flex-row dark:bg-gray-900 md:h-auto">
+<div class="relative flex flex-col items-center justify-between p-2 bg-gray-200 rounded-lg group hover:bg-gray-300 dark:hover:bg-gray-700 md:static md:flex-row dark:bg-gray-900 md:h-auto">
     <div class="absolute top-0 left-0 w-auto px-2 text-xl text-center bg-gray-200 rounded-lg md:bg-transparent md:static md:block md:flex-none md:w-12 md:px-0 dark:bg-gray-900 md:rounded-none md:text-2xl md:font-bold">
         #{{ $anime['rank'] }}
     </div>
@@ -33,13 +33,15 @@
             <p class="flex-auto">{{ $anime['members'] }}</p>
         </div>
     </div>
-    <div class="flex-row items-center justify-center hidden mx-4 md:flex">
-        <div class="flex flex-row items-center justify-center gap-2 py-1 text-sm text-center">
-            @foreach ($resources as $resource)
-            <img src="{{ asset($resource->platform->icon_url) }}" alt="{{ $resource->platform->name }} Logo" class="w-6 h-6" />
-            @endforeach
-        </div>
+    @if ($resources->count() > 0)
+    <div class="flex-row items-center justify-center hidden gap-3 p-2 mx-4 text-sm text-center bg-gray-300 rounded-lg dark:bg-gray-800 md:flex dark:group-hover:bg-gray-600">
+        @foreach ($resources as $resource)
+        <a href="{{ $resource->link }}" target="_blank" class="w-6 h-6">
+            <img src="{{ asset($resource->platform->icon_url) }}" alt="{{ $resource->platform->name }} Logo" />
+        </a>
+        @endforeach
     </div>
+    @endif
     <div class="grid flex-none grid-cols-1 md:grid-cols-2">
         <div class="{{ ($anime['score'] == 'N/A') ? 'hidden md:flex' : 'flex'}} flex-row items-center justify-center pt-2 md:pt-0 md:col-span-2 md:mr-4">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 pr-1" viewBox="0 0 20 20" fill="currentColor">
@@ -48,7 +50,7 @@
             <span class="text-xl font-semibold">{{ $anime['score'] }}</span>
         </div>
         <div class="flex-row items-center justify-center mx-4 md:hidden">
-            <div class="flex flex-row items-center justify-center gap-2 pt-2 text-sm text-center">
+            <div class="flex flex-row items-center justify-center gap-3 pt-2 text-sm text-center">
                 @foreach ($resources as $resource)
                 <img src="{{ asset($resource->platform->icon_url) }}" alt="{{ $resource->platform->name }} Logo" class="w-6 h-6" />
                 @endforeach
