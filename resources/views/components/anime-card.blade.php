@@ -16,11 +16,11 @@
         <div class="px-2 bg-gray-300 rounded-lg dark:bg-gray-800">{{ $genre['name'] }}</div>
         @endforeach
     </div>
-    <div class="grid grid-cols-2">
-        <a href="{{ route('anime.show', $anime['mal_id']) }}" class="w-full">
-            <img class="h-auto mx-auto" src="{{ $anime['image_url'] }}" loading="lazy" alt="Anime Name">
+    <div class="grid grid-cols-2 h-72 md:h-64 lg:h-80">
+        <a href="{{ route('anime.show', $anime['mal_id']) }}" class="mx-auto">
+            <img class="max-w-full max-h-full" src="{{ $anime['image_url'] }}" loading="lazy" alt="Anime Name">
         </a>
-        <div class="px-1 my-2 overflow-y-auto max-h-64">
+        <div class="px-1 mt-1 overflow-y-auto scrollbar scrollbar-thumb-gray-400 scrollbar-track-gray-300 dark:scrollbar-thumb-gray-500 dark:scrollbar-track-gray-700">
             <p class="text-sm">{{ $anime['synopsis'] }}</p>
         </div>
     </div>
