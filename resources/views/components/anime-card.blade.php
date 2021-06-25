@@ -13,7 +13,7 @@
     </div>
     <div class="flex flex-row flex-wrap justify-center gap-2 p-1 text-xs">
         @foreach ($anime['genres'] as $genre)
-        <div class="px-2 bg-gray-300 rounded-lg dark:bg-gray-800">{{ $genre['name'] }}</div>
+        <div class="px-2 bg-gray-300 rounded-lg transition-colors dark:bg-gray-800 dark:hover:bg-gray-700">{{ $genre['name'] }}</div>
         @endforeach
     </div>
     <div class="relative grid grid-cols-2 h-72 md:h-64 lg:h-80">
