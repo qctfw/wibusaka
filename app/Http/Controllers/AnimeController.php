@@ -143,12 +143,9 @@ class AnimeController extends Controller
     {
         try
         {
-            $date = !is_null($year) ? Carbon::parse($year) : now();
-            
             if (!is_null($season))
             {
-                $this->validateSeason($season);
-                $result = $this->jikan_service->getAnimesBySeason($date->year, $season);
+                $result = $this->jikan_service->getAnimesBySeason($year, $season);
             }
             else
             {
@@ -160,7 +157,7 @@ class AnimeController extends Controller
         }
         $season_resources = $this->resource_service->getByMalIds($result['animes']->pluck('mal_id'));
 
-        $season_view_model = new SeasonViewModel($result['season_year'], $result['season_name'], $result['animes'], $season_resources);
+        $season_view_model = new SeasonViewModel($result['seasons'], $result['animes'], $season_resources);
 
         return view('animes.season', $season_view_model);
     }
@@ -192,11 +189,5 @@ class AnimeController extends Controller
         {
             return redirect()->to(url()->current());
         }
-    }
-
-    private function validateSeason($season)
-    {
-        if (!in_array($season, ['winter', 'spring', 'summer', 'fall']))
-            abort(404, 'Musim Tidak Diketahui');
     }
 }

@@ -8,64 +8,17 @@ use Spatie\ViewModels\ViewModel;
 
 class SeasonViewModel extends ViewModel
 {
-    public $season_year;
-    
-    public $season_name;
-
-    public $previous_season;
-
-    public $next_season;
+    public $seasons;
 
     public $animes;
 
     public $resources;
 
-    public function __construct($season_year, $season_name, $animes, $resources)
+    public function __construct($seasons, $animes, $resources)
     {
-        $this->season_year = $season_year;
-        $this->season_name = $season_name;
+        $this->seasons = $seasons;
         $this->animes = $animes;
         $this->resources = $resources;
-    }
-
-    public function previous_season()
-    {
-        $seasons = $this->getAllSeasons();
-
-        $current_season_index = $seasons->search(Str::lower($this->season_name));
-
-        if ($current_season_index == 0)
-        {
-            $previous['season'] = $seasons->last();
-            $previous['year'] = $this->season_year - 1;
-        }
-        else
-        {
-            $previous['season'] = $seasons[$current_season_index - 1];
-            $previous['year'] = $this->season_year;
-        }
-
-        return $previous;
-    }
-
-    public function next_season()
-    {
-        $seasons = $this->getAllSeasons();
-
-        $current_season_index = $seasons->search(Str::lower($this->season_name));
-
-        if ($current_season_index == $seasons->count() - 1)
-        {
-            $next['season'] = $seasons->first();
-            $next['year'] = $this->season_year + 1;
-        }
-        else
-        {
-            $next['season'] = $seasons[$current_season_index + 1];
-            $next['year'] = $this->season_year;
-        }
-
-        return $next;
     }
 
     public function animes()
@@ -80,11 +33,6 @@ class SeasonViewModel extends ViewModel
             ]);
         });
         return $animes;
-    }
-
-    private function getAllSeasons()
-    {
-        return collect(['winter', 'spring', 'summer', 'fall']);
     }
 
     private function abbreviateNumber($number): string
