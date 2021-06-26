@@ -42,7 +42,7 @@ class JikanService implements JikanServiceInterface
     {
         $result = $this->requestJikan('season');
 
-        $animes = collect($result['anime'])->where('continuing', false)->where('members', '>', 30000)->values();
+        $animes = collect($result['anime'])->where('continuing', false);
 
         // dump($animes);
 
@@ -58,7 +58,7 @@ class JikanService implements JikanServiceInterface
     {
         $result = $this->requestJikan('season/' . $year . '/' . $season);
 
-        $animes = collect($result['anime'])->where('continuing', false)->where('members', '>', 30000)->values();
+        $animes = collect($result['anime'])->where('continuing', false);
 
         // $mal_ids = $animes->pluck('mal_id');
         return [

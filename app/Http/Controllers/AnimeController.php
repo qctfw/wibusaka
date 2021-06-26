@@ -121,16 +121,19 @@ class AnimeController extends Controller
      */
     public function season($year = null, $season = null)
     {
-        $date = !is_null($year) ? Carbon::parse($year) : now();
-        
-        if (!is_null($season))
-            $this->validateSeason($season);
-        else
-            $season = $this->getSeason(now());
-
         try
         {
-            $result = $this->jikan_service->getAnimesBySeason($date->year, $season);
+            $date = !is_null($year) ? Carbon::parse($year) : now();
+            
+            if (!is_null($season))
+            {
+                $this->validateSeason($season);
+                $result = $this->jikan_service->getAnimesBySeason($date->year, $season);
+            }
+            else
+            {
+                $result = $this->jikan_service->getCurrentSeason();
+            }
         } catch (JikanException $e)
         {
             abort($e->getHttpCode());
@@ -168,34 +171,4 @@ class AnimeController extends Controller
         if (!in_array($season, ['winter', 'spring', 'summer', 'fall']))
             abort(404, 'Musim Tidak Diketahui');
     }
-
-    private function getSeason(Carbon $date)
-    {
-        $season = '';
-        switch($date->month)
-        {
-            case 1:
-            case 2:
-            case 3:
-                $season = 'winter';
-                break;
-            case 4:
-            case 5:
-            case 6:
-                $season = 'spring';
-                break;
-            case 7:
-            case 8:
-            case 9:
-                $season = 'summer';
-                break;
-            case 10:
-            case 11:
-            case 12:
-                $season = 'fall';
-                break;
-        }
-        return $season;
-    }
-
 }

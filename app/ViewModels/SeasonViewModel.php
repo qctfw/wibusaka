@@ -12,6 +12,10 @@ class SeasonViewModel extends ViewModel
     
     public $season_name;
 
+    public $previous_season;
+
+    public $next_season;
+
     public $animes;
 
     public $resources;
@@ -24,9 +28,51 @@ class SeasonViewModel extends ViewModel
         $this->resources = $resources;
     }
 
+    public function previous_season()
+    {
+        $seasons = $this->getAllSeasons();
+
+        $current_season_index = $seasons->search(Str::lower($this->season_name));
+
+        if ($current_season_index == 0)
+        {
+            $previous['season'] = $seasons->last();
+            $previous['year'] = $this->season_year - 1;
+        }
+        else
+        {
+            $previous['season'] = $seasons[$current_season_index - 1];
+            $previous['year'] = $this->season_year;
+        }
+
+        return $previous;
+    }
+
+    public function next_season()
+    {
+        $seasons = $this->getAllSeasons();
+
+        $current_season_index = $seasons->search(Str::lower($this->season_name));
+
+        if ($current_season_index == $seasons->count() - 1)
+        {
+            $next['season'] = $seasons->first();
+            $next['year'] = $this->season_year + 1;
+        }
+        else
+        {
+            $next['season'] = $seasons[$current_season_index + 1];
+            $next['year'] = $this->season_year;
+        }
+
+        return $next;
+    }
+
     public function animes()
     {
-        $animes = collect($this->animes)->map(function ($item, $key) {
+        $animes = collect($this->animes);
+        
+        return $animes->where('members', '>', 1000)->where('r18', false)->where('continuing', false)->where('kids', false)->map(function ($item, $key) {
             return collect($item)->merge([
                 "airing_start" => (!is_null($item['airing_start'])) ? Carbon::parse($item['airing_start'])->translatedFormat('d F Y') : '?',
                 "members" => $this->abbreviateNumber($item['members']),
@@ -34,6 +80,11 @@ class SeasonViewModel extends ViewModel
             ]);
         });
         return $animes;
+    }
+
+    private function getAllSeasons()
+    {
+        return collect(['winter', 'spring', 'summer', 'fall']);
     }
 
     private function abbreviateNumber($number): string

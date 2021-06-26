@@ -2,9 +2,11 @@
     <a href="{{ route('anime.show', $anime['mal_id']) }}" class="pb-0 text-lg font-semibold text-center transition-colors duration-200 hover:text-blue-700 dark:hover:text-blue-300">{{ $anime['title'] }}</a>
     <div class="flex flex-row items-start justify-center gap-4 py-1 text-sm">
         <div class="flex flex-col text-center">
-            @foreach ($anime['producers'] as $producer)
+            @forelse ($anime['producers'] as $producer)
                 <p>{{ $producer['name'] }}</p>
-            @endforeach
+            @empty
+                <p>-</p>
+            @endforelse
         </div>
         <span>&bull;</span>
         <div class="text-center">{{ $anime['episodes'] ?? '?' }} ep</div>
