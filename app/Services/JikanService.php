@@ -44,9 +44,6 @@ class JikanService implements JikanServiceInterface
 
         $animes = collect($result['anime'])->where('continuing', false);
 
-        // dump($animes);
-
-        // $mal_ids = $animes->pluck('mal_id');
         return [
             'season_name' => $result['season_name'],
             'season_year' => $result['season_year'],
@@ -60,7 +57,6 @@ class JikanService implements JikanServiceInterface
 
         $animes = collect($result['anime'])->where('continuing', false);
 
-        // $mal_ids = $animes->pluck('mal_id');
         return [
             'season_name' => $result['season_name'],
             'season_year' => $result['season_year'],
