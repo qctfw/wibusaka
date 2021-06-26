@@ -10,6 +10,7 @@ use App\ViewModels\SeasonViewModel;
 use App\ViewModels\TopIndexViewModel;
 use App\ViewModels\TopViewModel;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class AnimeController extends Controller
 {
@@ -44,6 +45,7 @@ class AnimeController extends Controller
         {
             abort($e->getHttpCode());
         }
+        
         $top_resources = $this->resource_service->getByMalIds($top->pluck('mal_id'));
 
         $top_index_view_model = new TopIndexViewModel($top, $top_resources, $upcoming);
@@ -56,8 +58,13 @@ class AnimeController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
-    public function topRated($page = 1)
+    public function topRated(Request $request)
     {
+        $total_page = 50;
+        $page = $request->input('page', 1);
+
+        $this->validatePage($page, $total_page);
+
         try
         {
             $top = $this->jikan_service->getTopRatedAnimes($page);
@@ -65,9 +72,10 @@ class AnimeController extends Controller
         {
             abort($e->getHttpCode());
         }
+        
         $top_resources = $this->resource_service->getByMalIds($top->pluck('mal_id'));
 
-        $top_view_model = new TopViewModel('Terbaik', $top, $top_resources);
+        $top_view_model = new TopViewModel('Terbaik', $page, $total_page, $top, $top_resources);
 
         return view('animes.top', $top_view_model);
     }
@@ -77,8 +85,13 @@ class AnimeController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
-    public function topPopular($page = 1)
+    public function topPopular(Request $request)
     {
+        $total_page = 50;
+        $page = $request->input('page', 1);
+
+        $this->validatePage($page, $total_page);
+
         try
         {
             $top = $this->jikan_service->getTopPopularityAnimes($page);
@@ -86,9 +99,10 @@ class AnimeController extends Controller
         {
             abort($e->getHttpCode());
         }
+        
         $top_resources = $this->resource_service->getByMalIds($top->pluck('mal_id'));
 
-        $top_view_model = new TopViewModel('Terpopuler', $top, $top_resources);
+        $top_view_model = new TopViewModel('Terpopuler', $page, $total_page, $top, $top_resources);
 
         return view('animes.top', $top_view_model);
     }
@@ -98,8 +112,13 @@ class AnimeController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
-    public function topUpcoming($page = 1)
+    public function topUpcoming(Request $request)
     {
+        $total_page = 3;
+        $page = $request->input('page', 1);
+
+        $this->validatePage($page, $total_page);
+
         try
         {
             $top = $this->jikan_service->getTopUpcomingAnimes($page);
@@ -107,9 +126,10 @@ class AnimeController extends Controller
         {
             abort($e->getHttpCode());
         }
+        
         $top_resources = $this->resource_service->getByMalIds($top->pluck('mal_id'));
 
-        $top_view_model = new TopViewModel('Paling Dinantikan', $top, $top_resources);
+        $top_view_model = new TopViewModel('Paling Dinantikan', $page, $total_page, $top, $top_resources);
 
         return view('animes.top', $top_view_model);
     }
@@ -164,6 +184,14 @@ class AnimeController extends Controller
         $anime_view_model = new AnimeViewModel($result);
 
         return view('animes.single', $anime_view_model);
+    }
+
+    private function validatePage($page, $total_page)
+    {
+        if (!preg_match('/^\d+$/', $page) || $page < 1 || $page > $total_page)
+        {
+            return redirect()->to(url()->current());
+        }
     }
 
     private function validateSeason($season)

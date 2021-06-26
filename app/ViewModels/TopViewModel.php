@@ -8,12 +8,16 @@ use Spatie\ViewModels\ViewModel;
 class TopViewModel extends ViewModel
 {
     public $type;
+    public $page;
+    public $total_page;
     public $top_animes;
     public $resources;
 
-    public function __construct($type, $top_animes, $resources)
+    public function __construct($type, $page, $total_page, $top_animes, $resources)
     {
         $this->type = $type;
+        $this->page = $page;
+        $this->total_page = $total_page;
         $this->top_animes = $top_animes;
         $this->resources = $resources;
     }
