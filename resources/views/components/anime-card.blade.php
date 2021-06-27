@@ -1,5 +1,5 @@
 <div class="relative flex flex-col py-1 mt-4 bg-gray-200 divide-y divide-gray-400 divide-opacity-50 divide-dashed dark:bg-gray-900 rounded-xl">
-    <a href="{{ route('anime.show', $anime['mal_id']) }}" class="pb-0 text-lg font-semibold text-center transition-colors duration-200 hover:text-blue-700 dark:hover:text-blue-300">{{ $anime['title'] }}</a>
+    <a href="{{ route('anime.show', $anime['mal_id']) }}" class="p-1 text-lg leading-tight font-semibold text-center transition-colors duration-200 hover:text-blue-700 dark:hover:text-blue-300">{{ $anime['title'] }}</a>
     <div class="flex flex-row items-start justify-center gap-4 py-1 text-sm">
         <div class="flex flex-col text-center">
             @forelse ($anime['producers'] as $producer)

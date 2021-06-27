@@ -32,7 +32,6 @@ class SeasonViewModel extends ViewModel
                 "score" => ($item['score'] > 0) ? number_format($item['score'], 2, '.', '') : 'N/A'
             ]);
         });
-        return $animes;
     }
 
     private function abbreviateNumber($number): string
