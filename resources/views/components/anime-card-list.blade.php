@@ -1,7 +1,17 @@
 <div class="relative flex flex-col items-center justify-between p-2 bg-gray-200 rounded-lg group hover:bg-gray-300 dark:hover:bg-gray-700 md:static md:flex-row dark:bg-gray-900 md:h-auto">
+    @if ($anime['rank'] <= 10)
+    <div class="absolute top-0 left-0 w-auto px-2 text-3xl text-center bg-gray-200 rounded-lg md:bg-transparent md:static md:block md:flex-none md:w-12 md:px-0 dark:bg-gray-900 md:rounded-none md:font-bold">
+        #{{ $anime['rank'] }}
+    </div>
+    @elseif ($anime['rank'] <= 100)
+    <div class="absolute top-0 left-0 w-auto px-2 text-2xl text-center bg-gray-200 rounded-lg md:bg-transparent md:static md:block md:flex-none md:w-12 md:px-0 dark:bg-gray-900 md:rounded-none md:font-bold">
+        #{{ $anime['rank'] }}
+    </div>
+    @else
     <div class="absolute top-0 left-0 w-auto px-2 text-xl text-center bg-gray-200 rounded-lg md:bg-transparent md:static md:block md:flex-none md:w-12 md:px-0 dark:bg-gray-900 md:rounded-none md:font-bold">
         #{{ $anime['rank'] }}
     </div>
+    @endif
     <a href="{{ route('anime.show', $anime['mal_id']) }}" class="flex flex-row items-center w-full md:w-20 md:pl-4">
         <img src="{{ $anime['image_url'] }}" alt="'{{ $anime['title'] }}' Anime Poster" loading="lazy" class="mx-auto" />
     </a>
