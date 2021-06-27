@@ -63,7 +63,11 @@ class AnimeController extends Controller
         $total_page = 50;
         $page = $request->input('page', 1);
 
-        $this->validatePage($page, $total_page);
+        $check = $this->validatePage($page, $total_page);
+        if (!is_null($check))
+        {
+            return $check;
+        }
 
         try
         {
@@ -90,7 +94,11 @@ class AnimeController extends Controller
         $total_page = 50;
         $page = $request->input('page', 1);
 
-        $this->validatePage($page, $total_page);
+        $check = $this->validatePage($page, $total_page);
+        if (!is_null($check))
+        {
+            return $check;
+        }
 
         try
         {
@@ -117,7 +125,11 @@ class AnimeController extends Controller
         $total_page = 3;
         $page = $request->input('page', 1);
 
-        $this->validatePage($page, $total_page);
+        $check = $this->validatePage($page, $total_page);
+        if (!is_null($check))
+        {
+            return $check;
+        }
 
         try
         {
