@@ -7,6 +7,7 @@ use App\Services\Contracts\JikanServiceInterface;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class JikanService implements JikanServiceInterface
@@ -108,11 +109,19 @@ class JikanService implements JikanServiceInterface
         }
 
         $response = Cache::remember($cache_key, $cache_expire, function () use ($uri, $query) {
+            $full_url = $this->base_uri . $uri;
+
+            $this->logJikan($full_url, $query);
+
             $response = Http::acceptJson()->get($this->base_uri . $uri, $query);
 
             if ($response->clientError())
             {
-                throw new JikanException($response->status());
+                $status = $response->status();
+                $exception_body = $response->collect();
+                $exception_message = 'Type: ' . $exception_body['type'] . ' (' . $exception_body['message'] . ')';
+
+                throw new JikanException($status, $exception_message);
             }
             
             return $response->body();
@@ -201,5 +210,16 @@ class JikanService implements JikanServiceInterface
         }
 
         return is_integer($seasons->search(ucfirst($season)));
+    }
+
+    private function logJikan($full_url, $query)
+    {
+        if (is_null($query))
+        {
+            $query = [];
+        }
+
+        $log = 'Requesting Jikan... URL: ' . $full_url . ' Query: ' . http_build_query($query);
+        Log::info($log);
     }
 }

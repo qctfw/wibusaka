@@ -22,7 +22,7 @@ class SearchNavbar extends Component
     {
         $results = [];
 
-        if (strlen($this->search) > 1)
+        if (strlen($this->search) > 2)
         {
             $results = $jikan_service->searchAnime($this->search);
         }
