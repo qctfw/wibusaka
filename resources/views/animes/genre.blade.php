@@ -1,10 +1,10 @@
 <x-app-layout>
-    <x-slot name="title">Anime Genre {{ $genre->name }}{{ ($page > 1) ? ' (Hal. ' . $page . ')' : '' }}</x-slot>
+    <x-slot name="title">Genre Anime - {{ $genre->name }}{{ ($page > 1) ? ' (Hal. ' . $page . ')' : '' }}</x-slot>
     
     <div class="container px-4 pt-12 mx-auto">
         <div class="flex flex-col items-center justify-between gap-8 pb-4 md:flex-row">
             <div class="flex flex-col items-center font-bold text-blue-700 dark:text-blue-300">
-                <p class="text-2xl">Anime / Genre {{ $genre->name }}</p>
+                <p class="text-2xl">Genre Anime / {{ $genre->name }}</p>
             </div>
             <x-pagination-link :current="$page" :total="$total_page" />
         </div>
