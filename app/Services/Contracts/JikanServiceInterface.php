@@ -9,6 +9,7 @@ interface JikanServiceInterface
     public function getTopUpcomingAnimes(int $page = 1);
     public function getCurrentSeason();
     public function getAnimesBySeason(int $year, string $season);
+    public function getAnimesByGenre(int $id, int $page = 1);
     public function getAnime(string $id);
     public function getAnimeRecommendations(string $id);
     public function searchAnime(string $query);

@@ -63,10 +63,8 @@ class AnimeController extends Controller
         $total_page = 50;
         $page = $request->input('page', 1);
 
-        $check = $this->validatePage($page, $total_page);
-        if (!is_null($check))
-        {
-            return $check;
+        if (!validate_page($page, $total_page)) {
+            return redirect()->to(url()->current());
         }
 
         try
@@ -94,10 +92,8 @@ class AnimeController extends Controller
         $total_page = 50;
         $page = $request->input('page', 1);
 
-        $check = $this->validatePage($page, $total_page);
-        if (!is_null($check))
-        {
-            return $check;
+        if (!validate_page($page, $total_page)) {
+            return redirect()->to(url()->current());
         }
 
         try
@@ -125,10 +121,8 @@ class AnimeController extends Controller
         $total_page = 3;
         $page = $request->input('page', 1);
 
-        $check = $this->validatePage($page, $total_page);
-        if (!is_null($check))
-        {
-            return $check;
+        if (!validate_page($page, $total_page)) {
+            return redirect()->to(url()->current());
         }
 
         try
@@ -193,13 +187,5 @@ class AnimeController extends Controller
         $anime_view_model = new AnimeViewModel($result);
 
         return view('animes.single', $anime_view_model);
-    }
-
-    private function validatePage($page, $total_page)
-    {
-        if (!preg_match('/^\d+$/', $page) || $page < 1 || $page > $total_page)
-        {
-            return redirect()->to(url()->current());
-        }
     }
 }

@@ -44,3 +44,15 @@ if (!function_exists('abbreviate_number'))
         return $final_num . ' ' . $abb_text;
     }
 }
+
+if (!function_exists('validate_page')) {
+    function validate_page($page, $total_page = null)
+    {
+        if (is_null($total_page))
+        {
+            return preg_match('/^\d+$/', $page) && $page > 0;
+        }
+
+        return preg_match('/^\d+$/', $page) && $page > 0 && $page <= $total_page;
+    }
+}

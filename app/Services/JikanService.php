@@ -67,6 +67,17 @@ class JikanService implements JikanServiceInterface
             'animes' => $animes
         ];
     }
+    
+    public function getAnimesByGenre(int $id, int $page = 1)
+    {
+        $result = $this->requestJikan('genre/anime/' . $id . '/' . $page);
+
+        return [
+            'total' => $result['item_count'],
+            'mal_details' => $result['mal_url'],
+            'animes' => collect($result['anime'])
+        ];
+    }
 
     public function getAnime(string $id)
     {
@@ -115,7 +126,7 @@ class JikanService implements JikanServiceInterface
 
             $response = Http::acceptJson()->get($this->base_uri . $uri, $query);
 
-            if ($response->clientError())
+            if ($response->failed())
             {
                 $status = $response->status();
                 $exception_body = $response->collect();
