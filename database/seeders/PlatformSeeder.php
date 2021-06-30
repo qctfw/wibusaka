@@ -22,7 +22,8 @@ class PlatformSeeder extends Seeder
         {
             $platform = new Platform();
             $platform->name = $data['name'];
-            $platform->icon_url = $data['icon_url'];
+            $platform->type = $data['type'];
+            $platform->icon_path = $data['icon_path'];
             $platform->save();
         }
     }
@@ -32,39 +33,48 @@ class PlatformSeeder extends Seeder
         return [
             [
                 'name' => 'YouTube',
-                'icon_url' => 'icons/youtube.webp'
+                'type' => 'stream',
+                'icon_path' => 'icons/youtube.webp'
             ],
             [
                 'name' => 'Crunchyroll',
-                'icon_url' => 'icons/crunchyroll.webp'
+                'type' => 'stream',
+                'icon_path' => 'icons/crunchyroll.webp'
             ],
             [
                 'name' => 'Netflix',
-                'icon_url' => 'icons/netflix.webp'
+                'type' => 'stream',
+                'icon_path' => 'icons/netflix.webp'
             ],
             [
                 'name' => 'Sushiroll',
-                'icon_url' => 'icons/sushiroll.webp'
+                'type' => 'stream',
+                'icon_path' => 'icons/sushiroll.webp'
             ],
             [
                 'name' => 'iQIYI',
-                'icon_url' => 'icons/iqiyi.webp'
+                'type' => 'stream',
+                'icon_path' => 'icons/iqiyi.webp'
             ],
             [
                 'name' => 'iFlix',
-                'icon_url' => 'icons/iflix.webp'
+                'type' => 'stream',
+                'icon_path' => 'icons/iflix.webp'
             ],
             [
                 'name' => 'CATCHPLAY+',
-                'icon_url' => 'icons/catchplay-plus.webp'
+                'type' => 'stream',
+                'icon_path' => 'icons/catchplay-plus.webp'
             ],
             [
                 'name' => 'VIU',
-                'icon_url' => 'icons/viu.webp'
+                'type' => 'stream',
+                'icon_path' => 'icons/viu.webp'
             ],
             [
                 'name' => 'Spotify',
-                'icon_url' => 'icons/spotify.webp'
+                'type' => 'stream',
+                'icon_path' => 'icons/spotify.webp'
             ],
         ];
     }

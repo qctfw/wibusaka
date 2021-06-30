@@ -15,7 +15,6 @@ class CreateAnimeResourcesTable extends Migration
     {
         Schema::create('anime_resources', function (Blueprint $table) {
             $table->string('id', 24)->primary();
-            $table->enum('type', ['tv', 'stream', 'theater'])->comment('Type of the resource');
             $table->integer('mal_id')->comment('MAL ID');
             $table->string('platform_id', 24);
             $table->boolean('paid')->comment('Defines if the resource requires payment');

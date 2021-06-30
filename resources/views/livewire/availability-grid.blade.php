@@ -3,7 +3,7 @@
         @forelse ($resources as $resource)
         <a href="{{ $resource->link }}" target="_blank" class="flex flex-row items-center justify-between h-24 p-4 transition-colors duration-200 bg-gray-200 rounded-xl dark:bg-gray-900 hover:bg-gray-300 dark:hover:bg-gray-700">
             <div class="flex flex-none w-16 mx-auto">
-                <img src="{{ asset($resource->platform->icon_url) }}" alt="{{ $resource->platform->name }} Icon" class="mx-auto">
+                <img src="{{ asset($resource->platform->icon_path) }}" alt="{{ $resource->platform->name }} Icon" class="mx-auto">
             </div>
             <div class="flex flex-col flex-auto pl-4">
                 <div class="flex flex-row items-center gap-2 text-lg font-semibold">

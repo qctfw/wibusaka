@@ -69,7 +69,6 @@ class ImportResources extends Command
             }
 
             $resource = new Resource();
-            $resource->type = $collection['type'];
             $resource->mal_id = $collection['mal_id'];
             $resource->platform_id = $platform->id;
             $resource->paid = $collection['paid'];

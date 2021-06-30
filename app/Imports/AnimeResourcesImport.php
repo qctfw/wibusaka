@@ -16,11 +16,10 @@ class AnimeResourcesImport implements WithMapping, WithStartRow
     {
         return [
             'mal_id' => $row[0],
-            'type' => $row[1],
-            'platform' => $row[2],
-            'paid' => $row[3],
-            'link' => $row[4],
-            'note' => $row[5]
+            'platform' => $row[1],
+            'paid' => $row[2],
+            'link' => $row[3],
+            'note' => $row[4]
         ];
     }
 
