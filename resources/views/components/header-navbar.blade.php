@@ -26,6 +26,9 @@
                         <a href="{{ route('anime.top.popular') }}" class="block px-4 py-2 text-sm rounded-lg hover:text-blue-700 dark:hover:text-blue-300 dark:text-white hover:bg-gray-400 dark:hover:bg-gray-900" role="menuitem" tabindex="-1" >
                             Anime Terpopuler
                         </a>
+                        <a href="{{ route('anime.top.airing') }}" class="block px-4 py-2 text-sm rounded-lg hover:text-blue-700 dark:hover:text-blue-300 dark:text-white hover:bg-gray-400 dark:hover:bg-gray-900" role="menuitem" tabindex="-1" >
+                            Anime yang Sedang Tayang
+                        </a>
                         <a href="{{ route('anime.top.upcoming') }}" class="block px-4 py-2 text-sm rounded-lg hover:text-blue-700 dark:hover:text-blue-300 dark:text-white hover:bg-gray-400 dark:hover:bg-gray-900" role="menuitem" tabindex="-1" >
                             Anime Paling Dinantikan
                         </a>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AnimeController;
 use App\Http\Controllers\GenreController;
+use App\Http\Controllers\TopAnimeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,10 +21,10 @@ Route::get('/', [AnimeController::class, 'index'])->name('index');
 Route::group(['as' => 'anime.', 'prefix' => 'anime'], function () {
 
     Route::group(['as' => 'top.', 'prefix' => 'top'], function () {
-        Route::get('rated', [AnimeController::class, 'topRated'])->name('rated');
-        // Route::get('airing');
-        Route::get('popular', [AnimeController::class, 'topPopular'])->name('popular');
-        Route::get('upcoming', [AnimeController::class, 'topUpcoming'])->name('upcoming');
+        Route::get('rated', [TopAnimeController::class, 'rated'])->name('rated');
+        Route::get('airing', [TopAnimeController::class, 'airing'])->name('airing');
+        Route::get('popular', [TopAnimeController::class, 'popular'])->name('popular');
+        Route::get('upcoming', [TopAnimeController::class, 'upcoming'])->name('upcoming');
         // Route::get('tv');
         // Route::get('movies');
     });
