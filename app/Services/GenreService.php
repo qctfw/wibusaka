@@ -9,7 +9,7 @@ class GenreService implements GenreServiceInterface
 {
     public function all()
     {
-        $all_genres = Genre::all();
+        $all_genres = Genre::where('name', '!=', 'Hentai')->get();
 
         return $all_genres;
     }
@@ -17,6 +17,11 @@ class GenreService implements GenreServiceInterface
     public function getBySlug(string $slug)
     {
         $name = ucwords(str_replace('-', ' ', $slug));
+
+        if ($name === 'Hentai')
+        {
+            abort(404);
+        }
 
         $genre = Genre::where('name', $name)->firstOrFail();
 
