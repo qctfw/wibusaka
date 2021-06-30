@@ -23,7 +23,7 @@
         <div class="absolute inset-x-0 bottom-0 flex flex-row items-center justify-center w-1/2 gap-3 bg-gray-900 bg-opacity-60 py-1">
             @foreach ($resources as $resource)
             <a href="{{ $resource->link }}" target="_blank" class="w-6 h-6">
-                <img src="{{ asset($resource->platform->icon_url) }}" alt="{{ $resource->platform->name }} Logo" />
+                <img src="{{ asset($resource->platform->icon_path) }}" alt="{{ $resource->platform->name }} Logo" />
             </a>
             @endforeach
         </div>
