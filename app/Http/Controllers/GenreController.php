@@ -46,7 +46,11 @@ class GenreController extends Controller
      */
     public function index()
     {
-        //
+        $all_genres = $this->genre_service->all();
+
+        return view('animes.genre_index', [
+            'genres' => $all_genres
+        ]);
     }
 
     /**

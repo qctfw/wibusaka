@@ -7,6 +7,13 @@ use App\Services\Contracts\GenreServiceInterface;
 
 class GenreService implements GenreServiceInterface
 {
+    public function all()
+    {
+        $all_genres = Genre::all();
+
+        return $all_genres;
+    }
+
     public function getBySlug(string $slug)
     {
         $name = ucwords(str_replace('-', ' ', $slug));

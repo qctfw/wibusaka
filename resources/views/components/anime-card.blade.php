@@ -15,7 +15,7 @@
     </div>
     <div class="flex flex-row flex-wrap justify-center gap-2 p-1 text-xs">
         @foreach ($anime['genres'] as $genre)
-        <a href="{{ route('anime.genre', str_replace(' ', '-', strtolower($genre['name']))) }}" class="px-2 bg-gray-300 rounded-lg transition-colors dark:bg-gray-800 dark:hover:bg-gray-700">{{ $genre['name'] }}</a>
+        <a href="{{ route('anime.genre.show', str_replace(' ', '-', strtolower($genre['name']))) }}" class="px-2 bg-gray-300 rounded-lg transition-colors dark:bg-gray-800 dark:hover:bg-gray-700">{{ $genre['name'] }}</a>
         @endforeach
     </div>
     <div class="relative grid grid-cols-2 h-72 md:h-64 lg:h-80">

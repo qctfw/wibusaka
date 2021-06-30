@@ -33,7 +33,10 @@
                 </div>
             </div>
             <a href="{{ route('anime.season-current') }}" class="p-3 text-gray-600 rounded-lg dark:text-white hover:text-blue-700 dark:hover:text-blue-300 hover:bg-gray-300 dark:hover:bg-gray-900">
-                Musim
+                Musim Anime
+            </a>
+            <a href="{{ route('anime.genre') }}" class="p-3 text-gray-600 rounded-lg dark:text-white hover:text-blue-700 dark:hover:text-blue-300 hover:bg-gray-300 dark:hover:bg-gray-900">
+                Genre Anime
             </a>
         </nav>
         <div class="flex flex-col items-center w-full md:w-64 lg:w-72 md:flex-row">
