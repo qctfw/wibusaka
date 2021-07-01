@@ -18,16 +18,7 @@
         <a href="{{ route('anime.genre.show', str_replace(' ', '-', strtolower($genre['name']))) }}" class="px-2 bg-gray-300 rounded-lg transition-colors dark:bg-gray-800 dark:hover:bg-gray-700">{{ $genre['name'] }}</a>
         @endforeach
     </div>
-    <div class="relative grid grid-cols-2 h-72 md:h-64 lg:h-80">
-        @if ($resources->count() > 0)
-        <div class="absolute inset-x-0 bottom-0 flex flex-row items-center justify-center w-1/2 gap-3 bg-gray-900 bg-opacity-60 py-1">
-            @foreach ($resources as $resource)
-            <a href="{{ $resource->link }}" target="_blank" class="w-6 h-6">
-                <img src="{{ asset($resource->platform->icon_path) }}" alt="{{ $resource->platform->name }} Logo" />
-            </a>
-            @endforeach
-        </div>
-        @endif
+    <div class="grid grid-cols-2 h-72 md:h-64 lg:h-80">
         <a href="{{ route('anime.show', $anime['mal_id']) }}" class="mx-auto h-72 md:h-64 lg:h-80">
             <img class="max-w-full max-h-full" src="{{ $anime['image_url'] }}" loading="lazy" alt="Anime Name">
         </a>
@@ -35,7 +26,16 @@
             <p class="text-sm">{{ $anime['synopsis'] }}</p>
         </div>
     </div>
-    <div class="flex flex-row items-center justify-between px-2 py-1">
+    <div class="relative flex flex-row items-center justify-between px-2 py-1">
+        @if ($resources->count() > 0)
+        <div class="absolute inset-x-0 -top-8 flex flex-row items-center justify-center w-1/2 gap-3 bg-gray-900 bg-opacity-60 py-1">
+            @foreach ($resources as $resource)
+            <a href="{{ $resource->link }}" target="_blank" class="w-6 h-6">
+                <img src="{{ asset($resource->platform->icon_path) }}" alt="{{ $resource->platform->name }} Logo" />
+            </a>
+            @endforeach
+        </div>
+        @endif
         <div class="flex flex-row items-center justify-center gap-2 text-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
                 <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z" />
