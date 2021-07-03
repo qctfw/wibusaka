@@ -8,7 +8,7 @@ use App\Models\Resource;
 use Illuminate\Console\Command;
 use Maatwebsite\Excel\Facades\Excel;
 
-class ImportResources extends Command
+class ImportResourcesCommand extends Command
 {
     /**
      * The name and signature of the console command.
