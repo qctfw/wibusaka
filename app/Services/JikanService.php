@@ -144,7 +144,7 @@ class JikanService implements JikanServiceInterface
     {
         $uri = 'top/anime/' . $page;
 
-        $uri .= (substr($category, 0, 1) == '/') ? $category : '/' . $category;
+        $uri .= (Str::substr($category, 0, 1) == '/') ? $category : '/' . $category;
 
         $result = $this->requestJikan($uri);
 
@@ -172,13 +172,13 @@ class JikanService implements JikanServiceInterface
 
             if (!is_null($previous_seasons))
             {
-                $previous['season'] = strtolower($previous_seasons->last());
+                $previous['season'] = Str::lower($previous_seasons->last());
                 $previous['year'] = $year - 1;
             }
         }
         else
         {
-            $previous['season'] = strtolower($current_year_seasons[$current_season_index - 1]);
+            $previous['season'] = Str::lower($current_year_seasons[$current_season_index - 1]);
             $previous['year'] = $year;
         }
 
@@ -188,13 +188,13 @@ class JikanService implements JikanServiceInterface
             $next_seasons = $all_seasons->get($year + 1);
             if (!is_null($next_seasons))
             {
-                $next['season'] = strtolower($next_seasons->first());
+                $next['season'] = Str::lower($next_seasons->first());
                 $next['year'] = $year + 1;
             }
         }
         else
         {
-            $next['season'] = strtolower($current_year_seasons[$current_season_index + 1]);
+            $next['season'] = Str::lower($current_year_seasons[$current_season_index + 1]);
             $next['year'] = $year;
         }
 
@@ -210,8 +210,8 @@ class JikanService implements JikanServiceInterface
 
     private function getAllowedSeasons()
     {
-        $all_seasons = $this->requestJikan('season/archive', now()->addMonth()->endOfMonth());
-        return collect($all_seasons['archive'])->mapWithKeys(function ($item, $key) {
+        $all_seasons = $this->requestJikan('season/archive', now()->endOfMonth());
+        return collect($all_seasons['archive'])->where('year', '>=', 1995)->mapWithKeys(function ($item, $key) {
             return [ $item['year'] => collect($item['seasons']) ];
         });
     }
