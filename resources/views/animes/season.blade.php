@@ -6,9 +6,7 @@
 
             @if (!is_null($seasons['previous']))
             <a href="{{ route('anime.season', ['year' => $seasons['previous']['year'], 'season' => $seasons['previous']['season']]) }}" class="flex transition-colors hover:text-blue-700 dark:hover:text-blue-300">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                </svg>
+                <x-icons.arrow-left class="w-6 h-6" />
             </a>
             <a href="{{ route('anime.season', ['year' => $seasons['previous']['year'], 'season' => $seasons['previous']['season']]) }}" class="flex flex-col items-center transition-colors hover:text-blue-700 dark:hover:text-blue-300">
                 <p class="text-lg">{{ ucfirst($seasons['previous']['season']) }}</p>
@@ -27,9 +25,7 @@
                 <p class="text-sm">{{ $seasons['next']['year'] }}</p>
             </a>
             <a href="{{ route('anime.season', ['year' => $seasons['next']['year'], 'season' => $seasons['next']['season']]) }}" class="flex transition-colors hover:text-blue-700 dark:hover:text-blue-300">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
+                <x-icons.arrow-right class="w-6 h-6" />
             </a>
             @endif
 
