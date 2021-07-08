@@ -4,7 +4,7 @@
     <div class="container px-4 pt-12 mx-auto">
         <div class="flex flex-col items-center justify-between gap-8 pb-4 md:flex-row">
             <div class="flex flex-col items-center font-bold text-blue-700 dark:text-blue-300">
-                <p class="text-2xl">Genre Anime / {{ $genre->name }}</p>
+                <x-title>Genre Anime / {{ $genre->name }}</x-title>
             </div>
             <x-pagination-link :current="$page" :total="$total_page" />
         </div>
