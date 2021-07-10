@@ -37,7 +37,7 @@
             <p class="flex-auto">{{ $anime['members'] }}</p>
         </div>
     </div>
-    @if ($resources->count() > 0)
+    @if (!blank($resources))
     <div class="flex-row items-center justify-center hidden gap-3 p-2 mx-4 text-sm text-center transition-colors bg-gray-300 rounded-lg dark:bg-gray-800 md:flex dark:group-hover:bg-gray-600">
         @foreach ($resources as $resource)
         <a href="{{ $resource->link }}" target="_blank" class="w-6 h-6">
