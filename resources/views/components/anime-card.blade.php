@@ -27,7 +27,7 @@
         </div>
     </div>
     <div class="relative flex flex-row items-center justify-between px-2 py-1">
-        @if ($resources->count() > 0)
+        @if (!blank($resources))
         <div class="absolute inset-x-0 -top-8 flex flex-row items-center justify-center w-1/2 gap-3 bg-gray-900 bg-opacity-60 py-1">
             @foreach ($resources as $resource)
             <a href="{{ $resource->link }}" target="_blank" class="w-6 h-6">
