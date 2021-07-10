@@ -45,7 +45,7 @@ class JikanService implements JikanServiceInterface
 
         $season_navigation = $this->getSeasonNavigation($result['season_year'], $result['season_name']);
 
-        $animes = collect($result['anime'])->where('continuing', false);
+        $animes = collect($result['anime']);
 
         return [
             'seasons' => $season_navigation,
@@ -59,7 +59,7 @@ class JikanService implements JikanServiceInterface
 
         $result = $this->requestJikan('season/' . $year . '/' . $season);
 
-        $animes = collect($result['anime'])->where('continuing', false);
+        $animes = collect($result['anime']);
 
         return [
             'seasons' => $season_navigation,

@@ -30,10 +30,95 @@
             @endif
 
         </div>
-        <div class="grid items-start grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
-            @foreach ($animes as $anime)
-                <x-anime-card :anime="$anime" :resources="$resources[$anime['mal_id']]" />
-            @endforeach
+        <div class="flex flex-col gap-4">
+            <div class="flex flex-col gap-2">
+                <x-subtitle>
+                    TV <span class="text-xs normal-case">({{ abbreviate_number(config('anime.season.minimum.tv')) }}+ member)</span>
+                </x-subtitle>
+                <div class="grid items-start grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+                    @forelse ($animes->where('type', 'TV')->where('continuing', false)->where('members', '>=', config('anime.season.minimum.tv')) as $anime)
+                    <x-anime-card :anime="$anime" :resources="$resources[$anime['mal_id']]" />
+                    @empty
+                    <div class="text-lg italic">
+                        Tidak ada anime.
+                    </div>
+                    @endforelse
+                </div>
+            </div>
+            <div class="flex flex-col gap-2">
+                <x-subtitle>
+                    TV
+                    <span class="normal-case">(Lanjutan)</span>
+                    <span class="text-xs normal-case">({{ abbreviate_number(config('anime.season.minimum.tv_continuing')) }}+ member)</span>
+                </x-subtitle>
+                <div class="grid items-start grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+                    @forelse ($animes->where('type', 'TV')->where('continuing', true)->where('members', '>=', config('anime.season.minimum.tv_continuing')) as $anime)
+                    <x-anime-card :anime="$anime" :resources="$resources[$anime['mal_id']]" />
+                    @empty
+                    <div class="text-lg italic">
+                        Tidak ada anime.
+                    </div>
+                    @endforelse
+                </div>
+            </div>
+            <div class="flex flex-col gap-2">
+                <x-subtitle>
+                    ONA <span class="text-xs normal-case">({{ abbreviate_number(config('anime.season.minimum.ona')) }}+ member)</span>
+                </x-subtitle>
+                <div class="grid items-start grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+                    @forelse ($animes->where('type', 'ONA')->where('members', '>=', config('anime.season.minimum.ona')) as $anime)
+                    <x-anime-card :anime="$anime" :resources="$resources[$anime['mal_id']]" />
+                    @empty
+                    <div class="text-lg italic">
+                        Tidak ada anime.
+                    </div>
+                    @endforelse
+                </div>
+                
+            </div>
+            <div class="flex flex-col gap-2">
+                <x-subtitle>
+                    OVA <span class="text-xs normal-case">({{ abbreviate_number(config('anime.season.minimum.ova')) }}+ member)</span>
+                </x-subtitle>
+                <div class="grid items-start grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+                    @forelse ($animes->where('type', 'OVA')->where('members', '>=', config('anime.season.minimum.ova')) as $anime)
+                    <x-anime-card :anime="$anime" :resources="$resources[$anime['mal_id']]" />
+                    @empty
+                    <div class="text-lg italic">
+                        Tidak ada anime.
+                    </div>
+                    @endforelse
+                </div>
+            </div>
+            <div class="flex flex-col gap-2">
+                <x-subtitle>
+                    Movie <span class="text-xs normal-case">({{ abbreviate_number(config('anime.season.minimum.movie')) }}+ member)</span>
+                </x-subtitle>
+                <div class="grid items-start grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+                    @forelse ($animes->where('type', 'Movie')->where('members', '>=', config('anime.season.minimum.movie')) as $anime)
+                    <x-anime-card :anime="$anime" :resources="$resources[$anime['mal_id']]" />
+                    @empty
+                    <div class="text-lg italic">
+                        Tidak ada anime.
+                    </div>
+                    @endforelse
+                </div>
+            </div>
+            <div class="flex flex-col gap-2">
+                <x-subtitle>
+                    Special <span class="text-xs normal-case">({{ abbreviate_number(config('anime.season.minimum.special')) }}+ member)</span>
+                </x-subtitle>
+                <div class="grid items-start grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+                    @forelse ($animes->where('type', 'Special')->where('members', '>=', config('anime.season.minimum.special')) as $anime)
+                    <x-anime-card :anime="$anime" :resources="$resources[$anime['mal_id']]" />
+                    @empty
+                    <div class="text-lg italic">
+                        Tidak ada anime.
+                    </div>
+                    @endforelse
+                </div>
+            </div>
         </div>
+        
     </div>
 </x-app-layout>

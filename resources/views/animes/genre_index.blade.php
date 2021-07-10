@@ -9,7 +9,7 @@
         </div>
         <div class="grid items-start justify-center grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4">
             @foreach ($genres as $genre)
-            <x-button-link :link="route('anime.genre.show', str_replace(' ', '-', strtolower($genre->name)))">
+            <x-button-link href="{{ route('anime.genre.show', str_replace(' ', '-', strtolower($genre->name))) }}">
                 <x-slot name="icon">
                     <x-icons.chevron-right-solid class="w-6 h-6" />
                 </x-slot>

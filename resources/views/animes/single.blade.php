@@ -44,7 +44,7 @@
                         <p class="text-sm md:text-md">Rating</p>
                     </div>
                 </div>
-                <x-button-link :link="$anime['url']" class="h-16">
+                <x-button-link href="{{ $anime['url'] }}" target="_blank" class="h-16">
                     <p class="text-lg text-left font-semibold md:text-xl">MyAnimeList</p>
                 </x-button-link>
             </div>

@@ -8,9 +8,9 @@
                 <p>-</p>
             @endforelse
         </div>
-        <span>&bull;</span>
+        <span class="select-none">&bull;</span>
         <div class="text-center">{{ $anime['episodes'] ?? '?' }} ep</div>
-        <span>&bull;</span>
+        <span class="select-none">&bull;</span>
         <div class="text-center">{{ $anime['source'] }}</div>
     </div>
     <div class="flex flex-row flex-wrap justify-center gap-2 p-1 text-xs">
@@ -50,7 +50,7 @@
         </div>
         <div class="flex flex-row items-center justify-center gap-2 text-center">
             <x-icons.user-solid class="w-5 h-5" />
-            <span>{{ $anime['members'] }}</span>
+            <span>{{ abbreviate_number($anime['members']) }}</span>
         </div>
     </div>
 </div>
