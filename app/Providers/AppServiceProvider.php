@@ -32,6 +32,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        if (config('cache.default') == 'memcached' && !class_exists('Memcached')) {
+            include('memcached.php');
+        }
+
         if(config('app.env') === 'production') {
             URL::forceScheme('https');
         }
