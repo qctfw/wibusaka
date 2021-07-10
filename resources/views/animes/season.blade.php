@@ -30,7 +30,7 @@
             @endif
 
         </div>
-        <div class="flex flex-col gap-4">
+        <div class="flex flex-col gap-4 divide-y divide-gray-400 divide-dashed divide-opacity-50">
             <div class="flex flex-col gap-2">
                 <x-subtitle>
                     TV <span class="text-xs normal-case">({{ abbreviate_number(config('anime.season.minimum.tv')) }}+ member)</span>
@@ -45,7 +45,7 @@
                     @endforelse
                 </div>
             </div>
-            <div class="flex flex-col gap-2">
+            <div class="flex flex-col gap-2 pt-4">
                 <x-subtitle>
                     TV
                     <span class="normal-case">(Lanjutan)</span>
@@ -61,7 +61,7 @@
                     @endforelse
                 </div>
             </div>
-            <div class="flex flex-col gap-2">
+            <div class="flex flex-col gap-2 pt-4">
                 <x-subtitle>
                     ONA <span class="text-xs normal-case">({{ abbreviate_number(config('anime.season.minimum.ona')) }}+ member)</span>
                 </x-subtitle>
@@ -76,7 +76,7 @@
                 </div>
                 
             </div>
-            <div class="flex flex-col gap-2">
+            <div class="flex flex-col gap-2 pt-4">
                 <x-subtitle>
                     OVA <span class="text-xs normal-case">({{ abbreviate_number(config('anime.season.minimum.ova')) }}+ member)</span>
                 </x-subtitle>
@@ -90,7 +90,7 @@
                     @endforelse
                 </div>
             </div>
-            <div class="flex flex-col gap-2">
+            <div class="flex flex-col gap-2 pt-4">
                 <x-subtitle>
                     Movie <span class="text-xs normal-case">({{ abbreviate_number(config('anime.season.minimum.movie')) }}+ member)</span>
                 </x-subtitle>
@@ -104,7 +104,7 @@
                     @endforelse
                 </div>
             </div>
-            <div class="flex flex-col gap-2">
+            <div class="flex flex-col gap-2 pt-4">
                 <x-subtitle>
                     Special <span class="text-xs normal-case">({{ abbreviate_number(config('anime.season.minimum.special')) }}+ member)</span>
                 </x-subtitle>
