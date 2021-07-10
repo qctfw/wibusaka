@@ -10,5 +10,10 @@ return [
             'movie' => env('ANIME_SEASON_MINIMUM_MOVIE'),
             'special' => env('ANIME_SEASON_MINIMUM_SPECIAL')
         ]
+    ],
+    'link' => [
+        'discord' => env('WIBULIST_LINK_DISCORD', '#'),
+        'github' => env('WIBULIST_LINK_GITHUB', '#'),
+        'twitter' => env('WIBULIST_LINK_TWITTER', '#')
     ]
 ];
