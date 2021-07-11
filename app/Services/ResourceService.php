@@ -82,6 +82,6 @@ class ResourceService implements ResourceServiceInterface
 
     private function getCacheKey(int $mal_id)
     {
-        return Str::lower(config('app.name')) . ':db:resource:' . $mal_id;
+        return 'db:anime_resources:' . $mal_id;
     }
 }

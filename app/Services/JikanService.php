@@ -106,7 +106,7 @@ class JikanService implements JikanServiceInterface
     {
         $uri = trim($uri, '/');
 
-        $cache_key = Str::lower(config('app.name')) . ':jikan:' . Str::replace('/', '-', $uri);
+        $cache_key = 'jikan:' . Str::replace('/', '-', $uri);
 
         if ($query)
         {
