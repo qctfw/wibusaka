@@ -1,10 +1,10 @@
-
 # WibuList
 
 A simple app to inform you where to watch anime legally in Indonesia.
 
-
 ## Installation 
+
+> This app requires Redis for caching purposes.
 
 Copy `.env.example` into `.env` and edit these values.
 
