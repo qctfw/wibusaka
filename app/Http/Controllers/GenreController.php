@@ -48,7 +48,7 @@ class GenreController extends Controller
     {
         $all_genres = $this->genre_service->all();
 
-        return view('animes.genre_index', [
+        return view('animes.genre-index', [
             'genres' => $all_genres->sortBy('name')
         ]);
     }
