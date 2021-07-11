@@ -13,7 +13,7 @@
         <x-icons.search class="w-4 mt-1.5 ml-2" />
     </div>
     <div x-show="searchOpen" class="absolute left-0 z-40 w-full mt-2 bg-gray-300 rounded-lg dark:bg-gray-800">
-        <div class="grid grid-cols-1 overflow-y-auto border border-gray-400 divide-y-2 divide-gray-100 rounded-lg shadow-md min-h-8 max-h-96 divide-solid scrollbar dark:border-gray-700 md:shadow-lg scrollbar-thumb-gray-400 scrollbar-track-gray-300 dark:scrollbar-thumb-gray-500 dark:scrollbar-track-gray-700 dark:divide-gray-700">
+        <div class="grid grid-cols-1 overflow-y-auto border border-gray-400 divide-y-2 divide-gray-100 rounded-lg shadow-md min-h-8 max-h-96 divide-solid scrollbar-extra-thin dark:border-gray-700 md:shadow-lg scrollbar-thumb-gray-400 scrollbar-track-gray-300 dark:scrollbar-thumb-gray-500 dark:scrollbar-track-gray-700 dark:divide-gray-700">
             <div wire:loading class="w-full h-auto">
                 <div class="flex items-center justify-center h-10 gap-4">
                     <x-icons.spinner class="block w-5 h-5" />

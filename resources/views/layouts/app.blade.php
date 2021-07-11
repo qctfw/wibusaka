@@ -9,7 +9,7 @@
     <livewire:styles />
     <script src="https://unpkg.com/alpinejs@3.0.6/dist/cdn.min.js" defer></script>
 </head>
-<body class="font-sans dark:bg-gray-800 dark:text-white">
+<body class="font-sans dark:bg-gray-800 dark:text-white scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-300 dark:scrollbar-thumb-gray-500 dark:scrollbar-track-gray-700">
     <x-header-navbar />
     {{ $slot }}
     <footer class="mt-4 border-t border-gray-200 footer dark:border-gray-700">
