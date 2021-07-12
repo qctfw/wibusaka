@@ -49,13 +49,9 @@ class ResourceService implements ResourceServiceInterface
             
             foreach ($mal_ids_db as $mal_id) {
                 $resources = $resources_db->where('mal_id', $mal_id)->sortBy('platform.name', SORT_NATURAL | SORT_FLAG_CASE)->values();
-                
-                if ($resources->count() > 0) {
-                    $resources_result->put($mal_id, $resources);
-                }
-                else {
-                    $resources_result->put($mal_id, null);
-                }
+
+                $resources_result->put($mal_id, $resources);
+
                 $this->setResourceCache($resources, $mal_id);
                 
             }
