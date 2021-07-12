@@ -87,7 +87,7 @@ class JikanService implements JikanServiceInterface
 
     public function getAnimeRecommendations(string $id)
     {
-        $result = $this->requestJikan('anime/' . $id . '/recommendations');
+        $result = $this->requestJikan('anime/' . $id . '/recommendations', now()->addDays(3)->endOfDay());
 
         return collect($result['recommendations'])->take(5);
     }
@@ -115,7 +115,7 @@ class JikanService implements JikanServiceInterface
 
         if (is_null($cache_expire))
         {
-            $cache_expire = now()->addDay()->endOfDay();
+            $cache_expire = now()->endOfDay();
         }
 
         $response = Cache::remember($cache_key, $cache_expire, function () use ($uri, $query) {
