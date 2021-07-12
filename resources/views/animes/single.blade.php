@@ -4,7 +4,7 @@
     <div class="container flex flex-col px-4 py-4 mx-auto md:pt-12 md:flex-row">
         <div class="grid justify-between flex-none w-full grid-cols-2 md:grid-cols-1 md:items-center md:w-72 md:h-full">
             <div class="w-full text-center">
-                <div id="anime-cover" class="relative w-64 mx-auto rounded-lg">
+                <div id="anime-cover" class="relative mx-auto rounded-lg">
                     <div class="flex flex-col items-center justify-center w-full h-96 spinner">
                         <x-icons.spinner class="block w-5 h-5" />
                     </div>

@@ -2,13 +2,13 @@
     @if ($loaded)
         @forelse ($resources as $resource)
         <x-button-link href="{{ $resource->link }}" target="_blank" :img="asset($resource->platform->icon_path)">
-            <div class="flex flex-row items-center gap-2 pl-4 text-lg font-semibold">
+            <div class="flex flex-row items-center gap-2 pl-2 text-lg font-semibold md:pl-4">
                 <p>{{ $resource->platform->name }}</p>
                 @if ($resource->paid)
                 <x-icons.currency-dollar-solid class="w-6 h-6" />
                 @endif
             </div>
-            <p class="text-sm italic">{{ $resource->note }}</p>
+            <p class="pl-2 text-sm italic md:pl-4">{{ $resource->note }}</p>
         </x-button-link>
         @empty
         <div class="flex items-center h-12 col-span-2 p-4">
