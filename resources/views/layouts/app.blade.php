@@ -43,5 +43,6 @@
         </div>
     </footer>
     <livewire:scripts />
+    {{ $script ?? '' }}
 </body>
 </html>
