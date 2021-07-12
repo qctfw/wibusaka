@@ -1,9 +1,9 @@
 <div class="flex flex-col bg-gray-200 divide-y divide-gray-400 rounded-lg group dark:bg-gray-900 divide-opacity-50 divide-dashed">
     <a href="{{ route('anime.show', $anime['mal_id']) }}" class="relative w-full mx-auto rounded-lg anime-cover">
-        <div class="flex flex-col items-center justify-center w-full h-64 spinner bg-white dark:bg-gray-800">
+        <div class="flex flex-col items-center justify-center w-full h-80 spinner">
             <x-icons.spinner class="block w-5 h-5" />
         </div>
-        <img alt="{{ $anime['title'] }} Anime Poster" data-src="{{ $anime['image_url'] }}" class="absolute inset-x-0 top-0 w-full mx-auto rounded-lg" loading="lazy" />
+        <img alt="{{ $anime['title'] }} Anime Poster" data-src="{{ $anime['image_url'] }}" class="absolute inset-x-0 top-0 w-full mx-auto rounded-lg opacity-0" loading="lazy" />
     </a>
     <a href="{{ route('anime.show', $anime['mal_id']) }}" class="my-1">
         <h4 class="p-1 text-lg font-semibold leading-tight text-center transition-colors duration-200 group-hover:text-blue-700 dark:group-hover:text-blue-300">

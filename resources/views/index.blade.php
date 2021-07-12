@@ -33,7 +33,7 @@
                 const imgPreload = allImages[i].getElementsByClassName('spinner')[0];
 
                 imgCover.onload = function () {
-                    imgCover.classList.remove('absolute');
+                    imgCover.classList.remove('absolute', 'opacity-0');
                     imgPreload.remove();
                 }
 
