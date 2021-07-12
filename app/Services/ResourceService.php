@@ -73,7 +73,7 @@ class ResourceService implements ResourceServiceInterface
     {
         $cache_key = $this->getCacheKey($mal_id);
 
-        Cache::put($cache_key, $resources, now()->endOfDay());
+        Cache::put($cache_key, $resources);
     }
 
     private function getCacheKey(int $mal_id)
