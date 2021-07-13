@@ -24,7 +24,7 @@ class SeasonViewModel extends ViewModel
     {
         $animes = collect($this->animes);
         
-        return $animes->where('members', '>', 1000)->where('r18', false)->where('kids', false)->map(function ($item, $key) {
+        return $animes->map(function ($item, $key) {
             return collect($item)->merge([
                 "airing_start" => (!is_null($item['airing_start'])) ? Carbon::parse($item['airing_start'])->translatedFormat('d F Y') : '?',
                 "score" => ($item['score'] > 0) ? number_format($item['score'], 2, '.', '') : 'N/A'

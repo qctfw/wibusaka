@@ -39,8 +39,8 @@ class AnimeController extends Controller
     {
         try
         {
-            $top = $this->jikan_service->getTopPopularityAnimes();
-            $upcoming = $this->jikan_service->getTopUpcomingAnimes();
+            $top = $this->jikan_service->getTopPopularityAnimes()->take(12);
+            $upcoming = $this->jikan_service->getTopUpcomingAnimes()->take(12);
         } catch (JikanException $e)
         {
             abort($e->getHttpCode());
@@ -74,9 +74,12 @@ class AnimeController extends Controller
         {
             abort($e->getHttpCode());
         }
-        $season_resources = $this->resource_service->getByMalIds($result['animes']->pluck('mal_id'));
 
-        $season_view_model = new SeasonViewModel($result['seasons'], $result['animes'], $season_resources);
+        $animes = $result['animes']->where('members', '>', 1000)->where('r18', false)->where('kids', false);
+
+        $season_resources = $this->resource_service->getByMalIds($animes->pluck('mal_id'));
+
+        $season_view_model = new SeasonViewModel($result['seasons'], $animes, $season_resources);
 
         return view('animes.season', $season_view_model);
     }

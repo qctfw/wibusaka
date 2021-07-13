@@ -23,7 +23,7 @@ class TopIndexViewModel extends ViewModel
 
     public function top_animes()
     {
-        return collect($this->top_animes)->take(12)->map(function ($item, $key) {
+        return collect($this->top_animes)->map(function ($item, $key) {
             return collect($item)->merge([
                 'start_date' => (!is_null($item['start_date'])) ? Carbon::parse($item['start_date'])->translatedFormat('M Y') : '?',
                 'end_date' => (!is_null($item['end_date'])) ? Carbon::parse($item['end_date'])->translatedFormat('M Y') : '?',
@@ -34,7 +34,7 @@ class TopIndexViewModel extends ViewModel
 
     public function upcoming_animes()
     {
-        return collect($this->upcoming_animes)->take(12)->map(function ($item, $key) {
+        return collect($this->upcoming_animes)->map(function ($item, $key) {
             return collect($item)->merge([
                 'start_date' => (!is_null($item['start_date'])) ? Carbon::parse($item['start_date'])->translatedFormat('M Y') : '?',
                 'end_date' => (!is_null($item['end_date'])) ? Carbon::parse($item['end_date'])->translatedFormat('M Y') : '?',

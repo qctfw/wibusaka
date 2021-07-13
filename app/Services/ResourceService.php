@@ -4,18 +4,16 @@ namespace App\Services;
 
 use App\Models\Resource;
 use App\Services\Contracts\ResourceServiceInterface;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Str;
 
 class ResourceService implements ResourceServiceInterface
 {
     public function getByMalId(int $mal_id)
     {
-        $resources = $this->getFromCache($mal_id);
-        if ($this->getFromCache($mal_id))
+        $resources_cache = $this->getFromCache($mal_id);
+        if (!is_null($resources_cache))
         {
-            return $resources;
+            return $resources_cache;
         }
 
         $resources = Resource::with('platform')->byMalId($mal_id)->get()->sortBy('platform.name', SORT_NATURAL | SORT_FLAG_CASE);
@@ -44,6 +42,7 @@ class ResourceService implements ResourceServiceInterface
                 $mal_ids_db->push($mal_id);
             }
         }
+
         if ($mal_ids_db->count() > 0) {
             $resources_db = Resource::with('platform')->byMalId($mal_ids_db->toArray())->get();
             
