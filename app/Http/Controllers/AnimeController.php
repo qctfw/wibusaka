@@ -8,9 +8,6 @@ use App\Services\Contracts\ResourceServiceInterface;
 use App\ViewModels\AnimeViewModel;
 use App\ViewModels\SeasonViewModel;
 use App\ViewModels\TopIndexViewModel;
-use App\ViewModels\TopViewModel;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
 
 class AnimeController extends Controller
 {
