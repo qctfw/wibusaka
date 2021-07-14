@@ -100,6 +100,12 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
+
+        'jikan' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/jikan.log'),
+            'level' => 'info',
+        ],
     ],
 
 ];

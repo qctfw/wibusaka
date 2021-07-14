@@ -113,6 +113,8 @@ class JikanService implements JikanServiceInterface
             $cache_key .= ':' . implode('-', $query);
         }
 
+        $cache_key = Str::lower($cache_key);
+
         if (is_null($cache_expire))
         {
             $cache_expire = now()->endOfDay();
@@ -236,6 +238,6 @@ class JikanService implements JikanServiceInterface
         }
 
         $log = 'Requesting Jikan... URL: ' . $full_url . ' Query: ' . http_build_query($query);
-        Log::info($log);
+        Log::channel('jikan')->info($log);
     }
 }
