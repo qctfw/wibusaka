@@ -56,3 +56,9 @@ if (!function_exists('validate_page')) {
         return preg_match('/^\d+$/', $page) && $page > 0 && $page <= $total_page;
     }
 }
+
+if (!function_exists('logo_asset')) {
+    function logo_asset(string $path) {
+        return config('anime.asset.base_url') . '/' . $path;
+    }
+}

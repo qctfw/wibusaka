@@ -38,7 +38,7 @@
     <div class="flex flex-row items-center justify-center gap-3 py-1 text-sm text-center">
         @forelse ($resources as $resource)
         <a href="{{ $resource->link }}" target="_blank" class="w-6 h-6">
-            <img src="{{ asset($resource->platform->icon_path) }}" alt="{{ $resource->platform->name }} Logo" />
+            <img src="{{ logo_asset($resource->platform->icon_path) }}" alt="{{ $resource->platform->name }} Logo" />
         </a>
         @empty
         <x-icons.x class="w-6 h-6" />

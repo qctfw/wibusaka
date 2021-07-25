@@ -34,47 +34,47 @@ class PlatformSeeder extends Seeder
             [
                 'name' => 'YouTube',
                 'type' => 'stream',
-                'icon_path' => 'icons/youtube.webp'
+                'icon_path' => 'img/logos/youtube.webp'
             ],
             [
                 'name' => 'Crunchyroll',
                 'type' => 'stream',
-                'icon_path' => 'icons/crunchyroll.webp'
+                'icon_path' => 'img/logos/crunchyroll.webp'
             ],
             [
                 'name' => 'Netflix',
                 'type' => 'stream',
-                'icon_path' => 'icons/netflix.webp'
+                'icon_path' => 'img/logos/netflix.webp'
             ],
             [
                 'name' => 'Sushiroll',
                 'type' => 'stream',
-                'icon_path' => 'icons/sushiroll.webp'
+                'icon_path' => 'img/logos/sushiroll.webp'
             ],
             [
                 'name' => 'iQIYI',
                 'type' => 'stream',
-                'icon_path' => 'icons/iqiyi.webp'
+                'icon_path' => 'img/logos/iqiyi.webp'
             ],
             [
                 'name' => 'iFlix',
                 'type' => 'stream',
-                'icon_path' => 'icons/iflix.webp'
+                'icon_path' => 'img/logos/iflix.webp'
             ],
             [
                 'name' => 'CATCHPLAY+',
                 'type' => 'stream',
-                'icon_path' => 'icons/catchplay-plus.webp'
+                'icon_path' => 'img/logos/catchplay-plus.webp'
             ],
             [
                 'name' => 'VIU',
                 'type' => 'stream',
-                'icon_path' => 'icons/viu.webp'
+                'icon_path' => 'img/logos/viu.webp'
             ],
             [
                 'name' => 'Spotify',
                 'type' => 'stream',
-                'icon_path' => 'icons/spotify.webp'
+                'icon_path' => 'img/logos/spotify.webp'
             ],
         ];
     }

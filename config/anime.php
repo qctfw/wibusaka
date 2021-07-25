@@ -1,6 +1,9 @@
 <?php
 
 return [
+    'asset' => [
+        'base_url' => env('WIBULIST_ASSET_BASE_URL')
+    ],
     'season' => [
         'minimum' => [
             'tv' => env('ANIME_SEASON_MINIMUM_TV'),

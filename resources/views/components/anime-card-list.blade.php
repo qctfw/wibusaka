@@ -41,7 +41,7 @@
     <div class="flex-row items-center justify-center hidden gap-3 p-2 mx-4 text-sm text-center transition-colors bg-gray-300 rounded-lg dark:bg-gray-800 md:flex dark:group-hover:bg-gray-600">
         @foreach ($resources as $resource)
         <a href="{{ $resource->link }}" target="_blank" class="w-6 h-6">
-            <img src="{{ asset($resource->platform->icon_path) }}" alt="{{ $resource->platform->name }} Logo" />
+            <img src="{{ logo_asset($resource->platform->icon_path) }}" alt="{{ $resource->platform->name }} Logo" />
         </a>
         @endforeach
     </div>
@@ -55,7 +55,7 @@
         <div class="flex-row items-center justify-center mx-4 md:hidden">
             <div class="flex flex-row items-center justify-center gap-3 pt-2 text-sm text-center">
                 @foreach ($resources as $resource)
-                <img src="{{ asset($resource->platform->icon_path) }}" alt="{{ $resource->platform->name }} Logo" class="w-6 h-6" />
+                <img src="{{ logo_asset($resource->platform->icon_path) }}" alt="{{ $resource->platform->name }} Logo" class="w-6 h-6" />
                 @endforeach
             </div>
         </div>
