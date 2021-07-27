@@ -1,5 +1,5 @@
 <x-app-layout>
-    <x-slot name="title">Top Anime</x-slot>
+    <x-slot name="title">Halaman Utama</x-slot>
 
     <div class="container flex flex-col gap-4 px-4 pt-12 mx-auto">
         <div class="flex flex-col gap-2">
@@ -23,22 +23,4 @@
             </div>
         </div>
     </div>
-
-    <x-slot name="script">
-        <script>
-            const allImages = document.getElementsByClassName('anime-cover');
-            
-            for (let i = 0; i < allImages.length; i++) {
-                const imgCover = allImages[i].getElementsByTagName('img')[0];
-                const imgPreload = allImages[i].getElementsByClassName('spinner')[0];
-
-                imgCover.onload = function () {
-                    imgCover.classList.remove('absolute', 'opacity-0');
-                    imgPreload.remove();
-                }
-
-                imgCover.src = imgCover.getAttribute('data-src');
-            }
-        </script>
-    </x-slot>
 </x-app-layout>

@@ -4,7 +4,7 @@
     <div class="container flex flex-col px-4 py-4 mx-auto md:pt-12 md:flex-row">
         <div class="grid justify-between flex-none w-full grid-cols-2 md:grid-cols-1 md:items-center md:w-72 md:h-full">
             <div class="w-full text-center">
-                <div id="anime-cover" class="relative mx-auto rounded-lg">
+                <div class="anime-cover relative mx-auto rounded-lg">
                     <div class="flex flex-col items-center justify-center w-full h-96 spinner">
                         <x-icons.spinner class="block w-5 h-5" />
                     </div>
@@ -177,20 +177,4 @@
             </div>
         </div>
     </div>
-
-    <x-slot name="script">
-        <script>
-            const imgElements = document.getElementById('anime-cover');
-
-            const imgCover = imgElements.getElementsByTagName('img')[0];
-            const imgPreload = imgElements.getElementsByClassName('spinner')[0];
-
-            imgCover.onload = function () {
-                imgCover.classList.remove('absolute', 'opacity-0');
-                imgPreload.remove();
-            }
-
-            imgCover.src = imgCover.getAttribute('data-src');
-        </script>
-    </x-slot>
 </x-app-layout>
