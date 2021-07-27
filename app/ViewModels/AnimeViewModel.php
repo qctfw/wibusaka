@@ -30,6 +30,8 @@ class AnimeViewModel extends ViewModel
                     'popularity' => number_format($this->anime['popularity']),
                     'members' => abbreviate_number($this->anime['members']),
                     'favorites' => abbreviate_number($this->anime['favorites']),
+                    'studios' => collect($this->anime['studios']),
+                    'genres' => collect($this->anime['genres'])
                 ])
                 ->except(['request_hash', 'request_hashed', 'request_cached', 'request_cache_expiry']);
         return $anime;

@@ -81,10 +81,7 @@
                 <div class="pt-2">
                     <p class="font-semibold md:text-lg">Studio</p>
                     <p class="text-sm md:text-md">
-                        @if (count($anime['studios']) <= 0) - @endif
-                        @foreach ($anime['studios'] as $studio)
-                            {{ $studio['name'] }}{{ (!$loop->last) ? ', ' : '' }}
-                        @endforeach
+                        {{ $anime['studios']->implode('name', ', ') }}
                     </p>
                 </div>
                 <div class="pt-2">
@@ -94,9 +91,7 @@
                 <div class="pt-2">
                     <div class="font-semibold md:text-lg">Genre</div>
                     <p class="text-sm md:text-md">
-                        @foreach ($anime['genres'] as $genre)
-                            {{ $genre['name'] }}{{ (!$loop->last) ? ', ' : '' }}
-                        @endforeach
+                        {{ $anime['genres']->implode('name', ', ') }}
                     </p>
                 </div>
             </div>
