@@ -42,7 +42,7 @@
         </a>
         @empty
         <x-icons.x class="w-6 h-6" />
-        <span>Tidak Tersedia</span>
+        <span>{{ __('anime.single.availability_empty_short') }}</span>
         @endforelse
     </div>
     @endif

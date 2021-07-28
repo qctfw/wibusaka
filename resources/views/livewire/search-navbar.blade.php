@@ -17,12 +17,12 @@
             <div wire:loading class="w-full h-auto">
                 <div class="flex items-center justify-center h-10 gap-4">
                     <x-icons.spinner class="block w-5 h-5" />
-                    Mencari...
+                    {{ __('anime.search.loading') }}
                 </div>
             </div>
             @if(strlen($search) < 3)
                 <div wire:loading.remove class="flex items-center justify-center h-10">
-                    <p class="text-sm">Silahkan cari anime disini</p>
+                    <p class="text-sm">{{ __('anime.search.placeholder') }}</p>
                 </div>
             @else
                 @if ($results->count() > 0)
@@ -61,7 +61,7 @@
                     @endforeach
                 @else
                     <div wire:loading.remove class="flex items-center justify-center h-10">
-                        <p class="text-sm">Tidak ada hasil untuk "{{ $search }}".</p>
+                        <p class="text-sm">{{ __('anime.search.no_results', ['query' => $search]) }}</p>
                     </div>
                 @endif
             @endif

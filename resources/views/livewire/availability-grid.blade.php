@@ -12,7 +12,8 @@
         </x-button-link>
         @empty
         <div class="flex items-center h-12 col-span-2 p-4">
-            <p class="w-full italic text-center">Kami belum menemukan platform yang menayangkan anime ini.
+            <p class="w-full italic text-center">
+                {{ __('anime.single.availability_empty') }}
                 <x-icons.emoji-sad class="inline-block w-5 h-5" />
             </p>
         </div>

@@ -16,25 +16,25 @@
                 <div x-show="topMenuOpen" class="relative left-0 w-full bg-gray-300 border-gray-400 rounded-lg shadow-xl dark:border-gray-600 md:border md:origin-top-left md:absolute md:w-56 dark:bg-gray-800 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
                     <div role="none">
                         <a href="{{ route('anime.top.rated') }}" class="block px-4 py-2 text-sm rounded-lg hover:text-blue-700 dark:hover:text-blue-300 dark:text-white hover:bg-gray-400 dark:hover:bg-gray-900" role="menuitem" tabindex="-1" >
-                            Anime Terbaik
+                            {{ __('anime.top.title.rated') }}
                         </a>
                         <a href="{{ route('anime.top.popular') }}" class="block px-4 py-2 text-sm rounded-lg hover:text-blue-700 dark:hover:text-blue-300 dark:text-white hover:bg-gray-400 dark:hover:bg-gray-900" role="menuitem" tabindex="-1" >
-                            Anime Terpopuler
+                            {{ __('anime.top.title.popularity') }}
                         </a>
                         <a href="{{ route('anime.top.airing') }}" class="block px-4 py-2 text-sm rounded-lg hover:text-blue-700 dark:hover:text-blue-300 dark:text-white hover:bg-gray-400 dark:hover:bg-gray-900" role="menuitem" tabindex="-1" >
-                            Anime yang Sedang Tayang
+                            {{ __('anime.top.title.airing') }}
                         </a>
                         <a href="{{ route('anime.top.upcoming') }}" class="block px-4 py-2 text-sm rounded-lg hover:text-blue-700 dark:hover:text-blue-300 dark:text-white hover:bg-gray-400 dark:hover:bg-gray-900" role="menuitem" tabindex="-1" >
-                            Anime Paling Dinantikan
+                            {{ __('anime.top.title.upcoming') }}
                         </a>
                     </div>
                 </div>
             </div>
             <a href="{{ route('anime.season-current') }}" class="p-3 text-gray-600 rounded-lg dark:text-white hover:text-blue-700 dark:hover:text-blue-300 hover:bg-gray-300 dark:hover:bg-gray-900">
-                Musim Anime
+                {{ __('anime.season.title') }}
             </a>
             <a href="{{ route('anime.genre') }}" class="p-3 text-gray-600 rounded-lg dark:text-white hover:text-blue-700 dark:hover:text-blue-300 hover:bg-gray-300 dark:hover:bg-gray-900">
-                Genre Anime
+                {{ __('anime.genre.title') }}
             </a>
         </nav>
         <div class="flex flex-col items-center w-full md:w-64 lg:w-72 md:flex-row mt-2 lg:mt-0">

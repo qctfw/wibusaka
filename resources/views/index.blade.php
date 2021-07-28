@@ -4,7 +4,7 @@
     <div class="container flex flex-col gap-4 px-4 pt-12 mx-auto">
         <div class="flex flex-col gap-2">
             <a href="{{ route('anime.top.popular') }}">
-                <x-title>Top Anime</x-title>
+                <x-title>{{ __('anime.top.title.rated') }}</x-title>
             </a>
             <div class="grid items-end grid-cols-2 gap-8 py-4 md:grid-cols-3 lg:grid-cols-6">
                 @foreach ($top_animes as $anime)
@@ -14,7 +14,7 @@
         </div>
         <div class="flex flex-col gap-2">
             <a href="{{ route('anime.top.upcoming') }}">
-                <x-title>Anime Paling Dinantikan</x-title>
+                <x-title>{{ __('anime.top.title.upcoming') }}</x-title>
             </a>
             <div class="grid items-end grid-cols-2 gap-8 py-4 md:grid-cols-3 lg:grid-cols-6">
                 @foreach ($upcoming_animes as $anime)

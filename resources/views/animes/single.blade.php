@@ -16,37 +16,37 @@
                             <x-icons.star-solid class="inline-block w-3 h-3 md:w-5 md:h-5" />
                             {{ !empty($anime['score']) ? number_format($anime['score'], 2, '.', '') : 'N/A' }}
                         </span>
-                        <p class="text-sm md:text-md">Skor</p>
+                        <p class="text-sm md:text-md">{{ __('anime.single.score') }}</p>
                     </div>
                     <div class="text-center">
                         <p class="text-lg font-semibold md:text-2xl">#{{ $anime['popularity'] }}</p>
-                        <p class="text-sm md:text-md">Terpopuler</p>
+                        <p class="text-sm md:text-md">{{ __('anime.single.popularity') }}</p>
                     </div>
                     <div class="text-center">
                         <p class="text-lg font-semibold md:text-2xl">{{ $anime['members'] }}</p>
-                        <p class="hidden text-sm md:block">Jumlah Penonton</p>
-                        <p class="text-sm md:hidden">Penonton</p>
+                        <p class="hidden text-sm md:block">{{ __('anime.single.members') }}</p>
+                        <p class="text-sm md:hidden">{{ __('anime.single.members_mobile') }}</p>
                     </div>
                     <div class="text-center">
                         <div class="flex flex-row items-center justify-center md:gap-1">
-                            <p class="text-lg font-semibold md:text-2xl">{{ $anime['rating']['rating'] ?? 'N/A' }}</p>
-                            @if (!empty($anime['rating']['note']))
+                            <p class="text-lg font-semibold md:text-2xl">{{ $anime['rating'] ?? 'N/A' }}</p>
+                            @if ($anime['rating'] != 'None')
                             <div class="relative flex flex-col items-center mt-1 group">
-                                @if (in_array($anime['rating']['rating'], ['R', 'R+', 'Rx']))
+                                @if (in_array($anime['rating'], ['R', 'R+', 'Rx']))
                                 <x-icons.exclamation-solid class="hidden w-6 h-6 md:block" />
                                 @else
                                 <x-icons.information-circle-solid class="hidden w-4 h-4 md:block" />
                                 @endif
                                 <div class="absolute bottom-0 flex-col items-center hidden w-48 mb-6 group-hover:flex">
                                     <div class="relative z-20 p-2 text-sm leading-4 text-white whitespace-no-wrap bg-black shadow-xl rounded-xl">
-                                        {{ $anime['rating']['note'] }}
+                                        {{ __('anime.single.rating_note.' . $anime['rating']) }}
                                     </div>
                                     <div class="w-3 h-3 -mt-2 transform rotate-45 bg-black"></div>
                                 </div>
                             </div>
                             @endif
                         </div>
-                        <p class="text-sm md:text-md">Rating</p>
+                        <p class="text-sm md:text-md">{{ __('anime.single.rating') }}</p>
                     </div>
                 </div>
                 <x-button-link href="{{ $anime['url'] }}" target="_blank" class="h-16">
@@ -60,36 +60,36 @@
                     <p class="text-sm italic">{{ $anime['title_japanese'] }}</p>
                 </div>
                 <div class="hidden pt-2 md:block">
-                    <p class="text-lg font-semibold">Judul Lain</p>
+                    <p class="text-lg font-semibold">{{ __('anime.single.alternative_title') }}</p>
                     <p class="text-sm md:text-md">{{ (count($anime['title_synonyms']) > 0) ? implode(', ', $anime['title_synonyms']) : '-' }}</p>
                 </div>
                 <div class="pt-2">
-                    <p class="font-semibold md:text-lg">Tipe Anime</p>
+                    <p class="font-semibold md:text-lg">{{ __('anime.single.type') }}</p>
                     <p class="text-sm md:text-md">
                         {{ $anime['type'] }} @if ($anime['episodes'] > 1) ({{ $anime['episodes'] }} episode) @endif
                     </p>
                 </div>
                 <div class="pt-2">
-                    <p class="font-semibold md:text-lg">Status</p>
+                    <p class="font-semibold md:text-lg">{{ __('anime.single.status') }}</p>
                     <p class="text-sm md:text-md">{{ $anime['status'] }}</p>
                 </div>
                 <div class="pt-2">
-                    <p class="font-semibold md:text-lg">Tanggal Tayang</p>
+                    <p class="font-semibold md:text-lg">{{ __('anime.single.airing_date') }}</p>
                     <p class="text-sm md:text-md">{{ $anime['aired']['from'] }}@if ($anime['episodes'] > 1 || $anime['airing']) s.d {{ $anime['aired']['to'] }}@endif</p>
                     <p class="text-xs">{{ !empty($anime['premiered']) ? '(' . $anime['premiered'] . ')' : '' }}</p>
                 </div>
                 <div class="pt-2">
-                    <p class="font-semibold md:text-lg">Studio</p>
+                    <p class="font-semibold md:text-lg">{{ __('anime.single.studio') }}</p>
                     <p class="text-sm md:text-md">
                         {{ $anime['studios']->implode('name', ', ') }}
                     </p>
                 </div>
                 <div class="pt-2">
-                    <p class="font-semibold md:text-lg">Sumber</p>
+                    <p class="font-semibold md:text-lg">{{ __('anime.single.source') }}</p>
                     <p class="text-sm md:text-md">{{ $anime['source'] }}</p>
                 </div>
                 <div class="pt-2">
-                    <div class="font-semibold md:text-lg">Genre</div>
+                    <div class="font-semibold md:text-lg">{{ __('anime.single.genre') }}</div>
                     <p class="text-sm md:text-md">
                         {{ $anime['genres']->implode('name', ', ') }}
                     </p>
@@ -97,10 +97,10 @@
             </div>
         </div>
 
-        @if (!empty($anime['rating']['note']) && in_array($anime['rating']['rating'], ['R', 'R+', 'Rx']))
+        @if ($anime['rating'] != 'None' && in_array($anime['rating'], ['R', 'R+', 'Rx']))
         <div class="flex flex-col items-center w-auto gap-2 p-2 my-4 bg-gray-200 md:hidden rounded-xl dark:bg-gray-900">
             <x-icons.exclamation-solid class="w-8 h-8" />
-            <p class="text-sm text-center">{{ $anime['rating']['note'] }}</p>
+            <p class="text-sm text-center">{{ __('anime.single.rating_note.' . $anime['rating']) }}</p>
         </div>
         @endif
 
@@ -108,13 +108,13 @@
             <h2 class="hidden text-3xl font-bold text-left md:block lg:text-5xl">{{ $anime['title'] }}</h2>
             <p class="hidden pt-2 text-sm italic text-left md:block">{{ $anime['title_english'] }} / {{ $anime['title_japanese'] }}</p>
 
-            <h3 class="py-3 text-2xl font-semibold border-b border-gray-400 border-opacity-50 border-dashed">Sinopsis</h3>
+            <h3 class="py-3 text-2xl font-semibold border-b border-gray-400 border-opacity-50 border-dashed">{{ __('anime.single.synopsis') }}</h3>
             <div class="mt-3">
-                @if (!empty($anime['synopsis'])) {{ $anime['synopsis'] }} @else <i>Tidak ada sinopsis.</i> @endif
+                @if (!empty($anime['synopsis'])) {{ $anime['synopsis'] }} @else <i>{{ __('anime.single.synopsis_empty') }}</i> @endif
             </div>
 
             @if (!empty($anime['related']))
-            <h3 class="py-3 text-2xl font-semibold border-b border-gray-400 border-opacity-50 border-dashed">Anime Terkait</h3>
+            <h3 class="py-3 text-2xl font-semibold border-b border-gray-400 border-opacity-50 border-dashed">{{ __('anime.single.related') }}</h3>
             <table class="w-full mt-4 table-fixed">
                 <thead>
                     <tr>
@@ -143,22 +143,22 @@
 
             @if ($anime['status'] != 'Belum Tayang')
             <div class="flex flex-col mt-4">
-                <h3 class="pb-3 text-2xl font-semibold border-b border-gray-400 border-opacity-50 border-dashed">Tonton Di</h3>
+                <h3 class="pb-3 text-2xl font-semibold border-b border-gray-400 border-opacity-50 border-dashed">{{ __('anime.single.availability') }}</h3>
                 <livewire:availability-grid :mal="$anime['mal_id']" />
             </div>
             @endif
 
             @if (count($anime['opening_themes']) > 0 && count($anime['ending_themes']) > 0)
-            <h3 class="py-3 text-2xl font-semibold border-b border-gray-400 border-opacity-50 border-dashed">Tema Lagu</h3>
+            <h3 class="py-3 text-2xl font-semibold border-b border-gray-400 border-opacity-50 border-dashed">{{ __('anime.single.theme_song') }}</h3>
             <div class="grid justify-between grid-cols-1 md:grid-cols-2">
                 <div class="mt-3">
-                    <h4 class="text-lg font-semibold">Pembuka</h4>
+                    <h4 class="text-lg font-semibold">{{ __('anime.single.theme_song_op') }}</h4>
                     <p class="mt-1">
                         {!! implode('<br />', $anime['opening_themes']) !!}
                     </p>
                 </div>
                 <div class="mt-3">
-                    <h4 class="text-lg font-semibold">Penutup</h4>
+                    <h4 class="text-lg font-semibold">{{ __('anime.single.theme_song_ed') }}</h4>
                     <p class="mt-1">
                         {!! implode('<br />', $anime['ending_themes']) !!}
                     </p>
@@ -167,7 +167,7 @@
             @endif
 
             <div class="flex flex-col mt-4">
-                <h3 class="py-3 text-2xl font-semibold border-b border-gray-400 border-opacity-50 border-dashed">Rekomendasi</h3>
+                <h3 class="py-3 text-2xl font-semibold border-b border-gray-400 border-opacity-50 border-dashed">{{ __('anime.single.recommendation') }}</h3>
                 <livewire:recommendation-list :mal="$anime['mal_id']" />
             </div>
         </div>

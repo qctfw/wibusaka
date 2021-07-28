@@ -1,5 +1,5 @@
 <x-app-layout>
-    <x-slot name="title">Anime {{ $seasons['current']['season'] . ' ' . $seasons['current']['year'] }}</x-slot>
+    <x-slot name="title">{{ __('anime.season.title') }} {{ $seasons['current']['season'] . ' ' . $seasons['current']['year'] }}</x-slot>
     
     <div class="container px-4 pt-12 mx-auto">
         <div class="flex flex-row items-center justify-center gap-8 pb-4">
@@ -40,7 +40,7 @@
                     <x-anime-card :anime="$anime" :resources="$resources[$anime['mal_id']]" />
                     @empty
                     <div class="text-lg italic">
-                        Tidak ada anime.
+                        {{ __('anime.season.no_anime') }}
                     </div>
                     @endforelse
                 </div>
@@ -56,7 +56,7 @@
                     <x-anime-card :anime="$anime" :resources="$resources[$anime['mal_id']]" />
                     @empty
                     <div class="text-lg italic">
-                        Tidak ada anime.
+                        {{ __('anime.season.no_anime') }}
                     </div>
                     @endforelse
                 </div>
@@ -70,7 +70,7 @@
                     <x-anime-card :anime="$anime" :resources="$resources[$anime['mal_id']]" />
                     @empty
                     <div class="text-lg italic">
-                        Tidak ada anime.
+                        {{ __('anime.season.no_anime') }}
                     </div>
                     @endforelse
                 </div>
@@ -85,7 +85,7 @@
                     <x-anime-card :anime="$anime" :resources="$resources[$anime['mal_id']]" />
                     @empty
                     <div class="text-lg italic">
-                        Tidak ada anime.
+                        {{ __('anime.season.no_anime') }}
                     </div>
                     @endforelse
                 </div>
@@ -99,7 +99,7 @@
                     <x-anime-card :anime="$anime" :resources="$resources[$anime['mal_id']]" />
                     @empty
                     <div class="text-lg italic">
-                        Tidak ada anime.
+                        {{ __('anime.season.no_anime') }}
                     </div>
                     @endforelse
                 </div>
@@ -113,7 +113,7 @@
                     <x-anime-card :anime="$anime" :resources="$resources[$anime['mal_id']]" />
                     @empty
                     <div class="text-lg italic">
-                        Tidak ada anime.
+                        {{ __('anime.season.no_anime') }}
                     </div>
                     @endforelse
                 </div>

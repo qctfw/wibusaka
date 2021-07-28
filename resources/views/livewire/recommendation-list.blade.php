@@ -18,7 +18,7 @@
         @empty
         <div class="flex items-center h-12 col-span-3 md:col-span-5">
             <p class="w-full italic text-center">
-                Saat ini belum ada rekomendasi yang bisa diberikan dari anime ini.
+                {{ __('anime.single.recommendation_empty') }}
             </p>
         </div>
             @endforelse
