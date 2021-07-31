@@ -1,3 +1,5 @@
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 module.exports = {
   purge: [
     './resources/**/*.blade.php',
@@ -6,6 +8,12 @@ module.exports = {
   ],
   darkMode: 'media', // or 'media' or 'class'
   theme: {
+    fontFamily: {
+      primary: ['Catamaran', '"M PLUS 1p"', ...defaultTheme.fontFamily.sans],
+      sans: ['Lato', '"M PLUS 1p"', ...defaultTheme.fontFamily.sans],
+      serif: [...defaultTheme.fontFamily.serif],
+      mono: [...defaultTheme.fontFamily.mono]
+    },
     extend: {},
   },
   variants: {

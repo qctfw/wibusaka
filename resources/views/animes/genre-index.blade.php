@@ -14,7 +14,7 @@
                     <x-icons.chevron-right-solid class="w-6 h-6" />
                 </x-slot>
 
-                <p class="text-lg font-semibold md:text-xl">{{ $genre->name }}</p>
+                <p class="text-lg font-semibold font-primary md:text-xl">{{ $genre->name }}</p>
             </x-button-link>
             @endforeach
         </div>

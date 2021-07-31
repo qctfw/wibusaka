@@ -36,7 +36,7 @@
                     >
                         <img src="{{ $anime['image_url'] }}" alt="" class="w-12">
                         <div class="grid flex-auto grid-cols-1 ml-3 text-xs">
-                            <div class="text-sm font-semibold">
+                            <div class="text-sm font-semibold font-primary">
                                 {{ $anime['title'] }}
                             </div>
                             <div class="flex flex-row items-center justify-center gap-1 pt-2 text-left">

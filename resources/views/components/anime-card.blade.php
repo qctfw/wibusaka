@@ -1,5 +1,5 @@
-<div class="relative flex flex-col py-1 mt-4 bg-gray-200 divide-y divide-gray-400 divide-opacity-50 divide-dashed dark:bg-gray-900 rounded-xl">
-    <a href="{{ route('anime.show', $anime['mal_id']) }}" class="p-1 text-lg leading-tight font-semibold text-center transition-colors duration-200 hover:text-blue-700 dark:hover:text-blue-300">{{ $anime['title'] }}</a>
+<div class="relative flex flex-col py-1 mt-4 bg-gray-200 shadow divide-y divide-gray-400 divide-opacity-50 divide-dashed dark:bg-gray-900 rounded-xl">
+    <a href="{{ route('anime.show', $anime['mal_id']) }}" class="p-1 text-xl leading-tight font-semibold font-primary text-center transition-colors duration-200 hover:text-blue-700 dark:hover:text-blue-300">{{ $anime['title'] }}</a>
     <div class="flex flex-row items-start justify-center gap-4 py-1 text-sm">
         <div class="flex flex-col text-center">
             @forelse ($anime['producers'] as $producer)
@@ -26,9 +26,9 @@
             <p class="text-sm">{{ $anime['synopsis'] }}</p>
         </div>
     </div>
-    <div class="relative flex flex-row items-center justify-between px-2 py-1">
+    <div class="relative flex flex-row items-center justify-between px-2 py-1 font-primary font-medium">
         @if (!blank($resources))
-        <div class="absolute inset-x-0 -top-8 flex flex-row items-center justify-center w-1/2 gap-3 bg-gray-900 bg-opacity-60 py-1">
+        <div class="absolute inset-x-0 -top-8 flex flex-row items-center justify-center w-1/2 gap-3 bg-gray-200 bg-opacity-80 py-1 dark:bg-gray-900 dark:bg-opacity-60">
             @foreach ($resources as $resource)
             <a href="{{ $resource->link }}" target="_blank" class="w-6 h-6">
                 <img src="{{ logo_asset($resource->platform->icon_path) }}" alt="{{ $resource->platform->name }} Logo" />

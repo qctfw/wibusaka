@@ -1,5 +1,5 @@
 <div class="flex flex-col bg-gray-200 divide-y divide-gray-400 rounded-lg group dark:bg-gray-900 divide-opacity-50 divide-dashed">
-    <a href="{{ route('anime.show', $anime['mal_id']) }}" class="relative w-full mx-auto rounded-lg anime-cover">
+    <a href="{{ route('anime.show', $anime['mal_id']) }}" class="relative w-full mx-auto rounded-lg font-primary anime-cover">
         <div class="flex flex-col items-center justify-center w-full h-80 spinner">
             <x-icons.spinner class="block w-5 h-5" />
         </div>

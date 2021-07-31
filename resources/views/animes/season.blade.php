@@ -2,26 +2,26 @@
     <x-slot name="title">{{ __('anime.season.title') }} {{ $seasons['current']['season'] . ' ' . $seasons['current']['year'] }}</x-slot>
     
     <div class="container px-4 pt-12 mx-auto">
-        <div class="flex flex-row items-center justify-center gap-8 pb-4">
+        <div class="flex flex-row items-center justify-center gap-8 pb-4 font-primary">
 
             @if (!is_null($seasons['previous']))
             <a href="{{ route('anime.season', ['year' => $seasons['previous']['year'], 'season' => $seasons['previous']['season']]) }}" class="flex transition-colors hover:text-blue-700 dark:hover:text-blue-300">
                 <x-icons.arrow-left class="w-6 h-6" />
             </a>
             <a href="{{ route('anime.season', ['year' => $seasons['previous']['year'], 'season' => $seasons['previous']['season']]) }}" class="flex flex-col items-center transition-colors hover:text-blue-700 dark:hover:text-blue-300">
-                <p class="text-lg">{{ ucfirst($seasons['previous']['season']) }}</p>
+                <p class="text-xl">{{ ucfirst($seasons['previous']['season']) }}</p>
                 <p class="text-sm">{{ $seasons['previous']['year'] }}</p>
             </a>
             @endif
 
             <div class="flex flex-col items-center font-bold text-blue-700 dark:text-blue-300">
                 <p class="text-3xl">{{ $seasons['current']['season'] }}</p>
-                <p class="text-md">{{ $seasons['current']['year'] }}</p>
+                <p class="text-lg">{{ $seasons['current']['year'] }}</p>
             </div>
 
             @if (!is_null($seasons['next']))
             <a href="{{ route('anime.season', ['year' => $seasons['next']['year'], 'season' => $seasons['next']['season']]) }}" class="flex flex-col items-center transition-colors hover:text-blue-700 dark:hover:text-blue-300">
-                <p class="text-lg">{{ ucfirst($seasons['next']['season']) }}</p>
+                <p class="text-xl">{{ ucfirst($seasons['next']['season']) }}</p>
                 <p class="text-sm">{{ $seasons['next']['year'] }}</p>
             </a>
             <a href="{{ route('anime.season', ['year' => $seasons['next']['year'], 'season' => $seasons['next']['season']]) }}" class="flex transition-colors hover:text-blue-700 dark:hover:text-blue-300">

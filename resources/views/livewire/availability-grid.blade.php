@@ -2,7 +2,7 @@
     @if ($loaded)
         @forelse ($resources as $resource)
         <x-button-link href="{{ $resource->link }}" target="_blank" :img="logo_asset($resource->platform->icon_path)">
-            <div class="flex flex-row items-center gap-2 pl-2 text-lg font-semibold md:pl-4">
+            <div class="flex flex-row items-center gap-2 pl-2 text-lg font-semibold font-primary md:pl-4">
                 <p>{{ $resource->platform->name }}</p>
                 @if ($resource->paid)
                 <x-icons.currency-dollar-solid class="w-6 h-6" />

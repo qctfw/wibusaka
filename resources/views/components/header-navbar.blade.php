@@ -1,4 +1,4 @@
-<header x-data="{ mobileMenuOpen: false, topMenuOpen: false }" class="relative w-full p-4 bg-white border-b border-gray-300 dark:border-gray-700 dark:bg-gray-800 md:space-x-4" @click.away="mobileMenuOpen = false">
+<header x-data="{ mobileMenuOpen: false, topMenuOpen: false }" class="relative w-full p-4 font-bold bg-white border-b border-gray-300 dark:border-gray-700 dark:bg-gray-800 md:space-x-4" @click.away="mobileMenuOpen = false">
     <div class="container flex flex-row flex-wrap items-center justify-between mx-auto md:justify-center">
         <a href="{{ route('index') }}" class="block font-bold">
             <span class="sr-only">Logo</span>
@@ -7,7 +7,7 @@
         <button @click="mobileMenuOpen = !mobileMenuOpen" class="inline-block w-8 h-8 p-1 text-gray-600 bg-gray-200 dark:text-white dark:bg-gray-800 md:hidden">
             <x-icons.menu class="w-6 h-6" />
         </button>
-        <nav class="justify-end lg:justify-start absolute left-0 z-20 flex-col flex-auto w-full font-semibold bg-gray-100 rounded-lg shadow-md select-none md:ml-4 dark:bg-gray-800 md:relative top-16 md:top-0 md:flex md:flex-row md:space-x-2 md:w-auto md:bg-transparent md:shadow-none" :class="{ 'flex' : mobileMenuOpen , 'hidden' : !mobileMenuOpen}">
+        <nav class="absolute left-0 z-20 flex-col justify-end flex-auto w-full font-semibold font-primary bg-gray-100 rounded-lg shadow-md select-none lg:justify-start md:ml-4 dark:bg-gray-800 md:relative top-16 md:top-0 md:flex md:flex-row md:space-x-2 md:w-auto md:bg-transparent md:shadow-none" :class="{ 'flex' : mobileMenuOpen , 'hidden' : !mobileMenuOpen}">
             <div @click="topMenuOpen = !topMenuOpen" @click.away="topMenuOpen = false" class="relative text-gray-600 rounded-lg cursor-pointer dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-900">
                 <div class="flex flex-row items-center justify-between gap-4 p-3 rounded-lg dark:bg-gray-800 hover:text-blue-700 dark:hover:text-blue-300 dark:hover:bg-gray-900 dark:text-white" :class="{'bg-gray-300 text-blue-700 dark:text-blue-300 dark:bg-gray-900': topMenuOpen}">
                     <p>Top Anime</p>
@@ -37,7 +37,7 @@
                 {{ __('anime.genre.title') }}
             </a>
         </nav>
-        <div class="flex flex-col items-center w-full md:w-64 lg:w-72 md:flex-row mt-2 lg:mt-0">
+        <div class="flex flex-col items-center w-full mt-2 md:w-64 lg:w-72 md:flex-row lg:mt-0">
             <livewire:search-navbar />
         </div>
     </div>
