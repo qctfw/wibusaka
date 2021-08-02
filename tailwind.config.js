@@ -18,6 +18,7 @@ module.exports = {
   },
   variants: {
     extend: {
+      brightness: ['dark'],
       display: ['group-hover'],
     },
     scrollbar: ['dark']

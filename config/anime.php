@@ -2,7 +2,11 @@
 
 return [
     'asset' => [
-        'base_url' => env('WIBULIST_ASSET_BASE_URL')
+        'base_url' => env('WIBULIST_ASSET_BASE_URL'),
+        'logo' => [
+            'default' => env('WIBULIST_LOGO_PATH'),
+            'jp' => env('WIBULIST_LOGO_JP_PATH')
+        ]
     ],
     'season' => [
         'minimum' => [

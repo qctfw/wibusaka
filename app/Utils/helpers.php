@@ -62,3 +62,16 @@ if (!function_exists('logo_asset')) {
         return config('anime.asset.base_url') . '/' . $path;
     }
 }
+
+if (!function_exists('randomize_logo')) {
+    function randomize_logo() {
+        $chance = 10; // 10%
+
+        if (session()->missing('logorandom'))
+        {
+            session()->flash('logorandom', rand(0, 100));
+        }
+
+        return (session('logorandom') <= $chance) ? logo_asset(config('anime.asset.logo.jp')) : logo_asset(config('anime.asset.logo.default'));
+    }
+}

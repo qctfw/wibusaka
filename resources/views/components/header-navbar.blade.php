@@ -2,7 +2,7 @@
     <div class="container flex flex-row flex-wrap items-center justify-between mx-auto md:justify-center">
         <a href="{{ route('index') }}" class="block font-bold">
             <span class="sr-only">Logo</span>
-            <img src="https://placeholder.com/wp-content/uploads/2018/10/placeholder.com-logo1.png" alt="Logo" class="h-10" />
+            <img src="{{ randomize_logo() }}" alt="Logo" class="h-6 filter brightness-50 dark:brightness-100" />
         </a>
         <button @click="mobileMenuOpen = !mobileMenuOpen" class="inline-block w-8 h-8 p-1 text-gray-600 bg-gray-200 dark:text-white dark:bg-gray-800 md:hidden">
             <x-icons.menu class="w-6 h-6" />
