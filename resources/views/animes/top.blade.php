@@ -2,7 +2,7 @@
     <x-slot name="title">{{ $title }}{{ ($page > 1) ? ' (Hal. ' . $page . ')' : '' }}</x-slot>
     
     <div class="container px-4 pt-12 mx-auto lg:px-32">
-        <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="flex flex-col items-center justify-between gap-4 md:flex-row">
             <x-title :title="$title" />
             @if ($total_page > 1) <x-pagination-link :current="$page" :total="$total_page" /> @endif
         </div>
@@ -12,7 +12,8 @@
             @endforeach
         </div>
         @if ($total_page > 1)
-        <div class="flex flex-row items-center justify-center mt-4">
+        <div class="flex flex-col items-center justify-between gap-2 mt-4 md:flex-row">
+            <div class="font-primary">Halaman {{ $page }} / {{ $total_page }}</div>
             <x-pagination-link :current="$page" :total="$total_page" />
         </div>
         @endif
