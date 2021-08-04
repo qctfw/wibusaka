@@ -1,7 +1,7 @@
 {
     "name": "qctfw/wibulist",
     "type": "project",
-    "description": "A simple app to inform you where to watch anime legally in Indonesia..",
+    "description": "A simple app to inform you where to watch anime legally in Indonesia.",
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "require": {
