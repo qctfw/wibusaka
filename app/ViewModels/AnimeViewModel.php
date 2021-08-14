@@ -28,6 +28,7 @@ class AnimeViewModel extends ViewModel
                     'scored_by' => abbreviate_number($this->anime['scored_by']),
                     'rank' => number_format($this->anime['rank']),
                     'popularity' => number_format($this->anime['popularity']),
+                    'premiered' => $this->formatPremiered($this->anime['premiered']),
                     'members' => abbreviate_number($this->anime['members']),
                     'favorites' => abbreviate_number($this->anime['favorites']),
                     'studios' => collect($this->anime['studios']),
@@ -53,5 +54,16 @@ class AnimeViewModel extends ViewModel
         }
 
         return $result;
+    }
+
+    private function formatPremiered(string $premiered): array
+    {
+        $season = explode(' ', $premiered);
+
+        return [
+            'full' => $premiered,
+            'season' => Str::lower($season[0]),
+            'year' => $season[1]
+        ];
     }
 }

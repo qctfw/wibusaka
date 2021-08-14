@@ -76,7 +76,11 @@
                 <div class="pt-2">
                     <p class="font-semibold font-primary md:text-lg">{{ __('anime.single.airing_date') }}</p>
                     <p class="text-sm md:text-md">{{ $anime['aired']['from'] }}@if ($anime['episodes'] > 1 || $anime['airing']) s.d {{ $anime['aired']['to'] }}@endif</p>
-                    <p class="text-xs">{{ !empty($anime['premiered']) ? '(' . $anime['premiered'] . ')' : '' }}</p>
+                    <p class="text-xs">
+                        @if (!empty($anime['premiered']))
+                        <a href="{{ route('anime.season', ['year' => $anime['premiered']['year'], 'season' => $anime['premiered']['season']]) }}" class="text-link">({{ $anime['premiered']['full'] }})</a>
+                        @endif
+                    </p>
                 </div>
                 <div class="pt-2">
                     <p class="font-semibold font-primary md:text-lg">{{ __('anime.single.studio') }}</p>
@@ -91,7 +95,11 @@
                 <div class="pt-2">
                     <div class="font-semibold font-primary md:text-lg">{{ __('anime.single.genre') }}</div>
                     <p class="text-sm md:text-md">
-                        {{ $anime['genres']->implode('name', ', ') }}
+                        @forelse ($anime['genres'] as $genre)
+                            <a href="{{ route('anime.genre.show', ['slug' => str_replace(' ', '-', strtolower($genre['name']))]) }}" class="text-link">{{ $genre['name'] }}</a>{{ (!$loop->last) ? ',' : '' }}
+                        @empty
+                            <span>-</span>
+                        @endforelse
                     </p>
                 </div>
             </div>
@@ -132,7 +140,7 @@
                         <td class="align-top">:</td>
                         <td class="pl-2 align-top">
                         @foreach ($relate as $mal)
-                            <a href="{{ ($mal['type'] == 'anime') ? route('anime.show', ['id' => $mal['mal_id']]) : $mal['url'] }}" class="transition-colors duration-200 hover:text-blue-700 dark:hover:text-blue-300">{{ $mal['name'] }}</a>{{ (!$loop->last) ? ', ' : '' }}
+                            <a href="{{ ($mal['type'] == 'anime') ? route('anime.show', ['id' => $mal['mal_id']]) : $mal['url'] }}" class="text-link">{{ $mal['name'] }}</a>{{ (!$loop->last) ? ', ' : '' }}
                         @endforeach
                         </td>
                     </tr>
