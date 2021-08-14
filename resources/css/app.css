@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.text-link {
+    @apply transition-colors duration-200 hover:text-blue-700 dark:hover:text-blue-300;
+}
+
 .scrollbar-extra-thin {
     --scrollbar-track: initial;
     --scrollbar-thumb: initial;
