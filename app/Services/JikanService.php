@@ -69,7 +69,7 @@ class JikanService implements JikanServiceInterface
     
     public function getAnimesByGenre(int $id, int $page = 1)
     {
-        $result = $this->requestJikan('genre/anime/' . $id . '/' . $page, ['anime-genre'], 'jikan-genre-' . $id);
+        $result = $this->requestJikan('genre/anime/' . $id . '/' . $page, ['anime-genre'], 'jikan-genre-' . $id . '-' . $page);
 
         return [
             'total' => $result['item_count'],
