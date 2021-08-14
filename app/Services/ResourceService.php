@@ -10,15 +10,13 @@ class ResourceService implements ResourceServiceInterface
 {
     public function getByMalId(int $mal_id)
     {
-        $resources_cache = $this->getFromCache($mal_id);
-        if (!is_null($resources_cache))
+        $resources = $this->getFromCache($mal_id);
+        if (is_null($resources))
         {
-            return $resources_cache;
+            $resources = Resource::with('platform')->byMalId($mal_id)->get()->sortBy('platform.name', SORT_NATURAL | SORT_FLAG_CASE);
+    
+            $this->setResourceCache($resources, $mal_id);
         }
-
-        $resources = Resource::with('platform')->byMalId($mal_id)->get()->sortBy('platform.name', SORT_NATURAL | SORT_FLAG_CASE);
-
-        $this->setResourceCache($resources, $mal_id);
 
         return $resources;
     }
@@ -63,7 +61,7 @@ class ResourceService implements ResourceServiceInterface
     {
         $cache_key = $this->getCacheKey($mal_id);
 
-        $cache = Cache::get($cache_key);
+        $cache = Cache::tags(['db', 'db-anime-resources'])->get($cache_key);
 
         return $cache;
     }
@@ -72,11 +70,11 @@ class ResourceService implements ResourceServiceInterface
     {
         $cache_key = $this->getCacheKey($mal_id);
 
-        Cache::put($cache_key, $resources);
+        Cache::tags(['db', 'db-anime-resources'])->put($cache_key, $resources);
     }
 
     private function getCacheKey(int $mal_id)
     {
-        return 'db:anime_resources:' . $mal_id;
+        return 'db-anime-resources-' . $mal_id;
     }
 }
