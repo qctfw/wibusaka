@@ -80,7 +80,7 @@ class JikanService implements JikanServiceInterface
 
     public function getAnime(string $id)
     {
-        $result = $this->requestJikan('anime/' . $id, ['anime'], $id);
+        $result = $this->requestJikan('anime/' . $id, ['anime'], 'jikan-anime-' . $id);
 
         return $result;
     }
