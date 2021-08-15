@@ -41,7 +41,7 @@ class JikanService implements JikanServiceInterface
 
     public function getCurrentSeason()
     {
-        $result = $this->requestJikan('season', ['season'], 'jikan-season-current');
+        $result = $this->requestJikan('season', ['jikan-season'], 'jikan-season-current');
 
         $season_navigation = $this->getSeasonNavigation($result['season_year'], $result['season_name']);
 
@@ -57,7 +57,7 @@ class JikanService implements JikanServiceInterface
     {
         $season_navigation = $this->getSeasonNavigation($year, $season);
 
-        $result = $this->requestJikan('season/' . $year . '/' . $season, ['season', 'season-' . $year], 'jikan-season-' . $year . '-' . $season);
+        $result = $this->requestJikan('season/' . $year . '/' . $season, ['jikan-season', 'jikan-season-' . $year], 'jikan-season-' . $year . '-' . $season);
 
         $animes = collect($result['anime']);
 
@@ -69,7 +69,7 @@ class JikanService implements JikanServiceInterface
     
     public function getAnimesByGenre(int $id, int $page = 1)
     {
-        $result = $this->requestJikan('genre/anime/' . $id . '/' . $page, ['anime-genre'], 'jikan-genre-' . $id . '-' . $page);
+        $result = $this->requestJikan('genre/anime/' . $id . '/' . $page, ['jikan-anime-genre'], 'jikan-genre-' . $id . '-' . $page);
 
         return [
             'total' => $result['item_count'],
@@ -80,21 +80,21 @@ class JikanService implements JikanServiceInterface
 
     public function getAnime(string $id)
     {
-        $result = $this->requestJikan('anime/' . $id, ['anime'], 'jikan-anime-' . $id);
+        $result = $this->requestJikan('anime/' . $id, ['jikan-anime'], 'jikan-anime-' . $id);
 
         return $result;
     }
 
     public function getAnimeRecommendations(string $id)
     {
-        $result = $this->requestJikan('anime/' . $id . '/recommendations', ['anime-recommendations'], 'jikan-anime-recommendations-' . $id, now()->addDays(3)->endOfDay());
+        $result = $this->requestJikan('anime/' . $id . '/recommendations', ['jikan-anime-recommendations'], 'jikan-anime-recommendations-' . $id, now()->addDays(3)->endOfDay());
 
         return collect($result['recommendations'])->take(5);
     }
 
     public function searchAnime(string $query)
     {
-        $result = $this->requestJikan('search/anime', ['search'], 'jikan-search-anime-' .  $query, now()->addDays(5)->endOfDay(), [
+        $result = $this->requestJikan('search/anime', ['jikan-search'], 'jikan-search-anime-' .  $query, now()->addDays(5)->endOfDay(), [
             'q' => $query,
             'limit' => 6,
         ]);
@@ -153,7 +153,7 @@ class JikanService implements JikanServiceInterface
 
         $uri .= (Str::substr($category, 0, 1) == '/') ? $category : '/' . $category;
 
-        $result = $this->requestJikan($uri, ['top', 'top-' . $category], 'jikan-top-' . $category . '-' . $page);
+        $result = $this->requestJikan($uri, ['jikan-top', 'jikan-top-' . $category], 'jikan-top-' . $category . '-' . $page);
 
         return collect($result['top']);
     }
@@ -217,7 +217,7 @@ class JikanService implements JikanServiceInterface
 
     private function getAllowedSeasons()
     {
-        $all_seasons = $this->requestJikan('season/archive', ['season', 'season-archive'], 'jikan-season-archive', now()->addDays(14));
+        $all_seasons = $this->requestJikan('season/archive', ['jikan-season', 'jikan-season-archive'], 'jikan-season-archive', now()->addDays(14));
         return collect($all_seasons['archive'])->where('year', '>=', 1995)->mapWithKeys(function ($item, $key) {
             return [ $item['year'] => collect($item['seasons']) ];
         });
