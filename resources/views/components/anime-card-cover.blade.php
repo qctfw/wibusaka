@@ -1,4 +1,4 @@
-<div class="flex flex-col bg-gray-200 divide-y divide-gray-400 rounded-lg group dark:bg-gray-900 divide-opacity-50 divide-dashed">
+<div {{ $attributes->merge(['class' => 'flex flex-col bg-gray-200 divide-y divide-gray-400 rounded-lg group dark:bg-gray-900 divide-opacity-50 divide-dashed']) }}>
     <a href="{{ route('anime.show', $anime['mal_id']) }}" class="relative w-full mx-auto rounded-lg font-primary anime-cover">
         <div class="flex flex-col items-center justify-center w-full h-80 spinner">
             <x-icons.spinner class="block w-5 h-5" />
@@ -10,12 +10,12 @@
             {{ $anime['title'] }}
         </h4>
     </a>
-    <div class="grid items-center justify-center grid-cols-2 py-1 text-center">
-        <div class="flex flex-row items-center justify-center gap-2 text-center">
+    <div class="grid items-center justify-center grid-cols-2 px-2 py-1 text-center">
+        <div class="flex flex-row items-center gap-2 text-left">
             <x-icons.user-solid class="w-5 h-5" />
             <span>{{ $anime['members'] }}</span>
         </div>
-        <div class="flex flex-row items-center justify-center gap-2 text-center">
+        <div class="flex flex-row items-center gap-2 text-left">
             @if ($anime['score'] > 0)
             <x-icons.star-solid class="w-5 h-5" />
             <span>{{ $anime['score'] }}</span>
@@ -24,11 +24,11 @@
             <span>{{ $anime['start_date'] }}</span>
             @endif
         </div>
-        <div class="flex flex-row items-center justify-center gap-2 text-center">
+        <div class="flex flex-row items-center gap-2 text-left">
             <x-icons.video-camera-solid class="w-5 h-5" />
             <span>{{ $anime['type'] }}</span>
         </div>
-        <div class="flex flex-row items-center justify-center gap-2 text-center">
+        <div class="flex flex-row items-center gap-2 text-left">
             <x-icons.collection-solid class="w-5 h-5" />
             <span>{{ $anime['episodes'] ?? '?' }} ep</span>
         </div>

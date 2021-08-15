@@ -1,9 +1,15 @@
-<div class="relative flex flex-col py-1 mt-4 bg-gray-200 shadow divide-y divide-gray-400 divide-opacity-50 divide-dashed dark:bg-gray-900 rounded-xl">
-    <a href="{{ route('anime.show', $anime['mal_id']) }}" class="p-1 text-xl leading-tight font-semibold font-primary text-center text-link">{{ $anime['title'] }}</a>
-    <div class="flex flex-row items-start justify-center gap-4 py-1 text-sm">
-        <div class="flex flex-col text-center">
+<div class="relative flex flex-col py-1 mt-4 bg-gray-200 divide-y divide-gray-400 shadow divide-opacity-50 divide-dashed dark:bg-gray-900 rounded-xl">
+    <div x-data="{ title: `{{ $anime['title'] }}` }" class="flex items-center justify-center h-12">
+        <a
+            href="{{ route('anime.show', $anime['mal_id']) }}"
+            class="p-1 font-semibold leading-tight text-center font-primary text-link"
+            x-bind:class="title.length <= 50 ? 'text-lg lg:text-xl' : title.length <= 80 ? 'text-md lg:text-lg' : 'text-md'"
+            x-text="title"></a>
+    </div>
+    <div class="flex flex-row items-start justify-center gap-4 py-2 text-sm">
+        <div class="flex flex-row gap-1 text-center">
             @forelse ($anime['producers'] as $producer)
-                <p>{{ $producer['name'] }}</p>
+                <p>{{ $producer['name'] }}{{ (!$loop->last) ? ',' : '' }}</p>
             @empty
                 <p>-</p>
             @endforelse
@@ -13,22 +19,22 @@
         <span class="select-none">&bull;</span>
         <div class="text-center">{{ $anime['source'] }}</div>
     </div>
-    <div class="flex flex-row flex-wrap justify-center gap-2 p-1 text-xs">
+    <div class="flex flex-row flex-wrap items-center justify-center gap-2 px-1 py-1 text-xs md:h-12">
         @foreach ($anime['genres'] as $genre)
-        <a href="{{ route('anime.genre.show', str_replace(' ', '-', strtolower($genre['name']))) }}" class="px-2 bg-gray-300 rounded-lg transition-colors dark:bg-gray-800 dark:hover:bg-gray-700">{{ $genre['name'] }}</a>
+        <a href="{{ route('anime.genre.show', str_replace(' ', '-', strtolower($genre['name']))) }}" class="h-4 px-2 transition-colors bg-gray-300 rounded-lg dark:bg-gray-800 dark:hover:bg-gray-700">{{ $genre['name'] }}</a>
         @endforeach
     </div>
-    <div class="grid grid-cols-2 h-72 md:h-64 lg:h-80">
-        <a href="{{ route('anime.show', $anime['mal_id']) }}" class="mx-auto h-72 md:h-64 lg:h-80">
+    <div class="grid grid-cols-2 h-60 md:h-64 lg:h-80 xl:h-72">
+        <a href="{{ route('anime.show', $anime['mal_id']) }}" class="mx-auto h-60 md:h-64 lg:h-80 xl:h-72">
             <img class="max-w-full max-h-full" src="{{ $anime['image_url'] }}" loading="lazy" alt="Anime Name">
         </a>
-        <div class="px-1 mt-1 overflow-y-auto scrollbar-extra-thin scrollbar-thumb-gray-400 scrollbar-track-gray-300 dark:scrollbar-thumb-gray-500 dark:scrollbar-track-gray-700">
-            <p class="text-sm">{{ $anime['synopsis'] }}</p>
+        <div class="pl-2 overflow-y-auto scrollbar-extra-thin scrollbar-thumb-gray-400 scrollbar-track-gray-300 dark:scrollbar-thumb-gray-500 dark:scrollbar-track-gray-700">
+            <p class="text-sm leading-relaxed">{{ $anime['synopsis'] }}</p>
         </div>
     </div>
-    <div class="relative flex flex-row items-center justify-between px-2 py-1 font-primary font-medium">
+    <div class="relative flex flex-row items-center justify-between px-2 py-1 font-medium font-primary">
         @if (!blank($resources))
-        <div class="absolute inset-x-0 -top-8 flex flex-row items-center justify-center w-1/2 gap-3 bg-gray-200 bg-opacity-80 py-1 dark:bg-gray-900 dark:bg-opacity-60">
+        <div class="absolute inset-x-0 flex flex-row items-center justify-center w-1/2 gap-3 py-1 bg-gray-200 -top-8 bg-opacity-80 dark:bg-gray-900 dark:bg-opacity-60">
             @foreach ($resources as $resource)
             <a href="{{ $resource->link }}" target="_blank" class="w-6 h-6">
                 <img src="{{ logo_asset($resource->platform->icon_path) }}" alt="{{ $resource->platform->name }} Logo" />

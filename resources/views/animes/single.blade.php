@@ -31,9 +31,9 @@
                         <div class="flex flex-row items-center justify-center md:gap-1">
                             <p class="text-lg font-semibold font-primary md:text-2xl">{{ $anime['rating'] ?? 'N/A' }}</p>
                             @if ($anime['rating'] != 'None')
-                            <div class="relative flex flex-col items-center mt-1 group">
+                            <div class="relative flex flex-col items-center group">
                                 @if (in_array($anime['rating'], ['R', 'R+', 'Rx']))
-                                <x-icons.exclamation-solid class="hidden w-6 h-6 md:block" />
+                                <x-icons.exclamation-solid class="hidden w-5 h-5 md:block" />
                                 @else
                                 <x-icons.information-circle-solid class="hidden w-4 h-4 md:block" />
                                 @endif
@@ -140,7 +140,12 @@
                         <td class="align-top">:</td>
                         <td class="pl-2 align-top">
                         @foreach ($relate as $mal)
-                            <a href="{{ ($mal['type'] == 'anime') ? route('anime.show', ['id' => $mal['mal_id']]) : $mal['url'] }}" class="text-link">{{ $mal['name'] }}</a>{{ (!$loop->last) ? ', ' : '' }}
+                            <a href="{{ ($mal['type'] == 'anime') ? route('anime.show', ['id' => $mal['mal_id']]) : $mal['url'] }}" class="text-link">
+                                {{ $mal['name'] }}
+                                @if ($key == 'Adaptation')
+                                <x-icons.external-link-solid class="inline-block w-4 h-4" />
+                                @endif
+                            </a>{{ (!$loop->last) ? ', ' : '' }}
                         @endforeach
                         </td>
                     </tr>
