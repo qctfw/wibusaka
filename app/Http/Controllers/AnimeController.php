@@ -36,8 +36,8 @@ class AnimeController extends Controller
     {
         try
         {
-            $top = $this->jikan_service->getTopPopularityAnimes()->take(12);
-            $upcoming = $this->jikan_service->getTopUpcomingAnimes()->take(12);
+            $top = $this->jikan_service->getTopPopularityAnimes();
+            $upcoming = $this->jikan_service->getTopUpcomingAnimes();
         } catch (JikanException $e)
         {
             abort($e->getHttpCode());

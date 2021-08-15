@@ -1,6 +1,6 @@
 <div {{ $attributes->merge(['class' => 'flex flex-col bg-gray-200 divide-y divide-gray-400 rounded-lg group dark:bg-gray-900 divide-opacity-50 divide-dashed']) }}>
     <a href="{{ route('anime.show', $anime['mal_id']) }}" class="relative w-full mx-auto rounded-lg font-primary anime-cover">
-        <div class="flex flex-col items-center justify-center w-full h-80 spinner">
+        <div class="flex flex-col items-center justify-center w-full h-72 spinner">
             <x-icons.spinner class="block w-5 h-5" />
         </div>
         <img alt="{{ $anime['title'] }} Anime Poster" data-src="{{ $anime['image_url'] }}" class="absolute inset-x-0 top-0 w-full mx-auto rounded-lg opacity-0" loading="lazy" />

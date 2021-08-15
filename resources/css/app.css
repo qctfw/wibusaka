@@ -6,31 +6,41 @@
     @apply transition-colors duration-200 hover:text-blue-700 dark:hover:text-blue-300;
 }
 
-.scrollbar-extra-thin {
-    --scrollbar-track: initial;
-    --scrollbar-thumb: initial;
-    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
-    overflow: overlay;
-}
+@layer utilities {
+    .snap::-webkit-scrollbar {
+        display: none;
+    }
 
-.scrollbar-extra-thin::-webkit-scrollbar-track {
-    background-color: var(--scrollbar-track);
-}
+    .overflow-smooth {
+        scroll-behavior: smooth;
+    }
 
-.scrollbar-extra-thin::-webkit-scrollbar-thumb {
-    background-color: var(--scrollbar-thumb);
-}
+    .scrollbar-extra-thin {
+        --scrollbar-track: initial;
+        --scrollbar-thumb: initial;
+        scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+        overflow: overlay;
+    }
 
-.scrollbar-extra-thin {
-    scrollbar-width: thin;
-}
+    .scrollbar-extra-thin::-webkit-scrollbar-track {
+        background-color: var(--scrollbar-track);
+    }
 
-.scrollbar-extra-thin::-webkit-scrollbar {
-    width: 4px;
-    height: 4px;
-}
+    .scrollbar-extra-thin::-webkit-scrollbar-thumb {
+        background-color: var(--scrollbar-thumb);
+    }
 
-::-webkit-scrollbar-thumb {
-    background-color: var(--scrollbar-thumb);
-    border-radius: 4px;
+    .scrollbar-extra-thin {
+        scrollbar-width: thin;
+    }
+
+    .scrollbar-extra-thin::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: var(--scrollbar-thumb);
+        border-radius: 4px;
+    }
 }

@@ -20,10 +20,13 @@ module.exports = {
     extend: {
       brightness: ['dark'],
       display: ['group-hover'],
+      opacity: ['disabled'],
     },
-    scrollbar: ['dark']
+    scrollbar: ['dark'],
+    scrollSnapType: ['responsive']
   },
   plugins: [
-    require('tailwind-scrollbar')
+    require('tailwind-scrollbar'),
+    require('tailwindcss-scroll-snap')
   ],
 }
