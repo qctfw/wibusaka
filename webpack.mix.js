@@ -20,3 +20,7 @@ mix.js('resources/js/app.js', 'public/js')
         ]
     })
     .purgeCss();
+
+if (mix.inProduction()) {
+    mix.version();
+}

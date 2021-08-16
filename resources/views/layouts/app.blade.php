@@ -28,7 +28,7 @@
     <!-- Google Fonts - M PLUS 1p -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;500;700&display=swap" />
 
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}" />
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}" />
     <livewire:styles />
     <script src="https://unpkg.com/alpinejs@3.0.6/dist/cdn.min.js" defer></script>
 </head>
@@ -37,7 +37,7 @@
     {{ $slot }}
     <x-footer />
     <livewire:scripts />
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ mix('js/app.js') }}"></script>
     {{ $script ?? '' }}
 </body>
 </html>
