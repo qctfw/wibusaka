@@ -1,5 +1,5 @@
 <footer class="mt-4 border-t border-gray-200 footer dark:border-gray-700">
-    <div class="container flex flex-col items-start justify-between gap-1 px-4 py-6 mx-auto md:flex-row">
+    <div class="container flex flex-col items-center justify-between gap-1 px-4 py-6 mx-auto md:flex-row md:items-start">
         <div class="flex flex-row items-center gap-4">
             <div class="flex flex-row items-center gap-2">
                 <img src="{{ randomize_logo() }}" alt="Logo" class="h-5 filter brightness-50 dark:brightness-100" />
