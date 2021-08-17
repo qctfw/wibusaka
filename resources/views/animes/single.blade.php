@@ -66,7 +66,9 @@
                 <div class="pt-2">
                     <p class="font-semibold font-primary md:text-lg">{{ __('anime.single.type') }}</p>
                     <p class="text-sm md:text-md">
-                        {{ $anime['type'] }} @if ($anime['episodes'] > 1) ({{ $anime['episodes'] }} episode) @endif
+                        {{ $anime['type'] }}
+                        @if ($anime['episodes'] > 1) <span class="text-xs">({{ $anime['episodes'] }} episode)</span> @endif
+                        @if (!empty($anime['duration'])) <span class="text-xs">({{ $anime['duration'] }})</span> @endif
                     </p>
                 </div>
                 <div class="pt-2">

@@ -25,6 +25,7 @@ class AnimeViewModel extends ViewModel
                     ],
                     'status' => $this->formatStatus($this->anime['status']),
                     'rating' => explode(' - ', $this->anime['rating'])[0],
+                    'duration' => $this->formatDuration($this->anime['duration']),
                     'scored_by' => abbreviate_number($this->anime['scored_by']),
                     'rank' => number_format($this->anime['rank']),
                     'popularity' => number_format($this->anime['popularity']),
@@ -36,6 +37,16 @@ class AnimeViewModel extends ViewModel
                 ])
                 ->except(['request_hash', 'request_hashed', 'request_cached', 'request_cache_expiry']);
         return $anime;
+    }
+
+    private function formatDuration(string $duration): string
+    {
+        if ($duration == 'Unknown')
+        {
+            return '';
+        }
+
+        return trim(Str::replace(['hr', 'min', 'per ep'], ['jam', 'menit', ''], $duration));
     }
 
     private function formatStatus(string $status): string
