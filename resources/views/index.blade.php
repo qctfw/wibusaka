@@ -1,26 +1,42 @@
 <x-app-layout>
     <x-slot name="title">Halaman Utama</x-slot>
 
-    <div class="container flex flex-col gap-4 px-4 pt-12 mx-auto">
+    <div class="container flex flex-col gap-6 px-4 pt-12 mx-auto">
+        @foreach ($sections as $section)
         <div class="flex flex-col">
             <x-title>
-                <a href="{{ route('anime.top.popular') }}">{{ __('anime.top.title.rated') }}</a>
+                <a href="{{ $section['route'] }}">{{ $section['title'] }} <x-icons.chevron-right-solid class="w-6 h-6 inline-block" /></a>
             </x-title>
             <x-library-scroll>
-                @foreach ($top_animes as $anime)
-                <x-anime-card-cover :anime="$anime" :resources="$top_resources[$anime['mal_id']]" class="flex-shrink-0 w-52 snap-center" />
+                @foreach ($section['animes'] as $anime)
+                <x-anime-card-cover :anime="$anime" :resources="$resources[$anime['mal_id']] ?? null" class="flex-shrink-0 w-52 snap-center" />
                 @endforeach
             </x-library-scroll>
         </div>
-        <div class="mt-2 flex flex-col">
-            <x-title>
-                <a href="{{ route('anime.top.upcoming') }}">{{ __('anime.top.title.upcoming') }}</a>
-            </x-title>
-            <x-library-scroll>
-                @foreach ($upcoming_animes as $anime)
-                <x-anime-card-cover :anime="$anime" class="flex-shrink-0 w-52 snap-center" />
-                @endforeach
-            </x-library-scroll>
+        @endforeach
+
+        <div class="grid justify-center grid-cols-1 gap-4 md:grid-cols-3">
+            <x-button-link href="{{ route('anime.top.popular') }}">
+                <x-slot name="icon">
+                    <x-icons.chevron-right-solid class="w-6 h-6" />
+                </x-slot>
+
+                <p class="text-lg font-semibold font-primary md:text-xl">{{ __('anime.top.title.popularity') }}</p>
+            </x-button-link>
+            <x-button-link href="{{ route('anime.top.rated') }}">
+                <x-slot name="icon">
+                    <x-icons.chevron-right-solid class="w-6 h-6" />
+                </x-slot>
+
+                <p class="text-lg font-semibold font-primary md:text-xl">{{ __('anime.top.title.rated') }}</p>
+            </x-button-link>
+            <x-button-link href="{{ route('anime.genre') }}">
+                <x-slot name="icon">
+                    <x-icons.chevron-right-solid class="w-6 h-6" />
+                </x-slot>
+
+                <p class="text-lg font-semibold font-primary md:text-xl">{{ __('anime.genre.title') }}</p>
+            </x-button-link>
         </div>
     </div>
 </x-app-layout>

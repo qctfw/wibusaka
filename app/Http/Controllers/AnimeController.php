@@ -36,16 +36,47 @@ class AnimeController extends Controller
     {
         try
         {
-            $top = $this->jikan_service->getTopPopularityAnimes();
-            $upcoming = $this->jikan_service->getTopUpcomingAnimes();
+            $current_season = $this->jikan_service->getCurrentSeason();
+            $current_season['animes'] = $current_season['animes']->take(25);
+
+            $airing_animes = collect($this->jikan_service->getTopAiringAnimes())->take(25);
+            $upcoming_animes = collect($this->jikan_service->getTopUpcomingAnimes())->take(25);
         } catch (JikanException $e)
         {
             abort($e->getHttpCode());
         }
-        
-        $top_resources = $this->resource_service->getByMalIds($top->pluck('mal_id'));
 
-        $top_index_view_model = new TopIndexViewModel($top, $top_resources, $upcoming);
+        $all_mal_ids = collect([
+            $current_season['animes']->pluck('mal_id'),
+            $airing_animes->pluck('mal_id')
+        ])->flatten()->unique()->sort()->values();
+
+        $resources = $this->resource_service->getByMalIds($all_mal_ids);
+
+        // Build current_season object
+        $current_season = collect([
+            'title' => 'Anime ' . $current_season['seasons']['current']['season'] . ' ' . $current_season['seasons']['current']['year'],
+            'route' => route('anime.season-current'),
+            'animes' => $current_season['animes'],
+        ]);
+
+        // Build airing_animes object
+        $airing_animes = collect([
+            'title' => __('anime.top.title.airing'),
+            'route' => route('anime.top.airing'),
+            'animes' => $airing_animes
+        ]);
+
+        // Build upcoming_animes object
+        $upcoming_animes = collect([
+            'title' => __('anime.top.title.upcoming'),
+            'route' => route('anime.top.upcoming'),
+            'animes' => $upcoming_animes
+        ]);
+
+        $sections = collect([$current_season, $airing_animes, $upcoming_animes]);
+
+        $top_index_view_model = new TopIndexViewModel($sections, $resources);
 
         return view('index', $top_index_view_model);
     }

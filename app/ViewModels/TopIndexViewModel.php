@@ -3,43 +3,45 @@
 namespace App\ViewModels;
 
 use Carbon\Carbon;
-use Illuminate\Support\Str;
+use Illuminate\Support\Collection;
 use Spatie\ViewModels\ViewModel;
 
 class TopIndexViewModel extends ViewModel
 {
-    public $top_animes;
+    /**
+     * @var Collection
+     */
+    public $sections;
+    
+    /**
+     * @var Collection
+     */
+    public $resources;
 
-    public $top_resources;
-
-    public $upcoming_animes;
-
-    public function __construct($top_animes, $top_resources, $upcoming_animes)
+    public function __construct(Collection $sections, Collection $resources)
     {
-        $this->top_animes = $top_animes;
-        $this->top_resources = $top_resources;
-        $this->upcoming_animes = $upcoming_animes;
+        $this->sections = $sections;
+        $this->resources = $resources;
     }
 
-    public function top_animes()
+    public function sections()
     {
-        return collect($this->top_animes)->map(function ($item, $key) {
-            return collect($item)->merge([
-                'start_date' => (!is_null($item['start_date'])) ? Carbon::parse($item['start_date'])->translatedFormat('M Y') : '?',
-                'end_date' => (!is_null($item['end_date'])) ? Carbon::parse($item['end_date'])->translatedFormat('M Y') : '?',
-                'members' => abbreviate_number($item['members']),
-            ]);
-        });
-    }
+        return $this->sections->map(function ($item, $key) {
+            $item['animes'] = $item['animes']->map(function ($anime, $key) {
 
-    public function upcoming_animes()
-    {
-        return collect($this->upcoming_animes)->map(function ($item, $key) {
-            return collect($item)->merge([
-                'start_date' => (!is_null($item['start_date'])) ? Carbon::parse($item['start_date'])->translatedFormat('M Y') : '?',
-                'end_date' => (!is_null($item['end_date'])) ? Carbon::parse($item['end_date'])->translatedFormat('M Y') : '?',
-                'members' => abbreviate_number($item['members']),
-            ]);
+                if (isset($anime['airing_start']))
+                {
+                    $anime['start_date'] = $anime['airing_start'];
+                }
+
+                return collect($anime)->merge([
+                    'start_date' => (!is_null($anime['start_date'])) ? Carbon::parse($anime['start_date'])->translatedFormat('M Y') : '?',
+                    'members' => abbreviate_number($anime['members']),
+                    "score" => ($anime['score'] > 0) ? number_format($anime['score'], 2, '.', '') : 0
+                ]);
+            });
+
+            return collect($item);
         });
     }
 }
