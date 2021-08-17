@@ -56,8 +56,13 @@ class AnimeViewModel extends ViewModel
         return $result;
     }
 
-    private function formatPremiered(string $premiered): array
+    private function formatPremiered(?string $premiered): ?array
     {
+        if (is_null($premiered))
+        {
+            return null;
+        }
+
         $season = explode(' ', $premiered);
 
         return [
