@@ -175,11 +175,10 @@ class JikanService implements JikanServiceInterface
         $previous = null;
         if ($current_season_index == 0)
         {
-            $previous_seasons = $all_seasons->get($year - 1);
-
-            if (!is_null($previous_seasons))
+            $previous_year_seasons = $all_seasons->get($year - 1);
+            if (!is_null($previous_year_seasons))
             {
-                $previous['season'] = Str::lower($previous_seasons->last());
+                $previous['season'] = Str::lower($previous_year_seasons->last());
                 $previous['year'] = $year - 1;
             }
         }
@@ -192,10 +191,10 @@ class JikanService implements JikanServiceInterface
         $next = null;
         if ($current_season_index == $current_year_seasons->count() - 1)
         {
-            $next_seasons = $all_seasons->get($year + 1);
-            if (!is_null($next_seasons))
+            $next_year_seasons = $all_seasons->get($year + 1);
+            if (!is_null($next_year_seasons))
             {
-                $next['season'] = Str::lower($next_seasons->first());
+                $next['season'] = Str::lower($next_year_seasons->first());
                 $next['year'] = $year + 1;
             }
         }
