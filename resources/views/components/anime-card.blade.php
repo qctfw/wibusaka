@@ -2,7 +2,7 @@
     <div x-data="{ title: `{{ $anime['title'] }}` }" class="flex items-center justify-center h-12">
         <a
             href="{{ route('anime.show', $anime['mal_id']) }}"
-            class="p-1 font-semibold leading-tight text-center font-primary text-link"
+            class="p-1 font-semibold leading-none text-center font-primary text-link"
             x-bind:class="title.length <= 50 ? 'text-lg lg:text-xl' : title.length <= 80 ? 'text-md lg:text-lg' : 'text-md'"
             x-text="title"></a>
     </div>
@@ -25,8 +25,11 @@
         @endforeach
     </div>
     <div class="grid grid-cols-2 h-60 md:h-64 lg:h-80 xl:h-72">
-        <a href="{{ route('anime.show', $anime['mal_id']) }}" class="mx-auto h-60 md:h-64 lg:h-80 xl:h-72">
-            <img class="max-w-full max-h-full" src="{{ $anime['image_url'] }}" loading="lazy" alt="Anime Name">
+        <a href="{{ route('anime.show', $anime['mal_id']) }}" class="relative w-full mx-auto h-60 md:h-64 lg:h-80 xl:h-72 anime-cover">
+            <div class="flex flex-col items-center justify-center w-full h-72 spinner">
+                <x-icons.spinner class="block w-5 h-5" />
+            </div>
+            <img alt="{{ $anime['title'] }} Anime Poster" data-src="{{ $anime['image_url'] }}" class="absolute inset-x-0 top-0 max-w-full max-h-full mx-auto opacity-0" loading="lazy" />
         </a>
         <div class="pl-2 overflow-y-auto scrollbar-extra-thin scrollbar-thumb-gray-400 scrollbar-track-gray-300 dark:scrollbar-thumb-gray-500 dark:scrollbar-track-gray-700">
             <p class="text-sm leading-relaxed">{{ $anime['synopsis'] }}</p>
