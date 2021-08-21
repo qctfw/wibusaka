@@ -9,8 +9,8 @@
     <meta name="description" content="{{ $meta_description ?? __('meta.default.description') }}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:site" content="@wibulist">
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@wibulist" />
 
     <meta property="og:type" content="{{ $meta_type ?? __('meta.default.type') }}" />
     <meta property="og:url" content="{{ url()->current() }}" />
