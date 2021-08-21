@@ -1,5 +1,7 @@
 <x-app-layout>
-    <x-slot name="title">{{ __('anime.genre.title') }} - {{ $genre->name }}{{ ($page > 1) ? ' (Hal. ' . $page . ')' : '' }}</x-slot>
+    <x-slot name="title">{{ __('anime.genre.title') }} / {{ $genre->name }}{{ ($page > 1) ? ' (Hal. ' . $page . ')' : '' }}</x-slot>
+    <x-slot name="meta_title">{{ __('anime.genre.title') }} / {{ $genre->name }}</x-slot>
+    <x-slot name="meta_description">{{ __('meta.genre.description', ['genre' => $genre->name]) }}</x-slot>
     
     <div class="container px-4 pt-12 mx-auto">
         <div class="flex flex-col items-center justify-between gap-8 pb-4 md:flex-row">

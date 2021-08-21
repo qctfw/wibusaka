@@ -1,5 +1,6 @@
 <x-app-layout>
     <x-slot name="title">{{ __('anime.season.title') }} {{ $seasons['current']['season'] . ' ' . $seasons['current']['year'] }}</x-slot>
+    <x-slot name="meta_description">{{ __('meta.season.description', ['season' => $seasons['current']['season'] . ' ' . $seasons['current']['year']]) }}</x-slot>
     
     <div class="container px-4 pt-12 mx-auto">
         <div class="flex flex-row items-center justify-center gap-8 pb-4 font-primary">

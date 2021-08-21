@@ -1,5 +1,6 @@
 <x-app-layout>
     <x-slot name="title">Halaman Utama</x-slot>
+    <x-slot name="meta_title">{{ __('meta.default.title') }}</x-slot>
 
     <div class="container flex flex-col gap-6 px-4 pt-12 mx-auto">
         @foreach ($sections as $section)

@@ -1,5 +1,6 @@
 <x-app-layout>
     <x-slot name="title">{{ $title }}{{ ($page > 1) ? ' (Hal. ' . $page . ')' : '' }}</x-slot>
+    <x-slot name="meta_description">{{ __('meta.top.description') }}</x-slot>
     
     <div class="container px-4 pt-12 mx-auto lg:px-32">
         <div class="flex flex-col items-center justify-between gap-4 md:flex-row">

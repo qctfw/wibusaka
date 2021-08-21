@@ -1,5 +1,6 @@
 <x-app-layout>
     <x-slot name="title">{{ __('anime.genre.title') }}</x-slot>
+    <x-slot name="meta_description">{{ __('meta.genre.description_index') }}</x-slot>
 
     <div class="container px-4 py-12 mx-auto">
         <div class="flex flex-col items-center justify-between gap-8 pb-4 md:flex-row">

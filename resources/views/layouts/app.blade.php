@@ -5,16 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="title" content="{{ $title }} - {{ config('app.name') }}" />
     <meta name="theme-color" content="#2CEAA3" />
-    <meta name="keyword" content="anime, wibu, id" />
-    <meta name="description" content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis, cum." />
+    <meta name="keyword" content="anime, wibu, legal, platform, id" />
+    <meta name="description" content="{{ $meta_description ?? __('meta.default.description') }}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@wibulist">
+
+    <meta property="og:type" content="{{ $meta_type ?? __('meta.default.type') }}" />
     <meta property="og:url" content="{{ url()->current() }}" />
-    <meta property="og:title" content="{{ $title }}" />
-    <meta property="og:site_name" content="{{ config('app.name') }}" />
-    <meta property="og:description" content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis, cum." />
-    <meta property="og:image" content="https://metatags.io/assets/meta-tags-16a33a6a8531e519cc0936fbba0ad904e52d35f34a46c97a2c9f6f7dd7d336f2.png" />
+    <meta property="og:title" content="{{ $meta_title ?? $title }}" />
+    <meta property="og:site_name" content="{{ __('meta.default.site_name') }}" />
+    <meta property="og:description" content="{{ $meta_description ?? __('meta.default.description') }}" />
+    <meta property="og:image" content="{{ asset('img/favicons/wibulist_icon-meta-image-default.png') }}" />
 
     <title>{{ $title }} - {{ config('app.name') }}</title>
 
