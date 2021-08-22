@@ -45,7 +45,7 @@
     <livewire:styles />
     <script src="https://unpkg.com/alpinejs@3.0.6/dist/cdn.min.js" defer></script>
 </head>
-<body class="font-sans bg-gray-100 dark:bg-gray-800 dark:text-white scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-300 dark:scrollbar-thumb-gray-500 dark:scrollbar-track-gray-700">
+<body class="font-sans bg-gray-100 dark:bg-gray-800 dark:text-gray-200 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-300 dark:scrollbar-thumb-gray-500 dark:scrollbar-track-gray-700">
     <x-header-navbar />
     {{ $slot }}
     <x-footer />
