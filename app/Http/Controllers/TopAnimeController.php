@@ -35,17 +35,9 @@ class TopAnimeController extends Controller
             return redirect()->to(url()->current());
         }
 
-        try
-        {
-            $top = $this->jikan_service->getTopRatedAnimes($page);
-        } catch (JikanException $e)
-        {
-            abort($e->getHttpCode());
-        }
-        
-        $top_resources = $this->resource_service->getByMalIds($top->pluck('mal_id'));
+        $response = $this->fetchRequest('', $page);
 
-        $top_view_model = new TopViewModel('Anime Terbaik', $page, $total_page, $top, $top_resources);
+        $top_view_model = new TopViewModel(__('anime.top.title.rated'), $page, $total_page, $response['animes'], $response['resources']);
 
         return view('animes.top', $top_view_model);
     }
@@ -59,17 +51,9 @@ class TopAnimeController extends Controller
             return redirect()->to(url()->current());
         }
 
-        try
-        {
-            $top = $this->jikan_service->getTopAiringAnimes($page);
-        } catch (JikanException $e)
-        {
-            abort($e->getHttpCode());
-        }
-        
-        $top_resources = $this->resource_service->getByMalIds($top->pluck('mal_id'));
+        $response = $this->fetchRequest('airing', $page);
 
-        $top_view_model = new TopViewModel('Anime yang Sedang Tayang', $page, $total_page, $top, $top_resources);
+        $top_view_model = new TopViewModel(__('anime.top.title.airing'), $page, $total_page, $response['animes'], $response['resources']);
 
         return view('animes.top', $top_view_model);
     }
@@ -83,17 +67,9 @@ class TopAnimeController extends Controller
             return redirect()->to(url()->current());
         }
 
-        try
-        {
-            $top = $this->jikan_service->getTopPopularityAnimes($page);
-        } catch (JikanException $e)
-        {
-            abort($e->getHttpCode());
-        }
-        
-        $top_resources = $this->resource_service->getByMalIds($top->pluck('mal_id'));
+        $response = $this->fetchRequest('bypopularity', $page);
 
-        $top_view_model = new TopViewModel('Anime Terpopuler', $page, $total_page, $top, $top_resources);
+        $top_view_model = new TopViewModel(__('anime.top.title.popularity'), $page, $total_page, $response['animes'], $response['resources']);
 
         return view('animes.top', $top_view_model);
     }
@@ -107,19 +83,29 @@ class TopAnimeController extends Controller
             return redirect()->to(url()->current());
         }
 
+        $response = $this->fetchRequest('upcoming', $page);
+
+        $top_view_model = new TopViewModel(__('anime.top.title.upcoming'), $page, $total_page, $response['animes'], $response['resources']);
+
+        return view('animes.top', $top_view_model);
+    }
+
+    private function fetchRequest($category, $page)
+    {
         try
         {
-            $top = $this->jikan_service->getTopUpcomingAnimes($page);
+            $animes = $this->jikan_service->getTopAnimes($category, $page);
         } catch (JikanException $e)
         {
             abort($e->getHttpCode());
         }
-        
-        $top_resources = $this->resource_service->getByMalIds($top->pluck('mal_id'));
 
-        $top_view_model = new TopViewModel('Anime Paling Dinantikan', $page, $total_page, $top, $top_resources);
+        $anime_resources = $this->resource_service->getByMalIds($animes->pluck('mal_id'));
 
-        return view('animes.top', $top_view_model);
+        return [
+            'animes' => $animes,
+            'resources' => $anime_resources
+        ];
     }
 
 }

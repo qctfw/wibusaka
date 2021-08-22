@@ -19,24 +19,20 @@ class JikanService implements JikanServiceInterface
         $this->base_uri = 'https://api.jikan.moe/v3/';
     }
 
-    public function getTopRatedAnimes(int $page = 1)
+    public function getTopAnimes(string $category = '', int $page = 1)
     {
-        return $this->getTopAnimes($page);
-    }
+        if ($category == 'rated')
+        {
+            $category = '';
+        }
 
-    public function getTopAiringAnimes(int $page = 1)
-    {
-        return $this->getTopAnimes($page, 'airing');
-    }
+        $uri = 'top/anime/' . $page;
 
-    public function getTopPopularityAnimes(int $page = 1)
-    {
-        return $this->getTopAnimes($page, 'bypopularity');
-    }
+        $uri .= (Str::substr($category, 0, 1) == '/') ? $category : '/' . $category;
 
-    public function getTopUpcomingAnimes(int $page = 1)
-    {
-        return $this->getTopAnimes($page, 'upcoming');
+        $result = $this->requestJikan($uri, ['jikan-top', 'jikan-top-' . $category], 'jikan-top-' . $category . '-' . $page);
+
+        return collect($result['top']);
     }
 
     public function getCurrentSeason()
@@ -145,17 +141,6 @@ class JikanService implements JikanServiceInterface
         }
 
         return collect(json_decode($jikan_data, true));
-    }
-
-    private function getTopAnimes(int $page = 1, string $category = '')
-    {
-        $uri = 'top/anime/' . $page;
-
-        $uri .= (Str::substr($category, 0, 1) == '/') ? $category : '/' . $category;
-
-        $result = $this->requestJikan($uri, ['jikan-top', 'jikan-top-' . $category], 'jikan-top-' . $category . '-' . $page);
-
-        return collect($result['top']);
     }
 
     private function getSeasonNavigation(int $year, string $season)
