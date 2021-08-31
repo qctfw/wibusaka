@@ -1,4 +1,4 @@
-<div class="relative flex flex-col py-1 mt-4 bg-gray-200 divide-y divide-gray-400 shadow divide-opacity-50 divide-dashed dark:bg-gray-900 rounded-xl">
+<div class="relative flex flex-col py-1 mt-4 bg-gray-100 divide-y divide-gray-400 shadow divide-opacity-50 divide-dashed dark:bg-gray-800 rounded-xl">
     <div x-data="{ title: `{{ $anime['title'] }}` }" class="flex items-center justify-center h-12">
         <a
             href="{{ route('anime.show', $anime['mal_id']) }}"
@@ -21,7 +21,7 @@
     </div>
     <div class="flex flex-row flex-wrap items-center justify-center gap-2 px-1 py-1 text-xs md:h-12">
         @foreach ($anime['genres'] as $genre)
-        <a href="{{ route('anime.genre.show', str_replace(' ', '-', strtolower($genre['name']))) }}" class="h-4 px-2 transition-colors bg-gray-300 rounded-lg dark:bg-gray-800 dark:hover:bg-gray-700">{{ $genre['name'] }}</a>
+        <a href="{{ route('anime.genre.show', str_replace(' ', '-', strtolower($genre['name']))) }}" class="h-4 px-2 transition-colors bg-gray-300 rounded-lg dark:bg-gray-700 hover:bg-green-300 dark:hover:bg-green-600">{{ $genre['name'] }}</a>
         @endforeach
     </div>
     <div class="grid grid-cols-2 h-60 md:h-64 lg:h-80 xl:h-72">

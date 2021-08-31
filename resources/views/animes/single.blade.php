@@ -11,7 +11,7 @@
                     </div>
                     <img data-src="{{ $anime['image_url'] }}" alt="'{{ $anime['title'] }}' Anime Poster" class="absolute inset-x-0 top-0 w-full mx-auto opacity-0" />
                 </div>
-                <div class="grid w-auto grid-cols-2 py-2 my-3 bg-gray-200 rounded-xl dark:bg-gray-900">
+                <div class="grid w-auto grid-cols-2 py-2 my-3 bg-gray-100 rounded-xl dark:bg-gray-800">
                     <div class="text-center font-primary">
                         <span class="text-lg font-semibold md:text-2xl">
                             <x-icons.star-solid class="inline-block w-3 h-3 md:w-5 md:h-5" />
@@ -56,7 +56,7 @@
             </div>
             <div class="grid grid-cols-1 pl-2 border-gray-400 border-opacity-50 border-dashed md:mt-3 md:border-t">
                 <div class="pb-2 border-b border-gray-400 border-opacity-50 border-dashed md:hidden">
-                    <h2 class="text-lg font-bold font-primary">{{ $anime['title'] }}</h2>
+                    <h2 class="text-lg font-bold text-green-700 font-primary dark:text-green-300">{{ $anime['title'] }}</h2>
                     <p class="text-sm italic">{{ $anime['title_english'] }}</p>
                     <p class="text-sm italic">{{ $anime['title_japanese'] }}</p>
                 </div>
@@ -109,14 +109,14 @@
         </div>
 
         @if ($anime['rating'] != 'None' && in_array($anime['rating'], ['R', 'R+', 'Rx']))
-        <div class="flex flex-col items-center w-auto gap-2 p-2 my-4 bg-gray-200 md:hidden rounded-xl dark:bg-gray-900">
+        <div class="flex flex-col items-center w-auto gap-2 p-2 my-4 bg-gray-200 md:hidden rounded-xl dark:bg-gray-800">
             <x-icons.exclamation-solid class="w-8 h-8" />
             <p class="text-sm text-center">{{ __('anime.single.rating_note.' . $anime['rating']) }}</p>
         </div>
         @endif
 
         <div class="flex-grow md:ml-12">
-            <h2 class="hidden text-3xl font-bold text-left font-primary md:block lg:text-5xl">{{ $anime['title'] }}</h2>
+            <h2 class="hidden text-3xl font-bold text-left text-green-700 dark:text-green-300 font-primary md:block lg:text-5xl">{{ $anime['title'] }}</h2>
             <p class="hidden pt-2 text-sm italic text-left md:block">{{ $anime['title_english'] }} / {{ $anime['title_japanese'] }}</p>
 
             <h3 class="py-3 text-2xl font-semibold border-b border-gray-400 border-opacity-50 border-dashed font-primary">{{ __('anime.single.synopsis') }}</h3>
@@ -182,10 +182,12 @@
             </div>
             @endif
 
+            @if ($anime['status'] != 'Belum Tayang')
             <div class="flex flex-col mt-4">
                 <h3 class="py-3 text-2xl font-semibold border-b border-gray-400 border-opacity-50 border-dashed font-primary">{{ __('anime.single.recommendation') }}</h3>
                 <livewire:recommendation-list :mal="$anime['mal_id']" />
             </div>
+            @endif
         </div>
     </div>
 </x-app-layout>

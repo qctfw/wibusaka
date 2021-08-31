@@ -1,17 +1,16 @@
-<div class="relative flex flex-col items-center justify-between p-2 transition-colors bg-gray-200 rounded-lg group hover:bg-gray-300 dark:hover:bg-gray-700 md:static md:flex-row dark:bg-gray-900 md:h-auto">
-    @if ($anime['rank'] <= 10)
-    <div class="absolute top-0 left-0 w-auto px-2 text-2xl md:text-3xl text-center bg-gray-200 rounded-lg md:bg-transparent md:static md:block md:flex-none md:w-12 md:px-0 dark:bg-gray-900 md:rounded-none md:font-bold">
+<div class="relative flex flex-col items-center justify-between p-2 transition-colors bg-gray-100 text-green-900 rounded-lg group hover:bg-green-100 dark:hover:bg-green-800 md:static md:flex-row dark:bg-gray-800 dark:text-green-50 md:h-auto">
+    @php
+        $ranktext = 'text-lg md:text-xl';
+        if ($anime['rank'] <= 10) {
+            $ranktext = 'text-2xl md:text-3xl';
+        }
+        elseif ($anime['rank'] <= 100) {
+            $ranktext = 'text-xl md:text-2xl';
+        }
+    @endphp
+    <div class="absolute top-0 left-0 w-auto px-2 {{ $ranktext }} text-center bg-gray-200 rounded-lg md:bg-transparent md:static md:block md:flex-none md:w-12 md:px-0 dark:bg-gray-900 md:rounded-none md:font-bold">
         #{{ $anime['rank'] }}
     </div>
-    @elseif ($anime['rank'] <= 100)
-    <div class="absolute top-0 left-0 w-auto px-2 text-xl md:text-2xl text-center bg-gray-200 rounded-lg md:bg-transparent md:static md:block md:flex-none md:w-12 md:px-0 dark:bg-gray-900 md:rounded-none md:font-bold">
-        #{{ $anime['rank'] }}
-    </div>
-    @else
-    <div class="absolute top-0 left-0 w-auto px-2 text-lg md:text-xl text-center bg-gray-200 rounded-lg md:bg-transparent md:static md:block md:flex-none md:w-12 md:px-0 dark:bg-gray-900 md:rounded-none md:font-bold">
-        #{{ $anime['rank'] }}
-    </div>
-    @endif
     <a href="{{ route('anime.show', $anime['mal_id']) }}" class="flex flex-row items-center w-full md:w-20 md:pl-4">
         <img src="{{ $anime['image_url'] }}" alt="'{{ $anime['title'] }}' Anime Poster" loading="lazy" class="mx-auto" />
     </a>
@@ -38,7 +37,7 @@
         </div>
     </div>
     @if (!blank($resources))
-    <div class="flex-row items-center justify-center hidden gap-3 p-2 mx-4 text-sm text-center transition-colors bg-gray-300 rounded-lg dark:bg-gray-800 md:flex dark:group-hover:bg-gray-600">
+    <div class="flex-row items-center justify-center hidden gap-3 p-2 mx-4 text-sm text-center transition-colors bg-gray-300 rounded-lg dark:bg-gray-900 md:flex group-hover:bg-green-200 dark:group-hover:bg-green-900">
         @foreach ($resources as $resource)
         <a href="{{ $resource->link }}" target="_blank" class="w-6 h-6">
             <img src="{{ logo_asset($resource->platform->icon_path) }}" alt="{{ $resource->platform->name }} Logo" />

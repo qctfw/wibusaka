@@ -15,7 +15,7 @@
             </a>
             @endif
 
-            <div class="flex flex-col items-center font-bold text-blue-700 dark:text-blue-300">
+            <div class="flex flex-col items-center font-bold text-green-700 dark:text-green-300">
                 <p class="text-3xl">{{ $seasons['current']['season'] }}</p>
                 <p class="text-lg">{{ $seasons['current']['year'] }}</p>
             </div>
