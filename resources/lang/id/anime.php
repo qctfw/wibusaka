@@ -39,7 +39,7 @@ return [
             'rated' => 'Anime Terbaik',
             'popularity' => 'Anime Terpopuler',
             'airing' => 'Anime yang Sedang Tayang',
-            'upcoming' => 'Anime Paling Dinantikan'
+            'upcoming' => 'Anime Paling Ditunggu'
         ]
     ],
     'genre' => [
