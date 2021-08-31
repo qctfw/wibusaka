@@ -10,9 +10,11 @@
                 <a href="{{ config('anime.link.github') }}" target="_blank">
                     <x-icons.github class="w-6 h-6 transition-colors duration-150 hover:text-green-300 dark:hover:text-gray-300" fill="currentColor" />
                 </a>
+                {{--
                 <a href="{{ config('anime.link.twitter') }}" target="_blank">
                     <x-icons.twitter class="w-6 h-6 transition-colors duration-150 hover:text-green-300 dark:hover:text-gray-300" fill="currentColor" />
                 </a>
+                --}}
                 <a href="{{ config('anime.link.discord') }}" target="_blank">
                     <x-icons.discord class="w-6 h-6 transition-colors duration-150 hover:text-green-300 dark:hover:text-gray-300" fill="currentColor" />
                 </a>
@@ -25,9 +27,11 @@
             <a href="{{ config('anime.link.github') }}" target="_blank">
                 <x-icons.github class="w-6 h-6" fill="currentColor" />
             </a>
+            {{--
             <a href="{{ config('anime.link.twitter') }}" target="_blank">
                 <x-icons.twitter class="w-6 h-6" fill="currentColor" />
             </a>
+            --}}
             <a href="{{ config('anime.link.discord') }}" target="_blank">
                 <x-icons.discord class="w-6 h-6" fill="currentColor" />
             </a>
