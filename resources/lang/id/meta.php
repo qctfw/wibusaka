@@ -1,10 +1,6 @@
 <?php
 
 return [
-    'genre' => [
-        'description' => 'Telusuri tempat menonton anime genre :genre di WibuList.',
-        'description_index' => 'Telusuri genre-genre anime di WibuList.',
-    ],
     'season' => [
         'description' => 'Telusuri tempat menonton anime musim :season di WibuList.',
     ],
@@ -12,6 +8,7 @@ return [
         'description' => 'Lihat anime-anime top dan ketahui platform untuk menonton anime top di WibuList!',
     ],
     'single' => [
+        'description' => ':synopsis [Sumber: MyAnimeList] Cari tahu platform untuk menonton :anime di WibuList!',
         'description_empty' => 'Tidak ada sinopsis untuk anime ini.',
     ],
     'default' => [

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="title" content="{{ $title }} - {{ config('app.name') }}" />
-    <meta name="theme-color" content="#2CEAA3" />
+    <meta name="theme-color" content="#6EE7B7" />
     <meta name="keyword" content="anime, wibu, legal, platform, id" />
     <meta name="description" content="{{ $meta_description ?? __('meta.default.description') }}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />

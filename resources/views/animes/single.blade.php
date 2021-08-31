@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="title">{{ $anime['title'] }}</x-slot>
-    <x-slot name="meta_description">{{(!empty($anime['synopsis'])) ? \Str::words($anime['synopsis'], 60) : __('meta.single.description_empty') }}</x-slot>
+    <x-slot name="meta_description">{{(!empty($anime['synopsis'])) ? __('meta.single.description', ['synopsis' => \Str::words($anime['synopsis'], 30), 'anime' => $anime['title']]) : __('meta.single.description_empty') }}</x-slot>
 
     <div class="container flex flex-col px-4 py-4 mx-auto md:pt-12 md:flex-row">
         <div class="grid justify-between flex-none w-full grid-cols-2 md:grid-cols-1 md:items-center md:w-72 md:h-full">
