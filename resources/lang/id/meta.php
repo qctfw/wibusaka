@@ -1,6 +1,9 @@
 <?php
 
 return [
+    'google' => [
+        'site_verification' => env('GOOGLE_SITE_VERIFICATION')
+    ],
     'season' => [
         'description' => 'Telusuri tempat menonton anime musim :season di WibuList.',
     ],
