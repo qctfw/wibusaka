@@ -17,7 +17,7 @@
     <meta property="og:type" content="{{ $meta_type ?? __('meta.default.type') }}" />
     <meta property="og:url" content="{{ url()->current() }}" />
     <meta property="og:title" content="{{ $meta_title ?? $title }}" />
-    <meta property="og:site_name" content="{{ __('meta.default.site_name') }}" />
+    <meta property="og:site_name" content="{{ config('app.name') }}" />
     <meta property="og:description" content="{{ $meta_description ?? __('meta.default.description') }}" />
     <meta property="og:image" content="{{ asset('img/favicons/wibulist_icon-meta-image-default.png') }}" />
 
