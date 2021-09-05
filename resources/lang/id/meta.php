@@ -14,7 +14,6 @@ return [
     'default' => [
         'title' => 'Cari Platform Tontonan Anime Favoritmu di WibuList!',
         'type' => 'website',
-        'site_name' => env('APP_NAME'),
         'description' => 'Bingung mencari platform untuk menonton anime secara legal? WibuList tempatnya! WibuList memberikan info platform menonton anime legal dengan mudah dan cepat!',
     ]
 ];
