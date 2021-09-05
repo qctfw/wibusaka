@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Arr;
 
 class Resource extends Model
 {
@@ -64,7 +65,7 @@ class Resource extends Model
      */
     public function scopeByMalId($query, $mal_id)
     {
-        if (is_array($mal_id))
+        if (Arr::accessible($mal_id))
         {
             return $query->whereIn('mal_id', $mal_id);
         }
