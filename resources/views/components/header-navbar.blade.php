@@ -1,5 +1,5 @@
 <header x-data="{ mobileMenuOpen: false, topMenuOpen: false }" class="relative w-full p-4 font-bold bg-green-800 border-b border-gray-300 dark:border-gray-700 dark:bg-gray-800 md:space-x-4" @click.away="mobileMenuOpen = false">
-    <div class="container flex flex-row flex-wrap items-center justify-between mx-auto md:justify-center">
+    <div class="container flex flex-row flex-wrap items-center justify-between mx-auto md:justify-center" data-nosnippet>
         <a href="{{ route('index') }}" class="block font-bold">
             <span class="sr-only">Logo</span>
             <img src="{{ randomize_logo() }}" alt="Logo" class="h-6 filter" />
