@@ -4,10 +4,10 @@
             <span class="sr-only">Logo</span>
             <img src="{{ randomize_logo() }}" alt="Logo" class="h-6 filter" />
         </a>
-        <button @click="mobileMenuOpen = !mobileMenuOpen" class="inline-block w-8 h-8 p-1 bg-gray-200 text-green-50 dark:text-green-300 dark:bg-gray-800 md:hidden">
+        <button @click="mobileMenuOpen = !mobileMenuOpen" class="inline-block w-8 h-8 p-1 bg-green-900 text-green-50 dark:text-green-300 dark:bg-gray-900 md:hidden">
             <x-icons.menu class="w-6 h-6" />
         </button>
-        <nav class="absolute left-0 z-20 flex-col justify-end flex-auto w-full font-semibold bg-gray-100 rounded-lg shadow-md select-none font-primary lg:justify-start md:ml-4 dark:bg-gray-800 md:relative top-16 md:top-0 md:flex md:flex-row md:space-x-2 md:w-auto md:bg-transparent md:shadow-none" :class="{ 'flex' : mobileMenuOpen , 'hidden' : !mobileMenuOpen}">
+        <nav class="absolute left-0 z-20 flex-col justify-end flex-auto w-full font-semibold bg-green-900 rounded-lg shadow-md select-none font-primary lg:justify-start md:ml-4 dark:bg-gray-800 md:relative top-16 md:top-0 md:flex md:flex-row md:space-x-2 md:w-auto md:bg-transparent md:shadow-none" :class="{ 'flex' : mobileMenuOpen , 'hidden' : !mobileMenuOpen}">
             <div @click="topMenuOpen = !topMenuOpen" @click.away="topMenuOpen = false" class="relative rounded-lg cursor-pointer text-green-50 dark:bg-gray-800">
                 <div class="flex flex-row items-center justify-between gap-4 p-3 transition-colors duration-200 rounded-lg dark:bg-gray-800 hover:text-green-900 dark:hover:text-white hover:bg-green-300 dark:hover:bg-green-800 dark:text-green-300" :class="{'bg-green-300 text-green-900 dark:text-white dark:bg-green-800': topMenuOpen}">
                     <p>Top Anime</p>
