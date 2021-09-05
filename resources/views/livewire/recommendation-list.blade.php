@@ -6,10 +6,10 @@
                 <x-icons.user-solid class="w-5 h-5" />
                 <span>{{ $anime['recommendation_count'] }}</span>
             </div>
-            <a href="{{ route('anime.show', $anime['mal_id']) }}" class="w-full mx-auto rounded-lg">
+            <a href="{{ route('anime.show', $anime['mal_id']) }}" rel="nofollow" class="w-full mx-auto rounded-lg">
                 <img src="{{ $anime['image_url'] }}" alt="{{ $anime['title'] }} Anime Poster" class="w-full mx-auto rounded-lg" loading="lazy" />
             </a>
-            <a href="{{ route('anime.show', $anime['mal_id']) }}">
+            <a href="{{ route('anime.show', $anime['mal_id']) }}" rel="nofollow">
                 <p class="py-1 font-semibold leading-tight text-center transition-colors duration-200 border-dashed text-md group-hover:text-green-700 dark:group-hover:text-green-300">
                     {{ $anime['title'] }}
                 </p>

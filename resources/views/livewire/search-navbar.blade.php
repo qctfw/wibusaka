@@ -30,6 +30,7 @@
                     @foreach ($results as $anime)
                     <a
                         href="{{ route('anime.show', $anime['mal_id']) }}"
+                        rel="nofollow"
                         @if ($loop->last) @keydown.tab="searchOpen = false" @endif
                         class="flex flex-row items-center justify-between p-3 transition-colors rounded-lg hover:text-green-900 hover:bg-green-300 dark:hover:text-green-50 dark:hover:bg-green-800"
                         wire:loading.remove

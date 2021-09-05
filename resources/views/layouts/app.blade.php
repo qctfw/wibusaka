@@ -7,6 +7,7 @@
     <meta name="theme-color" content="#6EE7B7" />
     <meta name="keyword" content="anime, wibu, legal, platform, id" />
     <meta name="description" content="{{ $meta_description ?? __('meta.default.description') }}" />
+    <meta name="robots" content="{{ $meta_robots ?? 'index, follow' }}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <meta name="google-site-verification" content="{{ config('app.google_site_verification') }}" />

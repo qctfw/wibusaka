@@ -11,11 +11,11 @@
     <div class="absolute top-0 left-0 w-auto px-2 {{ $ranktext }} text-center bg-gray-200 rounded-lg md:bg-transparent md:static md:block md:flex-none md:w-12 md:px-0 dark:bg-gray-900 md:rounded-none md:font-bold">
         #{{ $anime['rank'] }}
     </div>
-    <a href="{{ route('anime.show', $anime['mal_id']) }}" class="flex flex-row items-center w-full md:w-20 md:pl-4">
+    <a href="{{ route('anime.show', $anime['mal_id']) }}" rel="nofollow" class="flex flex-row items-center w-full md:w-20 md:pl-4">
         <img src="{{ $anime['image_url'] }}" alt="'{{ $anime['title'] }}' Anime Poster" loading="lazy" class="mx-auto" />
     </a>
     <div class="grid items-center flex-auto w-full grid-cols-1 pb-2 border-b border-gray-400 border-opacity-50 border-dashed md:w-auto md:items-baseline md:flex md:flex-auto md:flex-col md:ml-3 md:border-none md:pb-0">
-        <a href="{{ route('anime.show', $anime['mal_id']) }}" class="flex flex-row items-center justify-center py-2 text-link text-lg font-semibold font-primary text-center border-b border-gray-400 border-opacity-50 border-dashed md:text-left md:py-0 md:border-none">
+        <a href="{{ route('anime.show', $anime['mal_id']) }}" rel="nofollow" class="flex flex-row items-center justify-center py-2 text-link text-lg font-semibold font-primary text-center border-b border-gray-400 border-opacity-50 border-dashed md:text-left md:py-0 md:border-none">
             {{ $anime['title'] }}
         </a>
         <div class="flex flex-row items-center justify-center gap-0 pt-2 text-center md:gap-2 md:text-left text-md md:text-sm md:pt-0">

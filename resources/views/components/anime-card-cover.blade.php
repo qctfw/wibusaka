@@ -1,5 +1,5 @@
 <div {{ $attributes->merge(['class' => 'flex flex-col bg-gray-100 text-green-900 divide-y divide-gray-400 rounded-lg group dark:bg-gray-800 dark:text-gray-50 divide-opacity-50 divide-dashed']) }}>
-    <a href="{{ route('anime.show', $anime['mal_id']) }}" class="relative flex items-center w-full mx-auto rounded-lg font-primary h-60 md:h-64 lg:h-64 xl:h-72 anime-cover">
+    <a href="{{ route('anime.show', $anime['mal_id']) }}" rel="nofollow" class="relative flex items-center w-full mx-auto rounded-lg font-primary h-60 md:h-64 lg:h-64 xl:h-72 anime-cover">
         <div class="flex flex-col items-center justify-center w-full h-72 spinner">
             <x-icons.spinner class="block w-5 h-5" />
         </div>

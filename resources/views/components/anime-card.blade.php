@@ -2,6 +2,7 @@
     <div x-data="{ title: `{{ $anime['title'] }}` }" class="flex items-center justify-center h-12">
         <a
             href="{{ route('anime.show', $anime['mal_id']) }}"
+            rel="nofollow"
             class="p-1 font-semibold leading-none text-center font-primary text-link"
             x-bind:class="title.length <= 50 ? 'text-lg lg:text-xl' : title.length <= 80 ? 'text-md lg:text-lg' : 'text-md'"
             x-text="title"></a>
@@ -25,7 +26,7 @@
         @endforeach
     </div>
     <div class="grid grid-cols-2 h-60 md:h-64 lg:h-80 xl:h-72">
-        <a href="{{ route('anime.show', $anime['mal_id']) }}" class="relative w-full mx-auto h-60 md:h-64 lg:h-80 xl:h-72 anime-cover">
+        <a href="{{ route('anime.show', $anime['mal_id']) }}" rel="nofollow" class="relative w-full mx-auto h-60 md:h-64 lg:h-80 xl:h-72 anime-cover">
             <div class="flex flex-col items-center justify-center w-full h-72 spinner">
                 <x-icons.spinner class="block w-5 h-5" />
             </div>
