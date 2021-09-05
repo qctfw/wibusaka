@@ -39,7 +39,7 @@
     @if (!blank($resources))
     <div class="flex-row items-center justify-center hidden gap-3 p-2 mx-4 text-sm text-center transition-colors bg-gray-300 rounded-lg dark:bg-gray-900 md:flex group-hover:bg-green-200 dark:group-hover:bg-green-900">
         @foreach ($resources as $resource)
-        <a href="{{ $resource->link }}" target="_blank" class="w-6 h-6">
+        <a href="{{ $resource->link }}" target="_blank" class="w-6 h-6" title="{{ $resource->alternative_note }}">
             <img src="{{ logo_asset($resource->platform->icon_path) }}" alt="{{ $resource->platform->name }} Logo" />
         </a>
         @endforeach

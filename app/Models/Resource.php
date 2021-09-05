@@ -73,6 +73,20 @@ class Resource extends Model
     }
 
     /**
+     * Get the resource's alternative note.
+     *
+     * @return string
+     */
+    public function getAlternativeNoteAttribute()
+    {
+        $alternative_note = $this->platform->name;
+        $alternative_note .= ($this->paid) ? ' (Berbayar)' : '';
+        $alternative_note .= ($this->note) ? ' (' . $this->note . ')' : '';
+
+        return $alternative_note;
+    }
+
+    /**
      * Bootstrap the model and its traits.
      *
      * @return void
