@@ -22,7 +22,7 @@
     <meta property="og:description" content="{{ $meta_description ?? __('meta.default.description') }}" />
     <meta property="og:image" content="{{ asset('img/favicons/wibulist_icon-meta-image-default.png') }}" />
 
-    <title>{{ $title }} - {{ config('app.name') }}</title>
+    <title>{{ $title }}{{ !request()->routeIs('index') ? ' - ' . config('app.name') : '' }}</title>
 
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('img/favicons/wibulist_icon-16x16.png') }}" />
@@ -49,9 +49,17 @@
     <script src="https://unpkg.com/alpinejs@3.0.6/dist/cdn.min.js" defer></script>
 </head>
 <body class="font-sans bg-gray-200 dark:bg-gray-900 dark:text-gray-200 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-300 dark:scrollbar-thumb-gray-500 dark:scrollbar-track-gray-700">
+    @if (!request()->routeIs('index'))
     <x-header-navbar />
+    @else
+    <x-header-index />
+    @endif
+
     {{ $slot }}
+
+    @if (!request()->routeIs('index'))
     <x-footer />
+    @endif
     <livewire:scripts />
     <script src="{{ mix('js/app.js') }}"></script>
     {{ $script ?? '' }}

@@ -12,6 +12,21 @@ class SearchNavbar extends Component
      * @var string
      */
     public $search;
+
+    /**
+     * @var string
+     */
+    public $height;
+
+    /**
+     * @var string
+     */
+    public $size;
+
+    /**
+     * @var string
+     */
+    public $background;
     
     public function mount()
     {

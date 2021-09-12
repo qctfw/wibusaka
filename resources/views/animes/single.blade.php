@@ -12,7 +12,7 @@
                     </div>
                     <img data-src="{{ $anime['image_url'] }}" alt="'{{ $anime['title'] }}' Anime Poster" class="absolute inset-x-0 top-0 w-full mx-auto opacity-0" />
                 </div>
-                <div class="grid w-auto grid-cols-2 py-2 my-3 bg-gray-100 rounded-xl dark:bg-gray-800">
+                <div class="grid w-auto grid-cols-2 py-2 my-3 bg-gray-100 rounded-xl dark:bg-green-800 dark:bg-opacity-50">
                     <div class="text-center font-primary">
                         <span class="text-lg font-semibold md:text-2xl">
                             <x-icons.star-solid class="inline-block w-3 h-3 md:w-5 md:h-5" />

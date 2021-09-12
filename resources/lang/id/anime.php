@@ -47,6 +47,7 @@ return [
     ],
     'season' => [
         'title' => 'Musim Anime',
+        'current' => 'Anime Musim Ini',
         'no_anime' => 'Tidak ada anime.'
     ],
     'search' => [
