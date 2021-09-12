@@ -16,10 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [AnimeController::class, 'index'])->name('index');
+Route::view('/', 'index')->name('index');
 
 Route::group(['as' => 'anime.', 'prefix' => 'anime'], function () {
-
+    Route::get('/', [AnimeController::class, 'index'])->name('index');
+    
     Route::group(['as' => 'top.', 'prefix' => 'top'], function () {
         Route::get('rated', [TopAnimeController::class, 'rated'])->name('rated');
         Route::get('airing', [TopAnimeController::class, 'airing'])->name('airing');

@@ -78,7 +78,7 @@ class AnimeController extends Controller
 
         $top_index_view_model = new TopIndexViewModel($sections, $resources);
 
-        return view('index', $top_index_view_model);
+        return view('animes.index', $top_index_view_model);
     }
 
     /**
