@@ -5,10 +5,6 @@
         <div class="flex flex-col w-full gap-4 lg:w-1/2">
             <h1 class="font-extrabold text-7xl">{{ config('app.name') }}</h1>
             <p class="text-xl font-semibold">{{ __('meta.default.description') }}</p>
-        </div>
-        <div class="flex flex-col w-full gap-4 lg:w-1/2">
-            <h2 class="text-4xl font-bold">Cari Sekarang!</h2>
-            <livewire:search-navbar :height="'h-12'" :size="'text-lg'" :background="'bg-green-100 bg-opacity-50 dark:bg-green-800 '" />
             <div class="grid grid-cols-1 gap-4 xl:grid-cols-3">
                 <x-button-link href="{{ route('anime.index') }}">
                     <x-slot name="icon">
@@ -32,6 +28,10 @@
                     <p class="font-semibold text-md font-primary md:text-lg xl:text-xl">{{ __('anime.top.title.rated') }}</p>
                 </x-button-link>
             </div>
+        </div>
+        <div class="flex flex-col w-full gap-4 lg:w-1/2">
+            <h2 class="text-4xl font-bold">Cari Sekarang!</h2>
+            <livewire:search-landing-page />
         </div>
     </section>
 

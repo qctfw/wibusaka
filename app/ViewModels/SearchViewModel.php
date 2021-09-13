@@ -9,10 +9,12 @@ use Illuminate\Support\Str;
 class SearchViewModel extends ViewModel
 {
     public $results;
-    
-    public function __construct($results)
+    public $resources;
+
+    public function __construct($results, $resources = null)
     {
         $this->results = $results;
+        $this->resources = $resources;
     }
 
     public function results()
