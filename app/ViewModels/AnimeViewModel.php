@@ -33,7 +33,8 @@ class AnimeViewModel extends ViewModel
                     'members' => abbreviate_number($this->anime['members']),
                     'favorites' => abbreviate_number($this->anime['favorites']),
                     'studios' => collect($this->anime['studios']),
-                    'genres' => collect($this->anime['genres'])
+                    'genres' => collect($this->anime['genres']),
+                    'external_links' => $this->formatExternalLinks($this->anime['external_links']),
                 ])
                 ->except(['request_hash', 'request_hashed', 'request_cached', 'request_cache_expiry']);
         return $anime;
@@ -81,5 +82,15 @@ class AnimeViewModel extends ViewModel
             'season' => Str::lower($season[0]),
             'year' => $season[1]
         ];
+    }
+
+    private function formatExternalLinks(array $links): array
+    {
+        return collect($links)->mapWithKeys(function ($item, $key) {
+            if ($item['name'] == 'Official Site') {
+                $item['name'] = 'Website';
+            }
+            return [ $item['name'] => $item['url'] ];
+        })->toArray();
     }
 }

@@ -20,6 +20,8 @@ return [
             'R+' => 'Anime ini mengandung sedikit unsur ketelanjangan yang hanya dapat ditonton oleh penonton dewasa berusia diatas 17 tahun.',
             'Rx' => 'Anime ini mengandung banyak unsur ketelanjangan (Hentai).'
         ],
+        'demographic' => 'Demografi',
+        'external_link' => 'Tautan Eksternal',
         'recommendation' => 'Rekomendasi',
         'recommendation_empty' => 'Saat ini belum ada rekomendasi yang bisa diberikan dari anime ini.',
         'related' => 'Anime Terkait',

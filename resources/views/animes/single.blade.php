@@ -51,33 +51,40 @@
                         <p class="text-sm font-primary md:text-md">{{ __('anime.single.rating') }}</p>
                     </div>
                 </div>
-                <x-button-link href="{{ $anime['url'] }}" target="_blank" class="h-16">
-                    <p class="text-lg font-semibold text-left md:text-xl">MyAnimeList</p>
-                </x-button-link>
+                <div class="grid grid-cols-1 gap-2 md:grid-cols-2">
+                    <x-button-link href="{{ $anime['url'] }}" target="_blank" class="h-16">
+                        <p class="mr-2 text-lg text-left">MAL</p>
+                    </x-button-link>
+                    @if (isset($anime['external_links']['Website']))
+                    <x-button-link href="{{ $anime['external_links']['Website'] }}" target="_blank" class="h-16">
+                        <p class="mr-2 text-lg text-left">Website</p>
+                    </x-button-link>
+                    @endif
+                </div>
             </div>
-            <div class="grid grid-cols-1 pl-2 border-gray-400 border-opacity-50 border-dashed md:mt-3 md:border-t">
-                <div class="pb-2 border-b border-gray-400 border-opacity-50 border-dashed md:hidden">
+            <div class="grid grid-cols-1 pl-2 pt-2 gap-2 border-gray-400 border-opacity-50 border-dashed md:grid-cols-2 md:mt-3 md:border-t">
+                <div class="border-b border-gray-400 border-opacity-50 border-dashed md:hidden">
                     <h2 class="text-lg font-bold text-green-700 font-primary dark:text-green-300">{{ $anime['title'] }}</h2>
                     <p class="text-sm italic">{{ $anime['title_english'] }}</p>
                     <p class="text-sm italic">{{ $anime['title_japanese'] }}</p>
                 </div>
-                <div class="hidden pt-2 md:block">
+                <div class="hidden md:block">
                     <p class="text-lg font-semibold font-primary">{{ __('anime.single.alternative_title') }}</p>
                     <p class="text-sm md:text-md">{{ (count($anime['title_synonyms']) > 0) ? implode(', ', $anime['title_synonyms']) : '-' }}</p>
                 </div>
-                <div class="pt-2">
+                <div>
                     <p class="font-semibold font-primary md:text-lg">{{ __('anime.single.type') }}</p>
                     <p class="text-sm md:text-md">
                         {{ $anime['type'] }}
-                        @if ($anime['episodes'] > 1) <span class="text-xs">({{ $anime['episodes'] }} episode)</span> @endif
+                        @if ($anime['episodes'] > 1) <span class="text-xs">({{ $anime['episodes'] }} ep)</span> @endif
                         @if (!empty($anime['duration'])) <span class="text-xs">({{ $anime['duration'] }})</span> @endif
                     </p>
                 </div>
-                <div class="pt-2">
+                <div>
                     <p class="font-semibold font-primary md:text-lg">{{ __('anime.single.status') }}</p>
                     <p class="text-sm md:text-md">{{ $anime['status'] }}</p>
                 </div>
-                <div class="pt-2">
+                <div>
                     <p class="font-semibold font-primary md:text-lg">{{ __('anime.single.airing_date') }}</p>
                     <p class="text-sm md:text-md">{{ $anime['aired']['from'] }}@if ($anime['episodes'] > 1 || $anime['airing']) s.d {{ $anime['aired']['to'] }}@endif</p>
                     <p class="text-xs">
@@ -86,17 +93,17 @@
                         @endif
                     </p>
                 </div>
-                <div class="pt-2">
+                <div>
                     <p class="font-semibold font-primary md:text-lg">{{ __('anime.single.studio') }}</p>
                     <p class="text-sm md:text-md">
                         {{ $anime['studios']->implode('name', ', ') }}
                     </p>
                 </div>
-                <div class="pt-2">
+                <div>
                     <p class="font-semibold font-primary md:text-lg">{{ __('anime.single.source') }}</p>
                     <p class="text-sm md:text-md">{{ $anime['source'] }}</p>
                 </div>
-                <div class="pt-2">
+                <div>
                     <div class="font-semibold font-primary md:text-lg">{{ __('anime.single.genre') }}</div>
                     <p class="text-sm md:text-md">
                         @forelse ($anime['genres'] as $genre)
@@ -105,6 +112,27 @@
                             <span>-</span>
                         @endforelse
                     </p>
+                </div>
+                <div>
+                    <div class="font-semibold font-primary md:text-lg">{{ __('anime.single.demographic') }}</div>
+                    <p class="text-sm md:text-md">
+                        @forelse ($anime['demographics'] as $demo)
+                            <a href="{{ route('anime.genre.show', ['slug' => str_replace(' ', '-', strtolower($demo['name']))]) }}" class="text-link">{{ $demo['name'] }}</a>{{ (!$loop->last) ? ',' : '' }}
+                        @empty
+                            <span>-</span>
+                        @endforelse
+                    </p>
+                </div>
+                <div class="md:col-span-2">
+                    <p class="font-semibold font-primary md:text-lg">{{ __('anime.single.external_link') }}</p>
+                    <div class="flex flex-col gap-1 text-sm md:text-md">
+                        @forelse ($anime['external_links'] as $name => $url)
+                            @if ($name == 'Website') @continue @endif
+                            <a href="{{ $url }}" class="text-link">{{ $name }} <x-icons.external-link-solid class="inline-block w-4 h-4 ml-1" /></a>
+                        @empty
+                            <span>-</span>
+                        @endforelse
+                    </div>
                 </div>
             </div>
         </div>
