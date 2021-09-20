@@ -24,6 +24,9 @@
         @foreach ($anime['genres'] as $genre)
         <a href="{{ route('anime.genre.show', str_replace(' ', '-', strtolower($genre['name']))) }}" class="h-4 px-2 transition-colors bg-gray-300 rounded-lg dark:bg-gray-700 hover:bg-green-300 dark:hover:bg-green-600">{{ $genre['name'] }}</a>
         @endforeach
+        @foreach ($anime['explicit_genres'] as $genre)
+        <a href="{{ route('anime.genre.show', str_replace(' ', '-', strtolower($genre['name']))) }}" class="h-4 px-2 transition-colors bg-red-300 rounded-lg dark:bg-red-700 hover:bg-red-300 dark:hover:bg-red-600">{{ $genre['name'] }}</a>
+        @endforeach
     </div>
     <div class="grid grid-cols-2 h-60 md:h-64 lg:h-80 xl:h-72">
         <a href="{{ route('anime.show', $anime['mal_id']) }}" rel="nofollow" class="relative w-full mx-auto h-60 md:h-64 lg:h-80 xl:h-72 anime-cover">
@@ -31,6 +34,11 @@
                 <x-icons.spinner class="block w-5 h-5" />
             </div>
             <img alt="{{ $anime['title'] }} Anime Poster" data-src="{{ $anime['image_url'] }}" class="absolute inset-x-0 top-0 max-w-full max-h-full mx-auto opacity-0" loading="lazy" />
+            @if (!empty($anime['explicit_genres']))
+            <div x-data="{showCover: false}" x-on:click.prevent="showCover = true" x-show="!showCover" class="absolute inset-x-0 top-0 flex items-center justify-center w-full h-full backdrop-filter backdrop-blur">
+                <div class="flex items-center px-2 py-1 bg-gray-800 rounded">Lihat</div>
+            </div>
+            @endif
         </a>
         <div class="pl-2 overflow-y-auto scrollbar-extra-thin scrollbar-thumb-gray-400 scrollbar-track-gray-300 dark:scrollbar-thumb-gray-500 dark:scrollbar-track-gray-700">
             <p class="text-sm leading-relaxed">{{ $anime['synopsis'] }}</p>
