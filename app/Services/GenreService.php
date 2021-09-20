@@ -9,7 +9,7 @@ class GenreService implements GenreServiceInterface
 {
     public function all()
     {
-        $all_genres = Genre::whereNotIn('name', ['Hentai', 'Yuri', 'Yaoi'])->get();
+        $all_genres = Genre::whereNotIn('name', ['Hentai', 'Erotica'])->get();
 
         return $all_genres;
     }
@@ -18,7 +18,7 @@ class GenreService implements GenreServiceInterface
     {
         $name = ucwords(str_replace('-', ' ', $slug));
 
-        if (in_array($name, ['Hentai', 'Yuri', 'Yaoi']))
+        if (in_array($name, ['Hentai', 'Erotica']))
         {
             abort(404);
         }
