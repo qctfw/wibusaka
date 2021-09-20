@@ -51,7 +51,7 @@
                         <p class="text-sm font-primary md:text-md">{{ __('anime.single.rating') }}</p>
                     </div>
                 </div>
-                <div class="grid grid-cols-1 gap-2 md:grid-cols-2">
+                <div class="grid grid-cols-1 gap-2 md:grid-flow-col md:auto-cols-fr">
                     <x-button-link href="{{ $anime['url'] }}" target="_blank" class="h-16">
                         <p class="mr-2 text-lg text-left">MAL</p>
                     </x-button-link>
