@@ -53,26 +53,12 @@ class AnimeController extends Controller
 
         $resources = $this->resource_service->getByMalIds($all_mal_ids);
 
-        // Build current_season object
-        $current_season = collect([
-            'title' => 'Anime ' . $current_season['seasons']['current']['season'] . ' ' . $current_season['seasons']['current']['year'],
-            'route' => route('anime.season-current'),
-            'animes' => $current_season['animes'],
-        ]);
+        $current_season_title = 'Anime ' . $current_season['seasons']['current']['season'] . ' ' . $current_season['seasons']['current']['year'];
+        $current_season = $this->buildIndexSection($current_season_title, 'anime.season-current', $current_season['animes']);
 
-        // Build airing_animes object
-        $airing_animes = collect([
-            'title' => __('anime.top.title.airing'),
-            'route' => route('anime.top.airing'),
-            'animes' => $airing_animes
-        ]);
+        $airing_animes = $this->buildIndexSection(__('anime.top.title.airing'), 'anime.top.airing', $airing_animes);
 
-        // Build upcoming_animes object
-        $upcoming_animes = collect([
-            'title' => __('anime.top.title.upcoming'),
-            'route' => route('anime.top.upcoming'),
-            'animes' => $upcoming_animes
-        ]);
+        $upcoming_animes = $this->buildIndexSection(__('anime.top.title.upcoming'), 'anime.top.upcoming', $upcoming_animes);
 
         $sections = collect([$current_season, $airing_animes, $upcoming_animes]);
 
@@ -131,5 +117,14 @@ class AnimeController extends Controller
         $anime_view_model = new AnimeViewModel($result);
 
         return view('animes.single', $anime_view_model);
+    }
+
+    private function buildIndexSection($title, $route, $animes)
+    {
+        return collect([
+            'title' => $title,
+            'route' => route($route),
+            'animes' => $animes
+        ]);
     }
 }
