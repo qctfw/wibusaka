@@ -22,7 +22,7 @@ class SeasonViewModel extends ViewModel
 
     public function animes()
     {
-        $animes = collect($this->animes);
+        $animes = collect($this->animes)->sortByDesc('members');
         
         return $animes->map(function ($item, $key) {
             return collect($item)->merge([
