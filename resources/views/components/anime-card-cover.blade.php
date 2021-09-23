@@ -34,7 +34,7 @@
         </div>
     </div>
 
-    @if (!is_null($resources))
+    @if (!is_null($resources) && $anime['is_released'])
     <div class="flex flex-row items-center justify-center gap-3 py-1 text-sm text-center">
         @forelse ($resources as $resource)
         <a href="{{ $resource->link }}" target="_blank" class="w-6 h-6" title="{{ $resource->alternative_note }}">

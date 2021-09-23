@@ -37,7 +37,8 @@ class TopIndexViewModel extends ViewModel
                 return collect($anime)->merge([
                     'start_date' => (isset($anime['start_date'])) ? Carbon::parse($anime['start_date'])->translatedFormat('M Y') : '?',
                     'members' => abbreviate_number($anime['members']),
-                    "score" => ($anime['score'] > 0) ? number_format($anime['score'], 2, '.', '') : 0
+                    'is_released' => now()->gte(Carbon::parse($anime['start_date'])),
+                    'score' => ($anime['score'] > 0) ? number_format($anime['score'], 2, '.', '') : 0
                 ]);
             });
 
