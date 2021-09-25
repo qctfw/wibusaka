@@ -21,9 +21,11 @@
         <div class="text-center">{{ $anime['source'] }}</div>
     </div>
     <div class="flex flex-row flex-wrap items-center justify-center gap-2 px-1 py-1 text-xs md:h-12">
-        @foreach ($anime['genres'] as $genre)
+        @forelse ($anime['genres'] as $genre)
         <a href="{{ route('anime.genre.show', str_replace(' ', '-', strtolower($genre['name']))) }}" class="h-4 px-2 transition-colors bg-gray-300 rounded-lg dark:bg-gray-700 hover:bg-green-300 dark:hover:bg-green-600">{{ $genre['name'] }}</a>
-        @endforeach
+        @empty
+        <span class="italic">Tidak ada genre</span>
+        @endforelse
         @foreach ($anime['explicit_genres'] as $genre)
         <a href="{{ route('anime.genre.show', str_replace(' ', '-', strtolower($genre['name']))) }}" class="h-4 px-2 transition-colors bg-red-300 rounded-lg dark:bg-red-700 hover:bg-red-300 dark:hover:bg-red-600">{{ $genre['name'] }}</a>
         @endforeach
@@ -58,6 +60,12 @@
             <x-icons.video-camera-solid class="w-5 h-5" />
             <span>{{ $anime['type'] }}</span>
         </div>
+        @if (!empty($anime['demographics']))
+        <div class="flex flex-row items-center justify-center gap-2 text-center">
+            <x-icons.user-group-solid class="w-5 h-5" />
+            <a href="{{ route('anime.genre.show', str_replace(' ', '-', strtolower($anime['demographics'][0]['name']))) }}" class="text-link">{{ $anime['demographics'][0]['name'] }}</a>
+        </div>
+        @endif
         <div class="flex flex-row items-center justify-center gap-2 text-center">
             <x-icons.calendar-solid class="w-5 h-5" />
             <span>{{ $anime['airing_start'] }}</span>
