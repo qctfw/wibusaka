@@ -2,18 +2,18 @@
 
 return [
     'season' => [
-        'description' => 'Telusuri tempat menonton anime musim :season di WibuList.',
+        'description' => 'Telusuri tempat menonton anime musim :season di WibuSaka.',
     ],
     'top' => [
-        'description' => 'Lihat anime-anime top dan ketahui platform untuk menonton anime top di WibuList!',
+        'description' => 'Lihat anime-anime top dan ketahui platform untuk menonton anime top di WibuSaka!',
     ],
     'single' => [
-        'description' => ':synopsis [Sumber: MyAnimeList] Cari tahu platform untuk menonton :anime di WibuList!',
+        'description' => ':synopsis [Sumber: MyAnimeList] Cari tahu platform untuk menonton :anime di WibuSaka!',
         'description_empty' => 'Tidak ada sinopsis untuk anime ini.',
     ],
     'default' => [
-        'title' => 'Cari Platform Tontonan Anime Favoritmu di WibuList!',
+        'title' => 'Cari Platform Tontonan Anime Favoritmu di WibuSaka!',
         'type' => 'website',
-        'description' => 'Bingung mencari platform untuk menonton anime secara legal? WibuList tempatnya! WibuList memberikan info platform menonton anime legal dengan mudah dan cepat!',
+        'description' => 'Bingung mencari platform untuk menonton anime secara legal? WibuSaka tempatnya! WibuSaka memberikan info platform menonton anime legal dengan mudah dan cepat!',
     ]
 ];

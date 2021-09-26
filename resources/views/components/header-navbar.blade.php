@@ -2,7 +2,7 @@
     <div class="container flex flex-row flex-wrap items-center justify-between mx-auto md:justify-center" data-nosnippet>
         <a href="{{ route('index') }}" class="block font-bold">
             <span class="sr-only">Logo</span>
-            <img src="{{ randomize_logo() }}" alt="Logo" class="h-6" />
+            <img src="{{ randomize_logo() }}" alt="Logo" class="h-8" />
         </a>
         <button @click="mobileMenuOpen = !mobileMenuOpen" class="inline-block w-8 h-8 p-1 bg-green-900 text-green-50 dark:text-green-300 dark:bg-gray-900 md:hidden">
             <x-icons.menu class="w-6 h-6" />

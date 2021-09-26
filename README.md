@@ -1,8 +1,8 @@
-# WibuList
+# WibuSaka
 
 A simple app to inform you where to watch anime legally in Indonesia.
 
-WibuList uses [Jikan.moe](https://jikan.moe) API to fetch anime datas.
+WibuSaka uses [Jikan.moe](https://jikan.moe) API to fetch anime datas.
 
 ## Requirements
 - PHP 7.4+
@@ -55,7 +55,7 @@ WibuList uses [Jikan.moe](https://jikan.moe) API to fetch anime datas.
 
 ## Contributing
 
-Contributions are always welcome! Create a pull request **[here](https://github.com/qctfw/wibulist/pulls)**!
+Contributions are always welcome! Create a pull request **[here](https://github.com/qctfw/wibusaka/pulls)**!
 
 Please make sure to check the existing pull request to avoid duplication.
 

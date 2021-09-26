@@ -2,7 +2,7 @@
     <div class="container flex flex-col items-center justify-between gap-1 px-4 py-6 text-green-50 mx-auto md:flex-row md:items-start" data-nosnippet>
         <div class="flex flex-row items-center gap-4">
             <div class="flex flex-row items-center gap-2">
-                <img src="{{ randomize_logo() }}" alt="Logo" class="h-5" />
+                <img src="{{ randomize_logo() }}" alt="Logo" class="h-6" />
                 <span class="select-none">&bull;</span>
                 2021
             </div>

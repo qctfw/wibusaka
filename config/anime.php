@@ -2,10 +2,10 @@
 
 return [
     'asset' => [
-        'base_url' => env('WIBULIST_ASSET_BASE_URL'),
+        'base_url' => env('WIBUSAKA_ASSET_BASE_URL'),
         'logo' => [
-            'default' => env('WIBULIST_LOGO_PATH'),
-            'jp' => env('WIBULIST_LOGO_JP_PATH')
+            'default' => env('WIBUSAKA_LOGO_PATH'),
+            'jp' => env('WIBUSAKA_LOGO_JP_PATH')
         ]
     ],
     'season' => [
@@ -19,8 +19,8 @@ return [
         ]
     ],
     'link' => [
-        'discord' => env('WIBULIST_LINK_DISCORD', '#'),
-        'github' => env('WIBULIST_LINK_GITHUB', '#'),
-        'twitter' => env('WIBULIST_LINK_TWITTER', '#')
+        'discord' => env('WIBUSAKA_LINK_DISCORD', '#'),
+        'github' => env('WIBUSAKA_LINK_GITHUB', '#'),
+        'twitter' => env('WIBUSAKA_LINK_TWITTER', '#')
     ]
 ];
