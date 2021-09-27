@@ -14,8 +14,8 @@ class ResourceService implements ResourceServiceInterface
         if (is_null($resources))
         {
             $resources = Resource::with('platform')->byMalId($mal_id)->get()->sortBy('platform.name', SORT_NATURAL | SORT_FLAG_CASE);
-    
-            $this->setResourceCache($resources, $mal_id);
+
+            $this->setToCache($resources, $mal_id);
         }
 
         return $resources;
@@ -49,7 +49,7 @@ class ResourceService implements ResourceServiceInterface
 
                 $resources_result->put($mal_id, $resources);
 
-                $this->setResourceCache($resources, $mal_id);
+                $this->setToCache($resources, $mal_id);
                 
             }
         }
@@ -66,7 +66,7 @@ class ResourceService implements ResourceServiceInterface
         return $cache;
     }
 
-    private function setResourceCache($resources, int $mal_id)
+    private function setToCache($resources, int $mal_id)
     {
         $cache_key = $this->getCacheKey($mal_id);
 
