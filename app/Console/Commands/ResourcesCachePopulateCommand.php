@@ -13,7 +13,7 @@ class ResourcesCachePopulateCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'resources:cache-populate';
+    protected $signature = 'resources:cache-populate {--f|flush : Flush the current resource cache}';
 
     /**
      * The console command description.
@@ -46,8 +46,10 @@ class ResourcesCachePopulateCommand extends Command
      */
     public function handle()
     {
-        $this->info('Flushing current resources...');
-        $this->call(ResourcesCacheFlushCommand::class);
+        if ($this->option('flush')) {
+            $this->line('Flushing current resources...');
+            $this->call(ResourcesCacheFlushCommand::class);
+        }
 
         $mal_ids = Resource::distinct()->get('mal_id')->pluck('mal_id');
 
