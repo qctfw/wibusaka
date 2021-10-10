@@ -1,4 +1,4 @@
-<header x-data="{ mobileMenuOpen: false, topMenuOpen: false }" class="fixed top-0 flex flex-col items-center justify-center w-full p-4 font-bold md:space-x-4 md:h-20" @click.away="mobileMenuOpen = false">
+<header x-data="{ mobileMenuOpen: false, topMenuOpen: false }" class="fixed top-0 flex flex-col bg-green-800 dark:bg-transparent items-center justify-center w-full p-4 font-bold md:space-x-4 md:h-20" @click.away="mobileMenuOpen = false">
     <div class="container flex flex-row flex-wrap items-center justify-between mx-auto md:justify-center" data-nosnippet>
         <a href="{{ route('index') }}" class="block font-bold">
             <span class="sr-only">Logo</span>
