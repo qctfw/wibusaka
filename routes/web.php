@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AnimeController;
 use App\Http\Controllers\GenreController;
+use App\Http\Controllers\MainPageController;
 use App\Http\Controllers\TopAnimeController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'index')->name('index');
+Route::get('/', [MainPageController::class, 'index'])->name('index');
 
 Route::group(['as' => 'anime.', 'prefix' => 'anime'], function () {
     Route::get('/', [AnimeController::class, 'index'])->name('index');

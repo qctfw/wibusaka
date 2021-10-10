@@ -11,6 +11,7 @@ module.exports = {
     fontFamily: {
       primary: ['Catamaran', '"M PLUS 1p"', ...defaultTheme.fontFamily.sans],
       sans: ['Lato', '"M PLUS 1p"', ...defaultTheme.fontFamily.sans],
+      jp: ['"M PLUS 1p"', ...defaultTheme.fontFamily.serif],
       serif: [...defaultTheme.fontFamily.serif],
       mono: [...defaultTheme.fontFamily.mono]
     },

@@ -2,7 +2,7 @@
     <input
         wire:model.debounce.500ms="search"
         type="text"
-        class="w-full {{ $height ?? 'h-7' }} px-4 py-1 pl-8 {{ $size ?? 'text-sm' }} rounded-md {{ $background ?? 'bg-green-100 dark:bg-gray-900'}} focus:outline-none focus:ring focus:ring-green-300"
+        class="w-full h-7 px-4 py-1 pl-8 text-sm rounded-md bg-green-100 {{ request()->routeIs('index') ? 'dark:bg-gray-800' : 'dark:bg-gray-900' }} focus:outline-none focus:ring focus:ring-green-300"
         placeholder="Cari..."
         @focus="searchOpen = true"
         @keydown="searchOpen = true"

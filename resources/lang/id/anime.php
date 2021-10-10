@@ -56,5 +56,11 @@ return [
         'loading' => 'Mencari...',
         'no_results' => 'Tidak ada hasil untuk ":query".',
         'placeholder' => 'Silahkan cari anime disini'
+    ],
+    'main' => [
+        'subtitle' => 'WibuSaka memberikan info platform menonton anime apapun secara legal dengan mudah dan cepat!',
+        'privacy' => 'Privasi',
+        'faq' => 'Tanya Jawab',
+        'credits' => 'Credits',
     ]
 ];

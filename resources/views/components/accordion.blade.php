@@ -4,7 +4,6 @@
         <x-icons.chevron-down-solid class="w-8 h-8 transform" x-bind:class="{'rotate-0': !accordionOpen, 'rotate-180': accordionOpen}" />
     </div>
     <div
-        class="flex flex-row items-center justify-between w-full text-justify"
         x-show="accordionOpen"
         x-transition:enter="transition ease-out duration-300"
         x-transition:enter-start="opacity-0 transform -translate-y-2"

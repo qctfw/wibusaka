@@ -59,6 +59,8 @@
 
     @if (!request()->routeIs('index'))
     <x-footer />
+    @else
+    <x-footer-main-page />
     @endif
     <livewire:scripts />
     <script src="{{ mix('js/app.js') }}"></script>
