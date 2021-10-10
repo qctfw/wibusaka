@@ -25,8 +25,16 @@ class SeasonViewModel extends ViewModel
         $animes = collect($this->animes)->sortByDesc('members');
         
         return $animes->map(function ($item, $key) {
+            if(!is_null($item['airing_start']))
+            {
+                $item['airing_start'] = Carbon::parse($item['airing_start']);
+                $item['airing_start'] = (count($item['demographics']) > 0) ? $item['airing_start']->translatedFormat('d M Y') : $item['airing_start']->translatedFormat('d F Y');
+            }
+            else {
+                $item['airing_start'] = '?';
+            }
             return collect($item)->merge([
-                "airing_start" => (!is_null($item['airing_start'])) ? Carbon::parse($item['airing_start'])->translatedFormat('d F Y') : '?',
+                "airing_start" => $item['airing_start'],
                 "score" => ($item['score'] > 0) ? number_format($item['score'], 2, '.', '') : 'N/A'
             ]);
         });
