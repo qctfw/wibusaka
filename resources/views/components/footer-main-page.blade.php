@@ -33,7 +33,35 @@
                 <p>Akan diisi nanti</p>
             </template>
             <template x-if="menu === 'faq'">
-                <p>Akan diisi nanti</p>
+                <section class="flex flex-col gap-4">
+                    <x-accordion>
+                        <x-slot name="title">Apa tujuan kalian membuat WibuSaka?</x-slot>
+                        <div class="px-2">
+                            Distribusi anime sudah mulai berkembang di Indonesia. Kami membuat website ini demi memberikan informasi bahwa sekarang anime sudah lebih mudah ditelusuri dengan mudah dan legal demi mendukung industri anime ini.
+                        </div>
+                    </x-accordion>
+                    <x-accordion>
+                        <x-slot name="title">Dari mana pustaka-pustaka anime ini berasal?</x-slot>
+                        <div class="px-2">
+                            Kami menggunakan <a href="https://jikan.moe" target="_blank" rel="noopener noreferrer" class="text-link font-semibold">Jikan.moe API</a> untuk mengambil data-data anime dari <a href="https://myanimelist.net" target="_blank" rel="noopener noreferrer" class="text-link font-semibold">MyAnimeList</a>. Informasi ketersediaan platform berasal dari informasi yang kita ketahui melalui berita, media sosial, <a href="{{ config('anime.link.discord') }}" target="_blank" rel="noopener noreferrer" class="text-link font-semibold">Discord</a> kami, dan lainnya.
+                        </div>
+                    </x-accordion>
+                    <x-accordion>
+                        <x-slot name="title">Saya mengunjungi platform yang tertera tetapi tidak bekerja!</x-slot>
+                        <div class="px-2">
+                            Terkadang distributor anime menarik anime mereka dari internet karena alasan tertentu. Silahkan laporkan ke <a href="{{ config('anime.link.discord') }}" target="_blank" rel="noopener noreferrer" class="text-link font-semibold">Discord</a> untuk memberitahu kami.
+                        </div>
+                    </x-accordion>
+                    <x-accordion>
+                        <x-slot name="title">Saya mengetahui platform anime yang masih belum tertera disini!</x-slot>
+                        <div class="px-2">
+                            Silahkan kirim link dan animenya ke <a href="{{ config('anime.link.discord') }}" target="_blank" rel="noopener noreferrer" class="text-link font-semibold">Discord</a>. Kami sangat mengapresiasi bantuan kalian.
+                        </div>
+                    </x-accordion>
+                    <div class="flex">
+                        <p>Jika pertanyaan kalian tidak tertera disini, silahkan tanya di <a href="{{ config('anime.link.discord') }}" target="_blank" rel="noopener noreferrer" class="text-link font-semibold">Discord</a> kami.</p>
+                    </div>
+                </section>
             </template>
             <template x-if="menu === 'credits'">
                 <section class="flex flex-col gap-4">
