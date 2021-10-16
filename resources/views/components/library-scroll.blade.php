@@ -5,13 +5,13 @@
     <button
         class="absolute items-center justify-center hidden w-12 h-12 transition-colors bg-green-700 rounded-full shadow-md md:flex text-green-50 dark:bg-gray-900 dark:text-green-50 inset-y-1/2 -left-5 bg-opacity-80 ring-0 hover:bg-opacity-100 hover:bg-green-300 hover:text-green-700 dark:hover:text-green-200 dark:hover:bg-green-800 disabled:opacity-0"
         x-bind:disabled="scroll == 0"
-        x-on:click="$refs.slider.scrollLeft -= $refs.slider.offsetWidth - ($refs.slider.offsetWidth / $refs.slider.childElementCount)">
+        x-on:click="$refs.slider.scrollLeft -= ($refs.slider.offsetWidth - ($refs.slider.offsetWidth / ($refs.slider.childElementCount))) / 1.2">
         <x-icons.chevron-left-solid class="w-8 h-8" />
     </button>
     <button
         class="absolute items-center justify-center hidden w-12 h-12 transition-colors bg-green-700 rounded-full shadow-md md:flex text-green-50 dark:bg-gray-900 dark:text-green-50 inset-y-1/2 -right-5 bg-opacity-80 ring-0 hover:bg-opacity-100 hover:bg-green-300 hover:text-green-700 dark:hover:text-green-200 dark:hover:bg-green-800 disabled:opacity-0"
         x-bind:disabled="scroll == $refs.slider.scrollWidth - $refs.slider.offsetWidth"
-        x-on:click="$refs.slider.scrollLeft += $refs.slider.offsetWidth - ($refs.slider.offsetWidth / $refs.slider.childElementCount)">
+        x-on:click="$refs.slider.scrollLeft += ($refs.slider.offsetWidth - ($refs.slider.offsetWidth / ($refs.slider.childElementCount))) / 1.2">
         <x-icons.chevron-right-solid class="w-8 h-8" />
     </button>
 </div>
