@@ -62,7 +62,7 @@
                     @endif
                 </div>
             </div>
-            <div class="grid grid-cols-1 pl-2 pt-2 gap-2 border-gray-400 border-opacity-50 border-dashed md:grid-cols-2 md:mt-3 md:border-t">
+            <div class="grid grid-cols-1 pl-2 pt-2 gap-2 border-gray-400 border-opacity-50 border-dashed md:mt-3 md:border-t">
                 <div class="border-b border-gray-400 border-opacity-50 border-dashed md:hidden">
                     <h2 class="text-lg font-bold text-green-700 font-primary dark:text-green-300">{{ $anime['title'] }}</h2>
                     <p class="text-sm italic">{{ $anime['title_english'] }}</p>
@@ -123,7 +123,7 @@
                         @endforelse
                     </p>
                 </div>
-                <div class="md:col-span-2">
+                <div>
                     <p class="font-semibold font-primary md:text-lg">{{ __('anime.single.external_link') }}</p>
                     <div class="flex flex-col gap-1 text-sm md:text-md">
                         @forelse ($anime['external_links'] as $name => $url)

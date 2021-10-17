@@ -15,7 +15,17 @@ module.exports = {
       serif: [...defaultTheme.fontFamily.serif],
       mono: [...defaultTheme.fontFamily.mono]
     },
-    extend: {},
+    extend: {
+      animation: {
+        blink: 'blink 1s ease-in-out'
+      },
+      keyframes: {
+        blink: {
+          '0%, 100%': { opacity: '1' },
+          '50%': {opacity: '0'}
+        }
+      }
+    },
   },
   variants: {
     extend: {
