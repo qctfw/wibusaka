@@ -29,6 +29,9 @@
             const allQuotes = {!! json_encode($quotes) !!};
             function regenerateQuote(e) {
                 const el = document.querySelector('[x-ref=title]');
+
+                if (el.classList.contains('animate-blink')) return;
+
                 el.classList.add('animate-blink');
 
                 let gachaRNG = Math.floor((Math.random() * 100) + 1);
