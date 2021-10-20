@@ -34,6 +34,8 @@ class AnimeViewModel extends ViewModel
                     'favorites' => abbreviate_number($this->anime['favorites']),
                     'studios' => collect($this->anime['studios']),
                     'genres' => collect($this->anime['genres']),
+                    'opening_themes' => $this->formatOPEDTheme($this->anime['opening_themes']),
+                    'ending_themes' => $this->formatOPEDTheme($this->anime['ending_themes']),
                     'external_links' => $this->formatExternalLinks($this->anime['external_links']),
                 ])
                 ->except(['request_hash', 'request_hashed', 'request_cached', 'request_cache_expiry']);
@@ -82,6 +84,15 @@ class AnimeViewModel extends ViewModel
             'season' => Str::lower($season[0]),
             'year' => $season[1]
         ];
+    }
+
+    private function formatOPEDTheme(array $themes): array
+    {
+        if (count($themes) < 1 || Str::contains($themes[0], 'Help improve our database')) {
+            return [];
+        }
+
+        return $themes;
     }
 
     private function formatExternalLinks(array $links): array
