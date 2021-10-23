@@ -85,7 +85,7 @@ class JikanService implements JikanServiceInterface
     {
         $result = $this->requestJikan('anime/' . $id . '/recommendations', ['jikan-anime-recommendations'], 'jikan-anime-recommendations-' . $id, now()->addDays(3)->endOfDay());
 
-        return collect($result['recommendations'])->take(5);
+        return collect($result['recommendations'])->take(6);
     }
 
     public function searchAnime(string $query)

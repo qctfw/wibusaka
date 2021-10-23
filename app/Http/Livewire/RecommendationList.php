@@ -20,6 +20,7 @@ class RecommendationList extends Component
     public function loadRecommendations()
     {
         $this->loaded = true;
+        $this->emit('rebuildImgPreload');
     }
 
     public function render(JikanServiceInterface $jikan_service)
