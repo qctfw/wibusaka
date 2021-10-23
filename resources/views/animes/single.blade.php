@@ -167,7 +167,7 @@
                     @foreach ($anime['related'] as $key => $relate)
                     <tr class="border-b border-gray-400 border-dashed border-opacity-30">
                         <td class="font-semibold align-top">
-                            {{ ucwords($key) }}
+                            {{ __('anime.single.relations.' . \Str::slug($key, '_')) }}
                         </td>
                         <td class="align-top">:</td>
                         <td class="pl-2 align-top">
