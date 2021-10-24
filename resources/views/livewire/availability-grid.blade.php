@@ -1,4 +1,4 @@
-<div wire:init="loadResources" class="grid items-center grid-cols-1 gap-4 mt-4 lg:grid-cols-2 rounded-xl">
+<div wire:init="loadResources" class="grid items-center grid-cols-1 gap-4 mt-4 lg:grid-cols-2 2xl:grid-cols-3 rounded-xl">
     @if ($loaded)
         @forelse ($resources as $resource)
         <x-button-link href="{{ $resource->link }}" target="_blank" :img="logo_asset($resource->platform->icon_path)">
@@ -19,7 +19,7 @@
         </div>
         @endforelse
     @else
-    <div class="flex items-center justify-center h-12 col-span-2 gap-4">
+    <div class="flex items-center justify-center h-12 col-span-3 gap-4">
         <x-icons.spinner class="block w-5 h-5" />
         Memuat...
     </div>

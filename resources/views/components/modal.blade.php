@@ -18,6 +18,8 @@
         <div class="flex justify-between mb-4 dark:text-gray-200">
             {{ $header }}
         </div>
-        {{ $slot }}
+        <div class="scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-300 dark:scrollbar-thumb-gray-500 dark:scrollbar-track-gray-700">
+            {{ $slot }}
+        </div>
     </div>
 </div>

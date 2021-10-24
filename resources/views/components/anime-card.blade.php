@@ -27,7 +27,7 @@
         <span class="italic">Tidak ada genre</span>
         @endforelse
         @foreach ($anime['explicit_genres'] as $genre)
-        <a href="{{ route('anime.genre.show', str_replace(' ', '-', strtolower($genre['name']))) }}" class="h-4 px-2 transition-colors bg-red-300 rounded-lg dark:bg-red-700 hover:bg-red-300 dark:hover:bg-red-600">{{ $genre['name'] }}</a>
+        <a href="{{ route('anime.genre.show', str_replace(' ', '-', strtolower($genre['name']))) }}" class="h-4 px-2 transition-colors bg-red-300 rounded-lg dark:bg-red-700 hover:bg-red-500 dark:hover:bg-red-600">{{ $genre['name'] }}</a>
         @endforeach
     </div>
     <div class="grid grid-cols-2 h-60 md:h-64 lg:h-80 xl:h-72">

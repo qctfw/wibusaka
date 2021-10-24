@@ -2,7 +2,7 @@
     <x-slot name="title">{{ __('anime.season.title') }} {{ $seasons['current']['season'] . ' ' . $seasons['current']['year'] }}</x-slot>
     <x-slot name="meta_description">{{ __('meta.season.description', ['season' => $seasons['current']['season'] . ' ' . $seasons['current']['year']]) }}</x-slot>
     
-    <div class="container px-4 pt-12 mx-auto">
+    <div class="px-4 pt-12 mx-auto md:px-6 xl:px-20">
         <div class="flex flex-row items-center justify-center gap-8 pb-4 font-primary">
 
             @if (!is_null($seasons['previous']))
@@ -36,7 +36,7 @@
                 <x-subtitle>
                     TV <span class="text-xs normal-case">({{ abbreviate_number(config('anime.season.minimum.tv')) }}+ member)</span>
                 </x-subtitle>
-                <div class="grid items-start grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+                <div class="grid items-start grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
                     @forelse ($animes->where('type', 'TV')->where('continuing', false)->where('members', '>=', config('anime.season.minimum.tv')) as $anime)
                     <x-anime-card :anime="$anime" :resources="$resources[$anime['mal_id']]" />
                     @empty
