@@ -39,7 +39,7 @@ class AnimeController extends Controller
             $current_season = $this->jikan_service->getCurrentSeason();
             $current_season['animes'] = $current_season['animes']->take(25)->sortByDesc('members');
 
-            $airing_animes = collect($this->jikan_service->getTopAnimes('airing'))->take(25)->sortByDesc('members');
+            $airing_animes = collect($this->jikan_service->getTopAnimes('airing'))->take(25)->sortByDesc('score');
             $upcoming_animes = collect($this->jikan_service->getTopAnimes('upcoming'))->take(25)->sortByDesc('members');
         } catch (JikanException $e)
         {
