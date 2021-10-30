@@ -55,7 +55,9 @@
     <x-header-index />
     @endif
 
-    {{ $slot }}
+    <main class="px-4 pt-12 mx-auto md:px-6 xl:px-8 2xl:px-20">
+        {{ $slot }}
+    </main>
 
     @if (!request()->routeIs('index'))
     <x-footer />

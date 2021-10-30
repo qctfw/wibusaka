@@ -2,11 +2,11 @@
     <x-slot name="title">Halaman Utama</x-slot>
     <x-slot name="meta_title">{{ __('meta.default.title') }}</x-slot>
 
-    <div class="flex flex-col gap-6 px-4 md:px-6 xl:px-20 pt-12 mx-auto">
+    <div class="flex flex-col gap-6">
         @foreach ($sections as $section)
         <div class="flex flex-col gap-2">
             <x-title>
-                <a href="{{ $section['route'] }}">{{ $section['title'] }} <x-icons.chevron-right-solid class="w-6 h-6 inline-block" /></a>
+                <a href="{{ $section['route'] }}">{{ $section['title'] }} <x-icons.chevron-right-solid class="inline-block w-6 h-6" /></a>
             </x-title>
             <x-library-scroll>
                 @foreach ($section['animes'] as $anime)

@@ -3,7 +3,7 @@
     <x-slot name="meta_description">{{(!empty($anime['synopsis'])) ? __('meta.single.description', ['synopsis' => \Str::words($anime['synopsis'], 30), 'anime' => $anime['title']]) : __('meta.single.description_empty') }}</x-slot>
     <x-slot name="meta_robots">noindex, nofollow</x-slot>
 
-    <div class="flex flex-col px-4 py-4 mx-auto md:px-6 xl:px-20 md:pt-12 md:flex-row">
+    <div class="flex flex-col py-4 md:flex-row">
         <div class="grid justify-between flex-none w-full grid-cols-2 md:grid-cols-1 md:items-center md:w-72 md:h-full">
             <div class="w-full text-center">
                 <div class="relative mx-auto rounded-lg anime-cover">

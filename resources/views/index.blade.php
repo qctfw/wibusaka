@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="title">{{ __('meta.default.title') }}</x-slot>
 
-    <section x-data="{}" class="flex items-center justify-center h-screen text-center">
+    <section x-data="{}" class="flex items-center justify-center h-screen text-center -mt-12">
         <div class="flex flex-col items-center w-full gap-4 px-4 lg:w-2/3 md:px-6">
             <h1
                 class="text-4xl font-bold cursor-pointer lg:text-7xl font-primary"
