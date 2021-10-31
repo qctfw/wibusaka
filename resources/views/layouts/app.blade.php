@@ -47,6 +47,17 @@
     <link rel="stylesheet" href="{{ mix('css/app.css') }}" />
     <livewire:styles />
     <script src="https://unpkg.com/alpinejs@3.0.6/dist/cdn.min.js" defer></script>
+    @if (!is_null(config('app.analytics_measurement_id')))
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ config('app.analytics_measurement_id') }}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', '{{ config("app.analytics_measurement_id") }}');
+    </script>
+    @endif
 </head>
 <body class="font-sans overflow-x-hidden bg-gray-200 dark:bg-gray-900 dark:text-gray-200 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-300 dark:scrollbar-thumb-gray-500 dark:scrollbar-track-gray-700">
     @if (!request()->routeIs('index'))

@@ -30,7 +30,11 @@
 
         <div class="flex flex-col gap-4 overflow-y-auto dark:text-gray-200">
             <template x-if="menu === 'privacy'">
-                <p>Akan diisi nanti</p>
+                @if (!is_null(config('app.analytics_measurement_id')))
+                <p>(Work In Progress) {{ config('app.name') }} menggunakan Google Analytics untuk mengoleksi data dan membuat laporan. Data yang dikoleksi adalah anonim. Untuk informasi lebih lanjut, kunjungi halaman <a href="https://www.google.com/policies/technologies/cookies/" target="_blank" rel="noopener noreferrer" class="text-link font-semibold">cara Google menggunakan cookie</a> atau <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener noreferrer" class="text-link font-semibold">cara Google menggunakan informasi dari situs atau aplikasi yang menggunakan layanan Google</a>.</p>
+                @else
+                <p>-</p>
+                @endif
             </template>
             <template x-if="menu === 'faq'">
                 <section class="flex flex-col gap-4">

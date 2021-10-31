@@ -136,6 +136,17 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Google Analytics Measurement ID
+    |--------------------------------------------------------------------------
+    |
+    | This key is used to give Measurement ID for Google Analytics.
+    |
+    */
+
+    'analytics_measurement_id' => env('ANALYTICS_MEASUREMENT_ID'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Autoloaded Service Providers
     |--------------------------------------------------------------------------
     |
