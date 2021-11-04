@@ -45,6 +45,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;500;700&display=swap" />
 
     <link rel="stylesheet" href="{{ mix('css/app.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/loading-screen.css') }}">
     <livewire:styles />
     <script src="https://unpkg.com/alpinejs@3.0.6/dist/cdn.min.js" defer></script>
     @if (!is_null(config('app.analytics_measurement_id')))
@@ -60,6 +61,7 @@
     @endif
 </head>
 <body class="font-sans overflow-x-hidden bg-gray-200 dark:bg-gray-900 dark:text-gray-200 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-300 dark:scrollbar-thumb-gray-500 dark:scrollbar-track-gray-700">
+    <x-loading-screen />
     @if (!request()->routeIs('index'))
     <x-header-navbar />
     @else
