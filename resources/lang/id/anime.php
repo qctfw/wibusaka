@@ -5,7 +5,7 @@ return [
         'airing_date' => 'Tanggal Tayang',
         'alternative_title' => 'Judul Lain',
         'availability' => 'Tersedia di',
-        'availability_empty' => 'Kami belum menemukan platform yang menayangkan anime ini.',
+        'availability_empty' => 'Kami belum menemukan platform yang menayangkan anime ini di Indonesia.',
         'availability_empty_short' => 'Tidak tersedia',
         'genre' => 'Genre',
         'members' => 'Jumlah Penonton',

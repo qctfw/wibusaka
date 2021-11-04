@@ -11,7 +11,7 @@
             <p class="pl-2 text-sm italic md:pl-4">{{ $resource->note }}</p>
         </x-button-link>
         @empty
-        <div class="flex items-center h-12 col-span-2 p-4">
+        <div class="flex items-center h-12 col-span-3 p-4">
             <p class="w-full italic text-center">
                 {{ __('anime.single.availability_empty') }}
                 <x-icons.emoji-sad class="inline-block w-5 h-5" />

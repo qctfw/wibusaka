@@ -190,6 +190,13 @@
             <div class="flex flex-col mt-4">
                 <h3 class="pb-3 text-2xl font-semibold border-b border-gray-400 border-opacity-50 border-dashed font-primary">{{ __('anime.single.availability') }}</h3>
                 <livewire:availability-grid :mal="$anime['mal_id']" />
+                <div class="flex items-center h-12 col-span-3 m-2">
+                    <p class="w-full text-center text-sm text-gray-700 dark:text-gray-300">Bantu kami menemukan lebih banyak platform untuk menonton anime ini melalui
+                        <a href="{{ config('anime.link.discord') }}" target="_blank" class="font-semibold text-link">
+                            Discord kami!<x-icons.discord class="inline-flex w-6 h-6 pl-2" fill="currentColor" />
+                        </a>
+                    </p>
+                </div>
             </div>
             @endif
 
