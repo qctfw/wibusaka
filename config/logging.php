@@ -103,7 +103,7 @@ return [
 
         'jikan' => [
             'driver' => 'daily',
-            'path' => storage_path('logs/jikan.log'),
+            'path' => storage_path('logs/jikan_logs/jikan.log'),
             'level' => 'info',
         ],
     ],
