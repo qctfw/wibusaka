@@ -66,7 +66,7 @@
                         <div class="text-xl font-semibold">Website</div>
                         <div class="gap-1">
                             <p>Built with <a href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer" class="text-link font-semibold">Tailwind CSS</a>, <a href="https://alpinejs.dev" target="_blank" rel="noopener noreferrer" class="text-link font-semibold">Alpine.js</a>, <a href="https://laravel.com" target="_blank" rel="noopener noreferrer" class="text-link font-semibold">Laravel</a>, and <a href="https://laravel-livewire.com" target="_blank" rel="noopener noreferrer" class="text-link font-semibold">Livewire</a></p>
-                            <p>API powered by <a href="https://api.jikan.moe" target="_blank" rel="noopener noreferrer" class="text-link font-semibold">Jikan.moe</a> (Unofficial <a href="https://myanimelist.net" target="_blank" rel="noopener noreferrer" class="text-link font-semibold">MyAnimeList</a> API)</p>
+                            <p>API powered by <a href="https://jikan.moe" target="_blank" rel="noopener noreferrer" class="text-link font-semibold">Jikan.moe</a> (Unofficial <a href="https://myanimelist.net" target="_blank" rel="noopener noreferrer" class="text-link font-semibold">MyAnimeList</a> API)</p>
                         </div>
                     </div>
                     <div class="flex flex-col gap-2">
