@@ -8,6 +8,7 @@ use App\Services\Contracts\ResourceServiceInterface;
 use App\ViewModels\AnimeViewModel;
 use App\ViewModels\SeasonViewModel;
 use App\ViewModels\TopIndexViewModel;
+use Illuminate\Support\Str;
 
 class AnimeController extends Controller
 {
@@ -113,6 +114,8 @@ class AnimeController extends Controller
         {
             abort($e->getHttpCode());
         }
+
+        abort_if(Str::contains($result['rating'], 'Rx'), 404);
 
         $anime_view_model = new AnimeViewModel($result);
 
