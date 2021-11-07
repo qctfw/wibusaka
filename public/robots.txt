@@ -1,2 +1,7 @@
 User-agent: *
-Disallow:
+Allow: /
+Allow: /anime
+Allow: /anime/genre
+Allow: /anime/season
+Allow: /anime/top
+Disallow: /anime/
