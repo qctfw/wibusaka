@@ -20,7 +20,7 @@
 <body class="font-sans dark:bg-gray-800 dark:text-white">
     <article class="flex flex-col items-center justify-center h-screen gap-4 text-center">
         <h1 class="font-bold font-primary text-7xl">{{ $code }}</h1>
-        <p>{{ $message }}</p>
+        {{ $message }}
         <p>- {{ config('app.name') }} -</p>
     </article>
 </body>

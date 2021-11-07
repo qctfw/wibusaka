@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Exceptions\JikanException;
 use App\Services\Contracts\JikanServiceInterface;
 use App\ViewModels\SearchViewModel;
 use Livewire\Component;
@@ -16,17 +17,7 @@ class SearchNavbar extends Component
     /**
      * @var string
      */
-    public $height;
-
-    /**
-     * @var string
-     */
-    public $size;
-
-    /**
-     * @var string
-     */
-    public $background;
+    public $message;
     
     public function mount()
     {
@@ -36,10 +27,15 @@ class SearchNavbar extends Component
     public function render(JikanServiceInterface $jikan_service)
     {
         $results = [];
+        $this->message = '';
 
         if (strlen($this->search) > 2)
         {
-            $results = $jikan_service->searchAnime($this->search);
+            try {
+                $results = $jikan_service->searchAnime($this->search);
+            } catch (JikanException $e) {
+                $this->message = __('error.jikan_api');
+            }
         }
 
         $search_view_model = new SearchViewModel($results);

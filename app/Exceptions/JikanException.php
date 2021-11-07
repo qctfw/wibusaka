@@ -4,10 +4,29 @@ namespace App\Exceptions;
 
 use Exception;
 
-class JikanException extends HttpRequestException
+class JikanException extends Exception
 {
-    public function __construct($http_code = 503, $message = 'Jikan.moe API Error')
+    public $code;
+
+    public $message;
+
+    public function __construct(int $code = 500, string $message = '')
     {
-        parent::__construct($http_code, $message);
+        $this->code = $code;
+        $this->message = $message;
+    }
+
+    /**
+     * Render the exception into an HTTP response.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function render($request)
+    {
+        return response()->view('errors.jikan', [
+            'code' => $this->code,
+            'message' => $this->message
+        ], 500);
     }
 }

@@ -60,6 +60,10 @@
                         </div>
                     </a>
                     @endforeach
+                @elseif (strlen($message) > 0)
+                    <div wire:loading.remove class="flex items-center justify-center h-20">
+                        <p class="text-sm font-normal p-2">{{ $message }}</p>
+                    </div>
                 @else
                     <div wire:loading.remove class="flex items-center justify-center h-10">
                         <p class="text-sm">{{ __('anime.search.no_results', ['query' => $search]) }}</p>

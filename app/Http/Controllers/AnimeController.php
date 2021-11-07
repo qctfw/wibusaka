@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Exceptions\JikanException;
 use App\Services\Contracts\JikanServiceInterface;
 use App\Services\Contracts\ResourceServiceInterface;
 use App\ViewModels\AnimeViewModel;
@@ -35,17 +34,12 @@ class AnimeController extends Controller
      */
     public function index()
     {
-        try
-        {
-            $current_season = $this->jikan_service->getCurrentSeason();
-            $current_season['animes'] = $current_season['animes']->take(25)->sortByDesc('members');
+        $current_season = $this->jikan_service->getCurrentSeason();
+        $current_season['animes'] = $current_season['animes']->take(25)->sortByDesc('members');
 
-            $airing_animes = collect($this->jikan_service->getTopAnimes('airing'))->take(25)->sortByDesc('score');
-            $upcoming_animes = collect($this->jikan_service->getTopAnimes('upcoming'))->take(25)->sortByDesc('members');
-        } catch (JikanException $e)
-        {
-            abort($e->getHttpCode());
-        }
+        $airing_animes = collect($this->jikan_service->getTopAnimes('airing'))->take(25)->sortByDesc('score');
+        $upcoming_animes = collect($this->jikan_service->getTopAnimes('upcoming'))->take(25)->sortByDesc('members');
+        
 
         $all_mal_ids = collect([
             $current_season['animes']->pluck('mal_id'),
@@ -75,19 +69,13 @@ class AnimeController extends Controller
      */
     public function season($year = null, $season = null)
     {
-        try
+        if (!is_null($season))
         {
-            if (!is_null($season))
-            {
-                $result = $this->jikan_service->getAnimesBySeason($year, $season);
-            }
-            else
-            {
-                $result = $this->jikan_service->getCurrentSeason();
-            }
-        } catch (JikanException $e)
+            $result = $this->jikan_service->getAnimesBySeason($year, $season);
+        }
+        else
         {
-            abort($e->getHttpCode());
+            $result = $this->jikan_service->getCurrentSeason();
         }
 
         $animes = $result['animes']->where('members', '>', 1000)->where('r18', false)->where('kids', false);
@@ -107,13 +95,7 @@ class AnimeController extends Controller
      */
     public function show($id)
     {
-        try
-        {
-            $result = $this->jikan_service->getAnime(intval($id));
-        } catch (JikanException $e)
-        {
-            abort($e->getHttpCode());
-        }
+        $result = $this->jikan_service->getAnime(intval($id));
 
         abort_if(Str::contains($result['rating'], 'Rx'), 404);
 

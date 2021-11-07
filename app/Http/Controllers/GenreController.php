@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Exceptions\JikanException;
 use App\Services\Contracts\GenreServiceInterface;
 use App\Services\Contracts\JikanServiceInterface;
 use App\Services\Contracts\ResourceServiceInterface;
@@ -70,12 +69,7 @@ class GenreController extends Controller
             return redirect()->to(url()->current());
         }
 
-        try {
-            $result = $this->jikan_service->getAnimesByGenre($genre->id, $page);
-        } catch (JikanException $e)
-        {
-            abort($e->getHttpCode());
-        }
+        $result = $this->jikan_service->getAnimesByGenre($genre->id, $page);
 
         $resources = $this->resource_service->getByMalIds($result['animes']->pluck('mal_id'));
         

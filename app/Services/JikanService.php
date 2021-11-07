@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class JikanService implements JikanServiceInterface
 {
@@ -100,6 +101,11 @@ class JikanService implements JikanServiceInterface
 
     private function requestJikan(string $uri, array $cache_tags, string $cache_key = '', Carbon $cache_expire = null, array $query = null)
     {
+        if (Cache::has('jikan-rate-limit'))
+        {
+            throw new JikanException(429, __('error.jikan_rate_limit'));
+        }
+
         $uri = trim($uri, '/');
         
         $cache_tags = array_merge(['jikan'], $cache_tags);
@@ -126,13 +132,26 @@ class JikanService implements JikanServiceInterface
 
             $jikan_response = Http::withoutVerifying()->acceptJson()->get($this->base_uri . $uri, $query);
 
-            if ($jikan_response->failed())
+            $status = $jikan_response->status();
+
+            if ($jikan_response->serverError())
             {
-                $status = $jikan_response->status();
                 $exception_body = $jikan_response->collect();
                 $exception_message = 'Type: ' . $exception_body['type'] . ' (' . $exception_body['message'] . ')';
 
                 throw new JikanException($status, $exception_message);
+            }
+            elseif ($jikan_response->clientError())
+            {
+                switch ($status) {
+                    case 404:
+                        throw new NotFoundHttpException();
+                        break;
+                    case 429:
+                        Cache::put('jikan-rate-limit', true, 15);
+                        throw new JikanException($status, __('error.jikan_rate_limit'));
+                        break;
+                }
             }
 
             $jikan_data = $jikan_response->body();
@@ -147,7 +166,7 @@ class JikanService implements JikanServiceInterface
     {
         if (!$this->validateSeason($year, $season))
         {
-            throw new JikanException(404);
+            throw new NotFoundHttpException();
         }
 
         $season = ucfirst($season);

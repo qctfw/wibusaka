@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Exceptions\JikanException;
 use App\Services\Contracts\JikanServiceInterface;
 use App\Services\Contracts\ResourceServiceInterface;
 use App\ViewModels\TopViewModel;
@@ -92,13 +91,7 @@ class TopAnimeController extends Controller
 
     private function fetchRequest($category, $page)
     {
-        try
-        {
-            $animes = $this->jikan_service->getTopAnimes($category, $page);
-        } catch (JikanException $e)
-        {
-            abort($e->getHttpCode());
-        }
+        $animes = $this->jikan_service->getTopAnimes($category, $page);
 
         $anime_resources = $this->resource_service->getByMalIds($animes->pluck('mal_id'));
 
