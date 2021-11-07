@@ -21,9 +21,6 @@
             </div>
         </div>
         <x-footer-menu />
-        <div class="flex flex-col gap-2 text-center md:flex-row md:text-right">
-            <p>Powered by <a href="https://jikan.moe" class="font-semibold hover:underline">Jikan.moe</a> API</p>
-        </div>
         <div class="flex flex-row items-center gap-4 md:hidden dark:text-white">
             <a href="{{ config('anime.link.github') }}" target="_blank">
                 <x-icons.github class="w-6 h-6" fill="currentColor" />
