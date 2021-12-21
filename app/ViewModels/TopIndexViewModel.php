@@ -29,15 +29,12 @@ class TopIndexViewModel extends ViewModel
         return $this->sections->map(function ($item, $key) {
             $item['animes'] = $item['animes']->map(function ($anime, $key) {
 
-                if (isset($anime['airing_start']))
-                {
-                    $anime['start_date'] = $anime['airing_start'];
-                }
+                $anime['start_date'] = (isset($anime['airing_start'])) ? Carbon::parse($anime['airing_start']) : null;
 
                 return collect($anime)->merge([
-                    'start_date' => (isset($anime['start_date'])) ? Carbon::parse($anime['start_date'])->translatedFormat('M Y') : '?',
+                    'start_date' => (!is_null($anime['start_date'])) ? $anime['start_date']->translatedFormat('M Y') : '?',
                     'members' => abbreviate_number($anime['members']),
-                    'is_released' => now()->gte(Carbon::parse($anime['start_date'])),
+                    'is_released' => (!is_null($anime['start_date'])) ? now()->gte($anime['start_date']) : false,
                     'score' => ($anime['score'] > 0) ? number_format($anime['score'], 2, '.', '') : 0
                 ]);
             });
