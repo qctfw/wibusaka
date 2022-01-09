@@ -1,11 +1,11 @@
-<div {{ $attributes->merge(['class' => 'flex flex-col bg-gray-100 text-green-900 divide-y divide-gray-400 rounded-lg group dark:bg-gray-800 dark:text-gray-50 divide-opacity-50 divide-dashed']) }}>
+<div {{ $attributes->merge(['class' => 'flex flex-col bg-gray-100 text-emerald-900 divide-y divide-gray-400 rounded-lg group dark:bg-gray-800 dark:text-gray-50 divide-opacity-50 divide-dashed']) }}>
     <a href="{{ route('anime.show', $anime['mal_id']) }}" rel="nofollow" class="relative flex items-center w-full mx-auto rounded-lg font-primary h-60 md:h-64 lg:h-64 xl:h-72 anime-cover">
         <div class="flex flex-col items-center justify-center w-full h-72 spinner">
             <x-icons.spinner class="block w-5 h-5" />
         </div>
         <img alt="{{ $anime['title'] }} Anime Poster" data-src="{{ $anime['images']['webp']['image_url'] }}" class="absolute inset-x-0 top-0 max-w-full max-h-full mx-auto rounded-lg opacity-0" loading="lazy" />
         <div class="absolute inset-x-0 bottom-0 py-1 bg-black bg-opacity-50">
-            <h4 class="p-1 text-lg font-semibold leading-tight text-center text-green-100 transition-colors duration-200 group-hover:text-green-300 dark:group-hover:text-green-300">
+            <h4 class="p-1 text-lg font-semibold leading-tight text-center text-emerald-100 transition-colors duration-200 group-hover:text-emerald-300 dark:group-hover:text-emerald-300">
                 {{ $anime['title'] }}
             </h4>
         </div>

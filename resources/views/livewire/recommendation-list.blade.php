@@ -2,12 +2,12 @@
     @if ($loaded)
         <x-library-scroll class="w-full">
         @forelse ($recommendations as $anime)
-        <div class="relative flex flex-col flex-shrink-0 snap-left bg-gray-100 rounded-lg font-primary group dark:bg-gray-800">
+        <div class="relative flex flex-col shrink-0 snap-left bg-gray-100 rounded-lg font-primary group dark:bg-gray-800">
             <div class="absolute top-0 left-0 z-20 flex flex-row items-center w-auto gap-1 px-2 text-center bg-gray-200 rounded-tl-lg rounded-br-lg text-md dark:bg-gray-900">
                 <x-icons.user-solid class="w-5 h-5" />
                 <span>{{ $anime['votes'] }}</span>
             </div>
-            <a href="{{ route('anime.show', $anime['entry']['mal_id']) }}" rel="nofollow" class="relative flex flex-row w-full mx-auto text-green-100 rounded-lg anime-cover hover:text-green-300 dark:hover:text-green-300 h-60 md:h-64 lg:h-64 xl:h-72">
+            <a href="{{ route('anime.show', $anime['entry']['mal_id']) }}" rel="nofollow" class="relative flex flex-row w-full mx-auto text-emerald-100 rounded-lg anime-cover hover:text-emerald-300 dark:hover:text-emerald-300 h-60 md:h-64 lg:h-64 xl:h-72">
                 <div class="flex flex-col items-center justify-center w-44 md:w-48 xl:w-52 spinner">
                     <x-icons.spinner class="block w-5 h-5" />
                 </div>

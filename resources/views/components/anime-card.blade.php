@@ -22,7 +22,7 @@
     </div>
     <div class="flex flex-row flex-wrap items-center justify-center gap-2 px-1 py-1 text-xs md:h-12">
         @forelse ($anime['genres'] as $genre)
-        <a href="{{ route('anime.genre.show', str_replace(' ', '-', strtolower($genre['name']))) }}" class="h-4 px-2 transition-colors bg-gray-300 rounded-lg dark:bg-gray-700 hover:bg-green-300 dark:hover:bg-green-600">{{ $genre['name'] }}</a>
+        <a href="{{ route('anime.genre.show', str_replace(' ', '-', strtolower($genre['name']))) }}" class="h-4 px-2 transition-colors bg-gray-300 rounded-lg dark:bg-gray-700 hover:bg-emerald-300 dark:hover:bg-emerald-600">{{ $genre['name'] }}</a>
         @empty
         <span class="italic">Tidak ada genre</span>
         @endforelse
@@ -37,7 +37,7 @@
             </div>
             <img alt="{{ $anime['title'] }} Anime Poster" data-src="{{ $anime['images']['webp']['image_url'] }}" class="absolute inset-x-0 top-0 max-w-full max-h-full mx-auto opacity-0" loading="lazy" />
             @if (!empty($anime['explicit_genres']))
-            <div x-data="{showCover: false}" x-on:click.prevent="showCover = true" x-show="!showCover" class="absolute inset-x-0 top-0 flex items-center justify-center w-full h-full text-gray-200 backdrop-filter backdrop-blur">
+            <div x-data="{showCover: false}" x-on:click.prevent="showCover = true" x-show="!showCover" class="absolute inset-x-0 top-0 flex items-center justify-center w-full h-full text-gray-200 backdrop-blur">
                 <div class="flex items-center px-2 py-1 bg-gray-800 rounded">Lihat</div>
             </div>
             @endif

@@ -13,7 +13,7 @@
                 x-on:animationend="$refs.title.classList.remove('animate-blink');"
                 data-nosnippet
                 >
-                {!! preg_replace('/\*{2}([^*]*)\*{2}/', '<span class="text-green-500">$1</span>', $selected_quote) !!}
+                {!! preg_replace('/\*{2}([^*]*)\*{2}/', '<span class="text-emerald-500">$1</span>', $selected_quote) !!}
             </h1>
             <p class="text-lg lg:text-xl">{{ __('anime.main.subtitle') }}</p>
             <div class="w-1/2 mt-4 lg:w-1/4">
@@ -39,7 +39,7 @@
                 let quotes = (gachaRNG <= 5 || {{ intval(env('TITLE_ABNORMAL_HACK', false)) }}) ? allQuotes.abnormal : allQuotes.normal;
 
                 setTimeout(() => {
-                    el.innerHTML = quotes[Math.floor(Math.random() * quotes.length)].replace(/\*{2}([^*]*)\*{2}/gim, '<span class="text-green-500">$1</span>');
+                    el.innerHTML = quotes[Math.floor(Math.random() * quotes.length)].replace(/\*{2}([^*]*)\*{2}/gim, '<span class="text-emerald-500">$1</span>');
                 }, 500);
             }
 

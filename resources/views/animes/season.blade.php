@@ -13,7 +13,7 @@
         </a>
         @endif
 
-        <div class="flex flex-col items-center font-bold text-green-700 dark:text-green-300">
+        <div class="flex flex-col items-center font-bold text-emerald-700 dark:text-emerald-300">
             <p class="text-3xl">{{ ucfirst($seasons['current']['season']) }}</p>
             <p class="text-lg">{{ $seasons['current']['year'] }}</p>
         </div>

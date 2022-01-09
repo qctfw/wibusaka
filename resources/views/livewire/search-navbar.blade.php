@@ -2,7 +2,7 @@
     <input
         wire:model.debounce.500ms="search"
         type="text"
-        class="w-full h-7 px-4 py-1 pl-8 text-sm rounded-md bg-green-100 {{ request()->routeIs('index') ? 'dark:bg-gray-800' : 'dark:bg-gray-900' }} focus:outline-none focus:ring focus:ring-green-300"
+        class="w-full h-7 px-4 py-1 pl-8 text-sm rounded-md bg-emerald-100 {{ request()->routeIs('index') ? 'dark:bg-gray-800' : 'dark:bg-gray-900' }} focus:outline-none focus:ring focus:ring-emerald-300"
         placeholder="Cari..."
         @focus="searchOpen = true"
         @keydown="searchOpen = true"
@@ -12,8 +12,8 @@
     <div class="absolute inset-y-0 left-2 flex items-center justify-center">
         <x-icons.search class="w-4" />
     </div>
-    <div x-show="searchOpen" class="absolute left-0 z-40 w-full mt-2 bg-green-900 rounded-lg text-green-50 dark:bg-gray-800">
-        <div class="grid grid-cols-1 overflow-y-auto border border-green-400 divide-y-2 divide-green-800 rounded-lg shadow-md min-h-8 max-h-96 divide-solid scrollbar-extra-thin dark:border-gray-700 md:shadow-lg scrollbar-thumb-gray-400 scrollbar-track-gray-300 dark:scrollbar-thumb-gray-500 dark:scrollbar-track-gray-700 dark:divide-gray-700">
+    <div x-show="searchOpen" class="absolute left-0 z-40 w-full mt-2 bg-emerald-900 rounded-lg text-emerald-50 dark:bg-gray-800">
+        <div class="grid grid-cols-1 overflow-y-auto border border-emerald-400 divide-y-2 divide-emerald-800 rounded-lg shadow-md min-h-8 max-h-96 divide-solid scrollbar-extra-thin dark:border-gray-700 md:shadow-lg scrollbar-thumb-gray-400 scrollbar-track-gray-300 dark:scrollbar-thumb-gray-500 dark:scrollbar-track-gray-700 dark:divide-gray-700">
             <div wire:loading class="w-full h-auto">
                 <div class="flex items-center justify-center h-10 gap-4">
                     <x-icons.spinner class="block w-5 h-5" />
@@ -32,7 +32,7 @@
                         href="{{ route('anime.show', $anime['mal_id']) }}"
                         rel="nofollow"
                         @if ($loop->last) @keydown.tab="searchOpen = false" @endif
-                        class="flex flex-row items-center justify-between p-3 transition-colors rounded-lg hover:text-green-900 hover:bg-green-300 dark:hover:text-green-50 dark:hover:bg-green-800"
+                        class="flex flex-row items-center justify-between p-3 transition-colors rounded-lg hover:text-emerald-900 hover:bg-emerald-300 dark:hover:text-emerald-50 dark:hover:bg-emerald-800"
                         wire:loading.remove
                     >
                         <img src="{{ $anime['images']['webp']['small_image_url'] }}" alt="" class="w-12">

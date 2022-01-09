@@ -10,7 +10,7 @@
             </x-title>
             <x-library-scroll>
                 @foreach ($section['animes'] as $anime)
-                <x-anime-card-cover :anime="$anime" :resources="$resources[$anime['mal_id']] ?? null" class="flex-shrink-0 w-44 md:w-48 xl:w-52 snap-center" />
+                <x-anime-card-cover :anime="$anime" :resources="$resources[$anime['mal_id']] ?? null" class="shrink-0 w-44 md:w-48 xl:w-52 snap-center" />
                 @endforeach
             </x-library-scroll>
         </div>
