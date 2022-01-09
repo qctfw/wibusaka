@@ -4,7 +4,7 @@
             <div class="flex flex-row items-center gap-2">
                 <img src="{{ randomize_logo() }}" alt="Logo" class="h-6" />
                 <span class="select-none">&bull;</span>
-                2021
+                {{ now()->year }}
             </div>
             <div class="flex-row items-center hidden gap-4 md:flex dark:text-white">
                 <a href="{{ config('anime.link.github') }}" target="_blank">
@@ -19,6 +19,9 @@
                     <x-icons.discord class="w-6 h-6 transition-colors duration-150 hover:text-green-300 dark:hover:text-gray-300" fill="currentColor" />
                 </a>
             </div>
+        </div>
+        <div class="flex flex-row items-center">
+            <p>This website is not affiliated with <a href="https://myanimelist.net" rel="nofollow noopener noreferrer" target="_blank" class="text-link font-bold">MyAnimeList.</a></p>
         </div>
         <x-footer-menu />
         <div class="flex flex-row items-center gap-4 md:hidden dark:text-white">

@@ -11,7 +11,7 @@ class GenreViewModel extends ViewModel
 
     public $page;
 
-    public $total;
+    public $pagination;
 
     public $details;
 
@@ -19,42 +19,30 @@ class GenreViewModel extends ViewModel
 
     public $resources;
 
-    public function __construct($genre, $page, $total, $details, $animes, $resources)
+    public function __construct($genre, $page, $pagination, $animes, $resources)
     {
         $this->genre = $genre;
         $this->page = $page;
-        $this->total = $total;
-        $this->details = $details;
+        $this->pagination = $pagination;
         $this->animes = $animes;
         $this->resources = $resources;
-    }
-
-    public function total_page()
-    {
-        $total_page = intdiv($this->total, 100);
-        
-        if ($this->total % 100 > 0)
-        {
-            $total_page += 1;
-        }
-
-        return $total_page;
     }
 
     public function animes()
     {
         return collect($this->animes)->where('members', '>', 1000)->where('r18', false)->where('continuing', false)->where('kids', false)->map(function ($item, $key) {
-            if(!is_null($item['airing_start']))
+
+            if(!is_null($item['aired']['from']))
             {
-                $item['airing_start'] = Carbon::parse($item['airing_start']);
-                $item['airing_start'] = (count($item['demographics']) > 0) ? $item['airing_start']->translatedFormat('d M Y') : $item['airing_start']->translatedFormat('d F Y');
+                $item['aired_at'] = Carbon::parse($item['aired']['from']);
+                $item['aired_at'] = (count($item['demographics']) > 0) ? $item['aired_at']->translatedFormat('d M Y') : $item['aired_at']->translatedFormat('d F Y');
             }
             else {
-                $item['airing_start'] = '?';
+                $item['aired_at'] = '?';
             }
 
             return collect($item)->merge([
-                "airing_start" => $item['airing_start'],
+                "aired_at" => $item['aired_at'],
                 "score" => ($item['score'] > 0) ? number_format($item['score'], 2, '.', '') : 'N/A'
             ]);
         });

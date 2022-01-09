@@ -1,6 +1,6 @@
 <header x-data="{ mobileMenuOpen: false, topMenuOpen: false }" class="relative w-full p-4 font-bold bg-green-800 border-b border-gray-300 dark:border-gray-700 dark:bg-gray-800 md:space-x-4 mx-auto md:px-6 xl:px-8 2xl:px-20" @click.away="mobileMenuOpen = false">
     <div class="flex flex-row flex-wrap items-center justify-between" data-nosnippet>
-        <a href="{{ route('index') }}" class="block font-bold">
+        <a href="{{ route('anime.index') }}" class="block font-bold">
             <span class="sr-only">Logo</span>
             <img src="{{ randomize_logo() }}" alt="Logo" class="h-8" />
         </a>

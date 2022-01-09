@@ -5,15 +5,15 @@
         <div class="relative flex flex-col flex-shrink-0 snap-left bg-gray-100 rounded-lg font-primary group dark:bg-gray-800">
             <div class="absolute top-0 left-0 z-20 flex flex-row items-center w-auto gap-1 px-2 text-center bg-gray-200 rounded-tl-lg rounded-br-lg text-md dark:bg-gray-900">
                 <x-icons.user-solid class="w-5 h-5" />
-                <span>{{ $anime['recommendation_count'] }}</span>
+                <span>{{ $anime['votes'] }}</span>
             </div>
-            <a href="{{ route('anime.show', $anime['mal_id']) }}" rel="nofollow" class="relative flex flex-row w-full mx-auto text-green-100 rounded-lg anime-cover hover:text-green-300 dark:hover:text-green-300 h-60 md:h-64 lg:h-64 xl:h-72">
+            <a href="{{ route('anime.show', $anime['entry']['mal_id']) }}" rel="nofollow" class="relative flex flex-row w-full mx-auto text-green-100 rounded-lg anime-cover hover:text-green-300 dark:hover:text-green-300 h-60 md:h-64 lg:h-64 xl:h-72">
                 <div class="flex flex-col items-center justify-center w-44 md:w-48 xl:w-52 spinner">
                     <x-icons.spinner class="block w-5 h-5" />
                 </div>
-                <img data-src="{{ $anime['image_url'] }}" alt="{{ $anime['title'] }} Anime Poster" class="absolute inset-x-0 top-0 max-w-full max-h-full mx-auto rounded-lg" loading="lazy" />
+                <img data-src="{{ $anime['entry']['images']['webp']['image_url'] }}" alt="{{ $anime['entry']['title'] }} Anime Poster" class="absolute inset-x-0 top-0 max-w-full max-h-full mx-auto rounded-lg" loading="lazy" />
                 <p class="absolute inset-x-0 bottom-0 py-1 font-semibold leading-tight text-center transition-colors duration-200 bg-black bg-opacity-50 border-dashed rounded-b-lg text-md">
-                    {{ $anime['title'] }}
+                    {{ $anime['entry']['title'] }}
                 </p>
             </a>
         </div>

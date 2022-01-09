@@ -35,7 +35,7 @@
                         class="flex flex-row items-center justify-between p-3 transition-colors rounded-lg hover:text-green-900 hover:bg-green-300 dark:hover:text-green-50 dark:hover:bg-green-800"
                         wire:loading.remove
                     >
-                        <img src="{{ $anime['image_url'] }}" alt="" class="w-12">
+                        <img src="{{ $anime['images']['webp']['small_image_url'] }}" alt="" class="w-12">
                         <div class="grid flex-auto grid-cols-1 ml-3 text-xs">
                             <div class="text-sm font-semibold font-primary">
                                 {{ $anime['title'] }}
@@ -51,7 +51,7 @@
                             <div class="flex flex-row items-center justify-center gap-1 text-left">
                                 <x-icons.calendar-solid class="flex-none w-4 h-4" />
                                 <p class="flex-auto">
-                                    {{ $anime['start_date'] }}
+                                    {{ $anime['aired']['from'] }}
                                 </p>
                             </div>
                         </div>

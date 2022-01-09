@@ -8,7 +8,7 @@
     </div>
     <div class="grid items-start grid-cols-2 gap-4 mt-4 md:grid-cols-1">
         @foreach ($top_animes as $anime)
-        <x-anime-card-list :anime="$anime" :resources="$resources[$anime['mal_id']]" />
+        <x-anime-card-list :anime="$anime" :resources="$resources[$anime['mal_id']]" :rank="(25 * ($page - 1)) + $loop->iteration" />
         @endforeach
     </div>
     @if ($total_page > 1)

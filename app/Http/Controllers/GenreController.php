@@ -72,8 +72,8 @@ class GenreController extends Controller
         $result = $this->jikan_service->getAnimesByGenre($genre->id, $page);
 
         $resources = $this->resource_service->getByMalIds($result['animes']->pluck('mal_id'));
-        
-        $genre_view_model = new GenreViewModel($genre, $page, $result['total'], $result['mal_details'], $result['animes'], $resources);
+
+        $genre_view_model = new GenreViewModel($genre, $page, $result['pagination'], $result['animes'], $resources);
 
         return view('animes.genre', $genre_view_model);
     }

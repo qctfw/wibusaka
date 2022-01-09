@@ -22,7 +22,7 @@
             @foreach ($results as $anime)
             <div class="flex flex-col flex-shrink-0 text-green-900 bg-gray-100 divide-y divide-gray-400 rounded-lg w-44 md:w-48 xl:w-48 snap-center group dark:bg-gray-800 dark:text-gray-50 divide-opacity-50 divide-dashed">
                 <a href="{{ route('anime.show', $anime['mal_id']) }}" rel="nofollow" class="relative flex items-center w-full mx-auto rounded-lg font-primary h-60 md:h-64 lg:h-64 xl:h-64">
-                    <img alt="{{ $anime['title'] }} Anime Poster" src="{{ $anime['image_url'] }}" class="absolute inset-x-0 top-0 max-w-full max-h-full mx-auto rounded-lg" loading="lazy" />
+                    <img alt="{{ $anime['title'] }} Anime Poster" src="{{ $anime['images']['webp']['image_url'] }}" class="absolute inset-x-0 top-0 max-w-full max-h-full mx-auto rounded-lg" loading="lazy" />
                     <div class="absolute inset-x-0 bottom-0 py-1 bg-black bg-opacity-50">
                         <h4 class="p-1 text-lg font-semibold leading-tight text-center text-green-100 transition-colors duration-200 group-hover:text-green-300 dark:group-hover:text-green-300">
                             {{ $anime['title'] }}

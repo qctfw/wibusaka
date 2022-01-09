@@ -4,6 +4,7 @@ namespace App\ViewModels;
 
 use Carbon\Carbon;
 use Spatie\ViewModels\ViewModel;
+use Illuminate\Support\Str;
 
 class SeasonViewModel extends ViewModel
 {
@@ -24,17 +25,27 @@ class SeasonViewModel extends ViewModel
     {
         $animes = collect($this->animes)->sortByDesc('members');
         
+        $animes = $animes->reject(function ($value) {
+            $is_nsfw = Str::contains($value['rating'], 'Rx');
+            foreach (array_merge($value['genres'], $value['explicit_genres']) as $genre) {
+                $is_nsfw = Str::contains($genre['name'], ['Erotica', 'Hentai']);
+            }
+
+            return $is_nsfw;
+        });
+
         return $animes->map(function ($item, $key) {
-            if(!is_null($item['airing_start']))
+            if(!is_null($item['aired']['from']))
             {
-                $item['airing_start'] = Carbon::parse($item['airing_start']);
-                $item['airing_start'] = (count($item['demographics']) > 0) ? $item['airing_start']->translatedFormat('d M Y') : $item['airing_start']->translatedFormat('d F Y');
+                $item['aired_at'] = Carbon::parse($item['aired']['from']);
+                $item['aired_at'] = (count($item['demographics']) > 0) ? $item['aired_at']->translatedFormat('d M Y') : $item['aired_at']->translatedFormat('d F Y');
             }
             else {
-                $item['airing_start'] = '?';
+                $item['aired_at'] = '?';
             }
+
             return collect($item)->merge([
-                "airing_start" => $item['airing_start'],
+                "aired_at" => $item['aired_at'],
                 "score" => ($item['score'] > 0) ? number_format($item['score'], 2, '.', '') : 'N/A'
             ]);
         });

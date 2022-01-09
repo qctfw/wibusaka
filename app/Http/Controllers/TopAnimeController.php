@@ -34,7 +34,7 @@ class TopAnimeController extends Controller
             return redirect()->to(url()->current());
         }
 
-        $response = $this->fetchRequest('', $page);
+        $response = $this->fetchRequest('rating', $page);
 
         $top_view_model = new TopViewModel(__('anime.top.title.rated'), $page, $total_page, $response['animes'], $response['resources']);
 
@@ -66,7 +66,7 @@ class TopAnimeController extends Controller
             return redirect()->to(url()->current());
         }
 
-        $response = $this->fetchRequest('bypopularity', $page);
+        $response = $this->fetchRequest('popularity', $page);
 
         $top_view_model = new TopViewModel(__('anime.top.title.popularity'), $page, $total_page, $response['animes'], $response['resources']);
 

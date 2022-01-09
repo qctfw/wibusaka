@@ -29,14 +29,14 @@ class AnimeViewModel extends ViewModel
                     'scored_by' => abbreviate_number($this->anime['scored_by']),
                     'rank' => number_format($this->anime['rank']),
                     'popularity' => number_format($this->anime['popularity']),
-                    'premiered' => $this->formatPremiered($this->anime['premiered']),
+                    'premiered' => $this->formatPremiered($this->anime['season'], $this->anime['year']),
                     'members' => abbreviate_number($this->anime['members']),
                     'favorites' => abbreviate_number($this->anime['favorites']),
                     'studios' => collect($this->anime['studios']),
                     'genres' => collect($this->anime['genres']),
-                    'opening_themes' => $this->formatOPEDTheme($this->anime['opening_themes']),
-                    'ending_themes' => $this->formatOPEDTheme($this->anime['ending_themes']),
-                    'external_links' => $this->formatExternalLinks($this->anime['external_links']),
+                    'openings' => $this->formatOPEDTheme($this->anime['openings']),
+                    'endings' => $this->formatOPEDTheme($this->anime['endings']),
+                    'external_links' => [],
                 ])
                 ->except(['request_hash', 'request_hashed', 'request_cached', 'request_cache_expiry']);
         return $anime;
@@ -70,20 +70,14 @@ class AnimeViewModel extends ViewModel
         return $result;
     }
 
-    private function formatPremiered(?string $premiered): ?array
+    private function formatPremiered(?string $season, ?int $year): ?string
     {
-        if (is_null($premiered))
+        if (is_null($season))
         {
             return null;
         }
 
-        $season = explode(' ', $premiered);
-
-        return [
-            'full' => $premiered,
-            'season' => Str::lower($season[0]),
-            'year' => $season[1]
-        ];
+        return Str::ucfirst($season) . ' ' . $year;
     }
 
     private function formatOPEDTheme(array $themes): array

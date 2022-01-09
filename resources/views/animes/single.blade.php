@@ -10,7 +10,7 @@
                     <div class="flex flex-col items-center justify-center w-full h-96 spinner">
                         <x-icons.spinner class="block w-5 h-5" />
                     </div>
-                    <img data-src="{{ $anime['image_url'] }}" alt="'{{ $anime['title'] }}' Anime Poster" class="absolute inset-x-0 top-0 w-full mx-auto opacity-0" />
+                    <img data-src="{{ $anime['images']['webp']['image_url'] }}" alt="'{{ $anime['title'] }}' Anime Poster" class="absolute inset-x-0 top-0 w-full mx-auto opacity-0" />
                 </div>
                 <div class="grid w-auto grid-cols-2 py-2 my-3 bg-gray-100 rounded-xl dark:bg-green-800 dark:bg-opacity-50">
                     <div class="text-center font-primary">
@@ -88,8 +88,8 @@
                     <p class="font-semibold font-primary md:text-lg">{{ __('anime.single.airing_date') }}</p>
                     <p class="text-sm md:text-md">{{ $anime['aired']['from'] }}@if ($anime['episodes'] > 1 || $anime['airing']) s.d {{ $anime['aired']['to'] }}@endif</p>
                     <p class="text-xs">
-                        @if (!empty($anime['premiered']))
-                        <a href="{{ route('anime.season', ['year' => $anime['premiered']['year'], 'season' => $anime['premiered']['season']]) }}" class="text-link">({{ $anime['premiered']['full'] }})</a>
+                        @if (!empty($anime['season']))
+                        <a href="{{ route('anime.season', ['year' => $anime['year'], 'season' => $anime['season']]) }}" class="text-link">({{ $anime['premiered'] }})</a>
                         @endif
                     </p>
                 </div>
@@ -124,15 +124,15 @@
                     </p>
                 </div>
                 <div>
+                    @if (!empty($anime['external_links']))
                     <p class="font-semibold font-primary md:text-lg">{{ __('anime.single.external_link') }}</p>
                     <div class="flex flex-col gap-1 text-sm md:text-md">
-                        @forelse ($anime['external_links'] as $name => $url)
+                        @foreach ($anime['external_links'] as $name => $url)
                             @if ($name == 'Website') @continue @endif
                             <a href="{{ $url }}" class="text-link">{{ $name }} <x-icons.external-link-solid class="inline-block w-4 h-4 ml-1" /></a>
-                        @empty
-                            <span>-</span>
-                        @endforelse
+                        @endforeach
                     </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -200,19 +200,19 @@
             </div>
             @endif
 
-            @if (count($anime['opening_themes']) > 0 && count($anime['ending_themes']) > 0)
+            @if (count($anime['openings']) > 0 && count($anime['endings']) > 0)
             <h3 class="py-3 text-2xl font-semibold border-b border-gray-400 border-opacity-50 border-dashed font-primary">{{ __('anime.single.theme_song') }}</h3>
             <div class="grid justify-between grid-cols-1 md:grid-cols-2">
                 <div class="mt-3">
                     <h4 class="text-lg font-semibold">{{ __('anime.single.theme_song_op') }}</h4>
                     <p class="mt-1">
-                        {!! implode('<br />', $anime['opening_themes']) !!}
+                        {!! implode('<br />', $anime['openings']) !!}
                     </p>
                 </div>
                 <div class="mt-3">
                     <h4 class="text-lg font-semibold">{{ __('anime.single.theme_song_ed') }}</h4>
                     <p class="mt-1">
-                        {!! implode('<br />', $anime['ending_themes']) !!}
+                        {!! implode('<br />', $anime['endings']) !!}
                     </p>
                 </div>
             </div>

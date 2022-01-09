@@ -72,10 +72,10 @@
         {{ $slot }}
     </main>
 
-    @if (!request()->routeIs('index'))
-    <x-footer />
-    @else
+    @if (request()->routeIs('index'))
     <x-footer-main-page />
+    @else
+    <x-footer />
     @endif
     <livewire:scripts />
     <script src="{{ mix('js/app.js') }}"></script>

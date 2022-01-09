@@ -1,21 +1,21 @@
 <div class="relative flex flex-col items-center justify-between p-2 text-green-900 transition-colors bg-gray-100 rounded-lg group hover:bg-green-100 dark:hover:bg-green-800 md:static md:flex-row dark:bg-gray-800 dark:text-green-50 md:h-auto">
     @php
         $ranktext = 'text-lg md:text-xl';
-        if ($anime['rank'] <= 10) {
+        if ($rank <= 10) {
             $ranktext = 'text-2xl md:text-3xl';
         }
-        elseif ($anime['rank'] <= 100) {
+        elseif ($rank <= 100) {
             $ranktext = 'text-xl md:text-2xl';
         }
     @endphp
     <div class="absolute top-0 left-0 w-auto px-2 {{ $ranktext }} text-center bg-gray-200 rounded-tl-lg rounded-br-lg md:bg-transparent md:static md:block md:flex-none md:w-12 md:px-0 dark:bg-gray-900 md:rounded-none md:font-bold z-20 group-hover:bg-green-200 dark:group-hover:bg-green-900">
-        <span class="hidden md:inline">#</span>{{ $anime['rank'] }}
+        <span class="hidden md:inline">#</span>{{ $rank }}
     </div>
     <a href="{{ route('anime.show', $anime['mal_id']) }}" rel="nofollow" class="relative flex flex-row items-center w-full anime-cover h-60 md:h-auto md:w-20 md:pl-4">
         <div class="flex flex-col items-center justify-center w-full spinner">
             <x-icons.spinner class="block w-5 h-5" />
         </div>
-        <img data-src="{{ $anime['image_url'] }}" alt="'{{ $anime['title'] }}' Anime Poster" loading="lazy" class="absolute inset-x-0 top-0 max-w-full max-h-full mx-auto rounded-lg opacity-0" />
+        <img data-src="{{ $anime['images']['webp']['image_url'] }}" alt="'{{ $anime['title'] }}' Anime Poster" loading="lazy" class="absolute inset-x-0 top-0 max-w-full max-h-full mx-auto rounded-lg opacity-0" />
         <div class="absolute inset-x-0 bottom-0 py-1 bg-black bg-opacity-50 md:hidden">
             <h4 class="p-1 text-lg font-semibold leading-tight text-center text-green-100 transition-colors duration-200 group-hover:text-green-300 dark:group-hover:text-green-300">
                 {{ $anime['title'] }}
@@ -33,9 +33,9 @@
         <div class="flex flex-row items-center justify-center gap-0 text-center md:gap-2 md:text-left text-md md:text-sm">
             <x-icons.calendar-solid class="flex-none w-5 h-5" />
             <p class="flex-auto">
-                {{ $anime['start_date'] ?? '-' }}
-                @if (!is_null($anime['end_date']) && $anime['start_date'] != $anime['end_date'])
-                <span class="hidden md:inline"> - {{ $anime['end_date'] }}</span>
+                {{ $anime['aired']['from'] ?? '-' }}
+                @if (!is_null($anime['aired']['to']) && $anime['aired']['from'] != $anime['aired']['to'])
+                <span class="hidden md:inline"> - {{ $anime['aired']['to'] }}</span>
                 @endif
             </p>
         </div>
