@@ -154,11 +154,7 @@ class JikanService implements JikanServiceInterface
     public function searchAnime(string $query)
     {
         $query = array_merge(self::DEFAULT_JIKAN_QUERY, ['q' => $query, 'limit' => 6]);
-        $result = $this->requestJikan('anime', ['jikan-search'], 'jikan-search-anime-' .  $query, now()->addDays(5)->endOfDay(), [
-            'q' => $query,
-            'limit' => 6,
-            ...self::DEFAULT_JIKAN_QUERY
-        ]);
+        $result = $this->requestJikan('anime', ['jikan-search'], 'jikan-search-anime-' .  $query['q'], now()->addDays(5)->endOfDay(), $query);
 
         return $result['data'];
     }
