@@ -28,11 +28,10 @@ class TopViewModel extends ViewModel
         return $this->top_animes->map(function ($item, $key) {
             return collect($item)->merge([
                 'aired' => [
-                    'from' => (!is_null($item['aired']['from'])) ? Carbon::parse($item['aired']['from'])->translatedFormat('d M Y') : '?',
-                    'to' => (!is_null($item['aired']['to'])) ? Carbon::parse($item['aired']['to'])->translatedFormat('d M Y') : '?'
+                    'from' => (!is_null($item['aired']['from'])) ? $item['aired']['from']->translatedFormat('d M Y') : '?',
+                    'to' => (!is_null($item['aired']['to'])) ? $item['aired']['to']->translatedFormat('d M Y') : '?'
                 ],
-                'members' => abbreviate_number($item['members']),
-                'score' => ($item['score'] > 0) ? number_format($item['score'], 2, '.', '') : 'N/A'
+                'members' => abbreviate_number($item['members'])
             ]);
         });
     }

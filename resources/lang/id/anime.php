@@ -7,6 +7,7 @@ return [
         'availability' => 'Tersedia di',
         'availability_empty' => 'Kami belum menemukan platform yang menayangkan anime ini di Indonesia.',
         'availability_empty_short' => 'Tidak tersedia',
+        'broadcast_string' => ':day pukul :time',
         'genre' => 'Genre',
         'members' => 'Jumlah Penonton',
         'members_mobile' => 'Penonton',
@@ -42,6 +43,11 @@ return [
         'score' => 'Skor',
         'source' => 'Sumber',
         'status' => 'Status',
+        'status_enums' => [
+            'not_yet_aired' => 'Belum Tayang',
+            'currently_airing' => 'Sedang Tayang',
+            'finished_airing' => 'Sudah Tayang'
+        ],
         'studio' => 'Studio',
         'synopsis' => 'Sinopsis',
         'synopsis_empty' => 'Tidak ada sinopsis.',

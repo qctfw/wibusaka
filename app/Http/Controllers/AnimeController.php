@@ -35,10 +35,10 @@ class AnimeController extends Controller
     public function index()
     {
         $current_season = $this->jikan_service->getCurrentSeason();
-        $current_season['animes'] = $current_season['animes']->take(25)->sortByDesc('members');
+        $current_season['animes'] = $current_season['animes']->take(25);
 
-        $airing_animes = collect($this->jikan_service->getTopAnimes('airing'))->take(25)->sortByDesc('score');
-        $upcoming_animes = collect($this->jikan_service->getTopAnimes('upcoming'))->take(25)->sortByDesc('members');
+        $airing_animes = $this->jikan_service->getTopAnimes('airing')->take(25)->sortByDesc('score');
+        $upcoming_animes = $this->jikan_service->getTopAnimes('upcoming')->take(25);
         
 
         $all_mal_ids = collect([
@@ -78,11 +78,9 @@ class AnimeController extends Controller
             $result = $this->jikan_service->getCurrentSeason();
         }
 
-        $animes = $result['animes']->where('members', '>', 1000)->where('r18', false)->where('kids', false);
+        $season_resources = $this->resource_service->getByMalIds($result['animes']->pluck('mal_id'));
 
-        $season_resources = $this->resource_service->getByMalIds($animes->pluck('mal_id'));
-
-        $season_view_model = new SeasonViewModel($result['seasons'], $animes, $season_resources);
+        $season_view_model = new SeasonViewModel($result['seasons'], $result['animes'], $season_resources);
 
         return view('animes.season', $season_view_model);
     }

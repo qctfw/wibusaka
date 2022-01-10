@@ -36,7 +36,7 @@
                 <x-icons.spinner class="block w-5 h-5" />
             </div>
             <img alt="{{ $anime['title'] }} Anime Poster" data-src="{{ $anime['images']['webp']['image_url'] }}" class="absolute inset-x-0 top-0 max-w-full max-h-full mx-auto opacity-0" loading="lazy" />
-            @if (!empty($anime['explicit_genres']))
+            @if (!$anime['explicit_genres']->isEmpty())
             <div x-data="{showCover: false}" x-on:click.prevent="showCover = true" x-show="!showCover" class="absolute inset-x-0 top-0 flex items-center justify-center w-full h-full text-gray-200 backdrop-blur">
                 <div class="flex items-center px-2 py-1 bg-gray-800 rounded">Lihat</div>
             </div>
@@ -68,7 +68,11 @@
         @endif
         <div class="flex flex-row items-center justify-center gap-2 text-center">
             <x-icons.calendar-solid class="w-5 h-5" />
-            <span>{{ $anime['aired_at'] }}</span>
+            @if (!is_null($anime['aired']['from']))
+            <span>{{ (count($anime['demographics']) > 0) ? $anime['aired']['from']->translatedFormat('d M Y') : $anime['aired']['from']->translatedFormat('d F Y') }}</span>
+            @else
+            <span>?</span>
+            @endif
         </div>
         <div class="flex flex-row items-center justify-center gap-2 text-center">
             <x-icons.star-solid class="w-5 h-5" />

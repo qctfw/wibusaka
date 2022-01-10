@@ -34,7 +34,7 @@
             <x-icons.calendar-solid class="flex-none w-5 h-5" />
             <p class="flex-auto">
                 {{ $anime['aired']['from'] ?? '-' }}
-                @if (!is_null($anime['aired']['to']) && $anime['aired']['from'] != $anime['aired']['to'])
+                @if (!is_null($anime['aired']['to']) && $anime['aired']['from'] != $anime['aired']['to'] && $anime['episodes'] > 1)
                 <span class="hidden md:inline"> - {{ $anime['aired']['to'] }}</span>
                 @endif
             </p>

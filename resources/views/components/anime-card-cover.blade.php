@@ -21,7 +21,7 @@
             <span>{{ $anime['score'] }}</span>
             @else
             <x-icons.calendar-solid class="w-5 h-5" />
-            <span>{{ $anime['aired_at'] }}</span>
+            <span>{{ $anime['aired']['from'] }}</span>
             @endif
         </div>
         <div class="flex flex-row items-center gap-2 text-left">

@@ -23,31 +23,17 @@ class SeasonViewModel extends ViewModel
 
     public function animes()
     {
-        $animes = collect($this->animes)->sortByDesc('members');
+        $animes = $this->animes;
         
         $animes = $animes->reject(function ($value) {
             $is_nsfw = Str::contains($value['rating'], 'Rx');
-            foreach (array_merge($value['genres'], $value['explicit_genres']) as $genre) {
+            foreach (array_merge($value['genres']->toArray(), $value['explicit_genres']->toArray()) as $genre) {
                 $is_nsfw = Str::contains($genre['name'], ['Erotica', 'Hentai']);
             }
 
             return $is_nsfw;
         });
 
-        return $animes->map(function ($item, $key) {
-            if(!is_null($item['aired']['from']))
-            {
-                $item['aired_at'] = Carbon::parse($item['aired']['from']);
-                $item['aired_at'] = (count($item['demographics']) > 0) ? $item['aired_at']->translatedFormat('d M Y') : $item['aired_at']->translatedFormat('d F Y');
-            }
-            else {
-                $item['aired_at'] = '?';
-            }
-
-            return collect($item)->merge([
-                "aired_at" => $item['aired_at'],
-                "score" => ($item['score'] > 0) ? number_format($item['score'], 2, '.', '') : 'N/A'
-            ]);
-        });
+        return $animes;
     }
 }

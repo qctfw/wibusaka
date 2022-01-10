@@ -49,7 +49,11 @@ class JikanService implements JikanServiceInterface
 
         $result = $this->requestJikan('anime', ['jikan-top', 'jikan-top-' . $category], 'jikan-top-' . $category . '-' . $page, null, $query);
 
-        return collect($result['data']);
+        $animes = collect($result['data'])->map(function ($item) {
+            return $this->formatAnime($item);
+        });
+
+        return $animes;
     }
 
     public function getCurrentSeason()
@@ -77,7 +81,9 @@ class JikanService implements JikanServiceInterface
             Cache::tags($cache_tags)->put($cache_key, $animes, now()->endOfDay());
         }
 
-        $animes = collect($animes);
+        $animes = collect($animes)->map(function ($item) {
+            return $this->formatAnime($item);
+        });
 
         $season_navigation = $this->getSeasonNavigation($animes->first()['year'], $animes->first()['season']);
 
@@ -115,7 +121,9 @@ class JikanService implements JikanServiceInterface
             Cache::tags($cache_tags)->put($cache_key, $animes, now()->endOfDay());
         }
 
-        $animes = collect($animes);
+        $animes = collect($animes)->map(function ($item) {
+            return $this->formatAnime($item);
+        });
 
         return [
             'seasons' => $season_navigation,
@@ -129,9 +137,13 @@ class JikanService implements JikanServiceInterface
 
         $result = $this->requestJikan('anime', ['jikan-anime-genre'], 'jikan-genre-' . $id . '-' . $page, null, $query);
 
+        $animes = collect($result['data'])->map(function ($item) {
+            return $this->formatAnime($item);
+        });
+
         return [
             'pagination' => $result['pagination'],
-            'animes' => collect($result['data'])
+            'animes' => $animes
         ];
     }
 
@@ -141,7 +153,9 @@ class JikanService implements JikanServiceInterface
 
         $themes = $this->requestJikan('anime/' . $id . '/themes', ['jikan-anime-themes'], 'jikan-anime-themes-' . $id);
 
-        return array_merge($result['data'], $themes['data']);
+        $anime = array_merge($result['data'], $themes['data']);
+
+        return $this->formatAnime($anime);
     }
 
     public function getAnimeRecommendations(string $id)
@@ -156,7 +170,11 @@ class JikanService implements JikanServiceInterface
         $query = array_merge(self::DEFAULT_JIKAN_QUERY, ['q' => $query, 'limit' => 6]);
         $result = $this->requestJikan('anime', ['jikan-search'], 'jikan-search-anime-' .  $query['q'], now()->addDays(5)->endOfDay(), $query);
 
-        return $result['data'];
+        $animes = collect($result['data'])->map(function ($item) {
+            return $this->formatAnime($item);
+        });
+
+        return $animes;
     }
 
     private function requestJikan(string $uri, array $cache_tags, string $cache_key = '', Carbon $cache_expire = null, array $query = null)
@@ -307,5 +325,39 @@ class JikanService implements JikanServiceInterface
 
         $log = 'Requesting Jikan... URL: ' . $full_url . ' Query: ' . http_build_query($query);
         Log::channel('jikan')->info($log);
+    }
+
+    private function formatAnime(array $anime)
+    {
+        $anime['aired'] = [
+            'from' => (!empty($anime['aired']['from'])) ? Carbon::parse($anime['aired']['from'])->shiftTimezone($anime['broadcast']['timezone'])->setTimeFrom($anime['broadcast']['time'])->setTimezone(config('app.timezone')) : null,
+            'to' => (!empty($anime['aired']['to'])) ? Carbon::parse($anime['aired']['to'])->shiftTimezone($anime['broadcast']['timezone'])->setTimeFrom($anime['broadcast']['time'])->setTimezone(config('app.timezone')) : null
+        ];
+
+        $anime['broadcast'] = [
+            'day' => $anime['aired']['from']->dayName ?? null,
+            'time' => (!empty($anime['aired']['from'])) ? $anime['aired']['from']->format('H:i') : null,
+            'timezone' => $anime['aired']['from']->tzName ?? null,
+            'string' => (!empty($anime['broadcast']['time']) && !empty($anime['broadcast']['timezone'])) ? __('anime.single.broadcast_string', [
+                'day' => $anime['aired']['from']->dayName,
+                'time' => $anime['aired']['from']->format('H:i') . ' ' . $anime['aired']['from']->format('T')
+            ]) : ''
+        ];
+
+        $anime = collect($anime)->merge([
+            'status' => __('anime.single.status_enums.' . Str::lower(Str::replace(' ', '_', $anime['status']))),
+            'rating' => explode(' - ', $anime['rating'])[0],
+            'score' => ($anime['score'] > 0) ? number_format($anime['score'], 2, '.', '') : 'N/A',
+            'duration' => ($anime['duration'] != 'Unknown') ? trim(Str::replace(['hr', 'min', 'per ep'], ['jam', 'menit', ''], $anime['duration'])) : '',
+            'rank' => number_format($anime['rank']),
+            'popularity' => number_format($anime['popularity']),
+            'premiered' => (!empty($anime['season']) && !empty($anime['year'])) ? Str::ucfirst($anime['season']) . ' ' . $anime['year'] : null,
+            'studios' => collect($anime['studios']),
+            'genres' => collect($anime['genres']),
+            'explicit_genres' => collect($anime['explicit_genres']),
+            'external_links' => [], // Not available in v4 right now
+        ]);
+
+        return $anime;
     }
 }
