@@ -28,7 +28,7 @@ class JikanService implements JikanServiceInterface
         $this->base_uri = 'https://api.jikan.moe/v4/';
     }
 
-    public function getTopAnimes(string $category = '', int $page = 1)
+    public function getTopAnimes(string $category, int $page = 1)
     {
         $query = array_merge(self::JIKAN_DEFAULT_QUERY, ['page' => $page]);
 
@@ -51,9 +51,7 @@ class JikanService implements JikanServiceInterface
 
         $result = $this->requestJikan('anime', ['jikan-top', 'jikan-top-' . $category], 'jikan-top-' . $category . '-' . $page, null, $query);
 
-        $animes = collect($result['data'])->map(function ($item) {
-            return $this->formatAnime($item);
-        });
+        $animes = $this->collectAnimes($result['data']);
 
         return $animes;
     }
@@ -62,30 +60,8 @@ class JikanService implements JikanServiceInterface
     {
         $cache_tags = ['jikan-season'];
         $cache_key = 'jikan-season-current';
-        $animes = Cache::tags($cache_tags)->get($cache_key);
-        if (is_null($animes))
-        {
-            $page = 1;
-            $animes = [];
-            $has_next_page = true;
 
-            while ($has_next_page) {
-                $result = $this->requestJikan('seasons/now', $cache_tags, $cache_key . '-page-' . $page, now()->endOfDay(), [
-                    'page' => $page
-                ]);
-
-                $animes = array_merge($animes, $result['data']);
-
-                $page++;
-                $has_next_page = $result['pagination']['has_next_page'];
-            }
-
-            Cache::tags($cache_tags)->put($cache_key, $animes, now()->endOfDay());
-        }
-
-        $animes = collect($animes)->map(function ($item) {
-            return $this->formatAnime($item);
-        });
+        $animes = $this->requestJikanAllPages('seasons/now', $cache_tags, $cache_key);
 
         $season_navigation = $this->getSeasonNavigation($animes->first()['year'], $animes->first()['season']);
 
@@ -102,46 +78,21 @@ class JikanService implements JikanServiceInterface
         $cache_tags = ['jikan-season', 'jikan-season-' . $year];
         $cache_key = 'jikan-season-' . $year . '-' . $season;
 
-        $animes = Cache::tags($cache_tags)->get($cache_key);
-        if (is_null($animes))
-        {
-            $page = 1;
-            $animes = [];
-            $has_next_page = true;
-
-            while ($has_next_page) {
-                $result = $this->requestJikan('seasons/' . $year . '/' . $season, $cache_tags, $cache_key . '-page-' . $page, now()->endOfDay(), [
-                    'page' => $page
-                ]);
-
-                $animes = array_merge($animes, $result['data']);
-
-                $page++;
-                $has_next_page = $result['pagination']['has_next_page'];
-            }
-
-            Cache::tags($cache_tags)->put($cache_key, $animes, now()->endOfDay());
-        }
-
-        $animes = collect($animes)->map(function ($item) {
-            return $this->formatAnime($item);
-        });
+        $animes = $this->requestJikanAllPages('seasons/' . $year . '/' . $season, $cache_tags, $cache_key);
 
         return [
             'seasons' => $season_navigation,
             'animes' => $animes
         ];
     }
-    
+
     public function getAnimesByGenre(int $id, int $page = 1)
     {
         $query = array_merge(self::JIKAN_DEFAULT_QUERY, ['genres' => $id, 'page' => $page]);
 
         $result = $this->requestJikan('anime', ['jikan-anime-genre'], 'jikan-genre-' . $id . '-' . $page, null, $query);
 
-        $animes = collect($result['data'])->map(function ($item) {
-            return $this->formatAnime($item);
-        });
+        $animes = $this->collectAnimes($result['data']);
 
         return [
             'pagination' => $result['pagination'],
@@ -172,9 +123,7 @@ class JikanService implements JikanServiceInterface
         $query = array_merge(self::JIKAN_DEFAULT_QUERY, ['q' => $query, 'limit' => 6]);
         $result = $this->requestJikan('anime', ['jikan-search'], 'jikan-search-anime-' .  $query['q'], now()->addDays(5)->endOfDay(), $query);
 
-        $animes = collect($result['data'])->map(function ($item) {
-            return $this->formatAnime($item);
-        });
+        $animes = $this->collectAnimes($result['data']);
 
         return $animes;
     }
@@ -214,14 +163,7 @@ class JikanService implements JikanServiceInterface
 
             $status = $jikan_response->status();
 
-            if ($jikan_response->serverError())
-            {
-                $exception_body = $jikan_response->collect();
-                $exception_message = 'Type: ' . $exception_body['type'] . ' (' . $exception_body['message'] . ')';
-
-                throw new JikanException($status, $exception_message);
-            }
-            elseif ($jikan_response->clientError())
+            if ($jikan_response->failed())
             {
                 switch ($status) {
                     case 404:
@@ -230,6 +172,12 @@ class JikanService implements JikanServiceInterface
                     case 429:
                         Cache::put('jikan-rate-limit', true, 15);
                         throw new JikanException($status, __('error.jikan_rate_limit'));
+                        break;
+                    default:
+                        $exception_body = $jikan_response->collect();
+                        $exception_message = 'Type: ' . $exception_body['type'] . ' (' . $exception_body['message'] . ')';
+            
+                        throw new JikanException($status, $exception_message);
                         break;
                 }
             }
@@ -240,6 +188,34 @@ class JikanService implements JikanServiceInterface
         }
 
         return collect(json_decode($jikan_data, true));
+    }
+
+    private function requestJikanAllPages(string $uri, array $cache_tags, string $cache_key = '', Carbon $cache_expire = null)
+    {
+        $animes = Cache::tags($cache_tags)->get($cache_key);
+
+        if (is_null($animes))
+        {
+            $page = 1;
+            $animes = [];
+            $has_next_page = true;
+
+            while ($has_next_page) {
+                $result = $this->requestJikan($uri, $cache_tags, $cache_key . '-page-' . $page, $cache_expire, [
+                    'page' => $page,
+                    'limit' => 100
+                ]);
+
+                $animes = array_merge($animes, $result['data']);
+
+                $page++;
+                $has_next_page = $result['pagination']['has_next_page'];
+            }
+
+            Cache::tags($cache_tags)->put($cache_key, $animes, now()->endOfDay());
+        }
+
+        return $this->collectAnimes($animes);
     }
 
     private function getSeasonNavigation(int $year, string $season)
@@ -327,6 +303,13 @@ class JikanService implements JikanServiceInterface
 
         $log = 'Requesting Jikan... URL: ' . $full_url . ' Query: ' . http_build_query($query);
         Log::channel('jikan')->info($log);
+    }
+
+    private function collectAnimes(?array $animes)
+    {
+        return collect($animes)->map(function ($item) {
+            return $this->formatAnime($item);
+        });
     }
 
     private function formatAnime(array $anime)
