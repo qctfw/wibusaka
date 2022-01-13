@@ -15,11 +15,13 @@ class JikanService implements JikanServiceInterface
 {
     private $base_uri;
 
-    private const DEFAULT_JIKAN_QUERY = [
+    private const JIKAN_DEFAULT_QUERY = [
         'sfw' => true,
         'order_by' => 'members',
         'sort' => 'desc'
     ];
+
+    private const JIKAN_ANIME_EXPLICIT_GENRE_IDS = [9, 12, 49];
 
     public function __construct()
     {
@@ -28,7 +30,7 @@ class JikanService implements JikanServiceInterface
 
     public function getTopAnimes(string $category = '', int $page = 1)
     {
-        $query = array_merge(self::DEFAULT_JIKAN_QUERY, ['page' => $page]);
+        $query = array_merge(self::JIKAN_DEFAULT_QUERY, ['page' => $page]);
 
         switch ($category) {
             case 'rating':
@@ -133,7 +135,7 @@ class JikanService implements JikanServiceInterface
     
     public function getAnimesByGenre(int $id, int $page = 1)
     {
-        $query = array_merge(self::DEFAULT_JIKAN_QUERY, ['genres' => $id, 'page' => $page]);
+        $query = array_merge(self::JIKAN_DEFAULT_QUERY, ['genres' => $id, 'page' => $page]);
 
         $result = $this->requestJikan('anime', ['jikan-anime-genre'], 'jikan-genre-' . $id . '-' . $page, null, $query);
 
@@ -167,7 +169,7 @@ class JikanService implements JikanServiceInterface
 
     public function searchAnime(string $query)
     {
-        $query = array_merge(self::DEFAULT_JIKAN_QUERY, ['q' => $query, 'limit' => 6]);
+        $query = array_merge(self::JIKAN_DEFAULT_QUERY, ['q' => $query, 'limit' => 6]);
         $result = $this->requestJikan('anime', ['jikan-search'], 'jikan-search-anime-' .  $query['q'], now()->addDays(5)->endOfDay(), $query);
 
         $animes = collect($result['data'])->map(function ($item) {
@@ -344,6 +346,16 @@ class JikanService implements JikanServiceInterface
             ]) : ''
         ];
 
+        $anime['explicit_genres'] = collect($anime['explicit_genres']);
+
+        $anime['genres'] = collect($anime['genres'])->filter(function ($genre) use ($anime) {
+            if (in_array($genre['mal_id'], self::JIKAN_ANIME_EXPLICIT_GENRE_IDS)) {
+                $anime['explicit_genres']->push($genre)->values();
+                return false;
+            }
+            return true;
+        });
+
         $anime = collect($anime)->merge([
             'status' => __('anime.single.status_enums.' . Str::lower(Str::replace(' ', '_', $anime['status']))),
             'rating' => explode(' - ', $anime['rating'])[0],
@@ -353,8 +365,6 @@ class JikanService implements JikanServiceInterface
             'popularity' => number_format($anime['popularity']),
             'premiered' => (!empty($anime['season']) && !empty($anime['year'])) ? Str::ucfirst($anime['season']) . ' ' . $anime['year'] : null,
             'studios' => collect($anime['studios']),
-            'genres' => collect($anime['genres']),
-            'explicit_genres' => collect($anime['explicit_genres']),
             'external_links' => [], // Not available in v4 right now
         ]);
 
