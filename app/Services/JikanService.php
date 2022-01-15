@@ -320,9 +320,9 @@ class JikanService implements JikanServiceInterface
         ];
 
         $anime['broadcast'] = [
-            'day' => $anime['aired']['from']->dayName ?? null,
-            'time' => (!empty($anime['aired']['from'])) ? $anime['aired']['from']->format('H:i') : null,
-            'timezone' => $anime['aired']['from']->tzName ?? null,
+            'day' => !empty($anime['broadcast']['day']) ? $anime['aired']['from']->dayName : null,
+            'time' => !empty($anime['broadcast']['time']) ? $anime['aired']['from']->format('H:i') : null,
+            'timezone' => !empty($anime['broadcast']['timezone']) ? $anime['aired']['from']->tzName : null,
             'string' => (!empty($anime['broadcast']['time']) && !empty($anime['broadcast']['timezone'])) ? __('anime.single.broadcast_string', [
                 'day' => $anime['aired']['from']->dayName,
                 'time' => $anime['aired']['from']->format('H:i') . ' ' . $anime['aired']['from']->format('T')
