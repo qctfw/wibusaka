@@ -47,7 +47,7 @@
     <link rel="stylesheet" href="{{ mix('css/app.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/loading-screen.css') }}">
     <livewire:styles />
-    <script src="https://unpkg.com/alpinejs@3.0.6/dist/cdn.min.js" defer></script>
+    <script src="https://unpkg.com/alpinejs@3.8.1/dist/cdn.min.js" defer></script>
     @if (!is_null(config('app.analytics_measurement_id')))
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ config('app.analytics_measurement_id') }}"></script>

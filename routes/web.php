@@ -34,6 +34,8 @@ Route::group(['as' => 'anime.', 'prefix' => 'anime'], function () {
     Route::get('/season', [AnimeController::class, 'season'])->name('season-current');
     Route::get('/season/{year}/{season}', [AnimeController::class, 'season'])->name('season')->whereNumber('year')->where('season', '[a-z]+');
 
+    Route::get('/schedule/{day?}', [AnimeController::class, 'schedule'])->name('schedule')->whereAlpha('day');
+
     Route::get('/genre', [GenreController::class, 'index'])->name('genre');
     Route::get('/genre/{slug}', [GenreController::class, 'show'])->name('genre.show');
 

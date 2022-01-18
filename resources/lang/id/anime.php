@@ -72,6 +72,9 @@ return [
         'current' => 'Anime Musim Ini',
         'no_anime' => 'Tidak ada anime.'
     ],
+    'schedule' => [
+        'title' => 'Jadwal Anime',
+    ],
     'search' => [
         'loading' => 'Mencari...',
         'no_results' => 'Tidak ada hasil untuk ":query".',

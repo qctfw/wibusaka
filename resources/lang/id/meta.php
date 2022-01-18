@@ -7,6 +7,9 @@ return [
     'top' => [
         'description' => 'Lihat anime-anime top dan ketahui platform untuk menonton anime top di WibuSaka!',
     ],
+    'schedule' => [
+        'description' => 'Lihat jadwal-jadwal anime yang sedang tayang hari :day dan ketahui platform untuk menontonnya di WibuSaka!',
+    ],
     'single' => [
         'description' => ':synopsis [Sumber: MyAnimeList] Cari tahu platform untuk menonton :anime di WibuSaka!',
         'description_empty' => 'Tidak ada sinopsis untuk anime ini.',

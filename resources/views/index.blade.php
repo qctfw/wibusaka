@@ -27,7 +27,7 @@
             </div>
         </div>
         <script>
-            const allQuotes = {{ Illuminate\Support\Js::from($quotes) }};
+            const allQuotes = @json($quotes);
             function regenerateQuote(e) {
                 const el = document.querySelector('[x-ref=title]');
 

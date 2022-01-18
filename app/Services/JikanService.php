@@ -100,6 +100,27 @@ class JikanService implements JikanServiceInterface
         ];
     }
 
+    public function getAnimesBySchedule(string $day)
+    {
+        $cache_tags = ['jikan-anime-schedule'];
+        $cache_key = 'jikan-anime-schedule-' . $day;
+
+        $animes = Cache::tags($cache_tags)->get($cache_key);
+
+        if (is_null($animes))
+        {
+            $cache_expire = now()->endOfWeek(Carbon::SUNDAY);
+
+            $animes = $this->requestJikanAllPages('schedules', $cache_tags, 'jikan-anime-schedule-all', $cache_expire);
+
+            $animes = $animes->where('broadcast.day', Carbon::create($day)->dayName)->whereNotNull('season')->sortBy('broadcast.time')->values();
+
+            Cache::tags($cache_tags)->put($cache_key, $animes, $cache_expire);
+        }
+
+        return $animes;
+    }
+
     public function getAnime(string $id)
     {
         $result = $this->requestJikan('anime/' . $id, ['jikan-anime'], 'jikan-anime-' . $id);
@@ -212,7 +233,7 @@ class JikanService implements JikanServiceInterface
                 $has_next_page = $result['pagination']['has_next_page'];
             }
 
-            Cache::tags($cache_tags)->put($cache_key, $animes, now()->endOfDay());
+            Cache::tags($cache_tags)->put($cache_key, $animes, $cache_expire);
         }
 
         return $this->collectAnimes($animes);

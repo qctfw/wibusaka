@@ -5,12 +5,23 @@ namespace App\Http\Controllers;
 use App\Services\Contracts\JikanServiceInterface;
 use App\Services\Contracts\ResourceServiceInterface;
 use App\ViewModels\AnimeViewModel;
+use App\ViewModels\ScheduleViewModel;
 use App\ViewModels\SeasonViewModel;
 use App\ViewModels\TopIndexViewModel;
 use Illuminate\Support\Str;
 
 class AnimeController extends Controller
 {
+    private const VALID_DAYS = [
+        'monday',
+        'tuesday',
+        'wednesday',
+        'thursday',
+        'friday',
+        'saturday',
+        'sunday'
+    ];
+
     /**
      * @var JikanServiceInterface
      */
@@ -83,6 +94,33 @@ class AnimeController extends Controller
         $season_view_model = new SeasonViewModel($result['seasons'], $result['animes'], $season_resources);
 
         return view('animes.season', $season_view_model);
+    }
+
+    /**
+     * Display animes by schedule.
+     *
+     * @param  string|null $day
+     * @return \Illuminate\Http\Response
+     */
+    public function schedule($day = null)
+    {
+        if (is_null($day))
+        {
+            $day = Str::of(now()->format('l'))->lower();
+            return redirect(route('anime.schedule', ['day' => $day]));
+        }
+
+        $day = Str::of($day)->lower();
+
+        abort_if(!in_array($day, self::VALID_DAYS), 404);
+
+        $animes = $this->jikan_service->getAnimesBySchedule($day);
+
+        $resources = $this->resource_service->getByMalIds($animes->pluck('mal_id'));
+
+        $schedule_view_model = new ScheduleViewModel($animes, $resources);
+
+        return view('animes.schedule', $schedule_view_model);
     }
 
     /**
