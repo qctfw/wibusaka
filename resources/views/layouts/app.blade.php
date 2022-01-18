@@ -60,7 +60,7 @@
     </script>
     @endif
 </head>
-<body class="font-sans overflow-x-hidden bg-gray-200 dark:bg-gray-900 dark:text-gray-200 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-300 dark:scrollbar-thumb-gray-500 dark:scrollbar-track-gray-700">
+<body class="flex flex-col gap-8 h-screen font-sans overflow-x-hidden bg-gray-200 dark:bg-gray-900 dark:text-gray-200 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-300 dark:scrollbar-thumb-gray-500 dark:scrollbar-track-gray-700">
     <x-loading-screen />
     @if (!request()->routeIs('index'))
     <x-header-navbar />
@@ -68,7 +68,7 @@
     <x-header-index />
     @endif
 
-    <main class="px-4 pt-12 mx-auto md:px-6 xl:px-8 2xl:px-20">
+    <main class="px-4 pt-4 mx-auto md:px-6 xl:px-8 2xl:px-20">
         {{ $slot }}
     </main>
 

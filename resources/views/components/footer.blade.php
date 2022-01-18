@@ -1,5 +1,5 @@
-<footer class="mt-4 bg-emerald-800 border-t border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-    <div class="flex flex-col items-center justify-between gap-1 px-4 py-6 mx-auto md:px-6 xl:px-20 text-emerald-50 md:flex-row md:items-start" data-nosnippet>
+<footer class="mt-auto bg-emerald-800 border-t border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+    <div class="flex flex-col items-center justify-between gap-1 px-4 py-6 mx-auto md:px-6 xl:px-20 text-emerald-50 lg:flex-row lg:items-start" data-nosnippet>
         <div class="flex flex-row items-center gap-4">
             <div class="flex flex-row items-center gap-2">
                 <img src="{{ randomize_logo() }}" alt="Logo" class="h-6" />

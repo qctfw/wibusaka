@@ -24,7 +24,7 @@
 
     <div class="grid items-start grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
         @foreach ($animes as $anime)
-        <div class="flex flex-col bg-gray-100 rounded dark:bg-gray-800">
+        <div class="flex flex-col bg-gray-100 rounded-lg dark:bg-gray-800">
             <div class="flex flex-row h-44 md:h-40 lg:h-52 2xl:h-64">
                 <a href="{{ route('anime.show', $anime['mal_id']) }}" rel="nofollow" class="relative w-1/3 mx-auto h-44 bg-gray-50 dark:bg-gray-700 md:h-40 lg:h-52 2xl:h-64 anime-cover">
                     <div class="flex flex-col items-center justify-center w-1/2 mx-auto h-72 spinner">
@@ -37,7 +37,7 @@
                     </div>
                     @endif
                 </a>
-                <div class="relative flex flex-col w-2/3 gap-1 px-2 pt-2">
+                <div class="relative flex flex-col w-2/3 gap-1 px-2 pt-2 divide-y divide-gray-400 shadow divide-opacity-50 divide-dashed">
                     <div class="flex flex-col text-sm gap-1 xl:text-base">
                         <div x-data="{ title: `{{ $anime['title'] }}` }" class="flex">
                             <a
