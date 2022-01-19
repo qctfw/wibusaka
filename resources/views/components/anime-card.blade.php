@@ -56,10 +56,12 @@
             @endforeach
         </div>
         @endif
+        @if (!empty($anime['type']))
         <div class="flex flex-row items-center justify-center gap-2 text-center">
             <x-icons.video-camera-solid class="w-5 h-5" />
             <span>{{ $anime['type'] }}</span>
         </div>
+        @endif
         @if (!empty($anime['demographics']))
         <div class="flex flex-row items-center justify-center gap-2 text-center">
             <x-icons.user-group-solid class="w-5 h-5" />

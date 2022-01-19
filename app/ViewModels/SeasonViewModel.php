@@ -32,7 +32,11 @@ class SeasonViewModel extends ViewModel
             }
 
             return $is_nsfw;
-        });
+        })->map(function ($anime) {
+            $anime['type'] = null;
+
+            return $anime;
+        })->values();
 
         return $animes;
     }

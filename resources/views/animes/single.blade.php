@@ -53,7 +53,7 @@
                 </div>
                 <div class="grid grid-cols-1 gap-2 md:grid-flow-col md:auto-cols-fr">
                     <x-button-link href="{{ $anime['url'] }}" target="_blank" class="h-16">
-                        <p class="mr-2 text-lg text-left">MAL</p>
+                        <p class="mr-2 text-lg text-left">MyAnimeList</p>
                     </x-button-link>
                     @if (isset($anime['external_links']['Website']))
                     <x-button-link href="{{ $anime['external_links']['Website'] }}" target="_blank" class="h-16">
@@ -153,7 +153,7 @@
                 @if (!empty($anime['synopsis'])) {{ $anime['synopsis'] }} @else <i>{{ __('anime.single.synopsis_empty') }}</i> @endif
             </div>
 
-            @if (!empty($anime['related']))
+            @if (!empty($anime['relations']))
             <h3 class="py-3 text-2xl font-semibold border-b border-gray-400 border-opacity-50 border-dashed font-primary">{{ __('anime.single.related') }}</h3>
             <table class="w-full mt-4 table-fixed">
                 <thead>
@@ -164,17 +164,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($anime['related'] as $key => $relate)
+                    @foreach ($anime['relations'] as $relation)
                     <tr class="border-b border-gray-400 border-dashed border-opacity-30">
                         <td class="font-semibold align-top">
-                            {{ __('anime.single.relations.' . \Str::slug($key, '_')) }}
+                            {{ __('anime.single.relations.' . \Str::slug($relation['relation'], '_')) }}
                         </td>
                         <td class="align-top">:</td>
                         <td class="pl-2 align-top">
-                        @foreach ($relate as $mal)
-                            <a href="{{ ($mal['type'] == 'anime') ? route('anime.show', ['id' => $mal['mal_id']]) : $mal['url'] }}" class="text-link">
-                                {{ $mal['name'] }}
-                                @if ($key == 'Adaptation')
+                        @foreach ($relation['entry'] as $entry)
+                            <a href="{{ ($entry['type'] == 'anime') ? route('anime.show', ['id' => $entry['mal_id']]) : $entry['url'] }}" class="text-link">
+                                {{ $entry['name'] }}
+                                @if ($relation['relation'] == 'Adaptation')
                                 <x-icons.external-link-solid class="inline-block w-4 h-4" />
                                 @endif
                             </a>{{ (!$loop->last) ? ', ' : '' }}

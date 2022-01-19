@@ -125,9 +125,11 @@ class JikanService implements JikanServiceInterface
     {
         $result = $this->requestJikan('anime/' . $id, ['jikan-anime'], 'jikan-anime-' . $id);
 
+        $relations = $this->requestJikan('anime/' . $id . '/relations', ['jikan-anime-relations'], 'jikan-anime-relations-' . $id);
+
         $themes = $this->requestJikan('anime/' . $id . '/themes', ['jikan-anime-themes'], 'jikan-anime-themes-' . $id);
 
-        $anime = array_merge($result['data'], $themes['data']);
+        $anime = array_merge($result['data'], [ 'relations' => $relations['data'] ], $themes['data']);
 
         return $this->formatAnime($anime);
     }
@@ -359,6 +361,11 @@ class JikanService implements JikanServiceInterface
             }
             return true;
         });
+
+        if (isset($anime['relations']))
+        {
+            $anime['relations'] = collect($anime['relations']);
+        }
 
         $anime = collect($anime)->merge([
             'status' => __('anime.single.status_enums.' . Str::lower(Str::replace(' ', '_', $anime['status']))),
