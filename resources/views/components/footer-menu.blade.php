@@ -4,7 +4,7 @@
         <div class="text-link cursor-pointer" x-on:click="open = true; menu = 'faq';">{{ __('anime.main.faq') }}</div>&bull;
         <div class="text-link cursor-pointer" x-on:click="open = true; menu = 'credits';">{{ __('anime.main.credits') }}</div>
     </section>
-    <x-modal class="z-30">
+    <x-modal class="z-30 text-gray-900 dark:text-gray-200">
         <x-slot name="header">
             <h3 x-show="menu === 'privacy'" class="text-2xl font-bold">{{ __('anime.main.privacy') }}</h3>
             <h3 x-show="menu === 'faq'" class="text-2xl font-bold">{{ __('anime.main.faq') }}</h3>
@@ -14,7 +14,7 @@
             </button>
         </x-slot>
     
-        <div class="flex flex-col gap-4 overflow-y-auto dark:text-gray-200">
+        <div class="flex flex-col gap-4 overflow-y-auto">
             <template x-if="menu === 'privacy'">
                 @if (!is_null(config('app.analytics_measurement_id')))
                 <p>(Work In Progress) {{ config('app.name') }} menggunakan Google Analytics untuk mengoleksi data dan membuat laporan. Data yang dikoleksi adalah anonim. Untuk informasi lebih lanjut, kunjungi halaman <a href="https://www.google.com/policies/technologies/cookies/" target="_blank" rel="noopener noreferrer" class="text-link font-semibold">cara Google menggunakan cookie</a> atau <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener noreferrer" class="text-link font-semibold">cara Google menggunakan informasi dari situs atau aplikasi yang menggunakan layanan Google</a>.</p>

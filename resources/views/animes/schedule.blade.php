@@ -6,11 +6,11 @@
         <div class="flex flex-col items-center font-bold text-blue-700 dark:text-blue-300">
             <x-title>{{ __('anime.schedule.title') }} Hari {{ $active_day }}</x-title>
         </div>
-        <div class="flex items-center" x-data="{}" x-init="$refs.dayselector.value = '{{ request('day') }}'">
+        <div class="relative inline-block w-32" x-data="{}" x-init="$refs.dayselector.value = '{{ request('day') }}'">
             <select
             x-ref="dayselector"
             x-on:change="window.location.href = '{{ route('anime.schedule', [], false) }}/' + $event.target.value;"
-            class="w-full h-10 text-lg px-2 rounded-md bg-emerald-100 dark:bg-gray-800 focus:outline-none focus:ring focus:ring-emerald-300">
+            class="w-full h-10 px-4 text-lg rounded-md appearance-none bg-emerald-100 dark:bg-gray-800 focus:outline-none focus:ring focus:ring-emerald-300">
                 <option value="monday">Senin</option>
                 <option value="tuesday">Selasa</option>
                 <option value="wednesday">Rabu</option>
@@ -19,6 +19,9 @@
                 <option value="saturday">Sabtu</option>
                 <option value="sunday">Minggu</option>
             </select>
+            <div class="absolute inset-y-0 right-2 pointer-events-none flex items-center">
+                <x-icons.chevron-down-solid class="w-6 h-6" />
+            </div>
         </div>
     </div>
 
@@ -26,11 +29,11 @@
         @foreach ($animes as $anime)
         <div class="flex flex-col bg-gray-100 rounded-lg dark:bg-gray-800">
             <div class="flex flex-row h-44 md:h-40 lg:h-52 2xl:h-64">
-                <a href="{{ route('anime.show', $anime['mal_id']) }}" rel="nofollow" class="relative w-1/3 mx-auto h-44 bg-gray-50 dark:bg-gray-700 md:h-40 lg:h-52 2xl:h-64 anime-cover">
+                <a href="{{ route('anime.show', $anime['mal_id']) }}" rel="nofollow" class="relative w-1/3 mx-auto h-44 md:h-40 lg:h-52 2xl:h-64 anime-cover">
                     <div class="flex flex-col items-center justify-center w-1/2 mx-auto h-72 spinner">
                         <x-icons.spinner class="block w-5 h-5" />
                     </div>
-                    <img alt="{{ $anime['title'] }} Anime Poster" data-src="{{ $anime['images']['webp']['image_url'] }}" class="absolute inset-x-0 top-0 max-w-full max-h-full mx-auto opacity-0" loading="lazy" />
+                    <img alt="{{ $anime['title'] }} Anime Poster" data-src="{{ $anime['images']['webp']['image_url'] }}" class="absolute inset-x-0 top-0 max-w-full max-h-full mx-auto opacity-0 rounded-l" loading="lazy" />
                     @if (!$anime['explicit_genres']->isEmpty())
                     <div x-data="{showCover: false}" x-on:click.prevent="showCover = true" x-show="!showCover" class="absolute inset-x-0 top-0 flex items-center justify-center w-full h-full text-gray-200 backdrop-blur">
                         <div class="flex items-center px-2 py-1 bg-gray-800 rounded">Lihat</div>
@@ -38,7 +41,7 @@
                     @endif
                 </a>
                 <div class="relative flex flex-col w-2/3 gap-1 px-2 pt-2 divide-y divide-gray-400 shadow divide-opacity-50 divide-dashed">
-                    <div class="flex flex-col text-sm gap-1 xl:text-base">
+                    <div class="flex flex-col gap-1 text-sm xl:text-base">
                         <div x-data="{ title: `{{ $anime['title'] }}` }" class="flex">
                             <a
                                 href="{{ route('anime.show', $anime['mal_id']) }}"
