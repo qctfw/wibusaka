@@ -2,9 +2,7 @@
 
 namespace App\ViewModels;
 
-use Carbon\Carbon;
 use Spatie\ViewModels\ViewModel;
-use Illuminate\Support\Str;
 
 class AnimeViewModel extends ViewModel
 {
@@ -17,7 +15,7 @@ class AnimeViewModel extends ViewModel
 
     public function anime()
     {
-        $anime = collect($this->anime)->merge([
+        $anime = $this->anime->merge([
             'aired' => [
                 'from' => (!is_null($this->anime['aired']['from'])) ? $this->anime['aired']['from']->translatedFormat('d F Y') : '?',
                 'to' => (!is_null($this->anime['aired']['to'])) ? $this->anime['aired']['to']->translatedFormat('d F Y') : '?'

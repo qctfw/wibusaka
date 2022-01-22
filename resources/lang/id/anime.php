@@ -9,6 +9,8 @@ return [
         'availability_empty_short' => 'Tidak tersedia',
         'broadcast_string' => ':day pukul :time',
         'genre' => 'Genre',
+        'genre_explicit' => 'Genre Eksplisit',
+        'genre_theme' => 'Tema',
         'members' => 'Jumlah Penonton',
         'members_mobile' => 'Penonton',
         'popularity' => 'Terpopuler',

@@ -62,7 +62,7 @@
             <span>{{ $anime['type'] }}</span>
         </div>
         @endif
-        @if (!empty($anime['demographics']))
+        @if ($anime['demographics']->isNotEmpty())
         <div class="flex flex-row items-center justify-center gap-2 text-center">
             <x-icons.user-group-solid class="w-5 h-5" />
             <a href="{{ route('anime.genre.show', str_replace(' ', '-', strtolower($anime['demographics'][0]['name']))) }}" class="text-link">{{ $anime['demographics'][0]['name'] }}</a>

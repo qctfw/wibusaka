@@ -376,6 +376,8 @@ class JikanService implements JikanServiceInterface
             'popularity' => number_format($anime['popularity']),
             'premiered' => (!empty($anime['season']) && !empty($anime['year'])) ? Str::ucfirst($anime['season']) . ' ' . $anime['year'] : null,
             'studios' => collect($anime['studios']),
+            'themes' => collect($anime['themes']),
+            'demographics' => collect($anime['demographics']),
             'external_links' => [], // Not available in v4 right now
         ]);
 

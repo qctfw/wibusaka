@@ -16,7 +16,7 @@
                     <div class="text-center font-primary">
                         <span class="text-lg font-semibold md:text-2xl">
                             <x-icons.star-solid class="inline-block w-3 h-3 md:w-5 md:h-5" />
-                            {{ !empty($anime['score']) ? number_format($anime['score'], 2, '.', '') : 'N/A' }}
+                            {{ $anime['score'] }}
                         </span>
                         <p class="text-sm md:text-md">{{ __('anime.single.score') }}</p>
                     </div>
@@ -96,7 +96,11 @@
                 <div>
                     <p class="font-semibold font-primary md:text-lg">{{ __('anime.single.studio') }}</p>
                     <p class="text-sm md:text-md">
+                        @if ($anime['studios']->isNotEmpty())
                         {{ $anime['studios']->implode('name', ', ') }}
+                        @else
+                        <span>-</span>
+                        @endif
                     </p>
                 </div>
                 <div>
@@ -113,18 +117,38 @@
                         @endforelse
                     </p>
                 </div>
+                @if ($anime['explicit_genres']->isNotEmpty())
+                <div>
+                    <p class="font-semibold font-primary md:text-lg">{{ __('anime.single.genre_explicit') }}</p>
+                    <div class="flex flex-col gap-1 text-sm md:text-md">
+                        @foreach ($anime['explicit_genres'] as $genre)
+                        <a href="{{ route('anime.genre.show', ['slug' => str_replace(' ', '-', strtolower($genre['name']))]) }}" class="text-link">{{ $genre['name'] }}</a>{{ (!$loop->last) ? ',' : '' }}
+                        @endforeach
+                    </div>
+                </div>
+                @endif
+                @if ($anime['themes']->isNotEmpty())
+                <div>
+                    <div class="font-semibold font-primary md:text-lg">{{ __('anime.single.genre_theme') }}</div>
+                    <p class="text-sm md:text-md">
+                        @foreach ($anime['themes'] as $theme)
+                            <a href="{{ route('anime.genre.show', ['slug' => str_replace(' ', '-', strtolower($theme['name']))]) }}" class="text-link">{{ $theme['name'] }}</a>{{ (!$loop->last) ? ',' : '' }}
+                        @endforeach
+                    </p>
+                </div>
+                @endif
+                @if ($anime['demographics']->isNotEmpty())
                 <div>
                     <div class="font-semibold font-primary md:text-lg">{{ __('anime.single.demographic') }}</div>
                     <p class="text-sm md:text-md">
-                        @forelse ($anime['demographics'] as $demo)
+                        @foreach ($anime['demographics'] as $demo)
                             <a href="{{ route('anime.genre.show', ['slug' => str_replace(' ', '-', strtolower($demo['name']))]) }}" class="text-link">{{ $demo['name'] }}</a>{{ (!$loop->last) ? ',' : '' }}
-                        @empty
-                            <span>-</span>
-                        @endforelse
+                        @endforeach
                     </p>
                 </div>
+                @endif
+                @if (!empty($anime['external_links']))
                 <div>
-                    @if (!empty($anime['external_links']))
                     <p class="font-semibold font-primary md:text-lg">{{ __('anime.single.external_link') }}</p>
                     <div class="flex flex-col gap-1 text-sm md:text-md">
                         @foreach ($anime['external_links'] as $name => $url)
@@ -132,8 +156,8 @@
                             <a href="{{ $url }}" class="text-link">{{ $name }} <x-icons.external-link-solid class="inline-block w-4 h-4 ml-1" /></a>
                         @endforeach
                     </div>
-                    @endif
                 </div>
+                @endif
             </div>
         </div>
 
@@ -146,14 +170,14 @@
 
         <div class="grow md:ml-12">
             <h2 class="hidden text-3xl font-bold text-left text-emerald-700 dark:text-emerald-300 font-primary md:block lg:text-5xl">{{ $anime['title'] }}</h2>
-            <p class="hidden pt-2 text-sm italic text-left md:block">{{ $anime['title_english'] }} / {{ $anime['title_japanese'] }}</p>
+            <p class="hidden pt-2 text-sm italic text-left md:block">{{ $anime['title_english'] }}{{ (!empty($anime['title_english']) && !empty($anime['title_japanese'])) ? ' / ' : '' }}{{ $anime['title_japanese'] }}</p>
 
             <h3 class="py-3 text-2xl font-semibold border-b border-gray-400 border-opacity-50 border-dashed font-primary">{{ __('anime.single.synopsis') }}</h3>
             <div class="mt-3">
                 @if (!empty($anime['synopsis'])) {{ $anime['synopsis'] }} @else <i>{{ __('anime.single.synopsis_empty') }}</i> @endif
             </div>
 
-            @if (!empty($anime['relations']))
+            @if ($anime['relations']->isNotEmpty())
             <h3 class="py-3 text-2xl font-semibold border-b border-gray-400 border-opacity-50 border-dashed font-primary">{{ __('anime.single.related') }}</h3>
             <table class="w-full mt-4 table-fixed">
                 <thead>
