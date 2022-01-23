@@ -36,7 +36,7 @@
             <a href="{{ route('anime.schedule') }}" class="p-3 transition-colors duration-200 rounded-lg text-emerald-50 dark:text-emerald-300 hover:text-emerald-800 dark:hover:text-white hover:bg-emerald-300 dark:hover:bg-emerald-800">
                 {{ __('anime.schedule.title') }}
             </a>
-            <a href="{{ route('anime.genre') }}" class="p-3 transition-colors duration-200 rounded-lg text-emerald-50 dark:text-emerald-300 hover:text-emerald-800 dark:hover:text-white hover:bg-emerald-300 dark:hover:bg-emerald-800">
+            <a href="{{ route('anime.genre.index') }}" class="p-3 transition-colors duration-200 rounded-lg text-emerald-50 dark:text-emerald-300 hover:text-emerald-800 dark:hover:text-white hover:bg-emerald-300 dark:hover:bg-emerald-800">
                 {{ __('anime.genre.title') }}
             </a>
         </nav>

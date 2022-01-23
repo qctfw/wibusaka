@@ -31,7 +31,7 @@
 
                 <p class="text-lg font-semibold font-primary md:text-xl">{{ __('anime.top.title.rated') }}</p>
             </x-button-link>
-            <x-button-link href="{{ route('anime.genre') }}">
+            <x-button-link href="{{ route('anime.genre.index') }}">
                 <x-slot name="icon">
                     <x-icons.chevron-right-solid class="w-6 h-6" />
                 </x-slot>

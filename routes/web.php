@@ -19,25 +19,27 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [MainPageController::class, 'index'])->name('index');
 
-Route::group(['as' => 'anime.', 'prefix' => 'anime'], function () {
-    Route::get('/', [AnimeController::class, 'index'])->name('index');
+Route::group(['as' => 'anime.', 'prefix' => 'anime', 'controller' => AnimeController::class], function () {
+    Route::get('/', 'index')->name('index');
     
-    Route::group(['as' => 'top.', 'prefix' => 'top'], function () {
-        Route::get('rated', [TopAnimeController::class, 'rated'])->name('rated');
-        Route::get('airing', [TopAnimeController::class, 'airing'])->name('airing');
-        Route::get('popular', [TopAnimeController::class, 'popular'])->name('popular');
-        Route::get('upcoming', [TopAnimeController::class, 'upcoming'])->name('upcoming');
+    Route::group(['as' => 'top.', 'prefix' => 'top', 'controller' => TopAnimeController::class], function () {
+        Route::get('rated', 'rated')->name('rated');
+        Route::get('airing', 'airing')->name('airing');
+        Route::get('popular', 'popular')->name('popular');
+        Route::get('upcoming', 'upcoming')->name('upcoming');
         // Route::get('tv');
         // Route::get('movies');
     });
 
-    Route::get('/season', [AnimeController::class, 'season'])->name('season-current');
-    Route::get('/season/{year}/{season}', [AnimeController::class, 'season'])->name('season')->whereNumber('year')->where('season', '[a-z]+');
+    Route::group(['as' => 'genre.', 'prefix' => 'genre', 'controller' => GenreController::class], function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('{slug}', 'show')->name('show');
+    });
 
-    Route::get('/schedule/{day?}', [AnimeController::class, 'schedule'])->name('schedule')->whereAlpha('day');
+    Route::get('/season', 'season')->name('season-current');
+    Route::get('/season/{year}/{season}', 'season')->name('season')->whereNumber('year')->whereAlpha('season');
 
-    Route::get('/genre', [GenreController::class, 'index'])->name('genre');
-    Route::get('/genre/{slug}', [GenreController::class, 'show'])->name('genre.show');
+    Route::get('/schedule/{day?}', 'schedule')->name('schedule')->whereAlpha('day');
 
-    Route::get('{id}', [AnimeController::class, 'show'])->name('show')->whereNumber('id');
+    Route::get('{id}', 'show')->name('show')->whereNumber('id');
 });
