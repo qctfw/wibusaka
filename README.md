@@ -5,7 +5,7 @@ A simple app to inform you where to watch anime legally in Indonesia.
 WibuSaka uses [Jikan.moe](https://jikan.moe) API to fetch anime datas.
 
 ## Requirements
-- PHP 7.4+
+- PHP 8.0+
 - MySQL 5.7+
 - Redis
 
@@ -49,9 +49,9 @@ WibuSaka uses [Jikan.moe](https://jikan.moe) API to fetch anime datas.
 
 4. After the dependencies has been installed, build the Laravel Mix assets
     ```bash
-    npm run dev
+    npm run watch
     ```
-    **Note:** Change `dev` into `prod` or `production` for purging unused styles and scripts.
+    **Note:** Change `watch` into `prod` or `production` for purging unused styles and scripts.
 
 ## Contributing
 
