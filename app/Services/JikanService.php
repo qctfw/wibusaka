@@ -8,7 +8,6 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class JikanService implements JikanServiceInterface
@@ -30,7 +29,7 @@ class JikanService implements JikanServiceInterface
 
     public function getTopAnimes(string $category, int $page = 1)
     {
-        $query = array_merge(self::JIKAN_DEFAULT_QUERY, ['page' => $page]);
+        $query = [...self::JIKAN_DEFAULT_QUERY, 'page' => $page];
 
         switch ($category) {
             case 'rating':
@@ -88,7 +87,7 @@ class JikanService implements JikanServiceInterface
 
     public function getAnimesByGenre(int $id, int $page = 1)
     {
-        $query = array_merge(self::JIKAN_DEFAULT_QUERY, ['genres' => $id, 'page' => $page]);
+        $query = [...self::JIKAN_DEFAULT_QUERY, 'genres' => $id, 'page' => $page];
 
         $result = $this->requestJikan('anime', ['jikan-anime-genre'], 'jikan-genre-' . $id . '-' . $page, null, $query);
 
@@ -143,7 +142,7 @@ class JikanService implements JikanServiceInterface
 
     public function searchAnime(string $query)
     {
-        $query = array_merge(self::JIKAN_DEFAULT_QUERY, ['q' => $query, 'limit' => 6]);
+        $query = [...self::JIKAN_DEFAULT_QUERY, 'q' => $query, 'limit' => 6];
         $result = $this->requestJikan('anime', ['jikan-search'], 'jikan-search-anime-' .  $query['q'], now()->addDays(5)->endOfDay(), $query);
 
         $animes = $this->collectAnimes($result['data']);
@@ -160,13 +159,13 @@ class JikanService implements JikanServiceInterface
 
         $uri = trim($uri, '/');
         
-        $cache_tags = array_merge(['jikan'], $cache_tags);
+        $cache_tags = ['jikan', ...$cache_tags];
 
         $cache = Cache::tags($cache_tags);
 
         if (empty($cache_key))
         {
-            $cache_key = 'jikan-' . Str::replace('/', '-', $uri);
+            $cache_key = 'jikan-' . str($uri)->replace('/', '-');
         }
 
         if (is_null($cache_expire))
@@ -249,7 +248,7 @@ class JikanService implements JikanServiceInterface
         }
 
         $current = [
-            'season' => Str::lower($season),
+            'season' => str($season)->lower(),
             'year' => $year
         ];
 
@@ -264,13 +263,13 @@ class JikanService implements JikanServiceInterface
             $previous_year_seasons = $all_seasons->get($current['year'] - 1);
             if (!is_null($previous_year_seasons))
             {
-                $previous['season'] = Str::lower($previous_year_seasons->last());
+                $previous['season'] = str($previous_year_seasons->last())->lower();
                 $previous['year'] = $current['year'] - 1;
             }
         }
         else
         {
-            $previous['season'] = Str::lower($current_year_seasons[$current_season_index - 1]);
+            $previous['season'] = str($current_year_seasons[$current_season_index - 1])->lower();
             $previous['year'] = $current['year'];
         }
 
@@ -280,13 +279,13 @@ class JikanService implements JikanServiceInterface
             $next_year_seasons = $all_seasons->get($current['year'] + 1);
             if (!is_null($next_year_seasons))
             {
-                $next['season'] = Str::lower($next_year_seasons->first());
+                $next['season'] = str($next_year_seasons->first())->lower();
                 $next['year'] = $current['year'] + 1;
             }
         }
         else
         {
-            $next['season'] = Str::lower($current_year_seasons[$current_season_index + 1]);
+            $next['season'] = str($current_year_seasons[$current_season_index + 1])->lower();
             $next['year'] = $current['year'];
         }
 
@@ -314,7 +313,7 @@ class JikanService implements JikanServiceInterface
             return false;
         }
 
-        return is_integer($seasons->search(Str::lower($season)));
+        return is_integer($seasons->search(str($season)->lower()));
     }
 
     private function logJikan($full_url, $query)
@@ -368,13 +367,13 @@ class JikanService implements JikanServiceInterface
         }
 
         $anime = collect($anime)->merge([
-            'status' => __('anime.single.status_enums.' . Str::lower(Str::replace(' ', '_', $anime['status']))),
+            'status' => __('anime.single.status_enums.' . str($anime['status'])->replace(' ', '_')->lower()),
             'rating' => explode(' - ', $anime['rating'])[0],
             'score' => ($anime['score'] > 0) ? number_format($anime['score'], 2, '.', '') : 'N/A',
-            'duration' => ($anime['duration'] != 'Unknown') ? trim(Str::replace(['hr', 'min', 'per ep'], ['jam', 'menit', ''], $anime['duration'])) : '',
+            'duration' => ($anime['duration'] != 'Unknown') ? str($anime['duration'])->replace(['hr', 'min', 'per ep'], ['jam', 'menit', ''])->trim() : '',
             'rank' => number_format($anime['rank']),
             'popularity' => number_format($anime['popularity']),
-            'premiered' => (!empty($anime['season']) && !empty($anime['year'])) ? Str::ucfirst($anime['season']) . ' ' . $anime['year'] : null,
+            'premiered' => (!empty($anime['season']) && !empty($anime['year'])) ? str($anime['season'])->ucfirst() . ' ' . $anime['year'] : null,
             'studios' => collect($anime['studios']),
             'themes' => collect($anime['themes']),
             'demographics' => collect($anime['demographics']),

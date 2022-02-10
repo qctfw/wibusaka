@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="title">{{ $anime['title'] }}</x-slot>
-    <x-slot name="meta_description">{{(!empty($anime['synopsis'])) ? __('meta.single.description', ['synopsis' => \Str::words($anime['synopsis'], 30), 'anime' => $anime['title']]) : __('meta.single.description_empty') }}</x-slot>
+    <x-slot name="meta_description">{{(!empty($anime['synopsis'])) ? __('meta.single.description', ['synopsis' => str($anime['synopsis'])->words(30), 'anime' => $anime['title']]) : __('meta.single.description_empty') }}</x-slot>
     <x-slot name="meta_robots">noindex, nofollow</x-slot>
 
     <div class="flex flex-col py-4 md:flex-row">
@@ -191,7 +191,7 @@
                     @foreach ($anime['relations'] as $relation)
                     <tr class="border-b border-gray-400 border-dashed border-opacity-30">
                         <td class="font-semibold align-top">
-                            {{ __('anime.single.relations.' . \Str::slug($relation['relation'], '_')) }}
+                            {{ __('anime.single.relations.' . str($relation['relation'])->slug('_')) }}
                         </td>
                         <td class="align-top">:</td>
                         <td class="pl-2 align-top">

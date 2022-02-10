@@ -8,7 +8,6 @@ use App\ViewModels\AnimeViewModel;
 use App\ViewModels\ScheduleViewModel;
 use App\ViewModels\SeasonViewModel;
 use App\ViewModels\TopIndexViewModel;
-use Illuminate\Support\Str;
 
 class AnimeController extends Controller
 {
@@ -106,11 +105,11 @@ class AnimeController extends Controller
     {
         if (is_null($day))
         {
-            $day = Str::of(now()->format('l'))->lower();
+            $day = str(now()->format('l'))->lower();
             return redirect(route('anime.schedule', ['day' => $day]));
         }
 
-        $day = Str::of($day)->lower();
+        $day = str($day)->lower();
 
         abort_if(!in_array($day, self::VALID_DAYS), 404);
 
@@ -133,7 +132,7 @@ class AnimeController extends Controller
     {
         $result = $this->jikan_service->getAnime(intval($id));
 
-        abort_if(Str::contains($result['rating'], 'Rx'), 404);
+        abort_if(str($result['rating'])->contains('Rx'), 404);
 
         $anime_view_model = new AnimeViewModel($result);
 
