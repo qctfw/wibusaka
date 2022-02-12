@@ -48,7 +48,12 @@ class JikanService implements JikanServiceInterface
                 break;
         }
 
-        $result = $this->requestJikan('anime', ['jikan-top', 'jikan-top-' . $category], 'jikan-top-' . $category . '-' . $page, null, $query);
+        $result = $this->requestJikan(
+            uri: 'anime',
+            cache_tags: ['jikan-top', 'jikan-top-' . $category],
+            cache_key:'jikan-top-' . $category . '-' . $page,
+            query: $query
+        );
 
         $animes = $this->collectAnimes($result['data']);
 
@@ -57,10 +62,11 @@ class JikanService implements JikanServiceInterface
 
     public function getCurrentSeason()
     {
-        $cache_tags = ['jikan-season'];
-        $cache_key = 'jikan-season-current';
-
-        $animes = $this->requestJikanAllPages('seasons/now', $cache_tags, $cache_key);
+        $animes = $this->requestJikanAllPages(
+            uri: 'seasons/now', 
+            cache_tags: ['jikan-season'],
+            cache_key: 'jikan-season-current'
+        );
 
         $season_navigation = $this->getSeasonNavigation($animes->first()['year'], $animes->first()['season']);
 
@@ -74,10 +80,11 @@ class JikanService implements JikanServiceInterface
     {
         $season_navigation = $this->getSeasonNavigation($year, $season);
 
-        $cache_tags = ['jikan-season', 'jikan-season-' . $year];
-        $cache_key = 'jikan-season-' . $year . '-' . $season;
-
-        $animes = $this->requestJikanAllPages('seasons/' . $year . '/' . $season, $cache_tags, $cache_key);
+        $animes = $this->requestJikanAllPages(
+            uri: 'seasons/' . $year . '/' . $season,
+            cache_tags: ['jikan-season', 'jikan-season-' . $year],
+            cache_key: 'jikan-season-' . $year . '-' . $season
+        );
 
         return [
             'seasons' => $season_navigation,
@@ -89,7 +96,12 @@ class JikanService implements JikanServiceInterface
     {
         $query = [...self::JIKAN_DEFAULT_QUERY, 'genres' => $id, 'page' => $page];
 
-        $result = $this->requestJikan('anime', ['jikan-anime-genre'], 'jikan-genre-' . $id . '-' . $page, null, $query);
+        $result = $this->requestJikan(
+            uri: 'anime',
+            cache_tags: ['jikan-anime-genre'],
+            cache_key: 'jikan-genre-' . $id . '-' . $page,
+            query: $query
+        );
 
         $animes = $this->collectAnimes($result['data']);
 
@@ -110,7 +122,12 @@ class JikanService implements JikanServiceInterface
         {
             $cache_expire = now()->endOfWeek(Carbon::SUNDAY);
 
-            $animes = $this->requestJikanAllPages('schedules', $cache_tags, 'jikan-anime-schedule-all', $cache_expire);
+            $animes = $this->requestJikanAllPages(
+                uri: 'schedules',
+                cache_tags: $cache_tags,
+                cache_key: 'jikan-anime-schedule-all',
+                cache_expire: $cache_expire
+            );
 
             $animes = $animes->where('broadcast.day', Carbon::create($day)->dayName)->whereNotNull('season')->sortBy('broadcast.time')->values();
 
@@ -122,11 +139,23 @@ class JikanService implements JikanServiceInterface
 
     public function getAnime(string $id)
     {
-        $result = $this->requestJikan('anime/' . $id, ['jikan-anime'], 'jikan-anime-' . $id);
+        $result = $this->requestJikan(
+            uri: 'anime/' . $id,
+            cache_tags: ['jikan-anime'],
+            cache_key: 'jikan-anime-' . $id
+        );
 
-        $relations = $this->requestJikan('anime/' . $id . '/relations', ['jikan-anime-relations'], 'jikan-anime-relations-' . $id);
+        $relations = $this->requestJikan(
+            uri: 'anime/' . $id . '/relations',
+            cache_tags: ['jikan-anime-relations'],
+            cache_key: 'jikan-anime-relations-' . $id
+        );
 
-        $themes = $this->requestJikan('anime/' . $id . '/themes', ['jikan-anime-themes'], 'jikan-anime-themes-' . $id);
+        $themes = $this->requestJikan(
+            uri: 'anime/' . $id . '/themes',
+            cache_tags: ['jikan-anime-themes'],
+            cache_key: 'jikan-anime-themes-' . $id
+        );
 
         $anime = array_merge($result['data'], [ 'relations' => $relations['data'] ], $themes['data']);
 
@@ -135,7 +164,12 @@ class JikanService implements JikanServiceInterface
 
     public function getAnimeRecommendations(string $id)
     {
-        $result = $this->requestJikan('anime/' . $id . '/recommendations', ['jikan-anime-recommendations'], 'jikan-anime-recommendations-' . $id, now()->addDays(3)->endOfDay());
+        $result = $this->requestJikan(
+            uri: 'anime/' . $id . '/recommendations',
+            cache_tags: ['jikan-anime-recommendations'],
+            cache_key: 'jikan-anime-recommendations-' . $id,
+            cache_expire: now()->addDays(3)->endOfDay()
+        );
 
         return collect($result['data'])->take(9);
     }
@@ -143,7 +177,13 @@ class JikanService implements JikanServiceInterface
     public function searchAnime(string $query)
     {
         $query = [...self::JIKAN_DEFAULT_QUERY, 'q' => $query, 'limit' => 6];
-        $result = $this->requestJikan('anime', ['jikan-search'], 'jikan-search-anime-' .  $query['q'], now()->addDays(5)->endOfDay(), $query);
+        $result = $this->requestJikan(
+            uri: 'anime',
+            cache_tags: ['jikan-search'],
+            cache_key: 'jikan-search-anime-' .  $query['q'],
+            cache_expire: now()->addDays(5)->endOfDay(),
+            query: $query
+        );
 
         $animes = $this->collectAnimes($result['data']);
 
@@ -298,7 +338,13 @@ class JikanService implements JikanServiceInterface
 
     private function getAllowedSeasons()
     {
-        $all_seasons = $this->requestJikan('seasons', ['jikan-season', 'jikan-season-archive'], 'jikan-season-archive', now()->addDays(14));
+        $all_seasons = $this->requestJikan(
+            uri: 'seasons',
+            cache_tags: ['jikan-season', 'jikan-season-archive'],
+            cache_key: 'jikan-season-archive',
+            cache_expire: now()->addDays(14)
+        );
+
         return collect($all_seasons['data'])->where('year', '>=', 1995)->mapWithKeys(function ($item, $key) {
             return [ $item['year'] => collect($item['seasons']) ];
         });
@@ -342,9 +388,9 @@ class JikanService implements JikanServiceInterface
         ];
 
         $anime['broadcast'] = [
-            'day' => !empty($anime['broadcast']['day']) ? $anime['aired']['from']->dayName : null,
-            'time' => !empty($anime['broadcast']['time']) ? $anime['aired']['from']->format('H:i') : null,
-            'timezone' => !empty($anime['broadcast']['timezone']) ? $anime['aired']['from']->tzName : null,
+            'day' => $anime['aired']['from']?->dayName,
+            'time' => $anime['aired']['from']?->format('H:i'),
+            'timezone' => $anime['aired']['from']?->tzName,
             'string' => (!empty($anime['broadcast']['time']) && !empty($anime['broadcast']['timezone'])) ? __('anime.single.broadcast_string', [
                 'day' => $anime['aired']['from']->dayName,
                 'time' => $anime['aired']['from']->format('H:i') . ' ' . $anime['aired']['from']->format('T')
@@ -374,6 +420,8 @@ class JikanService implements JikanServiceInterface
             'rank' => number_format($anime['rank']),
             'popularity' => number_format($anime['popularity']),
             'premiered' => (!empty($anime['season']) && !empty($anime['year'])) ? str($anime['season'])->ucfirst() . ' ' . $anime['year'] : null,
+            'producers' => collect($anime['producers']),
+            'licensors' => collect($anime['licensors']),
             'studios' => collect($anime['studios']),
             'themes' => collect($anime['themes']),
             'demographics' => collect($anime['demographics']),
