@@ -14,15 +14,24 @@ use Illuminate\Support\ServiceProvider;
 class AppServiceProvider extends ServiceProvider
 {
     /**
+     * All of the container bindings that should be registered.
+     *
+     * @var array
+     */
+    public $bindings = [
+        GenreServiceInterface::class => GenreService::class,
+        JikanServiceInterface::class => JikanService::class,
+        ResourceServiceInterface::class => ResourceService::class,
+    ];
+
+    /**
      * Register any application services.
      *
      * @return void
      */
     public function register()
     {
-        $this->app->bind(GenreServiceInterface::class, GenreService::class);
-        $this->app->bind(JikanServiceInterface::class, JikanService::class);
-        $this->app->bind(ResourceServiceInterface::class, ResourceService::class);
+        //
     }
 
     /**
