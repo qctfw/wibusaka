@@ -236,15 +236,16 @@ class JikanService implements JikanServiceInterface
                         throw new JikanException($status, __('error.jikan_rate_limit'));
                         break;
                     default:
-                        $exception_body = $jikan_response->collect();
-                        $exception_message = 'Type: ' . $exception_body['type'] . ' (' . $exception_body['message'] . ')';
-            
-                        throw new JikanException($status, $exception_message);
+                        $this->throwJikanException($jikan_response);
                         break;
                 }
             }
 
             $jikan_data = $jikan_response->body();
+
+            if (str_contains($jikan_data, 'Exception",')) {
+                $this->throwJikanException($jikan_response);
+            }
 
             $cache->put($cache_key, $jikan_data, $cache_expire);
         }
@@ -371,6 +372,15 @@ class JikanService implements JikanServiceInterface
 
         $log = 'Requesting Jikan... URL: ' . $full_url . ' Query: ' . http_build_query($query);
         Log::channel('jikan')->info($log);
+    }
+
+    private function throwJikanException($jikan_response)
+    {
+        $exception_body = $jikan_response->collect();
+
+        $exception_message = 'URL: ' . $jikan_response->effectiveUri()->getPath() . ' Type: ' . $exception_body['type'] . ' (' . $exception_body['status'] . ' | ' . $exception_body['message'] . ')';
+
+        throw new JikanException($jikan_response->status(), $exception_message);
     }
 
     private function collectAnimes(?array $animes)
