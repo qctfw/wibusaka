@@ -1,0 +1,80 @@
+openapi: 3.0.0
+info:
+  description: "This is an API Documentation for [WibuSaka](https://wibusaka.moe) API.\r\n# Information\r\nWibuSaka API is a simple REST API for fetching legal streaming platform in Indonesia using your favorite anime lists. (Currently supports Anime List's ID from [MyAnimeList](https://myanimelist.net), and [AniList](https://anilist.co))\r\n\r\nHere is the information you need before fetching any requests from this API.\r\n## Disclaimer\r\n- This project is not affiliated with MyAnimeList and AniList.\r\n## Support The Project\r\nYou can support this project by donating **[here](https://wibusaka.moe/donate)**. Proceeds earned from this link will go back to the project, keeping the servers alive, and bring noodles to my table.\r\n## Rate Limiting\r\nAll API requests have rate limit. You can only have **1500** API requests **per day**.\r\n## HTTP Status Codes\r\n| HTTP Code | Note |\r\n| ----- | ----- |\r\n| 200 | The request was successful. |\r\n| 304 | The request has not been modified since last request. |\r\n| 404 | Route not found. |\r\n| 422 | Validation failed or invalid request. Check `errors` on the response for more information |\r\n| 429 | You reached the request limit. Check `Retry-After` header to indicate how long to wait before making a new request. |\r\n| 500 | There is something wrong from the server. |\r\n| 503 | The service is unavailable. Mostly because of maintenance mode. |\r\n\r\nIf you got >=500 HTTP status code, please report it to [Discord](https://discord.gg/).\r\n## Error Response\r\nHere is the example of the `404` response error.\r\n\r\n```json\r\n{\r\n\t\"type\": \"NotFoundHttpException\",\r\n\t\"message\": \"Route Not Found\",\r\n\t\"errors\": null\r\n}\r\n```"
+  version: 1.0.0
+  title: "WibuSaka API"
+  x-logo:
+    url: "https://wibusaka.moe/img/wibusaka/wibusaka_full_logo_black.png"
+    backgroundColor: "#FFFFFF"
+    altText: "WibuSaka Image"
+servers:
+  - url: https://api.wibusaka.moe/v1
+tags:
+- name: "resources"
+  description: "Here is the API Endpoint for fetching a resource of streaming platforms."
+paths:
+  /resources/anime/{source}:
+    get:
+      tags:
+      - "resources"
+      description: "Returns a collection of anime streaming platforms by anime list's ID"
+      operationId: "getAnimeResourcesById"
+      parameters:
+      - name: "source"
+        in: "path"
+        schema:
+          type: "string"
+          enum: ["myanimelist", "anilist"]
+        required: true
+        description: "Supported anime list source"
+      - name: "id"
+        in: "query"
+        schema:
+          type: "string"
+        required: true
+        description: "Anime List IDs (Pass multiple IDs with a comma)"
+      responses:
+        200:
+          description: All anime resources grouped by ID
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/AnimeResourceGroup"
+        422:
+          description: "Invalid ID supplied"
+        429:
+          description: "Too Many Requests"
+components:
+  schemas:
+    AnimeResource:
+      type: "object"
+      properties:
+        platform_name:
+          type: "string"
+        platform_type:
+          type: "string"
+          enum: ['stream', 'tv', 'theater']
+        url:
+          type: "string"
+          example: "https://youtube.com/"
+        is_paid:
+          type: "boolean"
+          example: false
+        note:
+          type: "string"
+          nullable: true
+    AnimeResourceGroup:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        resources:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/AnimeResource"
