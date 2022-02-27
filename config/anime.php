@@ -2,6 +2,7 @@
 
 return [
     'asset' => [
+        'openapi' => env('WIBUSAKA_ASSET_OPENAPI_URL'),
         'base_url' => env('WIBUSAKA_ASSET_BASE_URL'),
         'logo' => [
             'default' => env('WIBUSAKA_LOGO_PATH'),

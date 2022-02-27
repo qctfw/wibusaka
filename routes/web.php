@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [MainPageController::class, 'index'])->name('index');
 
+Route::view('docs', 'docs')->name('docs');
+
 Route::group(['as' => 'anime.', 'prefix' => 'anime', 'controller' => AnimeController::class], function () {
     Route::get('/', 'index')->name('index');
     

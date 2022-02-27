@@ -1,5 +1,6 @@
 <div x-data="{open: false, menu: ''}">
     <section class="flex flex-row items-center justify-center gap-4">
+        <a href="{{ route('docs') }}" class="text-link cursor-pointer">{{ __('anime.main.api') }}</a>&bull;
         <div class="text-link cursor-pointer" x-on:click="open = true; menu = 'privacy';">{{ __('anime.main.privacy') }}</div>&bull;
         <div class="text-link cursor-pointer" x-on:click="open = true; menu = 'faq';">{{ __('anime.main.faq') }}</div>&bull;
         <div class="text-link cursor-pointer" x-on:click="open = true; menu = 'credits';">{{ __('anime.main.credits') }}</div>

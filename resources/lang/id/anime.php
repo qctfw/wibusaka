@@ -84,6 +84,7 @@ return [
     ],
     'main' => [
         'subtitle' => 'WibuSaka memberikan info platform menonton anime apapun secara legal dengan mudah dan cepat!',
+        'api' => 'API',
         'privacy' => 'Privasi',
         'faq' => 'Tanya Jawab',
         'credits' => 'Credits',
