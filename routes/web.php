@@ -19,7 +19,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [MainPageController::class, 'index'])->name('index');
 
-Route::view('docs', 'docs')->name('docs');
+Route::get('docs', function () {
+    return redirect(config('anime.link.api-doc'));
+})->name('docs');
 
 Route::group(['as' => 'anime.', 'prefix' => 'anime', 'controller' => AnimeController::class], function () {
     Route::get('/', 'index')->name('index');
