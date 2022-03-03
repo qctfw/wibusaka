@@ -11,7 +11,9 @@ info:
 
     ## Disclaimer
 
-    This project is not affiliated with MyAnimeList and AniList.
+    - This project is not affiliated with MyAnimeList and AniList.
+    
+    - Providing attribution to me is recommended but not required, but I am very thankful to you if you do.
     
     ## Support The Project
 
@@ -19,7 +21,7 @@ info:
     
     ## Rate Limiting
 
-    All API requests have rate limit. You can only have **1500** API requests **per day**.
+    You have **60** API requests **per minute** and **unlimited** API requests **per day**.
     
     ## HTTP Status Codes
 
