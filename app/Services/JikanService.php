@@ -247,7 +247,7 @@ class JikanService implements JikanServiceInterface
                 $this->throwJikanException($jikan_response);
             }
 
-            $cache->put($cache_key, $jikan_data, $cache_expire);
+            $cache->put($cache_key, $jikan_data, $cache_expire->diffInRealSeconds());
         }
 
         return collect(json_decode($jikan_data, true));
