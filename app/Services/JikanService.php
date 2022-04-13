@@ -247,7 +247,7 @@ class JikanService implements JikanServiceInterface
                 $this->throwJikanException($jikan_response);
             }
 
-            $cache->put($cache_key, $jikan_data, $cache_expire->diffInRealSeconds());
+            $cache->put($cache_key, $jikan_data, $cache_expire);
         }
 
         return collect(json_decode($jikan_data, true));
@@ -256,6 +256,11 @@ class JikanService implements JikanServiceInterface
     private function requestJikanAllPages(string $uri, array $cache_tags, string $cache_key = '', Carbon $cache_expire = null)
     {
         $animes = Cache::tags($cache_tags)->get($cache_key);
+
+        if (is_null($cache_expire))
+        {
+            $cache_expire = now()->endOfDay();
+        }
 
         if (is_null($animes))
         {
