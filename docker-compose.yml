@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/var/www/html/wibusaka
+    networks:
+      - wibusaka-network
+    depends_on:
+      - redis
+      - mysql
+    container_name: wibusaka-php
+
+  mysql:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    volumes:
+      - wibusaka-db-volume:/var/lib/mysql
+    networks:
+      - wibusaka-network
+    environment:
+      - MYSQL_USER=wibusaka
+      - MYSQL_PASSWORD=wibusaka
+      - MYSQL_ROOT_PASSWORD=root
+    container_name: wibusaka-mysql
+
+  redis:
+    image: redis:7-alpine
+    volumes:
+      - wibusaka-redis-volume:/data
+    networks:
+      - wibusaka-network
+    container_name: wibusaka-redis
+
+  nginx:
+    image: nginx:stable-alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www/html/wibusaka
+      - ./docker/nginx/templates:/etc/nginx/templates
+    networks:
+      - wibusaka-network
+    depends_on:
+      - php
+    environment:
+      - NGINX_APP_FOLDER=wibusaka
+      - NGINX_PORT=80
+    container_name: wibusaka-nginx
+
+networks:
+  wibusaka-network:
+    driver: bridge
+
+volumes:
+  wibusaka-db-volume:
+  wibusaka-redis-volume:
