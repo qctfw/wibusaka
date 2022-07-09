@@ -35,7 +35,7 @@ class TopIndexViewModel extends ViewModel
                         'to' => (!is_null($anime['aired']['to'])) ? $anime['aired']['to']->translatedFormat('M Y') : '?'
                     ],
                     'members' => abbreviate_number($anime['members']),
-                    'is_released' => (!is_null($anime['aired']['from'])) ? now()->gte($anime['aired']['from']) : false
+                    'is_released' => $anime['status'] != __('anime.single.status_enums.not_yet_aired')
                 ]);
             });
 

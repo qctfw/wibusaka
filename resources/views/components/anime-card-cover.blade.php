@@ -34,7 +34,11 @@
         </div>
     </div>
 
-    @if (!is_null($resources) && $anime['is_released'])
+    @if (!$anime['is_released'] && ( (is_null($resources)) || (!is_null($resources) && $resources->isEmpty()) ))
+    <div class="flex flex-row items-center justify-center gap-3 py-1 text-sm text-center">
+        <span class="italic">{{ __('anime.single.coming_soon') }}</span>
+    </div>
+    @elseif (!is_null($resources) && $anime['is_released'])
     <div class="flex flex-row items-center justify-center gap-3 py-1 text-sm text-center">
         @forelse ($resources as $resource)
         <a href="{{ $resource->link }}" target="_blank" class="w-6 h-6" title="{{ $resource->alternative_note }}">

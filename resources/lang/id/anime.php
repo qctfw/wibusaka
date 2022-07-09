@@ -8,6 +8,7 @@ return [
         'availability_empty' => 'Kami belum menemukan platform yang menayangkan anime ini di Indonesia.',
         'availability_empty_short' => 'Tidak tersedia',
         'broadcast_string' => ':day pukul :time',
+        'coming_soon' => 'Segera Tayang',
         'genre' => 'Genre',
         'genre_explicit' => 'Genre Eksplisit',
         'genre_theme' => 'Tema',
