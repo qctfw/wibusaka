@@ -25,11 +25,16 @@
         </div>
     </div>
 
+    @if ($animes->isNotEmpty()) <p class="italic w-full mb-2">&bull; Waktu yang ditunjukkan adalah jadwal waktu perdana di Jepang</p> @endif
+
     <div class="grid items-start grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
-        @foreach ($animes as $anime)
+        @forelse ($animes as $anime)
         <div class="flex flex-col bg-gray-100 rounded-lg dark:bg-gray-800">
-            <div class="flex flex-row h-44 md:h-40 lg:h-52 2xl:h-64">
-                <a href="{{ route('anime.show', $anime['mal_id']) }}" rel="nofollow" class="relative w-1/3 mx-auto h-44 md:h-40 lg:h-52 2xl:h-64 anime-cover">
+            <div class="relative flex flex-row h-44 md:h-40 lg:h-52 2xl:h-64">
+                <div x-data="countdownData({{ $anime['time_difference'] }}, {{ explode(' ', $anime['duration'])[0] }})" x-init="countdownTimer()" class="absolute inset-x-0 bottom-0 flex flex-row items-center justify-center w-2/5 gap-3 py-1 z-20 bg-gray-200 bg-opacity-80 dark:bg-gray-900 dark:bg-opacity-60">
+                    <div class="text-md timer lg:text-lg xl:text-xl" x-text="timerString"></div>
+                </div>
+                <a href="{{ route('anime.show', $anime['mal_id']) }}" rel="nofollow" class="relative w-2/5 mx-auto h-44 md:h-40 lg:h-52 2xl:h-64 anime-cover">
                     <div class="flex flex-col items-center justify-center w-1/2 mx-auto h-72 spinner">
                         <x-icons.spinner class="block w-5 h-5" />
                     </div>
@@ -40,7 +45,7 @@
                     </div>
                     @endif
                 </a>
-                <div class="relative flex flex-col w-2/3 gap-1 px-2 pt-2 divide-y divide-gray-400 shadow divide-opacity-50 divide-dashed">
+                <div class="relative flex flex-col w-3/5 gap-1 px-2 pt-2">
                     <div class="flex flex-col gap-1 text-sm xl:text-base">
                         <div x-data="{ title: `{{ $anime['title'] }}` }" class="flex">
                             <a
@@ -68,7 +73,7 @@
                             </p>
                         </div>
                         @endif
-                        <div class="grid grid-cols-2 lg:text-base">
+                        <div class="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 lg:text-base">
                             <div class="flex flex-row items-center gap-2 text-left lg:text-md">
                                 <x-icons.user-solid class="w-5 h-5" />
                                 <span>{{ $anime['members'] }}</span>
@@ -77,14 +82,14 @@
                                 <x-icons.star-solid class="w-5 h-5" />
                                 <span>{{ $anime['score'] }}</span>
                             </div>
-                        </div>
-                        <div class="flex">
-                            <p class="text-sm lg:text-md">Tayang setiap pukul {{ $anime['broadcast']['time'] }} WIB</p>
+                            <div class="flex flex-row items-center gap-2 text-left lg:text-md">
+                                <x-icons.clock-solid class="w-5 h-5" />
+                                <span>{{ $anime['broadcast']['time'] }} WIB</span>
+                            </div>
                         </div>
                     </div>
-                    <div x-data="countdownData({{ $anime['time_difference'] }}, {{ explode(' ', $anime['duration'])[0] }})" x-init="countdownTimer()" class="absolute inset-x-0 bottom-0 flex flex-row items-center justify-between gap-1 p-2 md:flex-col lg:flex-row">
-                        <div class="text-md timer lg:text-lg xl:text-xl 2xl:text-2xl" x-text="timerString"></div>
-                        <div class="flex flex-row items-center justify-center gap-3 p-1 bg-gray-200 bg-opacity-80 dark:bg-gray-900 dark:bg-opacity-60">
+                    <div class="absolute inset-x-0 bottom-0 flex flex-row items-center justify-center gap-1 p-2 md:flex-col lg:flex-row">
+                        <div class="flex flex-row flex-wrap items-center justify-center gap-3 p-1 bg-gray-200 bg-opacity-80 dark:bg-gray-900 dark:bg-opacity-60">
                             @forelse ($resources[$anime['mal_id']] as $resource)
                             <a href="{{ $resource->link }}" target="_blank" class="w-6 h-6 lg:w-7 lg:h-7" title="{{ $resource->alternative_note }}">
                                 <img src="{{ logo_asset($resource->platform->icon_path) }}" alt="{{ $resource->platform->name }} Logo" />
@@ -98,7 +103,9 @@
                 </div>
             </div>
         </div>
-        @endforeach
+        @empty
+        <p class="italic w-full">Tidak ada anime yang tayang hari ini.</p>
+        @endforelse
     </div>
     
     <x-slot name="script">
@@ -121,17 +128,19 @@
                                 this.timerString = 'Sedang Tayang';
                             }
                             else {
-                                let days = Math.floor(this.countdown / (3600 * 24)).toString().padStart(2, '0');
-                                let hours = Math.floor(this.countdown % (3600 * 24) / 3600).toString().padStart(2, '0');
-                                let minutes = Math.floor(this.countdown % 3600 / 60).toString().padStart(2, '0');
-                                let seconds = Math.floor(this.countdown % 60).toString().padStart(2, '0');
-
+                                let days = Math.floor(this.countdown / (3600 * 24)).toString();
+                                
                                 if (days > 0)
                                 {
-                                    this.timerString = `${days}:${hours}:${minutes}:${seconds}`;
+                                    this.timerString = `${days} hari`;
+                                    clearInterval(countdownInterval);
                                 }
                                 else
                                 {
+                                    let hours = Math.floor(this.countdown % (3600 * 24) / 3600).toString().padStart(2, '0');
+                                    let minutes = Math.floor(this.countdown % 3600 / 60).toString().padStart(2, '0');
+                                    let seconds = Math.floor(this.countdown % 60).toString().padStart(2, '0');
+                                    
                                     this.timerString = `${hours}:${minutes}:${seconds}`;
                                 }
                             }
