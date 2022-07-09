@@ -120,7 +120,7 @@ class JikanService implements JikanServiceInterface
 
         if (is_null($animes))
         {
-            $cache_expire = now()->endOfWeek(Carbon::SUNDAY);
+            $cache_expire = now()->endOfDay();
 
             $animes = $this->requestJikanAllPages(
                 uri: 'schedules',
