@@ -413,7 +413,7 @@ class JikanService implements JikanServiceInterface
             $anime['relations'] = collect($anime['relations']);
         }
 
-        if (isset($anime['relations']))
+        if (isset($anime['external']))
         {
             $anime['external'] = collect($anime['external']);
         }
