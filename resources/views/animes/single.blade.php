@@ -55,11 +55,6 @@
                     <x-button-link href="{{ $anime['url'] }}" target="_blank" class="h-16">
                         <p class="mr-2 text-lg text-left">MyAnimeList</p>
                     </x-button-link>
-                    @if (isset($anime['external_links']['Website']))
-                    <x-button-link href="{{ $anime['external_links']['Website'] }}" target="_blank" class="h-16">
-                        <p class="mr-2 text-lg text-left">Website</p>
-                    </x-button-link>
-                    @endif
                 </div>
             </div>
             <div class="grid grid-cols-1 gap-2 pt-2 pl-2 border-gray-400 border-opacity-50 border-dashed md:mt-3 md:border-t">
@@ -147,13 +142,12 @@
                     </p>
                 </div>
                 @endif
-                @if (!empty($anime['external_links']))
+                @if (!empty($anime['external']))
                 <div>
                     <p class="font-semibold font-primary md:text-lg">{{ __('anime.single.external_link') }}</p>
                     <div class="flex flex-col gap-1 text-sm md:text-md">
-                        @foreach ($anime['external_links'] as $name => $url)
-                            @if ($name == 'Website') @continue @endif
-                            <a href="{{ $url }}" class="text-link">{{ $name }} <x-icons.external-link-solid class="inline-block w-4 h-4 ml-1" /></a>
+                        @foreach ($anime['external'] as $link)
+                            <a href="{{ $link['url'] }}" class="text-link">{{ $link['name'] }} <x-icons.external-link-solid class="inline-block w-4 h-4 ml-1" /></a>
                         @endforeach
                     </div>
                 </div>
@@ -224,19 +218,19 @@
             </div>
             @endif
 
-            @if (count($anime['openings']) > 0 && count($anime['endings']) > 0)
+            @if (count($anime['theme']['openings']) > 0 && count($anime['theme']['endings']) > 0)
             <h3 class="py-3 text-2xl font-semibold border-b border-gray-400 border-opacity-50 border-dashed font-primary">{{ __('anime.single.theme_song') }}</h3>
             <div class="grid justify-between grid-cols-1 md:grid-cols-2">
                 <div class="mt-3">
                     <h4 class="text-lg font-semibold">{{ __('anime.single.theme_song_op') }}</h4>
                     <p class="mt-1">
-                        {!! implode('<br />', $anime['openings']) !!}
+                        {!! implode('<br />', $anime['theme']['openings']) !!}
                     </p>
                 </div>
                 <div class="mt-3">
                     <h4 class="text-lg font-semibold">{{ __('anime.single.theme_song_ed') }}</h4>
                     <p class="mt-1">
-                        {!! implode('<br />', $anime['endings']) !!}
+                        {!! implode('<br />', $anime['theme']['endings']) !!}
                     </p>
                 </div>
             </div>

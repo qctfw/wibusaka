@@ -140,26 +140,12 @@ class JikanService implements JikanServiceInterface
     public function getAnime(string $id)
     {
         $result = $this->requestJikan(
-            uri: 'anime/' . $id,
+            uri: 'anime/' . $id . '/full',
             cache_tags: ['jikan-anime'],
             cache_key: 'jikan-anime-' . $id
         );
 
-        $relations = $this->requestJikan(
-            uri: 'anime/' . $id . '/relations',
-            cache_tags: ['jikan-anime-relations'],
-            cache_key: 'jikan-anime-relations-' . $id
-        );
-
-        $themes = $this->requestJikan(
-            uri: 'anime/' . $id . '/themes',
-            cache_tags: ['jikan-anime-themes'],
-            cache_key: 'jikan-anime-themes-' . $id
-        );
-
-        $anime = array_merge($result['data'], [ 'relations' => $relations['data'] ], $themes['data']);
-
-        return $this->formatAnime($anime);
+        return $this->formatAnime($result['data']);
     }
 
     public function getAnimeRecommendations(string $id)
@@ -427,6 +413,11 @@ class JikanService implements JikanServiceInterface
             $anime['relations'] = collect($anime['relations']);
         }
 
+        if (isset($anime['relations']))
+        {
+            $anime['external'] = collect($anime['external']);
+        }
+
         $anime = collect($anime)->merge([
             'status' => __('anime.single.status_enums.' . str($anime['status'])->replace(' ', '_')->lower()),
             'rating' => explode(' - ', $anime['rating'])[0],
@@ -440,7 +431,6 @@ class JikanService implements JikanServiceInterface
             'studios' => collect($anime['studios']),
             'themes' => collect($anime['themes']),
             'demographics' => collect($anime['demographics']),
-            'external_links' => [], // Not available in v4 right now
         ]);
 
         return $anime;
