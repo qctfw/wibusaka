@@ -2,7 +2,7 @@
     <x-slot name="title">{{ __('anime.season.title') }} {{ ucfirst($seasons['current']['season']) . ' ' . $seasons['current']['year'] }}</x-slot>
     <x-slot name="meta_description">{{ __('meta.season.description', ['season' => $seasons['current']['season'] . ' ' . $seasons['current']['year']]) }}</x-slot>
     
-    <div class="flex flex-row items-center justify-center gap-8 pb-4 font-primary">
+    <div class="flex flex-row items-center justify-between gap-8 pb-4 font-primary">
         @if (!is_null($seasons['previous']))
         <a href="{{ route('anime.season', ['year' => $seasons['previous']['year'], 'season' => $seasons['previous']['season']]) }}" class="flex text-link">
             <x-icons.arrow-left class="w-6 h-6" />

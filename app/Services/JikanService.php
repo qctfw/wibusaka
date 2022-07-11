@@ -420,7 +420,7 @@ class JikanService implements JikanServiceInterface
 
         $anime = collect($anime)->merge([
             'status' => __('anime.single.status_enums.' . str($anime['status'])->replace(' ', '_')->lower()),
-            'rating' => explode(' - ', $anime['rating'])[0],
+            'rating' => (!is_null($anime['rating'])) ? explode(' - ', $anime['rating'])[0] : 'None',
             'score' => ($anime['score'] > 0) ? number_format($anime['score'], 2, '.', '') : 'N/A',
             'duration' => ($anime['duration'] != 'Unknown') ? str($anime['duration'])->replace(['hr', 'min', 'per ep'], ['jam', 'menit', ''])->trim() : '',
             'rank' => number_format($anime['rank']),

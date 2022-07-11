@@ -25,15 +25,15 @@
         </div>
     </div>
 
-    @if ($animes->isNotEmpty()) <p class="italic w-full mb-2">&bull; Waktu yang ditunjukkan adalah jadwal waktu perdana di Jepang</p> @endif
+    @if ($animes->isNotEmpty()) <p class="italic w-full mb-2">&bull; Waktu yang ditampilkan adalah jadwal waktu perdana di Jepang</p> @endif
 
     <div class="grid items-start grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
         @forelse ($animes as $anime)
-        <div class="flex flex-col bg-gray-100 rounded-lg dark:bg-gray-800">
-            <div class="relative flex flex-row h-44 md:h-40 lg:h-52 2xl:h-64">
-                <div x-data="countdownData({{ $anime['time_difference'] }}, {{ explode(' ', $anime['duration'])[0] }})" x-init="countdownTimer()" class="absolute inset-x-0 bottom-0 flex flex-row items-center justify-center w-2/5 gap-3 py-1 z-20 bg-gray-200 bg-opacity-80 dark:bg-gray-900 dark:bg-opacity-60">
-                    <div class="text-md timer lg:text-lg xl:text-xl" x-text="timerString"></div>
-                </div>
+        <div class="relative flex flex-col bg-gray-100 rounded-lg dark:bg-gray-800">
+            <div x-data="countdownData({{ $anime['time_difference'] }}, {{ explode(' ', $anime['duration'])[0] }})" x-init="countdownTimer()" class="absolute inset-x-0 bottom-0 flex flex-row items-center justify-center w-2/5 gap-3 py-1 z-20 rounded-bl-lg bg-gray-200 bg-opacity-80 dark:bg-gray-900 dark:bg-opacity-60">
+                <div class="text-md timer lg:text-lg xl:text-xl" x-text="timerString"></div>
+            </div>
+            <div class="flex flex-row h-44 md:h-40 lg:h-52 2xl:h-64 divide-x divide-gray-400 divide-dashed divide-opacity-50">
                 <a href="{{ route('anime.show', $anime['mal_id']) }}" rel="nofollow" class="relative w-2/5 mx-auto h-44 md:h-40 lg:h-52 2xl:h-64 anime-cover">
                     <div class="flex flex-col items-center justify-center w-1/2 mx-auto h-72 spinner">
                         <x-icons.spinner class="block w-5 h-5" />
@@ -88,7 +88,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="absolute inset-x-0 bottom-0 flex flex-row items-center justify-center gap-1 p-2 md:flex-col lg:flex-row">
+                    <div class="absolute inset-x-0 bottom-0 flex gap-1 p-2 md:flex-col lg:flex-row">
                         <div class="flex flex-row flex-wrap items-center justify-center gap-3 p-1 bg-gray-200 bg-opacity-80 dark:bg-gray-900 dark:bg-opacity-60">
                             @forelse ($resources[$anime['mal_id']] as $resource)
                             <a href="{{ $resource->link }}" target="_blank" class="w-6 h-6 lg:w-7 lg:h-7" title="{{ $resource->alternative_note }}">
@@ -104,7 +104,7 @@
             </div>
         </div>
         @empty
-        <p class="italic w-full">Tidak ada anime yang tayang hari ini.</p>
+        <p class="italic w-full">Tidak ada anime yang tayang hari {{ $active_day }}.</p>
         @endforelse
     </div>
     
