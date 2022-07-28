@@ -44,7 +44,7 @@
     <!-- Google Fonts - M PLUS 1p -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;500;700&display=swap" />
 
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}" />
+    @vite('resources/css/app.css')
     <link rel="stylesheet" href="{{ asset('css/loading-screen.css') }}">
     <livewire:styles />
     <script src="https://unpkg.com/alpinejs@3.8.1/dist/cdn.min.js" defer></script>
@@ -78,7 +78,7 @@
     <x-footer />
     @endif
     <livewire:scripts />
-    <script src="{{ mix('js/app.js') }}"></script>
+    @vite('resources/js/app.js')
     {{ $script ?? '' }}
 </body>
 </html>

@@ -2,13 +2,16 @@
     "name": "qctfw/wibusaka",
     "type": "project",
     "description": "A simple app to inform you where to watch anime legally in Indonesia.",
-    "keywords": ["framework", "laravel"],
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
     "license": "MIT",
     "require": {
         "php": "^8.0",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
-        "laravel/framework": "^9.0",
+        "laravel/framework": "^9.19",
         "laravel/tinker": "^2.7",
         "livewire/livewire": "^2.10",
         "maatwebsite/excel": "^3.1",
