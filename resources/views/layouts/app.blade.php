@@ -44,9 +44,9 @@
     <!-- Google Fonts - M PLUS 1p -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;500;700&display=swap" />
 
-    @vite('resources/css/app.css')
     <link rel="stylesheet" href="{{ asset('css/loading-screen.css') }}">
     <livewire:styles />
+    @vite('resources/js/app.js')
     <script src="https://unpkg.com/alpinejs@3.8.1/dist/cdn.min.js" defer></script>
     @if (!is_null(config('app.analytics_measurement_id')))
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -78,7 +78,6 @@
     <x-footer />
     @endif
     <livewire:scripts />
-    @vite('resources/js/app.js')
     {{ $script ?? '' }}
 </body>
 </html>

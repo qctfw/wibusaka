@@ -1,4 +1,4 @@
-module.exports = () => {
+export default () => {
     if (!'loading' in HTMLImageElement.prototype) {
         document.querySelectorAll('img[loading="lazy"]').forEach(img => img.classList.add('lazyload'))
 

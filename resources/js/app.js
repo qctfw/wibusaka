@@ -1,5 +1,6 @@
 // require('./bootstrap')
-const imgpreload = require('./imgpreload')
+import '../css/app.css';
+import imgpreload from './imgpreload'
 
 document.addEventListener('DOMContentLoaded', imgpreload)
 document.addEventListener('DOMContentLoaded', function () {
