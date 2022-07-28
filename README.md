@@ -49,7 +49,7 @@ WibuSaka uses [Jikan.moe](https://jikan.moe) API to fetch anime datas.
 
 4. After the dependencies has been installed, build the Laravel Mix assets
     ```bash
-    npm run watch
+    npm run dev
     ```
     **Note:** Change `watch` into `prod` or `production` for purging unused styles and scripts.
 
