@@ -70,6 +70,9 @@ return [
     'genre' => [
         'title' => 'Genre Anime'
     ],
+    'producer' => [
+        'title' => 'Producer Anime'
+    ],
     'season' => [
         'title' => 'Musim Anime',
         'current' => 'Anime Musim Ini',

@@ -45,5 +45,7 @@ Route::group(['as' => 'anime.', 'prefix' => 'anime', 'controller' => AnimeContro
 
     Route::get('/schedule/{day?}', 'schedule')->name('schedule')->whereAlpha('day');
 
+    Route::get('/producers/{id}', 'producer')->name('producer')->whereNumber('id');
+
     Route::get('{id}', 'show')->name('show')->whereNumber('id');
 });

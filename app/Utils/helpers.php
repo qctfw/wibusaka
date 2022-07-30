@@ -57,6 +57,16 @@ if (!function_exists('validate_page')) {
     }
 }
 
+if (!function_exists('guess_site')) {
+    function guess_site(string $url)
+    {
+        $parsed_url = ltrim(parse_url($url, PHP_URL_HOST), 'www.');
+        $parsed_url = explode('.', $parsed_url, 2)[0];
+        
+        return $parsed_url;
+    }
+}
+
 if (!function_exists('logo_asset')) {
     function logo_asset(string $path) {
         return config('anime.asset.base_url') . '/' . $path;

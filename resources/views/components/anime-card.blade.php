@@ -10,7 +10,7 @@
     <div class="flex flex-row items-start justify-center gap-4 py-2 text-sm">
         <div class="flex flex-row gap-1 text-center">
             @forelse ($anime['studios'] as $studio)
-                <p>{{ $studio['name'] }}{{ (!$loop->last) ? ',' : '' }}</p>
+                <a href="{{ route('anime.producer', ['id' => $studio['mal_id']]) }}" class="text-link">{{ $studio['name'] }}{{ (!$loop->last) ? ',' : '' }}</a>
             @empty
                 <p>-</p>
             @endforelse

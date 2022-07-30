@@ -91,11 +91,11 @@
                 <div>
                     <p class="font-semibold font-primary md:text-lg">{{ __('anime.single.studio') }}</p>
                     <p class="text-sm md:text-md">
-                        @if ($anime['studios']->isNotEmpty())
-                        {{ $anime['studios']->implode('name', ', ') }}
-                        @else
-                        <span>-</span>
-                        @endif
+                        @forelse ($anime['studios'] as $studio)
+                            <a href="{{ route('anime.producer', ['id' => $studio['mal_id']]) }}" class="text-link">{{ $studio['name'] }}</a>{{ (!$loop->last) ? ',' : '' }}
+                        @empty
+                            <span>-</span>
+                        @endforelse
                     </p>
                 </div>
                 <div>

@@ -59,7 +59,7 @@
                         <div class="flex-row hidden lg:flex">
                             <p><span class="font-semibold">Studio</span>: 
                             @foreach ($anime['studios'] as $studio)
-                            {{ $studio['name'] }}{{ (!$loop->last) ? ',' : '' }}
+                            <a href="{{ route('anime.producer', ['id' => $studio['mal_id']]) }}" class="text-link">{{ $studio['name'] }}</a>{{ (!$loop->last) ? ',' : '' }}
                             @endforeach
                             </p>
                         </div>

@@ -94,7 +94,7 @@ class JikanService implements JikanServiceInterface
 
     public function getAnimesByGenre(int $id, int $page = 1)
     {
-        $query = [...self::JIKAN_DEFAULT_QUERY, 'genres' => $id, 'page' => $page];
+        $query = [...self::JIKAN_DEFAULT_QUERY, 'genres' => $id, 'page' => $page, 'limit' => 24];
 
         $result = $this->requestJikan(
             uri: 'anime',
@@ -148,6 +148,25 @@ class JikanService implements JikanServiceInterface
         return $this->formatAnime($result['data']);
     }
 
+    public function getAnimesByProducer(string $producer_id, int $page = 1)
+    {
+        $query = [...self::JIKAN_DEFAULT_QUERY, 'producers' => $producer_id, 'page' => $page, 'limit' => 24];
+
+        $result = $this->requestJikan(
+            uri: 'anime',
+            cache_tags: ['jikan-anime-producers'],
+            cache_key: 'jikan-anime-producers-' . $producer_id . '-' . $page,
+            query: $query
+        );
+
+        $animes = $this->collectAnimes($result['data']);
+
+        return [
+            'pagination' => $result['pagination'],
+            'animes' => $animes
+        ];
+    }
+
     public function getAnimeRecommendations(string $id)
     {
         $result = $this->requestJikan(
@@ -174,6 +193,18 @@ class JikanService implements JikanServiceInterface
         $animes = $this->collectAnimes($result['data']);
 
         return $animes;
+    }
+
+    public function getProducer(string $id)
+    {
+        $result = $this->requestJikan(
+            uri: 'producers/' . $id . '/full',
+            cache_tags: ['jikan-producers'],
+            cache_key: 'jikan-producers-' . $id,
+            cache_expire: now()->endOfDay()
+        );
+
+        return collect($result['data']);
     }
 
     private function requestJikan(string $uri, array $cache_tags, string $cache_key = '', Carbon $cache_expire = null, array $query = null)

@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Services\Contracts\JikanServiceInterface;
 use App\Services\Contracts\ResourceServiceInterface;
 use App\ViewModels\AnimeViewModel;
+use App\ViewModels\ProducerViewModel;
 use App\ViewModels\ScheduleViewModel;
 use App\ViewModels\SeasonViewModel;
 use App\ViewModels\TopIndexViewModel;
+use Illuminate\Http\Request;
 
 class AnimeController extends Controller
 {
@@ -120,6 +122,32 @@ class AnimeController extends Controller
         $schedule_view_model = new ScheduleViewModel($animes, $resources);
 
         return view('animes.schedule', $schedule_view_model);
+    }
+
+    /**
+     * Display producer's anime.
+     * 
+     * @param string $id
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function producer(string $id, Request $request)
+    {
+        $page = $request->input('page', 1);
+
+        if (!validate_page($page)) {
+            return redirect()->to(url()->current());
+        }
+
+        $producer = $this->jikan_service->getProducer($id);
+        
+        $result = $this->jikan_service->getAnimesByProducer($id, $page);
+        
+        $resources = $this->resource_service->getByMalIds($result['animes']->pluck('mal_id'));
+
+        $producer_view_model = new ProducerViewModel($producer, $page, $result['pagination'], $result['animes'], $resources);
+
+        return view('animes.producer', $producer_view_model);
     }
 
     /**
