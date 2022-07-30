@@ -31,7 +31,7 @@
             <div>
                 <h2 class="text-3xl font-bold text-left text-emerald-700 dark:text-emerald-300 font-primary lg:text-5xl">{{ $producer['titles']['default']['title'] }}</h2>
                 <div class="flex flex-col pt-1 text-sm text-left">
-                    <p>{{ $producer['titles']['japanese']['title'] }}</p>
+                    <p>{{ $producer['titles']['japanese']['title'] ?? '' }}</p>
                     <p>({{ $producer['established'] }})</p>
                 </div>
                 <p class="mt-3">{!! nl2br(e($producer['about'])) !!}</p>
