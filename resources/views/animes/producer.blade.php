@@ -4,37 +4,53 @@
     <x-slot name="meta_robots">noindex, nofollow</x-slot>
     
     <div class="flex flex-col gap-3">
-        <div>
-            <div class="float-left mr-4 lg:mr-8">
-                <div class="relative w-44 lg:w-48 anime-cover">
-                    <div class="flex flex-col items-center justify-center w-full h-44 lg:h-48 spinner">
-                        <x-icons.spinner class="block w-5 h-5" />
+        <div class="flex flex-col xl:flex-row items-start gap-3">
+            <div class="xl:w-2/3">
+                <div class="float-left mr-4 mb-2 lg:mr-8">
+                    <div class="relative w-44 lg:w-56 anime-cover">
+                        <div class="flex flex-col items-center justify-center w-full h-44 lg:h-48 spinner">
+                            <x-icons.spinner class="block w-5 h-5" />
+                        </div>
+                        <img data-src="{{ $producer['images']['jpg']['image_url'] }}" alt="{{ $producer['titles']['default']['title'] }}" class="absolute inset-x-0 top-0 max-w-full max-h-full mx-auto opacity-0" loading="lazy" />
                     </div>
-                    <img data-src="{{ $producer['images']['jpg']['image_url'] }}" alt="{{ $producer['titles']['default']['title'] }}" class="absolute inset-x-0 top-0 max-w-full max-h-full mx-auto opacity-0" loading="lazy" />
                 </div>
-                <div class="grid grid-cols-5 gap-1 mt-2">
-                    <a href="{{ $producer['url'] }}" title="{{ $producer['titles']['default']['title'] }} MyAnimeList" target="_blank">
-                        <img src="{{ logo_asset('img/logos/myanimelist.webp') }}" alt="{{ $producer['titles']['default']['title'] }} MyAnimeList" class="w-8 h-8 rounded" />
+                <div>
+                    <h2 class="text-3xl font-bold text-left text-emerald-700 dark:text-emerald-300 font-primary lg:text-5xl">{{ $producer['titles']['default']['title'] }}</h2>
+                    <p>{{ $producer['titles']['japanese']['title'] ?? '' }}</p>
+                    <p class="mt-3 xl:pr-1">@if(!empty($producer['about'])) {!! nl2br(e($producer['about'])) !!} @else <i>{{ __('anime.producer.no_description') }}</i> @endif</p>
+                </div>
+            </div>
+            <div class="flex flex-col gap-4 w-full xl:w-1/3">
+                <div class="flex flex-row justify-center items-center gap-4 md:gap-10">
+                    <div class="flex flex-col text-center">
+                        <p class="font-semibold font-primary text-xl">{{ __('anime.producer.established') }}</p>
+                        <p>{{ $producer['established'] }}</p>
+                    </div>
+                    <div class="flex flex-col text-center">
+                        <p class="font-semibold font-primary text-xl">{{ __('anime.producer.favorites') }}</p>
+                        <p>{{ $producer['favorites'] }}</p>
+                    </div>
+                    <div class="flex flex-col text-center">
+                        <p class="font-semibold font-primary text-xl">{{ __('anime.producer.count') }}</p>
+                        <p>{{ $producer['count'] }}</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-2 md:grid-cols-3 xl:grid-cols-2">
+                    <a href="{{ $producer['url'] }}" title="{{ $producer['titles']['default']['title'] }} MyAnimeList" target="_blank" class="flex flex-row items-center text-link gap-2">
+                        <img src="{{ logo_asset('img/logos/myanimelist.webp') }}" class="w-6 h-6 lg:w-8 lg:h-8 rounded" />
+                        <span>MyAnimeList</span>
                     </a>
                     @foreach ($producer['external'] as $site)
                         @php
                             $site_type = guess_site($site['url']);
                             if (!in_array($site_type, ['twitter', 'instagram', 'youtube', 'facebook']))
                                 $site_type = 'globe-solid';
-
-                            $logo_str = sprintf('<a href="%s" title="%s" target="_blank"><x-icons.%s class="w-8 h-8 transition-colors duration-150 hover:text-emerald-300 dark:hover:text-gray-300" fill="currentColor" /></a>', $site['url'], $site['name'], $site_type);
+    
+                            $logo_str = sprintf('<a href="%s"target="_blank" class="flex flex-row items-center text-link gap-2"><x-icons.%s class="w-6 h-6 lg:w-8 lg:h-8" fill="currentColor" /><span>%s</span></a>', $site['url'], $site_type, $site['name']);
                         @endphp
                         {!! \Blade::render($logo_str) !!}
                     @endforeach
                 </div>
-            </div>
-            <div>
-                <h2 class="text-3xl font-bold text-left text-emerald-700 dark:text-emerald-300 font-primary lg:text-5xl">{{ $producer['titles']['default']['title'] }}</h2>
-                <div class="flex flex-col pt-1 text-sm text-left">
-                    <p>{{ $producer['titles']['japanese']['title'] ?? '' }}</p>
-                    <p>({{ $producer['established'] }})</p>
-                </div>
-                <p class="mt-3">{!! nl2br(e($producer['about'])) !!}</p>
             </div>
         </div>
 

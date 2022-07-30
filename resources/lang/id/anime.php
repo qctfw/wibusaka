@@ -71,7 +71,11 @@ return [
         'title' => 'Genre Anime'
     ],
     'producer' => [
-        'title' => 'Producer Anime'
+        'title' => 'Producer Anime',
+        'established' => 'Didirikan',
+        'count' => 'Jumlah Anime',
+        'favorites' => 'Jumlah Favorit',
+        'no_description' => 'Tidak ada deskripsi.',
     ],
     'season' => [
         'title' => 'Musim Anime',
