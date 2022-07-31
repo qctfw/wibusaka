@@ -7,7 +7,7 @@
             x-bind:class="title.length <= 50 ? 'text-lg lg:text-xl' : title.length <= 80 ? 'text-md lg:text-lg' : 'text-md'"
             x-text="title"></a>
     </div>
-    <div class="flex flex-row items-start justify-center gap-4 py-2 text-sm">
+    <div class="flex flex-row flex-wrap items-start justify-center gap-x-4 py-2 text-sm">
         <div class="flex flex-row gap-1 text-center">
             @forelse ($anime['studios'] as $studio)
                 <a href="{{ route('anime.producer', ['id' => $studio['mal_id']]) }}" class="text-link">{{ $studio['name'] }}{{ (!$loop->last) ? ',' : '' }}</a>
@@ -16,7 +16,7 @@
             @endforelse
         </div>
         <span class="select-none">&bull;</span>
-        <div class="text-center">{{ $anime['episodes'] ?? '?' }} ep</div>
+        <div class="text-center">{{ $anime['episodes'] ?? '?' }} ep @if (!empty($anime['type'])){{ '(' . $anime['type'] . ')' }}@endif</div>
         <span class="select-none">&bull;</span>
         <div class="text-center">{{ $anime['source'] }}</div>
     </div>
@@ -46,7 +46,7 @@
             <p class="text-sm leading-relaxed">{{ $anime['synopsis'] }}</p>
         </div>
     </div>
-    <div class="relative flex flex-row items-center justify-between px-2 py-1 font-medium font-primary">
+    <div class="relative h-min flex flex-row items-center justify-between px-2 py-1 font-medium font-primary">
         @if (!blank($resources))
         <div class="absolute inset-x-0 flex flex-row items-center justify-center w-1/2 gap-3 py-1 bg-gray-200 -top-8 bg-opacity-80 dark:bg-gray-900 dark:bg-opacity-60">
             @foreach ($resources as $resource)
@@ -54,12 +54,6 @@
                 <img src="{{ logo_asset($resource->platform->icon_path) }}" alt="{{ $resource->platform->name }} Logo" />
             </a>
             @endforeach
-        </div>
-        @endif
-        @if (!empty($anime['type']))
-        <div class="flex flex-row items-center justify-center gap-2 text-center">
-            <x-icons.video-camera-solid class="w-5 h-5" />
-            <span>{{ $anime['type'] }}</span>
         </div>
         @endif
         @if ($anime['demographics']->isNotEmpty())

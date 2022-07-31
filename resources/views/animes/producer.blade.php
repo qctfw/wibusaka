@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="flex flex-col gap-4 w-full xl:w-1/3">
-                <div class="flex flex-row justify-center items-center gap-4 md:gap-10">
+                <div class="flex flex-row justify-between items-center gap-4 p-3 md:gap-10 bg-gray-100 rounded-xl dark:bg-gray-800 dark:bg-opacity-60">
                     <div class="flex flex-col text-center">
                         <p class="font-semibold font-primary text-xl">{{ __('anime.producer.established') }}</p>
                         <p>{{ $producer['established'] }}</p>
@@ -35,7 +35,7 @@
                         <p>{{ $producer['count'] }}</p>
                     </div>
                 </div>
-                <div class="grid grid-cols-2 gap-2 md:grid-cols-3 xl:grid-cols-2">
+                <div class="grid grid-cols-2 gap-2 md:grid-cols-3 xl:grid-cols-2 p-3 bg-gray-100 rounded-xl dark:bg-gray-800 dark:bg-opacity-60">
                     <a href="{{ $producer['url'] }}" title="{{ $producer['titles']['default']['title'] }} MyAnimeList" target="_blank" class="flex flex-row items-center text-link gap-2">
                         <img src="{{ logo_asset('img/logos/myanimelist.webp') }}" class="w-6 h-6 lg:w-8 lg:h-8 rounded" />
                         <span>MyAnimeList</span>
