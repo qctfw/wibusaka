@@ -19,7 +19,7 @@ class ProducerViewModel extends ViewModel
     {
         $producer = $this->producer->merge([
             'titles' => collect($this->producer['titles'])->keyBy(fn ($item) => strtolower($item['type']))->toArray(),
-            'established' => Carbon::parse($this->producer['established'])->translatedFormat('d F Y'),
+            'established' => !is_null($this->producer['established']) ? Carbon::parse($this->producer['established'])->translatedFormat('d F Y') : '?',
             'favorites' => abbreviate_number($this->producer['favorites']),
             'count' => abbreviate_number($this->producer['count']),
         ]);
