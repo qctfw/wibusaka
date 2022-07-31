@@ -419,15 +419,17 @@ class JikanService implements JikanServiceInterface
             'to' => (!empty($anime['aired']['to'])) ? Carbon::parse($anime['aired']['to'])->shiftTimezone($anime['broadcast']['timezone'])->setTimeFrom($anime['broadcast']['time'])->setTimezone(config('app.timezone')) : null
         ];
 
-        $anime['broadcast'] = [
-            'day' => $anime['aired']['from']?->dayName,
-            'time' => $anime['aired']['from']?->format('H:i'),
-            'timezone' => $anime['aired']['from']?->tzName,
-            'string' => (!empty($anime['broadcast']['time']) && !empty($anime['broadcast']['timezone'])) ? __('anime.single.broadcast_string', [
-                'day' => $anime['aired']['from']->dayName,
-                'time' => $anime['aired']['from']->format('H:i') . ' ' . $anime['aired']['from']->format('T')
-            ]) : ''
-        ];
+        if ((!empty($anime['broadcast']['time']) && !empty($anime['broadcast']['timezone']))) {
+            $anime['broadcast'] = [
+                'day' => $anime['aired']['from']?->dayName,
+                'time' => $anime['aired']['from']?->format('H:i'),
+                'timezone' => $anime['aired']['from']?->tzName,
+                'string' => __('anime.single.broadcast_string', [
+                    'day' => $anime['aired']['from']->dayName,
+                    'time' => $anime['aired']['from']->format('H:i') . ' ' . $anime['aired']['from']->format('T')
+                ])
+            ];
+        }
 
         $anime['explicit_genres'] = collect($anime['explicit_genres']);
 
