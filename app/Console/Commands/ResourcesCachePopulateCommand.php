@@ -53,9 +53,11 @@ class ResourcesCachePopulateCommand extends Command
 
         $mal_ids = Resource::distinct()->get('mal_id')->pluck('mal_id');
 
+        $this->line('Collected unique ' . $mal_ids->count() . ' MyAnimeList IDs that has resources.');
+
         $this->resource_service->getByMalIds($mal_ids);
 
-        $this->info('Command Done.');
+        $this->components->info('Anime resources has been successfully cached.');
         return 0;
     }
 }

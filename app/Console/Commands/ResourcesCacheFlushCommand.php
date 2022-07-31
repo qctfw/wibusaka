@@ -39,7 +39,7 @@ class ResourcesCacheFlushCommand extends Command
     public function handle()
     {
         Cache::tags(['db', 'db-anime-resources'])->flush();
-        $this->info('Resources cache has been flushed!');
+        $this->components->info('Anime resources cache has been flushed.');
 
         return 0;
     }
