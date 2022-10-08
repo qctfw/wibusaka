@@ -30,7 +30,7 @@
         <a href="{{ route('anime.genre.show', str_replace(' ', '-', strtolower($genre['name']))) }}" class="h-4 px-2 transition-colors bg-red-300 rounded-lg dark:bg-red-700 hover:bg-red-500 dark:hover:bg-red-600">{{ $genre['name'] }}</a>
         @endforeach
     </div>
-    <div class="grid grid-cols-2 h-60 md:h-64 lg:h-80 xl:h-72">
+    <div class="relative grid grid-cols-2 h-60 md:h-64 lg:h-80 xl:h-72">
         <a href="{{ route('anime.show', $anime['mal_id']) }}" rel="nofollow" class="relative w-full mx-auto h-60 md:h-64 lg:h-80 xl:h-72 anime-cover">
             <div class="flex flex-col items-center justify-center w-full h-72 spinner">
                 <x-icons.spinner class="block w-5 h-5" />
@@ -42,13 +42,8 @@
             </div>
             @endif
         </a>
-        <div class="pl-2 overflow-y-auto scrollbar-extra-thin scrollbar-thumb-gray-400 scrollbar-track-gray-300 dark:scrollbar-thumb-gray-500 dark:scrollbar-track-gray-700">
-            <p class="text-sm leading-relaxed">{{ $anime['synopsis'] }}</p>
-        </div>
-    </div>
-    <div class="relative h-min flex flex-row items-center justify-between px-2 py-1 font-medium font-primary">
         @if (!blank($resources))
-        <div class="absolute inset-x-0 flex flex-row items-center justify-center w-1/2 gap-3 py-1 bg-gray-200 -top-8 bg-opacity-80 dark:bg-gray-900 dark:bg-opacity-60">
+        <div class="absolute inset-x-0 -bottom-[1px] flex flex-row flex-wrap items-center justify-center w-1/2 h-auto gap-3 py-1 bg-gray-200 bg-opacity-80 dark:bg-gray-900 dark:bg-opacity-60">
             @foreach ($resources as $resource)
             <a href="{{ $resource->link }}" target="_blank" class="w-6 h-6" title="{{ $resource->alternative_note }}">
                 <img src="{{ logo_asset($resource->platform->icon_path) }}" alt="{{ $resource->platform->name }} Logo" />
@@ -56,6 +51,11 @@
             @endforeach
         </div>
         @endif
+        <div class="pl-2 overflow-y-auto scrollbar-extra-thin scrollbar-thumb-gray-400 scrollbar-track-gray-300 dark:scrollbar-thumb-gray-500 dark:scrollbar-track-gray-700">
+            <p class="text-sm leading-relaxed">{{ $anime['synopsis'] }}</p>
+        </div>
+    </div>
+    <div class="relative h-min flex flex-row items-center justify-between px-2 py-1 font-medium font-primary">
         @if ($anime['demographics']->isNotEmpty())
         <div class="flex flex-row items-center justify-center gap-2 text-center">
             <x-icons.user-group-solid class="w-5 h-5" />

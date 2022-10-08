@@ -108,7 +108,7 @@ class AnimeController extends Controller
         if (is_null($day))
         {
             $day = str(now()->format('l'))->lower();
-            return redirect(route('anime.schedule', ['day' => $day]));
+            return to_route('anime.schedule', ['day' => $day]);
         }
 
         $day = str($day)->lower();
