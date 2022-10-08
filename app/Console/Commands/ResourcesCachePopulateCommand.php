@@ -58,6 +58,7 @@ class ResourcesCachePopulateCommand extends Command
         $this->resource_service->getByMalIds($mal_ids);
 
         $this->components->info('Anime resources has been successfully cached.');
-        return 0;
+
+        return Command::SUCCESS;
     }
 }

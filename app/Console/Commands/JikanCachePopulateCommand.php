@@ -69,6 +69,6 @@ class JikanCachePopulateCommand extends Command
         $this->newLine();
         $this->components->info('Jikan cache has been successfully cached.');
         
-        return 0;
+        return Command::SUCCESS;
     }
 }

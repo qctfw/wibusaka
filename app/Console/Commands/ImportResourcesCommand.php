@@ -81,6 +81,7 @@ class ImportResourcesCommand extends Command
         }
 
         $this->info('Importing done!');
-        return 0;
+
+        return Command::SUCCESS;
     }
 }

@@ -41,6 +41,6 @@ class ResourcesCacheFlushCommand extends Command
         Cache::tags(['db', 'db-anime-resources'])->flush();
         $this->components->info('Anime resources cache has been flushed.');
 
-        return 0;
+        return Command::SUCCESS;
     }
 }
