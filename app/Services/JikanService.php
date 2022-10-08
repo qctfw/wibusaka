@@ -238,7 +238,7 @@ class JikanService implements JikanServiceInterface
 
             $this->logJikan($full_url, $query);
 
-            $jikan_response = Http::withoutVerifying()->acceptJson()->get($this->base_uri . $uri, $query);
+            $jikan_response = Http::withoutVerifying()->withHeaders(['Accept-Encoding' => 'gzip, deflate, br'])->acceptJson()->get($this->base_uri . $uri, $query);
 
             $status = $jikan_response->status();
 
