@@ -46,7 +46,7 @@
                     @endif
                 </a>
                 <div class="relative flex flex-col w-3/5 gap-1 px-2 pt-2">
-                    <div class="flex flex-col gap-1 text-sm xl:text-base">
+                    <div class=" gap-1 text-sm xl:text-base">
                         <div x-data="{ title: `{{ $anime['title'] }}` }" class="flex">
                             <a
                                 href="{{ route('anime.show', $anime['mal_id']) }}"
@@ -89,14 +89,14 @@
                         </div>
                     </div>
                     <div class="absolute inset-x-0 bottom-0 flex gap-1 p-2 md:flex-col lg:flex-row">
-                        <div class="flex flex-row flex-wrap items-center justify-center gap-3 p-1 bg-gray-200 bg-opacity-80 dark:bg-gray-900 dark:bg-opacity-60">
+                        <div class="flex flex-row flex-wrap items-center justify-center gap-3 p-1 px-2 bg-gray-200 bg-opacity-80 dark:bg-gray-900 dark:bg-opacity-60 rounded-lg ">
                             @forelse ($resources[$anime['mal_id']] as $resource)
                             <a href="{{ $resource->link }}" target="_blank" class="w-6 h-6 lg:w-7 lg:h-7" title="{{ $resource->alternative_note }}">
                                 <img src="{{ logo_asset($resource->platform->icon_path) }}" alt="{{ $resource->platform->name }} Logo" />
                             </a>
                             @empty
                             <x-icons.x class="w-6 h-6 lg:w-7 lg:h-7" />
-                            <span class="text-sm lg:text-md">{{ __('anime.single.availability_empty_short') }}</span>
+                            <span class="text-sm lg:text-md px-2">{{ __('anime.single.availability_empty_short') }}</span>
                             @endforelse
                         </div>
                     </div>
