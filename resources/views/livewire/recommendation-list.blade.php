@@ -3,7 +3,7 @@
         <x-library-scroll class="w-full">
         @forelse ($recommendations as $anime)
         <div class="relative flex flex-col shrink-0 snap-left bg-gray-100 rounded-lg font-primary group dark:bg-gray-800">
-            <div class="absolute top-0 left-0 z-20 flex flex-row items-center w-auto gap-1 px-2 text-center bg-gray-200 rounded-tl-lg rounded-br-lg text-md dark:bg-gray-900">
+            <div class="absolute top-0 left-0 z-20 flex flex-row items-center w-auto gap-1 px-2 text-center bg-gray-200 rounded-br-lg text-md dark:bg-gray-900">
                 <x-icons.user-solid class="w-5 h-5" />
                 <span>{{ $anime['votes'] }}</span>
             </div>
