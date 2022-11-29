@@ -263,10 +263,6 @@ class JikanService implements JikanServiceInterface
 
             $jikan_data = $jikan_response->body();
 
-            if (str_contains($jikan_data, 'Exception",')) {
-                $this->throwJikanException($jikan_response);
-            }
-
             $cache->put($cache_key, $jikan_data, $cache_expire);
         }
 
