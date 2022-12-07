@@ -59,7 +59,7 @@
                     <div class="flex flex-col gap-2">
                         <div class="text-xl font-semibold">Art</div>
                         <div class="gap-1">
-                            <p>Logo designed by <a href="https://instagram.com/azrildrpna" target="_blank" rel="noopener noreferrer" class="text-link font-semibold">@azrildrpna</a></p>
+                            <p>Logo designed by <a href="https://azrildrpna.carrd.co" target="_blank" rel="noopener noreferrer" class="text-link font-semibold">@azrildrpna</a></p>
                             <p>Icons designed by <a href="https://heroicons.com" target="_blank" rel="noopener noreferrer" class="text-link font-semibold">Heroicons</a></p>
                         </div>
                     </div>

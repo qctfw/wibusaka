@@ -15,29 +15,5 @@
             </x-library-scroll>
         </div>
         @endforeach
-
-        <div class="grid justify-center grid-cols-1 gap-4 md:grid-cols-3">
-            <x-button-link href="{{ route('anime.top.popular') }}">
-                <x-slot name="icon">
-                    <x-icons.chevron-right-solid class="w-6 h-6" />
-                </x-slot>
-
-                <p class="text-lg font-semibold font-primary md:text-xl">{{ __('anime.top.title.popularity') }}</p>
-            </x-button-link>
-            <x-button-link href="{{ route('anime.top.rated') }}">
-                <x-slot name="icon">
-                    <x-icons.chevron-right-solid class="w-6 h-6" />
-                </x-slot>
-
-                <p class="text-lg font-semibold font-primary md:text-xl">{{ __('anime.top.title.rated') }}</p>
-            </x-button-link>
-            <x-button-link href="{{ route('anime.schedule') }}">
-                <x-slot name="icon">
-                    <x-icons.chevron-right-solid class="w-6 h-6" />
-                </x-slot>
-
-                <p class="text-lg font-semibold font-primary md:text-xl">{{ __('anime.schedule.title') }}</p>
-            </x-button-link>
-        </div>
     </div>
 </x-app-layout>
