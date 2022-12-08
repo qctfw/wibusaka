@@ -1,9 +1,9 @@
 <div x-data="{open: false, menu: ''}">
     <section class="flex flex-row items-center justify-center gap-4">
-        <a href="{{ config('anime.link.api-doc') }}" class="text-link cursor-pointer">{{ __('anime.main.api') }}</a>&bull;
-        <div class="text-link cursor-pointer" x-on:click="open = true; menu = 'privacy';">{{ __('anime.main.privacy') }}</div>&bull;
-        <div class="text-link cursor-pointer" x-on:click="open = true; menu = 'faq';">{{ __('anime.main.faq') }}</div>&bull;
-        <div class="text-link cursor-pointer" x-on:click="open = true; menu = 'credits';">{{ __('anime.main.credits') }}</div>
+        <a href="{{ config('anime.link.api-doc') }}" target="_blank" class="cursor-pointer text-emerald-100 hover:text-white text-link-underline">{{ __('anime.main.api') }}</a>&bull;
+        <div class="cursor-pointer text-emerald-100 hover:text-white" x-on:click="open = true; menu = 'privacy';">{{ __('anime.main.privacy') }}</div>&bull;
+        <div class="cursor-pointer text-emerald-100 hover:text-white" x-on:click="open = true; menu = 'faq';">{{ __('anime.main.faq') }}</div>&bull;
+        <div class="cursor-pointer text-emerald-100 hover:text-white" x-on:click="open = true; menu = 'credits';">{{ __('anime.main.credits') }}</div>
     </section>
     <x-modal class="z-30 text-gray-900 dark:text-gray-200">
         <x-slot name="header">
@@ -18,7 +18,7 @@
         <div class="flex flex-col gap-4 overflow-y-auto">
             <template x-if="menu === 'privacy'">
                 @if (!is_null(config('app.analytics_measurement_id')))
-                <p>(Work In Progress) {{ config('app.name') }} menggunakan Google Analytics untuk mengoleksi data dan membuat laporan. Data yang dikoleksi adalah anonim. Untuk informasi lebih lanjut, kunjungi halaman <a href="https://www.google.com/policies/technologies/cookies/" target="_blank" rel="noopener noreferrer" class="text-link font-semibold">cara Google menggunakan cookie</a> atau <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener noreferrer" class="text-link font-semibold">cara Google menggunakan informasi dari situs atau aplikasi yang menggunakan layanan Google</a>.</p>
+                <p>(Work In Progress) {{ config('app.name') }} menggunakan Google Analytics untuk mengoleksi data dan membuat laporan. Data yang dikoleksi adalah anonim. Untuk informasi lebih lanjut, kunjungi halaman <a href="https://www.google.com/policies/technologies/cookies/" target="_blank" rel="noopener noreferrer" class="text-link text-link-underline font-semibold">cara Google menggunakan cookie</a> atau <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener noreferrer" class="text-link text-link-underline font-semibold">cara Google menggunakan informasi dari situs atau aplikasi yang menggunakan layanan Google</a>.</p>
                 @else
                 <p>-</p>
                 @endif
@@ -34,23 +34,23 @@
                     <x-accordion>
                         <x-slot name="title">Dari mana pustaka-pustaka anime ini berasal?</x-slot>
                         <div class="px-2">
-                            Kami menggunakan <a href="https://jikan.moe" target="_blank" rel="noopener noreferrer" class="text-link font-semibold">Jikan.moe API</a> untuk mengambil data-data anime dari <a href="https://myanimelist.net" target="_blank" rel="noopener noreferrer" class="text-link font-semibold">MyAnimeList</a>. Informasi ketersediaan platform berasal dari informasi yang kita ketahui melalui berita, media sosial, <a href="{{ config('anime.link.discord') }}" target="_blank" rel="noopener noreferrer" class="text-link font-semibold">Discord</a> kami, dan lainnya.
+                            Kami menggunakan <a href="https://jikan.moe" target="_blank" rel="noopener noreferrer" class="text-link text-link-underline font-semibold">Jikan.moe API</a> untuk mengambil data-data anime dari <a href="https://myanimelist.net" target="_blank" rel="noopener noreferrer" class="text-link text-link-underline font-semibold">MyAnimeList</a>. Informasi ketersediaan platform berasal dari informasi yang kita ketahui melalui berita, media sosial, <a href="{{ config('anime.link.discord') }}" target="_blank" rel="noopener noreferrer" class="text-link text-link-underline font-semibold">Discord</a> kami, dan lainnya.
                         </div>
                     </x-accordion>
                     <x-accordion>
                         <x-slot name="title">Saya mengunjungi platform yang tertera tetapi tidak bekerja!</x-slot>
                         <div class="px-2">
-                            Terkadang distributor anime menarik anime mereka dari internet karena alasan tertentu. Silahkan laporkan ke <a href="{{ config('anime.link.discord') }}" target="_blank" rel="noopener noreferrer" class="text-link font-semibold">Discord</a> untuk memberitahu kami.
+                            Terkadang distributor anime menarik anime mereka dari internet karena alasan tertentu. Silahkan laporkan ke <a href="{{ config('anime.link.discord') }}" target="_blank" rel="noopener noreferrer" class="text-link text-link-underline font-semibold">Discord</a> untuk memberitahu kami.
                         </div>
                     </x-accordion>
                     <x-accordion>
                         <x-slot name="title">Saya mengetahui platform anime yang masih belum tertera disini!</x-slot>
                         <div class="px-2">
-                            Silahkan kirim link dan animenya ke <a href="{{ config('anime.link.discord') }}" target="_blank" rel="noopener noreferrer" class="text-link font-semibold">Discord</a>. Kami sangat mengapresiasi bantuan kalian.
+                            Silahkan kirim link dan animenya ke <a href="{{ config('anime.link.discord') }}" target="_blank" rel="noopener noreferrer" class="text-link text-link-underline font-semibold">Discord</a>. Kami sangat mengapresiasi bantuan kalian.
                         </div>
                     </x-accordion>
                     <div class="flex">
-                        <p>Jika pertanyaan kalian tidak tertera disini, silahkan tanya di <a href="{{ config('anime.link.discord') }}" target="_blank" rel="noopener noreferrer" class="text-link font-semibold">Discord</a> kami.</p>
+                        <p>Jika pertanyaan kalian tidak tertera disini, silahkan tanya di <a href="{{ config('anime.link.discord') }}" target="_blank" rel="noopener noreferrer" class="text-link text-link-underline font-semibold">Discord</a> kami.</p>
                     </div>
                 </section>
             </template>
@@ -59,20 +59,20 @@
                     <div class="flex flex-col gap-2">
                         <div class="text-xl font-semibold">Art</div>
                         <div class="gap-1">
-                            <p>Logo designed by <a href="https://azrildrpna.carrd.co" target="_blank" rel="noopener noreferrer" class="text-link font-semibold">@azrildrpna</a></p>
-                            <p>Icons designed by <a href="https://heroicons.com" target="_blank" rel="noopener noreferrer" class="text-link font-semibold">Heroicons</a></p>
+                            <p>Logo designed by <a href="https://azrildrpna.carrd.co" target="_blank" rel="noopener noreferrer" class="text-link text-link-underline font-semibold">@azrildrpna</a></p>
+                            <p>Icons designed by <a href="https://heroicons.com" target="_blank" rel="noopener noreferrer" class="text-link text-link-underline font-semibold">Heroicons</a></p>
                         </div>
                     </div>
                     <div class="flex flex-col gap-2">
                         <div class="text-xl font-semibold">Website</div>
                         <div class="gap-1">
-                            <p>Built with <a href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer" class="text-link font-semibold">Tailwind CSS</a>, <a href="https://alpinejs.dev" target="_blank" rel="noopener noreferrer" class="text-link font-semibold">Alpine.js</a>, <a href="https://laravel.com" target="_blank" rel="noopener noreferrer" class="text-link font-semibold">Laravel</a>, and <a href="https://laravel-livewire.com" target="_blank" rel="noopener noreferrer" class="text-link font-semibold">Livewire</a></p>
-                            <p>API powered by <a href="https://jikan.moe" target="_blank" rel="noopener noreferrer" class="text-link font-semibold">Jikan.moe</a> (Unofficial <a href="https://myanimelist.net" target="_blank" rel="noopener noreferrer" class="text-link font-semibold">MyAnimeList</a> API)</p>
+                            <p>Built with <a href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer" class="text-link text-link-underline font-semibold">Tailwind CSS</a>, <a href="https://alpinejs.dev" target="_blank" rel="noopener noreferrer" class="text-link text-link-underline font-semibold">Alpine.js</a>, <a href="https://laravel.com" target="_blank" rel="noopener noreferrer" class="text-link text-link-underline font-semibold">Laravel</a>, and <a href="https://laravel-livewire.com" target="_blank" rel="noopener noreferrer" class="text-link text-link-underline font-semibold">Livewire</a></p>
+                            <p>API powered by <a href="https://jikan.moe" target="_blank" rel="noopener noreferrer" class="text-link text-link-underline font-semibold">Jikan.moe</a> (Unofficial <a href="https://myanimelist.net" target="_blank" rel="noopener noreferrer" class="text-link text-link-underline font-semibold">MyAnimeList</a> API)</p>
                         </div>
                     </div>
                     <div class="flex flex-col gap-2">
                         <div class="text-xl font-semibold">Fonts</div>
-                        <p>These fonts are provided by <a href="https://fonts.google.com" target="_blank" rel="noopener noreferrer" class="text-link font-semibold">Google Fonts</a> with <a href="https://scripts.sil.org/OFL" target="_blank" rel="noopener noreferrer" class="text-link font-semibold">SIL Open Font License, 1.1</a></p>
+                        <p>These fonts are provided by <a href="https://fonts.google.com" target="_blank" rel="noopener noreferrer" class="text-link text-link-underline font-semibold">Google Fonts</a> with <a href="https://scripts.sil.org/OFL" target="_blank" rel="noopener noreferrer" class="text-link text-link-underline font-semibold">SIL Open Font License, 1.1</a></p>
                         <div class="flex flex-col gap-4">
                             <x-accordion>
                                 <x-slot name="title">Lato</x-slot>

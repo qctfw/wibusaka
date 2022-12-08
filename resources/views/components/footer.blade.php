@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="flex flex-row items-center">
-            <p>This website is not affiliated with <a href="https://myanimelist.net" rel="nofollow noopener noreferrer" target="_blank" class="text-link font-bold">MyAnimeList.</a></p>
+            <p>This website is not affiliated with <a href="https://myanimelist.net" rel="nofollow noopener noreferrer" target="_blank" class="text-emerald-300 hover:text-emerald-200 font-bold text-link-underline">MyAnimeList.</a></p>
         </div>
         <x-footer-menu />
         <div class="flex flex-row items-center gap-4 md:hidden dark:text-white">

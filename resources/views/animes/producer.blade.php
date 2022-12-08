@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <div class="grid grid-cols-2 gap-2 md:grid-cols-3 xl:grid-cols-2 p-3 bg-gray-100 rounded-xl dark:bg-gray-800 dark:bg-opacity-60">
-                    <a href="{{ $producer['url'] }}" title="{{ $producer['titles']['default']['title'] }} MyAnimeList" target="_blank" class="flex flex-row items-center text-link gap-2">
+                    <a href="{{ $producer['url'] }}" title="{{ $producer['titles']['default']['title'] }} MyAnimeList" target="_blank" class="flex flex-row items-center text-link text-link-underline gap-2">
                         <img src="{{ logo_asset('img/logos/myanimelist.webp') }}" class="w-6 h-6 lg:w-8 lg:h-8 rounded" />
                         <span>MyAnimeList</span>
                     </a>
@@ -46,7 +46,7 @@
                             if (!in_array($site_type, ['twitter', 'instagram', 'youtube', 'facebook']))
                                 $site_type = 'globe-solid';
     
-                            $logo_str = sprintf('<a href="%s"target="_blank" class="flex flex-row items-center text-link gap-2"><x-icons.%s class="w-6 h-6 lg:w-8 lg:h-8" fill="currentColor" /><span>%s</span></a>', $site['url'], $site_type, $site['name']);
+                            $logo_str = sprintf('<a href="%s"target="_blank" class="flex flex-row items-center text-link text-link-underline gap-2"><x-icons.%s class="w-6 h-6 dark:text-white lg:w-8 lg:h-8" fill="currentColor" /><span>%s</span></a>', $site['url'], $site_type, $site['name']);
                         @endphp
                         {!! \Blade::render($logo_str) !!}
                     @endforeach

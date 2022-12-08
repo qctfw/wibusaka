@@ -10,7 +10,7 @@
     <div class="flex flex-row flex-wrap items-start justify-center gap-x-4 py-2 text-sm">
         <div class="flex flex-row gap-1 text-center">
             @forelse ($anime['studios'] as $studio)
-                <a href="{{ route('anime.producer', ['id' => $studio['mal_id']]) }}" class="text-link">{{ $studio['name'] }}{{ (!$loop->last) ? ',' : '' }}</a>
+                <a href="{{ route('anime.producer', ['id' => $studio['mal_id']]) }}" class="text-link text-link-underline">{{ $studio['name'] }}{{ (!$loop->last) ? ',' : '' }}</a>
             @empty
                 <p>-</p>
             @endforelse
@@ -59,7 +59,7 @@
         @if ($anime['demographics']->isNotEmpty())
         <div class="flex flex-row items-center justify-center gap-2 text-center">
             <x-icons.user-group-solid class="w-5 h-5" />
-            <a href="{{ route('anime.genre.show', str_replace(' ', '-', strtolower($anime['demographics'][0]['name']))) }}" class="text-link">{{ $anime['demographics'][0]['name'] }}</a>
+            <a href="{{ route('anime.genre.show', str_replace(' ', '-', strtolower($anime['demographics'][0]['name']))) }}" class="text-link text-link-underline">{{ $anime['demographics'][0]['name'] }}</a>
         </div>
         @endif
         <div class="flex flex-row items-center justify-center gap-2 text-center">

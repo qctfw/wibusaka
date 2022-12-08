@@ -6,7 +6,8 @@
         @foreach ($sections as $section)
         <div class="flex flex-col gap-2">
             <x-title>
-                <a href="{{ $section['route'] }}">{{ $section['title'] }} <x-icons.chevron-right-solid class="inline-block w-6 h-6" /></a>
+                <a href="{{ $section['route'] }}" class="text-link-underline">{{ $section['title'] }}</a>
+                <x-icons.chevron-right-solid class="inline-block w-6 h-6" />
             </x-title>
             @if ($section['component'] == 'anime-card-cover')
             <x-library-scroll>

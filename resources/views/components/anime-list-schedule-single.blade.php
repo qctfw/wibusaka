@@ -24,7 +24,7 @@
                     <a
                         href="{{ route('anime.show', $anime['mal_id']) }}"
                         rel="nofollow"
-                        class="font-semibold leading-none font-primary text-link"
+                        class="font-semibold leading-none font-primary text-link no-underline"
                         x-bind:class="title.length <= 50 ? 'text-lg xl:text-xl 2xl:text-2xl' : title.length <= 80 ? 'text-md 2xl:text-lg' : 'text-sm'"
                         x-text="title"></a>
                 </div>
@@ -32,7 +32,7 @@
                 <div class="flex-row hidden lg:flex">
                     <p><span class="font-semibold">Studio</span>: 
                     @foreach ($anime['studios'] as $studio)
-                    <a href="{{ route('anime.producer', ['id' => $studio['mal_id']]) }}" class="text-link">{{ $studio['name'] }}</a>{{ (!$loop->last) ? ',' : '' }}
+                    <a href="{{ route('anime.producer', ['id' => $studio['mal_id']]) }}" class="text-link text-link-underline">{{ $studio['name'] }}</a>{{ (!$loop->last) ? ',' : '' }}
                     @endforeach
                     </p>
                 </div>
@@ -41,7 +41,7 @@
                 <div class="hidden lg:flex">
                     <p><span class="font-semibold">Genre</span>: 
                         @foreach ($anime['genres'] as $genre)
-                            <a href="{{ route('anime.genre.show', ['slug' => str_replace(' ', '-', strtolower($genre['name']))]) }}" class="text-link">{{ $genre['name'] }}</a>{{ (!$loop->last) ? ',' : '' }}
+                            <a href="{{ route('anime.genre.show', ['slug' => str_replace(' ', '-', strtolower($genre['name']))]) }}" class="text-link text-link-underline">{{ $genre['name'] }}</a>{{ (!$loop->last) ? ',' : '' }}
                         @endforeach
                     </p>
                 </div>

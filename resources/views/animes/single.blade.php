@@ -84,7 +84,7 @@
                     <p class="text-sm md:text-md">{{ $anime['aired']['from'] }}@if ($anime['episodes'] > 1 || $anime['airing']) s.d {{ $anime['aired']['to'] }}@endif</p>
                     <p class="text-xs">
                         @if (!empty($anime['season']))
-                        <a href="{{ route('anime.season', ['year' => $anime['year'], 'season' => $anime['season']]) }}" class="text-link">({{ $anime['premiered'] }})</a>
+                        <a href="{{ route('anime.season', ['year' => $anime['year'], 'season' => $anime['season']]) }}" class="text-link text-link-underline">({{ $anime['premiered'] }})</a>
                         @endif
                     </p>
                 </div>
@@ -92,7 +92,7 @@
                     <p class="font-semibold font-primary md:text-lg">{{ __('anime.single.studio') }}</p>
                     <p class="text-sm md:text-md">
                         @forelse ($anime['studios'] as $studio)
-                            <a href="{{ route('anime.producer', ['id' => $studio['mal_id']]) }}" class="text-link">{{ $studio['name'] }}</a>{{ (!$loop->last) ? ',' : '' }}
+                            <a href="{{ route('anime.producer', ['id' => $studio['mal_id']]) }}" class="text-link text-link-underline">{{ $studio['name'] }}</a>{{ (!$loop->last) ? ',' : '' }}
                         @empty
                             <span>-</span>
                         @endforelse
@@ -106,7 +106,7 @@
                     <div class="font-semibold font-primary md:text-lg">{{ __('anime.single.genre') }}</div>
                     <p class="text-sm md:text-md">
                         @forelse ($anime['genres'] as $genre)
-                            <a href="{{ route('anime.genre.show', ['slug' => str_replace(' ', '-', strtolower($genre['name']))]) }}" class="text-link">{{ $genre['name'] }}</a>{{ (!$loop->last) ? ',' : '' }}
+                            <a href="{{ route('anime.genre.show', ['slug' => str_replace(' ', '-', strtolower($genre['name']))]) }}" class="text-link text-link-underline">{{ $genre['name'] }}</a>{{ (!$loop->last) ? ',' : '' }}
                         @empty
                             <span>-</span>
                         @endforelse
@@ -117,7 +117,7 @@
                     <p class="font-semibold font-primary md:text-lg">{{ __('anime.single.genre_explicit') }}</p>
                     <div class="flex flex-col gap-1 text-sm md:text-md">
                         @foreach ($anime['explicit_genres'] as $genre)
-                        <a href="{{ route('anime.genre.show', ['slug' => str_replace(' ', '-', strtolower($genre['name']))]) }}" class="text-link">{{ $genre['name'] }}</a>{{ (!$loop->last) ? ',' : '' }}
+                        <a href="{{ route('anime.genre.show', ['slug' => str_replace(' ', '-', strtolower($genre['name']))]) }}" class="text-link text-link-underline">{{ $genre['name'] }}</a>{{ (!$loop->last) ? ',' : '' }}
                         @endforeach
                     </div>
                 </div>
@@ -127,7 +127,7 @@
                     <div class="font-semibold font-primary md:text-lg">{{ __('anime.single.genre_theme') }}</div>
                     <p class="text-sm md:text-md">
                         @foreach ($anime['themes'] as $theme)
-                            <a href="{{ route('anime.genre.show', ['slug' => str_replace(' ', '-', strtolower($theme['name']))]) }}" class="text-link">{{ $theme['name'] }}</a>{{ (!$loop->last) ? ',' : '' }}
+                            <a href="{{ route('anime.genre.show', ['slug' => str_replace(' ', '-', strtolower($theme['name']))]) }}" class="text-link text-link-underline">{{ $theme['name'] }}</a>{{ (!$loop->last) ? ',' : '' }}
                         @endforeach
                     </p>
                 </div>
@@ -137,7 +137,7 @@
                     <div class="font-semibold font-primary md:text-lg">{{ __('anime.single.demographic') }}</div>
                     <p class="text-sm md:text-md">
                         @foreach ($anime['demographics'] as $demo)
-                            <a href="{{ route('anime.genre.show', ['slug' => str_replace(' ', '-', strtolower($demo['name']))]) }}" class="text-link">{{ $demo['name'] }}</a>{{ (!$loop->last) ? ',' : '' }}
+                            <a href="{{ route('anime.genre.show', ['slug' => str_replace(' ', '-', strtolower($demo['name']))]) }}" class="text-link text-link-underline">{{ $demo['name'] }}</a>{{ (!$loop->last) ? ',' : '' }}
                         @endforeach
                     </p>
                 </div>
@@ -147,7 +147,10 @@
                     <p class="font-semibold font-primary md:text-lg">{{ __('anime.single.external_link') }}</p>
                     <div class="flex flex-col gap-1 text-sm md:text-md">
                         @foreach ($anime['external'] as $link)
-                            <a href="{{ $link['url'] }}" class="text-link">{{ $link['name'] }} <x-icons.external-link-solid class="inline-block w-4 h-4 ml-1" /></a>
+                        <div class="inline-flex gap-1">
+                            <a href="{{ $link['url'] }}" class="text-link text-link-underline">{{ $link['name'] }}</a>
+                            <x-icons.external-link-solid class="inline-block w-4 h-4 ml-1" />
+                        </div>
                         @endforeach
                     </div>
                 </div>
@@ -190,10 +193,10 @@
                         <td class="align-top">:</td>
                         <td class="pl-2 align-top">
                         @foreach ($relation['entry'] as $entry)
-                            <a href="{{ ($entry['type'] == 'anime') ? route('anime.show', ['id' => $entry['mal_id']]) : $entry['url'] }}" class="text-link">
+                            <a href="{{ ($entry['type'] == 'anime') ? route('anime.show', ['id' => $entry['mal_id']]) : $entry['url'] }}" class="text-link text-link-underline">
                                 {{ $entry['name'] }}
                                 @if ($relation['relation'] == 'Adaptation')
-                                <x-icons.external-link-solid class="inline-block w-4 h-4" />
+                                <x-icons.external-link-solid class="inline-block w-4 h-4 text-gray-200 dark:text-white" />
                                 @endif
                             </a>{{ (!$loop->last) ? ', ' : '' }}
                         @endforeach
@@ -210,7 +213,7 @@
                 <livewire:availability-grid :mal="$anime['mal_id']" />
                 <div class="flex items-center h-12 col-span-3 m-2">
                     <p class="w-full text-center text-sm text-gray-700 dark:text-gray-300">Bantu kami menemukan lebih banyak platform untuk menonton anime ini melalui
-                        <a href="{{ config('anime.link.discord') }}" target="_blank" class="font-semibold text-link">
+                        <a href="{{ config('anime.link.discord') }}" target="_blank" class="font-semibold text-link text-link-underline">
                             Discord kami!<x-icons.discord class="inline-flex w-6 h-6 pl-2" fill="currentColor" />
                         </a>
                     </p>
