@@ -2,6 +2,8 @@
 
 namespace App\Services\Contracts;
 
+use Carbon\Carbon;
+
 interface JikanServiceInterface
 {
     public function getTopAnimes(string $category, int $page = 1);
@@ -12,6 +14,7 @@ interface JikanServiceInterface
     public function getAnimesByProducer(string $producer_id, int $page = 1);
     public function getAnime(string $id);
     public function getAnimeRecommendations(string $id);
+    public function getUpcomingBroadcastAnimes(Carbon $time = null);
     public function searchAnime(string $query);
     public function getProducer(string $id);
 }

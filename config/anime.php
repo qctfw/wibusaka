@@ -11,6 +11,9 @@ return [
     'season' => [
         'min_members' => env('ANIME_SEASON_MINIMUM')
     ],
+    'index' => [
+        'max_schedule' => env('ANIME_UPCOMING_SCHEDULE_INDEX_MAXIMUM'),
+    ],
     'link' => [
         'api-doc' => env('WIBUSAKA_LINK_API_DOCS', '#'),
         'discord' => env('WIBUSAKA_LINK_DISCORD', '#'),
