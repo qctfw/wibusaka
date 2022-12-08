@@ -13,7 +13,7 @@
     <div class="grid items-center justify-center grid-cols-2 px-2 py-1 text-sm text-center xl:text-base">
         <div class="flex flex-row items-center gap-2 text-left">
             <x-icons.user-solid class="w-5 h-5" />
-            <span>{{ $anime['members'] }}</span>
+            <span>{{ abbreviate_number($anime['members']) }}</span>
         </div>
         <div class="flex flex-row items-center gap-2 text-left">
             @if ($anime['score'] > 0)
@@ -21,7 +21,7 @@
             <span>{{ $anime['score'] }}</span>
             @else
             <x-icons.calendar-solid class="w-5 h-5" />
-            <span>{{ $anime['aired']['from'] }}</span>
+            <span>{{ (!is_null($anime['aired']['from'])) ? $anime['aired']['from']->translatedFormat('M Y') : '?' }}</span>
             @endif
         </div>
         <div class="flex flex-row items-center gap-2 text-left">
@@ -34,12 +34,12 @@
         </div>
     </div>
 
-    @if (!$anime['is_released'] && ( (is_null($resources)) || (!is_null($resources) && $resources->isEmpty()) ))
-    <div class="flex flex-row items-center justify-center gap-3 py-1 text-sm text-center">
+    @if ($anime['status'] == __('anime.single.status_enums.not_yet_aired') && ( (is_null($resources)) || (!is_null($resources) && $resources->isEmpty()) ))
+    <div class="flex flex-row items-center justify-center gap-3 p-1 text-sm text-center h-full">
         <span class="italic">{{ __('anime.single.coming_soon') }}</span>
     </div>
     @elseif (!is_null($resources))
-    <div class="flex flex-row items-center justify-center gap-3 py-1 text-sm text-center">
+    <div class="flex flex-row flex-wrap items-center justify-center gap-x-3 gap-y-1 p-1 text-sm text-center h-full">
         @forelse ($resources as $resource)
         <a href="{{ $resource->link }}" target="_blank" class="w-6 h-6" title="{{ $resource->alternative_note }}">
             <img src="{{ logo_asset($resource->platform->icon_path) }}" alt="{{ $resource->platform->name }} Logo" />

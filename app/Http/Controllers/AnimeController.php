@@ -49,9 +49,9 @@ class AnimeController extends Controller
         $current_season = $this->jikan_service->getCurrentSeason();
         $current_season['animes'] = $current_season['animes']->take(25);
 
-        $airing_animes = $this->jikan_service->getTopAnimes('airing')->take(25)->sortByDesc('score');
-        $upcoming_animes = $this->jikan_service->getTopAnimes('upcoming')->take(25);
-        
+        $current_schedule_animes = $this->jikan_service->getUpcomingBroadcastAnimes();
+
+        $airing_animes = $this->jikan_service->getTopAnimes('airing');
 
         $all_mal_ids = collect([
             $current_season['animes']->pluck('mal_id'),
@@ -61,13 +61,13 @@ class AnimeController extends Controller
         $resources = $this->resource_service->getByMalIds($all_mal_ids);
 
         $current_season_title = 'Anime ' . $current_season['seasons']['current']['season'] . ' ' . $current_season['seasons']['current']['year'];
-        $current_season = $this->buildIndexSection($current_season_title, 'anime.season-current', $current_season['animes']);
+        $current_season = $this->buildIndexSection($current_season_title, 'anime.season-current', 'anime-card-cover', $current_season['animes']);
 
-        $airing_animes = $this->buildIndexSection(__('anime.top.title.airing'), 'anime.top.airing', $airing_animes);
+        $current_schedule = $this->buildIndexSection(__('anime.schedule.title'), 'anime.schedule', 'anime-list-schedule', $current_schedule_animes);
 
-        $upcoming_animes = $this->buildIndexSection(__('anime.top.title.upcoming'), 'anime.top.upcoming', $upcoming_animes);
+        $airing_animes = $this->buildIndexSection(__('anime.top.title.airing'), 'anime.top.airing', 'anime-card-cover', $airing_animes);
 
-        $sections = collect([$current_season, $airing_animes, $upcoming_animes]);
+        $sections = collect([$current_season, $current_schedule, $airing_animes]);
 
         $top_index_view_model = new TopIndexViewModel($sections, $resources);
 
@@ -167,11 +167,12 @@ class AnimeController extends Controller
         return view('animes.single', $anime_view_model);
     }
 
-    private function buildIndexSection($title, $route, $animes)
+    private function buildIndexSection($title, $route, $component, $animes)
     {
         return collect([
             'title' => $title,
             'route' => route($route),
+            'component' => $component,
             'animes' => $animes
         ]);
     }

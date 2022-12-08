@@ -36,14 +36,6 @@ class ScheduleViewModel extends ViewModel
         $animes = $this->animes->reject(function ($anime) {
             return $anime['explicit_genres']->whereIn('mal_id', [12, 49])->isNotEmpty();
         });
-        $animes = $animes->where('year', '>=', now()->subYear()->year)->where('members', '>=', config('anime.season.min_members'))->map(function ($anime) {
-            $anime['members'] = abbreviate_number($anime['members']);
-
-            $interval = now()->diff(Carbon::create($anime['aired']['from']->format('l H:i')));
-            $anime['time_difference'] = (int) ($interval->format('%r') . ($interval->days * 86400 + $interval->h * 3600 + $interval->i * 60 + $interval->s));
-
-            return $anime;
-        });
 
         return $animes;
     }

@@ -1,6 +1,6 @@
 @props(['id' => uniqid()])
 <div {{ $attributes->merge(['class' => 'relative']) }} x-data="{scroll: 0}" id="slider-{{ $id }}">
-    <div class="flex flex-row items-end w-full gap-8 overflow-auto transition-all flex-nowrap snap snap-x snap-mandatory overflow-smooth" x-ref="slider" x-on:scroll="scroll = $refs.slider.scrollLeft">
+    <div class="flex flex-row items-stretch w-full gap-8 overflow-auto transition-all flex-nowrap snap snap-x snap-mandatory overflow-smooth" x-ref="slider" x-on:scroll="scroll = $refs.slider.scrollLeft">
         {{ $slot }}
     </div>
     <button
