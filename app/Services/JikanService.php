@@ -167,7 +167,7 @@ class JikanService implements JikanServiceInterface
 
     public function getUpcomingBroadcastAnimes(Carbon $time = null)
     {
-        $time = $time ?: now();
+        $time = $time ?: now()->setSecond(0)->setMicrosecond(0);
         
         $cache = Cache::tags(['jikan', 'jikan-anime-schedule']);
         $cache_key = 'jikan-anime-schedule-all';
@@ -183,18 +183,20 @@ class JikanService implements JikanServiceInterface
         $animes = $animes
             ->where('year', '>=', now()->subYear()->year)
             ->where('members', '>=', config('anime.season.min_members'))
-            ->whereNotNull('season');
-
-        $result = $animes
-            ->where('broadcast.day', $time->dayName)
-            ->where('broadcast.time', '>', $time)
+            ->whereNotNull('season')
             ->sortBy('broadcast.time');
+
+        $result = $animes->filter(function ($value, $key) use ($time) {
+            $anime_max_time = Carbon::parse($value['broadcast']['time'])->addMinutes(explode(' ', $value['duration'])[0]);
+
+            return $time->dayName == $value['broadcast']['day'] && $time->lessThanOrEqualTo($anime_max_time);
+        });
 
         $max = config('anime.index.max_schedule', 6);
 
         if ($result->count() < $max) {
             $time->addDay();
-            $result->push(...$animes->where('broadcast.day', $time->dayName)->sortBy('broadcast.time'));
+            $result->push(...$animes->where('broadcast.day', $time->dayName));
         }
 
         return $result->take($max)->values();
