@@ -4,10 +4,10 @@
     
     <div class="flex flex-row items-center justify-between md:justify-center gap-8 pb-4 font-primary">
         @if (!is_null($seasons['previous']))
-        <a href="{{ route('anime.season', ['year' => $seasons['previous']['year'], 'season' => $seasons['previous']['season']]) }}" class="flex text-link">
+        <a href="{{ route('anime.season', ['year' => $seasons['previous']['year'], 'season' => $seasons['previous']['season']]) }}" class="flex text-link dark:text-emerald-200">
             <x-icons.arrow-left class="w-6 h-6" />
         </a>
-        <a href="{{ route('anime.season', ['year' => $seasons['previous']['year'], 'season' => $seasons['previous']['season']]) }}" class="flex flex-col items-center text-link">
+        <a href="{{ route('anime.season', ['year' => $seasons['previous']['year'], 'season' => $seasons['previous']['season']]) }}" class="flex flex-col items-center text-link dark:text-emerald-200">
             <p class="text-xl">{{ ucfirst($seasons['previous']['season']) }}</p>
             <p class="text-sm">{{ $seasons['previous']['year'] }}</p>
         </a>
@@ -19,11 +19,11 @@
         </div>
 
         @if (!is_null($seasons['next']))
-        <a href="{{ route('anime.season', ['year' => $seasons['next']['year'], 'season' => $seasons['next']['season']]) }}" class="flex flex-col items-center text-link">
+        <a href="{{ route('anime.season', ['year' => $seasons['next']['year'], 'season' => $seasons['next']['season']]) }}" class="flex flex-col items-center text-link dark:text-emerald-200">
             <p class="text-xl">{{ ucfirst($seasons['next']['season']) }}</p>
             <p class="text-sm">{{ $seasons['next']['year'] }}</p>
         </a>
-        <a href="{{ route('anime.season', ['year' => $seasons['next']['year'], 'season' => $seasons['next']['season']]) }}" class="flex text-link">
+        <a href="{{ route('anime.season', ['year' => $seasons['next']['year'], 'season' => $seasons['next']['season']]) }}" class="flex text-link dark:text-emerald-200">
             <x-icons.arrow-right class="w-6 h-6" />
         </a>
         @endif

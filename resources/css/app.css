@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .text-link {
-    @apply transition-colors text-emerald-900 dark:text-emerald-200 duration-200 hover:text-emerald-600 dark:hover:text-emerald-500;
+    @apply transition-colors text-emerald-900 dark:text-emerald-300 duration-200 hover:text-emerald-600 dark:hover:text-emerald-500;
 }
 
 .text-link-underline {

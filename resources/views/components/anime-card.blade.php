@@ -3,7 +3,7 @@
         <a
             href="{{ route('anime.show', $anime['mal_id']) }}"
             rel="nofollow"
-            class="p-1 font-semibold leading-none text-center font-primary text-link"
+            class="p-1 font-semibold leading-none text-center font-primary text-link dark:text-emerald-200"
             x-bind:class="title.length <= 50 ? 'text-lg lg:text-xl' : title.length <= 80 ? 'text-md lg:text-lg' : 'text-md'"
             x-text="title"></a>
     </div>

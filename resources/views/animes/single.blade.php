@@ -166,7 +166,7 @@
         @endif
 
         <div class="grow md:ml-12">
-            <h2 class="hidden text-3xl font-bold text-left text-emerald-700 dark:text-emerald-300 font-primary md:block lg:text-5xl">{{ $anime['title'] }}</h2>
+            <h2 class="hidden text-3xl font-bold text-left text-emerald-700 dark:text-emerald-200 font-primary md:block lg:text-5xl">{{ $anime['title'] }}</h2>
             <p class="hidden pt-2 text-sm italic text-left md:block">{{ $anime['title_english'] }}{{ (!empty($anime['title_english']) && !empty($anime['title_japanese'])) ? ' / ' : '' }}{{ $anime['title_japanese'] }}</p>
 
             <h3 class="py-3 text-2xl font-semibold border-b border-gray-400 border-opacity-50 border-dashed font-primary">{{ __('anime.single.synopsis') }}</h3>
