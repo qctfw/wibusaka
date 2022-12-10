@@ -60,7 +60,7 @@
                         <span>{{ $anime['broadcast']['time'] }} WIB</span>
                     </div>
                 </div>
-                <div class="flex gap-1 py-2 md:flex-col lg:flex-row">
+                <div class="flex gap-1 pt-2 md:flex-col lg:flex-row">
                     <div class="flex flex-row flex-wrap items-center justify-center gap-3 px-2 py-1 rounded-lg bg-gray-200 bg-opacity-80 dark:bg-gray-900 dark:bg-opacity-60">
                         @forelse ($resources as $resource)
                         <a href="{{ $resource->link }}" target="_blank" class="w-6 h-6 lg:w-7 lg:h-7" title="{{ $resource->alternative_note }}">
