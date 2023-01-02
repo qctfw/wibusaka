@@ -33,7 +33,7 @@ class JikanService implements JikanServiceInterface
         $cache_key = 'jikan-top-' . $category . '-' . $page;
 
         $animes = $cache->get($cache_key);
-        
+
         if (is_null($animes)) {
             $query = [...self::JIKAN_DEFAULT_QUERY, 'page' => $page];
 
@@ -55,7 +55,7 @@ class JikanService implements JikanServiceInterface
             }
 
             $result = $this->requestJikan('anime', $query);
-    
+
             $animes = $this->collectAnimes($result['data']);
 
             $cache->put($cache_key, $animes, now()->endOfDay());
@@ -76,7 +76,7 @@ class JikanService implements JikanServiceInterface
 
             $cache->put($cache_key, $animes, now()->endOfDay());
         }
-        
+
         return [
             'seasons' => $this->getSeasonNavigation($animes->first()['year'], $animes->first()['season']),
             'animes' => $animes
@@ -86,15 +86,15 @@ class JikanService implements JikanServiceInterface
     public function getAnimesBySeason(int $year, string $season)
     {
         $season_navigation = $this->getSeasonNavigation($year, $season);
-        
+
         $cache = Cache::tags(['jikan', 'jikan-season', 'jikan-season-' . $year]);
         $cache_key = 'jikan-season-' . $year . '-' . $season;
-        
+
         $animes = $cache->get($cache_key);
-        
+
         if (is_null($animes)) {
             $animes = $this->requestJikanAllPages('seasons/' . $year . '/' . $season);
-            
+
             $cache->put($cache_key, $animes, now()->endOfDay());
         }
 
@@ -117,7 +117,7 @@ class JikanService implements JikanServiceInterface
             $query = [...self::JIKAN_DEFAULT_QUERY, 'genres' => $id, 'page' => $page, 'limit' => 24];
 
             $result = $this->requestJikan('anime', $query);
-    
+
             $animes = $this->collectAnimes($result['data']);
             $pagination = $result['pagination'];
 
@@ -168,7 +168,7 @@ class JikanService implements JikanServiceInterface
     public function getUpcomingBroadcastAnimes(Carbon $time = null)
     {
         $time = $time ?: now()->setSecond(0)->setMicrosecond(0);
-        
+
         $cache = Cache::tags(['jikan', 'jikan-anime-schedule']);
         $cache_key = 'jikan-anime-schedule-all';
 
@@ -231,9 +231,9 @@ class JikanService implements JikanServiceInterface
 
         if (is_null($animes)) {
             $query = [...self::JIKAN_DEFAULT_QUERY, 'producers' => $producer_id, 'page' => $page, 'limit' => 24];
-    
+
             $result = $this->requestJikan('anime', $query);
-    
+
             $animes = $this->collectAnimes($result['data']);
             $pagination = $result['pagination'];
 
@@ -275,7 +275,7 @@ class JikanService implements JikanServiceInterface
         if (is_null($animes)) {
             $query = [...self::JIKAN_DEFAULT_QUERY, 'q' => $query, 'limit' => 6];
             $result = $this->requestJikan('anime', $query);
-        
+
             $animes = $this->collectAnimes($result['data']);
 
             $cache->put($cache_key, $animes, now()->addDays(5)->endOfDay());
