@@ -35,11 +35,11 @@
     </div>
 
     @if ($anime['status'] == __('anime.single.status_enums.not_yet_aired') && ( (is_null($resources)) || (!is_null($resources) && $resources->isEmpty()) ))
-    <div class="flex flex-row items-center justify-center gap-3 p-1 text-sm text-center h-full">
+    <div class="flex flex-row flex-grow items-center justify-center gap-3 p-1 text-sm text-center">
         <span class="italic">{{ __('anime.single.coming_soon') }}</span>
     </div>
     @elseif (!is_null($resources))
-    <div class="flex flex-row flex-wrap items-center justify-center gap-x-3 gap-y-1 p-1 text-sm text-center h-full">
+    <div class="flex flex-row flex-grow flex-wrap items-center justify-center gap-x-3 gap-y-1 p-1 text-sm text-center">
         @forelse ($resources as $resource)
         <a href="{{ $resource->link }}" target="_blank" class="w-6 h-6" title="{{ $resource->alternative_note }}">
             <img src="{{ logo_asset($resource->platform->icon_path) }}" alt="{{ $resource->platform->name }} Logo" />
