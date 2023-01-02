@@ -43,15 +43,14 @@ class ResourceService implements ResourceServiceInterface
 
         if ($mal_ids_db->count() > 0) {
             $resources_db = Resource::with('platform')->byMalId($mal_ids_db->toArray())->get();
-            
-            foreach ($mal_ids_db as $mal_id) {
+
+            $mal_ids_db->each(function ($mal_id) use ($resources_db, $resources_result) {
                 $resources = $resources_db->where('mal_id', $mal_id)->sortBy('platform.name', SORT_NATURAL | SORT_FLAG_CASE)->values();
 
                 $resources_result->put($mal_id, $resources);
 
                 $this->setToCache($resources, $mal_id);
-                
-            }
+            });
         }
 
         return $resources_result;
@@ -61,9 +60,7 @@ class ResourceService implements ResourceServiceInterface
     {
         $cache_key = $this->getCacheKey($mal_id);
 
-        $cache = Cache::tags(['db', 'db-anime-resources'])->get($cache_key);
-
-        return $cache;
+        return Cache::tags(['db', 'db-anime-resources'])->get($cache_key);
     }
 
     private function setToCache($resources, int $mal_id)
