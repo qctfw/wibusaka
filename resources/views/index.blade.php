@@ -16,13 +16,20 @@
                 {!! preg_replace('/\*{2}([^*]*)\*{2}/', '<span class="text-emerald-500">$1</span>', $selected_quote) !!}
             </h1>
             <p class="text-lg lg:text-xl">{{ __('anime.main.subtitle') }}</p>
-            <div class="w-1/2 mt-4 lg:w-1/4">
-                <x-button-link href="{{ route('anime.index') }}">
+            <div class="flex flex-col md:flex-row justify-between gap-3 w-full mt-4">
+                <x-button-link class="w-full" href="{{ route('anime.index') }}">
                     <x-slot name="icon">
                         <x-icons.chevron-right-solid class="w-6 h-6" />
                     </x-slot>
 
                     <p class="text-lg font-semibold font-primary md:text-xl">Buka</p>
+                </x-button-link>
+                <x-button-link class="w-full" href="{{ config('anime.link.api-doc') }}">
+                    <x-slot name="icon">
+                        <x-icons.chevron-right-solid class="w-6 h-6" />
+                    </x-slot>
+
+                    <p class="text-lg font-semibold font-primary md:text-xl">Dokumentasi API</p>
                 </x-button-link>
             </div>
         </div>
