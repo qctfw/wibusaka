@@ -170,9 +170,7 @@
             <p class="hidden pt-2 text-sm italic text-left md:block">{{ $anime['title_english'] }}{{ (!empty($anime['title_english']) && !empty($anime['title_japanese'])) ? ' / ' : '' }}{{ $anime['title_japanese'] }}</p>
 
             <h3 class="py-3 text-2xl font-semibold border-b border-gray-400 border-opacity-50 border-dashed font-primary">{{ __('anime.single.synopsis') }}</h3>
-            <div class="mt-3">
-                @if (!empty($anime['synopsis'])) {{ $anime['synopsis'] }} @else <i>{{ __('anime.single.synopsis_empty') }}</i> @endif
-            </div>
+            <div class="mt-3 whitespace-pre-line leading-relaxed">{{ (!empty($anime['synopsis'])) ? $anime['synopsis'] : __('anime.single.synopsis_empty') }}</div>
 
             @if ($anime['relations']->isNotEmpty())
             <h3 class="py-3 text-2xl font-semibold border-b border-gray-400 border-opacity-50 border-dashed font-primary">{{ __('anime.single.related') }}</h3>
