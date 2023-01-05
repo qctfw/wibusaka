@@ -6,11 +6,11 @@
     <div class="flex flex-col py-4 md:flex-row">
         <div class="grid justify-between flex-none w-full grid-cols-2 md:grid-cols-1 md:items-center md:w-72 md:h-full">
             <div class="w-full text-center">
-                <div class="relative mx-auto rounded-lg anime-cover">
+                <div class="relative mx-auto anime-cover">
                     <div class="flex flex-col items-center justify-center w-full h-96 spinner">
                         <x-icons.spinner class="block w-5 h-5" />
                     </div>
-                    <img data-src="{{ $anime['images']['webp']['image_url'] }}" alt="'{{ $anime['title'] }}' Anime Poster" class="absolute inset-x-0 top-0 w-full mx-auto opacity-0" />
+                    <img data-src="{{ $anime['images']['webp']['image_url'] }}" alt="'{{ $anime['title'] }}' Anime Poster" class="absolute inset-x-0 top-0 rounded-xl w-full mx-auto opacity-0" />
                 </div>
                 <div class="grid w-auto grid-cols-2 py-2 my-3 bg-gray-100 rounded-xl dark:bg-emerald-800 dark:bg-opacity-50">
                     <div class="text-center font-primary">
