@@ -46,7 +46,7 @@
 
     <link rel="stylesheet" href="{{ asset('css/loading-screen.css') }}">
     <livewire:styles />
-    @vite('resources/js/app.js')
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="https://unpkg.com/alpinejs@3.8.1/dist/cdn.min.js" defer></script>
     @if (!is_null(config('app.analytics_measurement_id')))
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -55,7 +55,7 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-    
+
       gtag('config', '{{ config("app.analytics_measurement_id") }}');
     </script>
     @endif
