@@ -7,7 +7,7 @@
             x-bind:class="title.length <= 50 ? 'text-lg lg:text-xl' : title.length <= 80 ? 'text-md lg:text-lg' : 'text-md'"
             x-text="title"></a>
     </div>
-    <div class="flex flex-row flex-wrap items-start justify-center gap-x-4 py-2 text-sm">
+    <div class="flex flex-row flex-wrap flex-grow items-center justify-center gap-x-4 py-2 text-sm">
         <div class="flex flex-row gap-1 text-center">
             @forelse ($anime['studios'] as $studio)
                 <a href="{{ route('anime.producer', ['id' => $studio['mal_id']]) }}" class="text-link text-link-underline">{{ $studio['name'] }}{{ (!$loop->last) ? ',' : '' }}</a>
@@ -20,7 +20,7 @@
         <span class="select-none">&bull;</span>
         <div class="text-center">{{ $anime['source'] }}</div>
     </div>
-    <div class="flex flex-row flex-wrap items-center justify-center gap-2 px-1 py-1 text-xs md:h-12">
+    <div class="flex flex-row flex-wrap flex-grow items-center justify-center gap-2 px-1 py-2 text-xs">
         @forelse ($anime['genres'] as $genre)
         <a href="{{ route('anime.genre.show', str_replace(' ', '-', strtolower($genre['name']))) }}" class="h-4 px-2 transition-colors bg-gray-300 rounded-lg dark:bg-gray-700 hover:bg-emerald-300 dark:hover:bg-emerald-600">{{ $genre['name'] }}</a>
         @empty
