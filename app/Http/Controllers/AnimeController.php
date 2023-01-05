@@ -41,7 +41,7 @@ class AnimeController extends Controller
 
     /**
      * Display the main page.
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function index()
@@ -55,7 +55,8 @@ class AnimeController extends Controller
 
         $all_mal_ids = collect([
             $current_season['animes']->pluck('mal_id'),
-            $airing_animes->pluck('mal_id')
+            $airing_animes->pluck('mal_id'),
+            $current_schedule_animes->pluck('mal_id')
         ])->flatten()->unique()->sort()->values();
 
         $resources = $this->resource_service->getByMalIds($all_mal_ids);
@@ -126,7 +127,7 @@ class AnimeController extends Controller
 
     /**
      * Display producer's anime.
-     * 
+     *
      * @param string $id
      * @param Request $request
      * @return \Illuminate\Http\Response
@@ -140,9 +141,9 @@ class AnimeController extends Controller
         }
 
         $producer = $this->jikan_service->getProducer($id);
-        
+
         $result = $this->jikan_service->getAnimesByProducer($id, $page);
-        
+
         $resources = $this->resource_service->getByMalIds($result['animes']->pluck('mal_id'));
 
         $producer_view_model = new ProducerViewModel($producer, $page, $result['pagination'], $result['animes'], $resources);
