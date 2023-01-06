@@ -1,6 +1,6 @@
 <x-app-layout>
-    <x-slot name="title">{{ $anime['title'] }}</x-slot>
-    <x-slot name="meta_description">{{(!empty($anime['synopsis'])) ? __('meta.single.description', ['synopsis' => str($anime['synopsis'])->words(30), 'anime' => $anime['title']]) : __('meta.single.description_empty') }}</x-slot>
+    <x-slot name="title">{{ $anime['titles']['default'][0] }}</x-slot>
+    <x-slot name="meta_description">{{(!empty($anime['synopsis'])) ? __('meta.single.description', ['synopsis' => str($anime['synopsis'])->words(30), 'anime' => $anime['titles']['default'][0]]) : __('meta.single.description_empty') }}</x-slot>
     <x-slot name="meta_robots">noindex, nofollow</x-slot>
 
     <div class="flex flex-col py-4 md:flex-row">
@@ -10,22 +10,22 @@
                     <div class="flex flex-col items-center justify-center w-full h-96 spinner">
                         <x-icons.spinner class="block w-5 h-5" />
                     </div>
-                    <img data-src="{{ $anime['images']['webp']['image_url'] }}" alt="'{{ $anime['title'] }}' Anime Poster" class="absolute inset-x-0 top-0 w-full mx-auto opacity-0" />
+                    <img data-src="{{ $anime['images']['webp']['image_url'] }}" alt="'{{ $anime['titles']['default'][0] }}' Anime Poster" class="absolute inset-x-0 top-0 w-full mx-auto opacity-0" />
                 </div>
                 <div class="grid w-auto grid-cols-2 py-2 my-3 bg-gray-100 rounded-xl dark:bg-emerald-800 dark:bg-opacity-50">
                     <div class="text-center font-primary">
                         <span class="text-lg font-semibold md:text-2xl">
                             <x-icons.star-solid class="inline-block w-3 h-3 md:w-5 md:h-5" />
-                            {{ $anime['score'] }}
+                            {{ $anime['score'] ?? 'T/A' }}
                         </span>
                         <p class="text-sm md:text-md">{{ __('anime.single.score') }}</p>
                     </div>
                     <div class="text-center font-primary">
-                        <p class="text-lg font-semibold md:text-2xl">#{{ $anime['popularity'] }}</p>
+                        <p class="text-lg font-semibold md:text-2xl">#{{ abbreviate_number($anime['popularity']) }}</p>
                         <p class="text-sm md:text-md">{{ __('anime.single.popularity') }}</p>
                     </div>
                     <div class="text-center font-primary">
-                        <p class="text-lg font-semibold md:text-2xl">{{ $anime['members'] }}</p>
+                        <p class="text-lg font-semibold md:text-2xl">{{ abbreviate_number($anime['members']) }}</p>
                         <p class="hidden text-sm md:block">{{ __('anime.single.members') }}</p>
                         <p class="text-sm md:hidden">{{ __('anime.single.members_mobile') }}</p>
                     </div>
@@ -52,27 +52,27 @@
                     </div>
                 </div>
                 <div class="grid grid-cols-1 gap-2 md:grid-flow-col md:auto-cols-fr">
-                    <x-button-link href="{{ $anime['url'] }}" target="_blank" class="h-16">
+                    <x-button-link href="{{ $anime['mal_url'] }}" target="_blank" class="h-16">
                         <p class="mr-2 text-lg text-left">MyAnimeList</p>
                     </x-button-link>
                 </div>
             </div>
             <div class="grid grid-cols-1 gap-2 pt-2 pl-2 border-gray-400 border-opacity-50 border-dashed md:mt-3 md:border-t">
                 <div class="border-b border-gray-400 border-opacity-50 border-dashed md:hidden">
-                    <h2 class="text-lg font-bold text-emerald-700 font-primary dark:text-emerald-300">{{ $anime['title'] }}</h2>
-                    <p class="text-sm italic">{{ $anime['title_english'] }}</p>
-                    <p class="text-sm italic">{{ $anime['title_japanese'] }}</p>
+                    <h2 class="text-lg font-bold text-emerald-700 font-primary dark:text-emerald-300">{{ $anime['titles']['default'][0] }}</h2>
+                    <p class="text-sm italic">{{ $anime['titles']['english'][0] ?? '' }}</p>
+                    <p class="text-sm italic">{{ $anime['titles']['japanese'][0] ?? '' }}</p>
                 </div>
                 <div class="hidden md:block">
                     <p class="text-lg font-semibold font-primary">{{ __('anime.single.alternative_title') }}</p>
-                    <p class="text-sm md:text-md">{{ (count($anime['title_synonyms']) > 0) ? implode(', ', $anime['title_synonyms']) : '-' }}</p>
+                    <p class="text-sm md:text-md">{{ (count($anime['titles']['synonym']) > 0) ? implode(', ', $anime['titles']['synonym']) : '-' }}</p>
                 </div>
                 <div>
                     <p class="font-semibold font-primary md:text-lg">{{ __('anime.single.type') }}</p>
                     <p class="text-sm md:text-md">
                         {{ $anime['type'] }}
                         @if ($anime['episodes'] > 1) <span class="text-xs">({{ $anime['episodes'] }} ep)</span> @endif
-                        @if (!empty($anime['duration'])) <span class="text-xs">({{ $anime['duration'] }})</span> @endif
+                        @if (!empty($anime['duration'])) <span class="text-xs">({{ $anime->durationFormat() }})</span> @endif
                     </p>
                 </div>
                 <div>
@@ -81,7 +81,7 @@
                 </div>
                 <div>
                     <p class="font-semibold font-primary md:text-lg">{{ __('anime.single.airing_date') }}</p>
-                    <p class="text-sm md:text-md">{{ $anime['aired']['from'] }}@if ($anime['episodes'] > 1 || $anime['airing']) s.d {{ $anime['aired']['to'] }}@endif</p>
+                    <p class="text-sm md:text-md">{{ $anime->airedFromLongFormat() }}@if ($anime['episodes'] > 1 || $anime['is_airing']) s.d {{ $anime->airedToLongFormat() }}@endif</p>
                     <p class="text-xs">
                         @if (!empty($anime['season']))
                         <a href="{{ route('anime.season', ['year' => $anime['year'], 'season' => $anime['season']]) }}" class="text-link text-link-underline">({{ $anime['premiered'] }})</a>
@@ -112,7 +112,7 @@
                         @endforelse
                     </p>
                 </div>
-                @if ($anime['explicit_genres']->isNotEmpty())
+                @if (filled($anime['explicit_genres']))
                 <div>
                     <p class="font-semibold font-primary md:text-lg">{{ __('anime.single.genre_explicit') }}</p>
                     <div class="flex flex-col gap-1 text-sm md:text-md">
@@ -122,7 +122,7 @@
                     </div>
                 </div>
                 @endif
-                @if ($anime['themes']->isNotEmpty())
+                @if (filled($anime['themes']))
                 <div>
                     <div class="font-semibold font-primary md:text-lg">{{ __('anime.single.genre_theme') }}</div>
                     <p class="text-sm md:text-md">
@@ -132,7 +132,7 @@
                     </p>
                 </div>
                 @endif
-                @if ($anime['demographics']->isNotEmpty())
+                @if (filled($anime['demographics']))
                 <div>
                     <div class="font-semibold font-primary md:text-lg">{{ __('anime.single.demographic') }}</div>
                     <p class="text-sm md:text-md">
@@ -142,11 +142,11 @@
                     </p>
                 </div>
                 @endif
-                @if (!empty($anime['external']))
+                @if (filled($anime['external_links']))
                 <div>
                     <p class="font-semibold font-primary md:text-lg">{{ __('anime.single.external_link') }}</p>
                     <div class="flex flex-col gap-1 text-sm md:text-md">
-                        @foreach ($anime['external'] as $link)
+                        @foreach ($anime['external_links'] as $link)
                         <div class="inline-flex gap-1">
                             <a href="{{ $link['url'] }}" class="text-link text-link-underline">{{ $link['name'] }}</a>
                             <x-icons.external-link-solid class="inline-block w-4 h-4 ml-1" />
@@ -166,13 +166,13 @@
         @endif
 
         <div class="grow md:ml-12">
-            <h2 class="hidden text-3xl font-bold text-left text-emerald-700 dark:text-emerald-200 font-primary md:block lg:text-5xl">{{ $anime['title'] }}</h2>
-            <p class="hidden pt-2 text-sm italic text-left md:block">{{ $anime['title_english'] }}{{ (!empty($anime['title_english']) && !empty($anime['title_japanese'])) ? ' / ' : '' }}{{ $anime['title_japanese'] }}</p>
+            <h2 class="hidden text-3xl font-bold text-left text-emerald-700 dark:text-emerald-200 font-primary md:block lg:text-5xl">{{ $anime['titles']['default'][0] }}</h2>
+            <p class="hidden pt-2 text-sm italic text-left md:block">{{ $anime['titles']['english'][0] ?? '' }}{{ (!empty($anime['titles']['english'][0]) && !empty($anime['titles']['japanese'][0])) ? ' / ' : '' }}{{ $anime['titles']['japanese'][0] ?? '' }}</p>
 
             <h3 class="py-3 text-2xl font-semibold border-b border-gray-400 border-opacity-50 border-dashed font-primary">{{ __('anime.single.synopsis') }}</h3>
             <div class="mt-3 whitespace-pre-line leading-relaxed">{{ (!empty($anime['synopsis'])) ? $anime['synopsis'] : __('anime.single.synopsis_empty') }}</div>
 
-            @if ($anime['relations']->isNotEmpty())
+            @if (filled($anime['relations']))
             <h3 class="py-3 text-2xl font-semibold border-b border-gray-400 border-opacity-50 border-dashed font-primary">{{ __('anime.single.related') }}</h3>
             <table class="w-full mt-4 table-fixed">
                 <thead>
@@ -219,19 +219,19 @@
             </div>
             @endif
 
-            @if (count($anime['theme']['openings']) > 0 && count($anime['theme']['endings']) > 0)
+            @if (count($anime['opening_themes']) > 0 && count($anime['ending_themes']) > 0)
             <h3 class="py-3 text-2xl font-semibold border-b border-gray-400 border-opacity-50 border-dashed font-primary">{{ __('anime.single.theme_song') }}</h3>
             <div class="grid justify-between grid-cols-1 md:grid-cols-2">
                 <div class="mt-3">
                     <h4 class="text-lg font-semibold">{{ __('anime.single.theme_song_op') }}</h4>
                     <p class="mt-1">
-                        {!! implode('<br />', $anime['theme']['openings']) !!}
+                        {!! implode('<br />', $anime['opening_themes']) !!}
                     </p>
                 </div>
                 <div class="mt-3">
                     <h4 class="text-lg font-semibold">{{ __('anime.single.theme_song_ed') }}</h4>
                     <p class="mt-1">
-                        {!! implode('<br />', $anime['theme']['endings']) !!}
+                        {!! implode('<br />', $anime['ending_themes']) !!}
                     </p>
                 </div>
             </div>

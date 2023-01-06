@@ -1,5 +1,5 @@
 <div class="relative flex flex-col py-1 mt-4 bg-gray-100 divide-y divide-gray-400 shadow divide-opacity-50 divide-dashed dark:bg-gray-800 rounded-xl">
-    <div x-data="{ title: `{{ $anime['title'] }}` }" class="flex items-center justify-center h-12">
+    <div x-data="{ title: `{{ $anime['titles']['default'][0] }}` }" class="flex items-center justify-center h-12">
         <a
             href="{{ route('anime.show', $anime['mal_id']) }}"
             rel="nofollow"
@@ -16,7 +16,8 @@
             @endforelse
         </div>
         <span class="select-none">&bull;</span>
-        <div class="text-center">{{ $anime['episodes'] ?? '?' }} ep @if (!empty($anime['type'])){{ '(' . $anime['type'] . ')' }}@endif</div>
+
+        <div class="text-center">{{ $anime['episodes'] ?? '?' }} ep @if (!empty($anime['type']) && !request()->routeIs('anime.season-current')){{ '(' . $anime['type'] . ')' }}@endif</div>
         <span class="select-none">&bull;</span>
         <div class="text-center">{{ $anime['source'] }}</div>
     </div>
@@ -35,8 +36,8 @@
             <div class="flex flex-col items-center justify-center w-full h-72 spinner">
                 <x-icons.spinner class="block w-5 h-5" />
             </div>
-            <img alt="{{ $anime['title'] }} Anime Poster" data-src="{{ $anime['images']['webp']['image_url'] }}" class="absolute inset-x-0 top-0 max-w-full max-h-full mx-auto opacity-0" loading="lazy" />
-            @if (!$anime['explicit_genres']->isEmpty())
+            <img alt="{{ $anime['titles']['default'][0] }} Anime Poster" data-src="{{ $anime['images']['webp']['image_url'] }}" class="absolute inset-x-0 top-0 max-w-full max-h-full mx-auto opacity-0" loading="lazy" />
+            @if (filled($anime['explicit_genres']))
             <div x-data="{showCover: false}" x-on:click.prevent="showCover = true" x-show="!showCover" class="absolute inset-x-0 top-0 flex items-center justify-center w-full h-full text-gray-200 backdrop-blur">
                 <div class="flex items-center px-2 py-1 bg-gray-800 rounded">Lihat</div>
             </div>
@@ -56,7 +57,7 @@
         </div>
     </div>
     <div class="relative h-min flex flex-row items-center justify-between px-2 py-1 font-medium font-primary">
-        @if ($anime['demographics']->isNotEmpty())
+        @if (filled($anime['demographics']))
         <div class="flex flex-row items-center justify-center gap-2 text-center">
             <x-icons.user-group-solid class="w-5 h-5" />
             <a href="{{ route('anime.genre.show', str_replace(' ', '-', strtolower($anime['demographics'][0]['name']))) }}" class="text-link text-link-underline">{{ $anime['demographics'][0]['name'] }}</a>
@@ -64,15 +65,15 @@
         @endif
         <div class="flex flex-row items-center justify-center gap-2 text-center">
             <x-icons.calendar-solid class="w-5 h-5" />
-            @if (!is_null($anime['aired']['from']))
-            <span>{{ (count($anime['demographics']) > 0) ? $anime['aired']['from']->translatedFormat('d M Y') : $anime['aired']['from']->translatedFormat('d F Y') }}</span>
+            @if (!is_null($anime['aired_from']))
+            <span>{{ (count($anime['demographics']) > 0) ? $anime->airedFromLongFormat() : $anime->airedFromShortFormat() }}</span>
             @else
             <span>?</span>
             @endif
         </div>
         <div class="flex flex-row items-center justify-center gap-2 text-center">
             <x-icons.star-solid class="w-5 h-5" />
-            <span>{{ $anime['score'] }}</span>
+            <span>{{ $anime['score'] ?? 'T/A' }}</span>
         </div>
         <div class="flex flex-row items-center justify-center gap-2 text-center">
             <x-icons.user-solid class="w-5 h-5" />

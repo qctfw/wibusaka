@@ -2,27 +2,17 @@
 
 namespace App\ViewModels;
 
-use Carbon\Carbon;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Spatie\ViewModels\ViewModel;
 
 class ScheduleViewModel extends ViewModel
 {
-    /**
-     * @var Collection
-     */
-    public $animes;
-
-    /**
-     * @var Collection
-     */
-    public $resources;
-
-    public function __construct($animes, $resources)
-    {
-        $this->animes = $animes;
-        $this->resources = $resources;
-    }
+    public function __construct(
+        public Collection $animes,
+        public Collection $resources
+    )
+    {}
 
     public function active_day()
     {
@@ -34,7 +24,9 @@ class ScheduleViewModel extends ViewModel
     public function animes()
     {
         $animes = $this->animes->reject(function ($anime) {
-            return $anime['explicit_genres']->whereIn('mal_id', [12, 49])->isNotEmpty();
+            return filled(Arr::where($anime['explicit_genres'], function ($value) {
+                return in_array($value['mal_id'], [12, 49]);
+            }));
         });
 
         return $animes;

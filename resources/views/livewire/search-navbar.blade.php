@@ -26,7 +26,7 @@
                 </div>
             @else
                 @if ($results->count() > 0)
-                    
+
                     @foreach ($results as $anime)
                     <a
                         href="{{ route('anime.show', $anime['mal_id']) }}"
@@ -38,7 +38,7 @@
                         <img src="{{ $anime['images']['webp']['small_image_url'] }}" alt="" class="w-12">
                         <div class="grid flex-auto grid-cols-1 ml-3 text-xs">
                             <div class="text-sm font-semibold font-primary">
-                                {{ $anime['title'] }}
+                                {{ $anime['titles']['default'][0] }}
                             </div>
                             <div class="flex flex-row items-center justify-center gap-1 pt-2 text-left">
                                 <x-icons.star-solid class="flex-none w-4 h-4" />
@@ -51,7 +51,7 @@
                             <div class="flex flex-row items-center justify-center gap-1 text-left">
                                 <x-icons.calendar-solid class="flex-none w-4 h-4" />
                                 <p class="flex-auto">
-                                    {{ $anime['aired']['from'] }}
+                                    {{ $anime->airedFromFormat('M Y') }}
                                 </p>
                             </div>
                         </div>

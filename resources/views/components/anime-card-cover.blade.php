@@ -3,10 +3,10 @@
         <div class="flex flex-col items-center justify-center w-full h-72 spinner">
             <x-icons.spinner class="block w-5 h-5" />
         </div>
-        <img alt="{{ $anime['title'] }} Anime Poster" data-src="{{ $anime['images']['webp']['image_url'] }}" class="absolute inset-x-0 top-0 max-w-full max-h-full mx-auto rounded-lg opacity-0" loading="lazy" />
+        <img alt="{{ $anime['titles']['default'][0] }} Anime Poster" data-src="{{ $anime['images']['webp']['image_url'] }}" class="absolute inset-x-0 top-0 max-w-full max-h-full mx-auto rounded-lg opacity-0" loading="lazy" />
         <div class="absolute inset-x-0 bottom-0 py-1 bg-black bg-opacity-50">
             <h4 class="p-1 text-lg font-semibold leading-tight text-center text-emerald-100 transition-colors duration-200 group-hover:text-emerald-300 dark:group-hover:text-emerald-300">
-                {{ $anime['title'] }}
+                {{ $anime['titles']['default'][0] }}
             </h4>
         </div>
     </a>
@@ -21,7 +21,7 @@
             <span>{{ $anime['score'] }}</span>
             @else
             <x-icons.calendar-solid class="w-5 h-5" />
-            <span>{{ (!is_null($anime['aired']['from'])) ? $anime['aired']['from']->translatedFormat('M Y') : '?' }}</span>
+            <span>{{ $anime->airedFromFormat('M Y') }}</span>
             @endif
         </div>
         <div class="flex flex-row items-center gap-2 text-left">

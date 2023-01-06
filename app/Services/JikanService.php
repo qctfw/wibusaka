@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Datas\AnimeData;
 use App\Exceptions\JikanException;
 use App\Services\Contracts\JikanServiceInterface;
 use Carbon\Carbon;
@@ -19,8 +20,6 @@ class JikanService implements JikanServiceInterface
         'order_by' => 'members',
         'sort' => 'desc'
     ];
-
-    private const JIKAN_ANIME_EXPLICIT_GENRE_IDS = [9, 12, 49];
 
     public function __construct()
     {
@@ -187,7 +186,7 @@ class JikanService implements JikanServiceInterface
             ->sortBy('broadcast.time');
 
         $result = $animes->filter(function ($value, $key) use ($time) {
-            $anime_max_time = Carbon::parse($value['broadcast']['time'])->addMinutes(explode(' ', $value['duration'])[0]);
+            $anime_max_time = Carbon::parse($value['broadcast']['time'])->addMinutes($value['duration']?->minute);
 
             return $time->dayName == $value['broadcast']['day'] && $time->lessThanOrEqualTo($anime_max_time);
         });
@@ -207,17 +206,17 @@ class JikanService implements JikanServiceInterface
         $cache = Cache::tags(['jikan', 'jikan-anime']);
         $cache_key = 'jikan-anime-' . $id;
 
-        $animes = $cache->get($cache_key);
+        $anime = $cache->get($cache_key);
 
-        if (is_null($animes)) {
+        if (is_null($anime)) {
             $result = $this->requestJikan('anime/' . $id . '/full');
 
-            $animes = $this->formatAnime($result['data']);
+            $anime = AnimeData::fromJikan($result['data']);
 
-            $cache->put($cache_key, $animes, now()->endOfDay());
+            $cache->put($cache_key, $anime, now()->endOfDay());
         }
 
-        return $animes;
+        return $anime;
     }
 
     public function getAnimesByProducer(string $producer_id, int $page = 1)
@@ -473,64 +472,7 @@ class JikanService implements JikanServiceInterface
     private function collectAnimes(?array $animes)
     {
         return collect($animes)->map(function ($item) {
-            return $this->formatAnime($item);
+            return AnimeData::fromJikan($item);
         });
-    }
-
-    private function formatAnime(array $anime)
-    {
-        $anime['aired'] = [
-            'from' => (!empty($anime['aired']['from'])) ? Carbon::parse($anime['aired']['from'])->shiftTimezone($anime['broadcast']['timezone'])->setTimeFrom($anime['broadcast']['time'])->setTimezone(config('app.timezone')) : null,
-            'to' => (!empty($anime['aired']['to'])) ? Carbon::parse($anime['aired']['to'])->shiftTimezone($anime['broadcast']['timezone'])->setTimeFrom($anime['broadcast']['time'])->setTimezone(config('app.timezone')) : null
-        ];
-
-        if ((!empty($anime['broadcast']['time']) && !empty($anime['broadcast']['timezone']))) {
-            $anime['broadcast'] = [
-                'day' => $anime['aired']['from']?->dayName,
-                'time' => $anime['aired']['from']?->format('H:i'),
-                'timezone' => $anime['aired']['from']?->tzName,
-                'string' => __('anime.single.broadcast_string', [
-                    'day' => $anime['aired']['from']->dayName,
-                    'time' => $anime['aired']['from']->format('H:i') . ' ' . $anime['aired']['from']->format('T')
-                ])
-            ];
-        }
-
-        $anime['explicit_genres'] = collect($anime['explicit_genres']);
-
-        $anime['genres'] = collect($anime['genres'])->filter(function ($genre) use ($anime) {
-            if (in_array($genre['mal_id'], self::JIKAN_ANIME_EXPLICIT_GENRE_IDS)) {
-                $anime['explicit_genres']->push($genre)->values();
-                return false;
-            }
-            return true;
-        });
-
-        if (isset($anime['relations']))
-        {
-            $anime['relations'] = collect($anime['relations']);
-        }
-
-        if (isset($anime['external']))
-        {
-            $anime['external'] = collect($anime['external']);
-        }
-
-        $anime = collect($anime)->merge([
-            'status' => __('anime.single.status_enums.' . str($anime['status'])->replace(' ', '_')->lower()),
-            'rating' => (!is_null($anime['rating'])) ? explode(' - ', $anime['rating'])[0] : 'None',
-            'score' => ($anime['score'] > 0) ? number_format($anime['score'], 2, '.', '') : 'N/A',
-            'duration' => ($anime['duration'] != 'Unknown') ? str($anime['duration'])->replace(['hr', 'min', 'per ep'], ['jam', 'menit', ''])->trim() : '',
-            'rank' => number_format($anime['rank']),
-            'popularity' => number_format($anime['popularity']),
-            'premiered' => (!empty($anime['season']) && !empty($anime['year'])) ? str($anime['season'])->ucfirst() . ' ' . $anime['year'] : null,
-            'producers' => collect($anime['producers']),
-            'licensors' => collect($anime['licensors']),
-            'studios' => collect($anime['studios']),
-            'themes' => collect($anime['themes']),
-            'demographics' => collect($anime['demographics']),
-        ]);
-
-        return $anime;
     }
 }
