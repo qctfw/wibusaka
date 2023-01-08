@@ -25,7 +25,7 @@
         </div>
     </div>
 
-    @if ($animes->isNotEmpty()) <p class="italic w-full mb-2">&bull; Waktu yang ditampilkan adalah jadwal waktu perdana di Jepang</p> @endif
+    @if ($animes->isNotEmpty()) <p class="italic w-full mb-2">&bull; {{ __('anime.schedule.broadcast_disclaimer') }}</p> @endif
 
     <x-anime-list-schedule :animes="$animes" :resources="$resources" />
 </x-app-layout>

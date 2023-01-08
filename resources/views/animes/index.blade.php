@@ -16,7 +16,7 @@
                 @endforeach
             </x-library-scroll>
             @elseif ($section['component'] == 'anime-list-schedule')
-            @if ($section['animes']->isNotEmpty()) <p class="italic w-full mb-2">&bull; Waktu yang ditampilkan adalah jadwal waktu perdana di Jepang</p> @endif
+            @if ($section['animes']->isNotEmpty()) <p class="italic w-full mb-2">&bull; {{ __('anime.schedule.broadcast_disclaimer') }}</p> @endif
             <x-anime-list-schedule :animes="$section['animes']" :resources="$resources" />
             @endif
         </div>

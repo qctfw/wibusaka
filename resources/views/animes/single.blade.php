@@ -88,6 +88,23 @@
                         @endif
                     </p>
                 </div>
+                @if ($anime['is_airing'] && filled($anime['broadcast']['time']))
+                <div>
+                    <p class="font-semibold font-primary md:text-lg">{{ __('anime.single.broadcast') }}</p>
+                    <div class="flex flex-row items-center gap-2">
+                        <p class="text-sm md:text-md">{{ $anime['broadcast']['string'] }}</p>
+                        <div class="relative inline-flex flex-col items-center group">
+                            <x-icons.information-circle-solid class="hidden w-4 h-4 md:block" />
+                            <div class="absolute bottom-0 flex-col items-center hidden w-48 mb-6 group-hover:flex">
+                                <div class="relative z-20 p-2 text-sm text-center leading-4 text-white whitespace-no-wrap bg-black shadow-xl rounded-xl">
+                                    {{ __('anime.schedule.broadcast_disclaimer') }}
+                                </div>
+                                <div class="w-3 h-3 -mt-2 rotate-45 bg-black"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endif
                 <div>
                     <p class="font-semibold font-primary md:text-lg">{{ __('anime.single.studio') }}</p>
                     <p class="text-sm md:text-md">

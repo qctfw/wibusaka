@@ -3,6 +3,7 @@
 return [
     'single' => [
         'airing_date' => 'Tanggal Tayang',
+        'broadcast' => 'Jadwal Tayang',
         'alternative_title' => 'Judul Lain',
         'availability' => 'Tersedia di',
         'availability_empty' => 'Kami belum menemukan platform yang menayangkan anime ini di Indonesia.',
@@ -84,6 +85,7 @@ return [
     ],
     'schedule' => [
         'title' => 'Jadwal Anime',
+        'broadcast_disclaimer' => 'Waktu yang ditampilkan adalah jadwal waktu perdana di Jepang.',
     ],
     'search' => [
         'loading' => 'Mencari...',
