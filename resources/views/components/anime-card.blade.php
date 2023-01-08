@@ -53,7 +53,7 @@
         </div>
         @endif
         <div class="pl-2 overflow-y-auto scrollbar-extra-thin scrollbar-thumb-gray-400 scrollbar-track-gray-300 dark:scrollbar-thumb-gray-500 dark:scrollbar-track-gray-700">
-            <p class="text-sm leading-relaxed">{{ $anime['synopsis'] }}</p>
+            <p class="text-sm leading-relaxed whitespace-pre-line">{{ $anime['synopsis'] }}</p>
         </div>
     </div>
     <div class="relative h-min flex flex-row items-center justify-between px-2 py-1 font-medium font-primary">

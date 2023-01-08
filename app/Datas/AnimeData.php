@@ -189,15 +189,15 @@ class AnimeData implements ArrayAccess
         return property_exists($this, $offset) ? $this->$offset : throw new ErrorException('Undefined key `'. $offset . '`');
     }
 
-    private function airedFormat(?Carbon $date, string $format): string
+    private function airedFormat(?Carbon $date, stdClass $date_properties, $format): string
     {
         if (blank($date)) return '?';
 
-        if (!$this->aired_from_properties->has_day)
+        if (!$date_properties->has_day)
             $format = str_replace(['d', 'D', 'j', 'l', 'N', 'S', 'w', 'z', 'W'], '', $format);
-        if (!$this->aired_from_properties->has_month)
+        if (!$date_properties->has_month)
             $format = str_replace(['F', 'm', 'M', 'n', 't'], '', $format);
-        if (!$this->aired_from_properties->has_year)
+        if (!$date_properties->has_year)
             $format = str_replace(['L', 'o', 'X', 'x', 'Y', 'y'], '', $format);
 
         $format = trim($format);
@@ -207,7 +207,7 @@ class AnimeData implements ArrayAccess
 
     public function airedFromFormat(string $format): string
     {
-        return $this->airedFormat($this->aired_from, $format);
+        return $this->airedFormat($this->aired_from, $this->aired_from_properties, $format);
     }
 
     public function airedFromShortFormat(): string
@@ -222,7 +222,7 @@ class AnimeData implements ArrayAccess
 
     public function airedToFormat(string $format): string
     {
-        return $this->airedFormat($this->aired_to, $format);
+        return $this->airedFormat($this->aired_to, $this->aired_to_properties, $format);
     }
 
     public function airedToShortFormat(): string
