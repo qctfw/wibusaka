@@ -37,7 +37,7 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['single'],
+            'channels' => ['single', 'larabug'],
             'ignore_exceptions' => false,
         ],
 
@@ -49,6 +49,7 @@ return [
 
         'daily' => [
             'driver' => 'daily',
+            'channels' => ['larabug'],
             'path' => storage_path('logs/laravel.log'),
             'level' => env('LOG_LEVEL', 'debug'),
             'days' => 14,
@@ -105,6 +106,10 @@ return [
             'driver' => 'daily',
             'path' => storage_path('logs/jikan_logs/jikan.log'),
             'level' => 'info',
+        ],
+
+        'larabug' => [
+            'driver' => 'larabug',
         ],
     ],
 
