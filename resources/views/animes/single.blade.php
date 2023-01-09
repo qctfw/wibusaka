@@ -88,7 +88,7 @@
                         @endif
                     </p>
                 </div>
-                @if ($anime['is_airing'] && filled($anime['broadcast']['time']))
+                @if ($anime['is_airing'] && filled($anime['broadcast']))
                 <div>
                     <p class="font-semibold font-primary md:text-lg">{{ __('anime.single.broadcast') }}</p>
                     <div class="flex flex-row items-center gap-2">

@@ -17,7 +17,7 @@
         </div>
         <span class="select-none">&bull;</span>
 
-        <div class="text-center">{{ $anime['episodes'] ?? '?' }} ep @if (!empty($anime['type']) && !request()->routeIs('anime.season-current')){{ '(' . $anime['type'] . ')' }}@endif</div>
+        <div class="text-center">{{ $anime['episodes'] ?? '?' }} ep @if (!empty($anime['type']) && !request()->routeIs('anime.season*')){{ '(' . $anime['type'] . ')' }}@endif</div>
         <span class="select-none">&bull;</span>
         <div class="text-center">{{ $anime['source'] }}</div>
     </div>
@@ -54,10 +54,12 @@
         @endif
         <div class="pl-2 overflow-y-auto scrollbar-extra-thin scrollbar-thumb-gray-400 scrollbar-track-gray-300 dark:scrollbar-thumb-gray-500 dark:scrollbar-track-gray-700">
             <p class="text-sm leading-relaxed whitespace-pre-line">{{ $anime['synopsis'] ?? __('anime.single.synopsis_empty') }}</p>
+            @if ($anime['is_airing'] && filled($anime['broadcast']))
             <div class="flex flex-row items-center gap-2 font-medium font-primary">
                 <x-icons.clock-solid class="w-5 h-5" />
                 <span>{{ $anime['broadcast']['day'] }}, {{ $anime['broadcast']['time'] }} WIB</span>
             </div>
+            @endif
         </div>
     </div>
     <div class="relative h-min flex flex-row items-center justify-between px-2 py-1 font-medium font-primary">
