@@ -104,13 +104,18 @@ class AnimeData implements ArrayAccess
 
         $broadcast = null;
         if ((filled($data['broadcast']['time']) && filled($data['broadcast']['timezone']))) {
+            $broadcast_carbon = Carbon::parse($data['broadcast']['day'])
+                ->shiftTimezone($data['broadcast']['timezone'])
+                ->setTimeFrom($data['broadcast']['time'])
+                ->setTimezone(config('app.timezone'));
             $broadcast = [
-                'day' => $aired_from?->dayName,
-                'time' => $aired_from?->format('H:i'),
-                'timezone' => $aired_from?->tzName,
+                'carbon' => $broadcast_carbon,
+                'day' => $broadcast_carbon->dayName,
+                'time' => $broadcast_carbon->format('H:i'),
+                'timezone' => $broadcast_carbon->tzName,
                 'string' => __('anime.single.broadcast_string', [
-                    'day' => $aired_from->dayName,
-                    'time' => $aired_from->format('H:i') . ' ' . $aired_from->format('T')
+                    'day' => $broadcast_carbon->dayName,
+                    'time' => $broadcast_carbon->format('H:i T')
                 ])
             ];
         }

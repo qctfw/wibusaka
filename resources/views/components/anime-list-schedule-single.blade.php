@@ -1,5 +1,5 @@
 @php
-    $interval = now()->diff(\Carbon\Carbon::create($anime->aired_from->format('l H:i')));
+    $interval = now()->diff($anime->broadcast['carbon']);
     $time_difference = (int) ($interval->format('%r') . ($interval->days * 86400 + $interval->h * 3600 + $interval->i * 60 + $interval->s));
 @endphp
 <div class="relative flex flex-col bg-gray-100 rounded-lg dark:bg-gray-800">
