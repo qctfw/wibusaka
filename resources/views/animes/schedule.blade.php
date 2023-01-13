@@ -8,7 +8,7 @@
         </div>
         <x-dropdown>
             <x-slot name="menu">
-                <button class="flex flex-row w-36 h-12 px-2 items-center justify-between rounded-md transition duration-100 text-emerald-50 bg-emerald-800 hover:text-emerald-900 hover:bg-emerald-300 group-focus-within:text-emerald-900 group-focus-within:bg-emerald-300 dark:hover:text-white dark:text-emerald-300 dark:bg-gray-800 dark:hover:bg-emerald-800 dark:group-focus-within:bg-emerald-800 dark:group-focus-within:text-white">
+                <button class="flex flex-row w-36 h-12 px-3 items-center justify-between rounded-md transition duration-100 text-emerald-50 bg-emerald-800 hover:text-emerald-900 hover:bg-emerald-300 group-focus-within:text-emerald-900 group-focus-within:bg-emerald-300 dark:hover:text-white dark:text-emerald-300 dark:bg-gray-800 dark:hover:bg-emerald-800 dark:group-focus-within:bg-emerald-800 dark:group-focus-within:text-white">
                     <div class="text-lg">Pilih Hari</div>
                     <x-icons.chevron-down-solid class="w-6 h-6" />
                 </button>

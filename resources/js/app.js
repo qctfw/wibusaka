@@ -2,6 +2,7 @@
 import imgpreload from './imgpreload'
 
 document.addEventListener('DOMContentLoaded', imgpreload)
+/*
 document.addEventListener('DOMContentLoaded', function () {
     var opacity = 1
     var loadingScreen = window.setInterval( function () {
@@ -13,5 +14,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }, 100)
 })
+*/
 
 Livewire.on('rebuildImgPreload', imgpreload)
