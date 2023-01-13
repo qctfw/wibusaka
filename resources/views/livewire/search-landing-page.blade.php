@@ -10,7 +10,7 @@
             <x-icons.search class="w-4" />
         </div>
     </div>
-    <div class="flex flex-col h-48 pt-2">
+    <div x-cloak class="flex flex-col h-48 pt-2">
         <div wire:loading class="w-full h-auto">
             <div class="flex items-center justify-center h-10 gap-4">
                 <x-icons.spinner class="block w-5 h-5" />

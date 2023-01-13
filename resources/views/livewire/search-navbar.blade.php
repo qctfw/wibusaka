@@ -1,4 +1,4 @@
-<div x-data="{ searchOpen: false }" @click.away="searchOpen = false" class="relative w-full mt-3 md:mt-0">
+<div x-data="{ searchOpen: false }" @click.away="searchOpen = false" class="relative w-full">
     <input
         wire:model.debounce.500ms="search"
         type="text"
@@ -12,7 +12,7 @@
     <div class="absolute inset-y-0 left-2 flex items-center justify-center">
         <x-icons.search class="w-4" />
     </div>
-    <div x-show="searchOpen" class="absolute left-0 z-40 w-full mt-2 bg-emerald-900 rounded-lg text-emerald-50 dark:bg-gray-800">
+    <div x-show="searchOpen" x-cloak class="absolute left-0 z-40 w-full mt-2 bg-emerald-900 rounded-lg text-emerald-50 dark:bg-gray-800">
         <div class="grid grid-cols-1 overflow-y-auto border border-emerald-400 divide-y-2 divide-emerald-800 rounded-lg shadow-md min-h-8 max-h-96 divide-solid scrollbar-extra-thin dark:border-gray-700 md:shadow-lg scrollbar-thumb-gray-400 scrollbar-track-gray-300 dark:scrollbar-thumb-gray-500 dark:scrollbar-track-gray-700 dark:divide-gray-700">
             <div wire:loading class="w-full h-auto">
                 <div class="flex items-center justify-center h-10 gap-4">

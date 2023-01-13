@@ -6,6 +6,8 @@
     x-transition:leave="transition ease-out duration-300"
     x-transition:leave-start="opacity-100"
     x-transition:leave-end="opacity-0"
+    x-cloak
+    role="dialog"
     {{ $attributes->merge(['class' => 'fixed inset-0 flex items-center justify-center px-4 bg-white bg-opacity-50 md:px-0 dark:bg-gray-700 dark:bg-opacity-50']) }}>
     <div x-show="{{ $trigger ?? 'open' }}"
         x-transition:enter="transition ease-out duration-300"

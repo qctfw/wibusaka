@@ -1,9 +1,26 @@
 <div x-data="{open: false, menu: ''}">
     <section class="flex flex-row items-center justify-center gap-4">
-        <a href="{{ config('anime.link.api-doc') }}" target="_blank" class="cursor-pointer text-emerald-100 hover:text-white text-link-underline">{{ __('anime.main.api') }}</a>&bull;
-        <div class="cursor-pointer text-emerald-100 hover:text-white" x-on:click="open = true; menu = 'privacy';">{{ __('anime.main.privacy') }}</div>&bull;
-        <div class="cursor-pointer text-emerald-100 hover:text-white" x-on:click="open = true; menu = 'faq';">{{ __('anime.main.faq') }}</div>&bull;
-        <div class="cursor-pointer text-emerald-100 hover:text-white" x-on:click="open = true; menu = 'credits';">{{ __('anime.main.credits') }}</div>
+        <a href="{{ config('anime.link.api-doc') }}" target="_blank" @class([
+            'cursor-pointer',
+            'text-link-underline',
+            'text-emerald-900 dark:text-emerald-100 hover:text-emerald-300 dark:hover:text-white' => request()->routeIs('index'),
+            'text-emerald-100 hover:text-white' => !request()->routeIs('index'),
+        ])>{{ __('anime.main.api') }}</a>&bull;
+        <div @class([
+            'cursor-pointer',
+            'text-emerald-900 dark:text-emerald-100 hover:text-emerald-300 dark:hover:text-white' => request()->routeIs('index'),
+            'text-emerald-100 hover:text-white' => !request()->routeIs('index'),
+        ]) x-on:click="open = true; menu = 'privacy';">{{ __('anime.main.privacy') }}</div>&bull;
+        <div @class([
+            'cursor-pointer',
+            'text-emerald-900 dark:text-emerald-100 hover:text-emerald-300 dark:hover:text-white' => request()->routeIs('index'),
+            'text-emerald-100 hover:text-white' => !request()->routeIs('index'),
+        ]) x-on:click="open = true; menu = 'faq';">{{ __('anime.main.faq') }}</div>&bull;
+        <div @class([
+            'cursor-pointer',
+            'text-emerald-900 dark:text-emerald-100 hover:text-emerald-300 dark:hover:text-white' => request()->routeIs('index'),
+            'text-emerald-100 hover:text-white' => !request()->routeIs('index'),
+        ]) x-on:click="open = true; menu = 'credits';">{{ __('anime.main.credits') }}</div>
     </section>
     <x-modal class="z-30 text-gray-900 dark:text-gray-200">
         <x-slot name="header">
@@ -14,7 +31,7 @@
                 <x-icons.x class="w-6 h-6" />
             </button>
         </x-slot>
-    
+
         <div class="flex flex-col gap-4 overflow-y-auto">
             <template x-if="menu === 'privacy'">
                 @if (!is_null(config('app.analytics_measurement_id')))

@@ -11,8 +11,6 @@
     background-color: rgb(229, 231, 235); // bg-gray-200
 }
 
-@media (prefers-color-scheme: dark) {
-    #loading-screen {
-        background-color: rgb(17, 24, 39); // bg-gray-900
-    }
+.dark #loading-screen {
+    background-color: rgb(17, 24, 39); // bg-gray-900
 }

@@ -6,23 +6,23 @@
         <div class="flex flex-col items-center font-bold text-blue-700 dark:text-blue-300">
             <x-title>{{ __('anime.schedule.title') }} Hari {{ $active_day }}</x-title>
         </div>
-        <div class="relative inline-block w-32" x-data="{}" x-init="$refs.dayselector.value = '{{ request('day') }}'">
-            <select
-            x-ref="dayselector"
-            x-on:change="window.location.href = '{{ route('anime.schedule', [], false) }}/' + $event.target.value;"
-            class="w-full h-10 px-4 text-lg rounded-md appearance-none bg-emerald-100 dark:bg-gray-800 focus:outline-none focus:ring focus:ring-emerald-300">
-                <option value="monday">Senin</option>
-                <option value="tuesday">Selasa</option>
-                <option value="wednesday">Rabu</option>
-                <option value="thursday">Kamis</option>
-                <option value="friday">Jum'at</option>
-                <option value="saturday">Sabtu</option>
-                <option value="sunday">Minggu</option>
-            </select>
-            <div class="absolute inset-y-0 right-2 pointer-events-none flex items-center">
-                <x-icons.chevron-down-solid class="w-6 h-6" />
+        <x-dropdown>
+            <x-slot name="menu">
+                <button class="flex flex-row w-36 h-12 px-2 items-center justify-between rounded-md transition duration-100 text-emerald-50 bg-emerald-800 hover:text-emerald-900 hover:bg-emerald-300 group-focus-within:text-emerald-900 group-focus-within:bg-emerald-300 dark:hover:text-white dark:text-emerald-300 dark:bg-gray-800 dark:hover:bg-emerald-800 dark:group-focus-within:bg-emerald-800 dark:group-focus-within:text-white">
+                    <div class="text-lg">Pilih Hari</div>
+                    <x-icons.chevron-down-solid class="w-6 h-6" />
+                </button>
+            </x-slot>
+            <div class="absolute flex flex-col w-40 rounded-md bg-emerald-900 border border-emerald-200 border-opacity-30 text-emerald-50 dark:text-emerald-300 dark:bg-gray-800 shadow-lg outline-none" role="menu">
+                <a href="{{ route('anime.schedule', ['day' => 'monday']) }}" class="px-4 py-2 transition duration-75 hover:text-emerald-900 hover:bg-emerald-300 dark:hover:text-white dark:hover:bg-emerald-800 rounded-t-md">Senin</a>
+                <a href="{{ route('anime.schedule', ['day' => 'tuesday']) }}" class="px-4 py-2 transition duration-75 hover:text-emerald-900 hover:bg-emerald-300 dark:hover:text-white dark:hover:bg-emerald-800">Selasa</a>
+                <a href="{{ route('anime.schedule', ['day' => 'wednesday']) }}" class="px-4 py-2 transition duration-75 hover:text-emerald-900 hover:bg-emerald-300 dark:hover:text-white dark:hover:bg-emerald-800">Rabu</a>
+                <a href="{{ route('anime.schedule', ['day' => 'thursday']) }}" class="px-4 py-2 transition duration-75 hover:text-emerald-900 hover:bg-emerald-300 dark:hover:text-white dark:hover:bg-emerald-800">Kamis</a>
+                <a href="{{ route('anime.schedule', ['day' => 'friday']) }}" class="px-4 py-2 transition duration-75 hover:text-emerald-900 hover:bg-emerald-300 dark:hover:text-white dark:hover:bg-emerald-800">Jum'at</a>
+                <a href="{{ route('anime.schedule', ['day' => 'saturday']) }}" class="px-4 py-2 transition duration-75 hover:text-emerald-900 hover:bg-emerald-300 dark:hover:text-white dark:hover:bg-emerald-800">Sabtu</a>
+                <a href="{{ route('anime.schedule', ['day' => 'sunday']) }}" class="px-4 py-2 transition duration-75 hover:text-emerald-900 hover:bg-emerald-300 dark:hover:text-white dark:hover:bg-emerald-800 rounded-b-md">Minggu</a>
             </div>
-        </div>
+        </x-dropdown>
     </div>
 
     @if ($animes->isNotEmpty()) <p class="italic w-full mb-2">&bull; {{ __('anime.schedule.broadcast_disclaimer') }}</p> @endif

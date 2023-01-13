@@ -43,8 +43,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Catamaran:wght@100;200;300;400;500;600;700;800;900&display=swap" />
     <!-- Google Fonts - M PLUS 1p -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;500;700&display=swap" />
-
-    <link rel="stylesheet" href="{{ asset('css/loading-screen.css') }}">
     <livewire:styles />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="https://unpkg.com/alpinejs@3.8.1/dist/cdn.min.js" defer></script>
@@ -59,13 +57,47 @@
       gtag('config', '{{ config("app.analytics_measurement_id") }}');
     </script>
     @endif
+    <script>
+        document.addEventListener('DOMContentLoaded', function(event) {
+            changeTheme();
+
+            document.querySelectorAll('[data-setting=theme]').forEach(function (el) {
+                el.addEventListener('click', function (e) {
+                    if (e.target.dataset.option == 'default') {
+                        localStorage.removeItem('theme');
+                    }
+                    else {
+                        localStorage.theme = e.target.dataset.option;
+                    }
+                    changeTheme();
+                });
+            });
+
+
+            function changeTheme() {
+                selectedTheme = ('theme' in localStorage) ? localStorage.theme : 'default';
+                document.querySelectorAll('[data-setting=theme] span').forEach(function (el) {
+                    (el.parentNode.dataset.option == selectedTheme) ? el.classList.remove('hidden') : el.classList.add('hidden');
+                });
+
+                if (selectedTheme === 'dark' || (selectedTheme === 'default' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    document.documentElement.classList.add('dark');
+                }
+                else {
+                    document.documentElement.classList.remove('dark');
+                }
+            }
+        });
+    </script>
+    <style>
+        [x-cloak] {display: none !important;}
+    </style>
 </head>
 <body class="flex flex-col w-screen h-screen gap-8 overflow-x-hidden font-sans bg-gray-200 dark:bg-gray-900 dark:text-gray-200 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-300 dark:scrollbar-thumb-gray-500 dark:scrollbar-track-gray-700">
-    <x-loading-screen />
-    @if (!request()->routeIs('index'))
-    <x-header-navbar />
-    @else
+    @if (request()->routeIs('index'))
     <x-header-index />
+    @else
+    <x-header-navbar />
     @endif
 
     <main class="w-full px-4 pt-4 mx-auto md:px-6 xl:px-8 2xl:px-20">
