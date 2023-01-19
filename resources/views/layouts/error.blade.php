@@ -15,7 +15,16 @@
     <!-- Google Fonts - Catamaran -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Catamaran:wght@100;200;300;400;500;600;700;800;900&display=swap" />
 
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}" />
+    @vite('resources/css/app.css')
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/fontawesome.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/brands.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/solid.min.css') }}" />
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
 </head>
 <body class="font-sans dark:bg-gray-800 dark:text-white">
     <article class="flex flex-col items-center justify-center h-screen gap-4 text-center">

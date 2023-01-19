@@ -46,6 +46,12 @@
     <livewire:styles />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="https://unpkg.com/alpinejs@3.8.1/dist/cdn.min.js" defer></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/fontawesome.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/brands.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/solid.min.css') }}" />
+
     @if (!is_null(config('app.analytics_measurement_id')))
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ config('app.analytics_measurement_id') }}"></script>
@@ -58,44 +64,9 @@
     </script>
     @endif
     <script>
-        // FOUC Fix
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
         }
-    </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function(event) {
-            changeTheme();
-
-            document.querySelectorAll('[data-setting=theme]').forEach(function (el) {
-                el.addEventListener('click', function (e) {
-                    if (e.target.dataset.option == 'default') {
-                        localStorage.removeItem('theme');
-                    }
-                    else {
-                        localStorage.theme = e.target.dataset.option;
-                    }
-                    changeTheme();
-                });
-            });
-
-
-            function changeTheme() {
-                selectedTheme = ('theme' in localStorage) ? localStorage.theme : 'default';
-                document.querySelectorAll('[data-setting=theme] span').forEach(function (el) {
-                    (el.parentNode.dataset.option == selectedTheme) ? el.classList.remove('hidden') : el.classList.add('hidden');
-                });
-
-                if (selectedTheme === 'dark' || (selectedTheme === 'default' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                    document.documentElement.classList.add('dark');
-                }
-                else {
-                    document.documentElement.classList.remove('dark');
-                }
-            }
-        });
     </script>
     <style>
         [x-cloak] {display: none !important;}
