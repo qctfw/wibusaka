@@ -2,15 +2,15 @@
     <x-footer-menu />
     <div class="flex flex-row items-center justify-center gap-4 mt-2">
         <a href="{{ config('anime.link.github') }}" target="_blank">
-            <x-icons.github class="w-6 h-6" fill="currentColor" />
+            <i class="fa-brands fa-github text-2xl"></i>
         </a>
         {{--
         <a href="{{ config('anime.link.twitter') }}" target="_blank">
-            <x-icons.twitter class="w-6 h-6" fill="currentColor" />
+            <i class="fa-brands fa-twitter text-2xl"></i>
         </a>
         --}}
         <a href="{{ config('anime.link.discord') }}" target="_blank">
-            <x-icons.discord class="w-6 h-6" fill="currentColor" />
+            <i class="fa-brands fa-discord text-xl"></i>
         </a>
     </div>
 </footer>

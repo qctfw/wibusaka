@@ -13,9 +13,9 @@
     </div>
     <a href="{{ route('anime.show', $anime['mal_id']) }}" rel="nofollow" class="relative flex flex-row items-center w-full anime-cover h-60 md:h-auto md:w-20 md:pl-4">
         <div class="flex flex-col items-center justify-center w-full spinner">
-            <x-icons.spinner class="block w-5 h-5" />
+            <i class="animate-spin fa-solid fa-spinner text-lg text-gray-800 dark:text-gray-100"></i>
         </div>
-        <img data-src="{{ $anime['images']['webp']['image_url'] }}" alt="'{{ $anime['titles']['default'][0] }}' Anime Poster" loading="lazy" class="absolute inset-x-0 top-0 max-w-full max-h-full mx-auto rounded-lg opacity-0" />
+        <img data-src="{{ $anime['images']['webp']['small_image_url'] }}" srcset="{{ $anime['images']['webp']['image_url'] }} 1.6x, {{ $anime['images']['webp']['large_image_url'] }} 1.75x" alt="'{{ $anime['titles']['default'][0] }}' Anime Poster" loading="lazy" class="absolute inset-x-0 top-0 max-w-full max-h-full mx-auto rounded-lg opacity-0" />
         <div class="absolute inset-x-0 bottom-0 py-1 bg-black bg-opacity-50 md:hidden">
             <h4 class="p-1 text-lg font-semibold leading-tight text-center text-emerald-100 transition-colors duration-200 group-hover:text-emerald-300 dark:group-hover:text-emerald-300">
                 {{ $anime['titles']['default'][0] }}
@@ -27,11 +27,11 @@
             {{ $anime['titles']['default'][0] }}
         </a>
         <div class="flex flex-row items-center justify-center gap-0 pt-2 text-center md:gap-2 md:text-left text-md md:text-sm md:pt-0">
-            <x-icons.video-camera-solid class="flex-none w-5 h-5" />
+            <div class="flex-none w-4"><i class="flex-none fa-solid fa-video text-sm"></i></div>
             <p class="flex-auto">{{ $anime['type'] ?? '?' }}{{ ($anime['episodes'] > 1) ? ' ('.$anime['episodes'].' ep)' : '' }}</p>
         </div>
         <div class="flex flex-row items-center justify-center gap-0 text-center md:gap-2 md:text-left text-md md:text-sm">
-            <x-icons.calendar-solid class="flex-none w-5 h-5" />
+            <div class="flex-none w-4"><i class="flex-none fa-solid fa-calendar-day text-sm"></i></div>
             <p class="flex-auto">
                 {{ $anime->airedFromLongFormat() }}
                 @if (!is_null($anime['aired_to']) && $anime->airedFromLongFormat() != $anime->airedToLongFormat() && $anime['episodes'] > 1)
@@ -40,7 +40,7 @@
             </p>
         </div>
         <div class="flex flex-row items-center justify-center gap-0 text-center md:gap-2 md:text-left text-md md:text-sm">
-            <x-icons.user-solid class="w-5 h-5" />
+            <div class="flex-none w-4"><i class="flex-none fa-solid fa-user text-sm"></i></div>
             <p class="flex-auto">{{ abbreviate_number($anime['members']) }}</p>
         </div>
     </div>
@@ -55,7 +55,7 @@
         </div>
         @endif
         <div class="{{ (!$anime['score']) ? 'hidden md:flex' : 'flex'}} flex-row items-center justify-center md:pt-0 md:col-span-2 md:mr-4">
-            <x-icons.star-solid class="w-6 h-6 pr-1" />
+            <i class="fa-solid fa-star pr-1"></i>
             <span class="text-xl font-semibold">{{ $anime['score'] ?? 'T/A' }}</span>
         </div>
     </div>

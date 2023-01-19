@@ -28,7 +28,7 @@
             <h3 x-show="menu === 'faq'" class="text-2xl font-bold">{{ __('anime.main.faq') }}</h3>
             <h3 x-show="menu === 'credits'" class="text-2xl font-bold">{{ __('anime.main.credits') }}</h3>
             <button x-on:click="open = false">
-                <x-icons.x class="w-6 h-6" />
+                <div class="fa-solid fa-xmark text-2xl"></div>
             </button>
         </x-slot>
 
@@ -77,7 +77,7 @@
                         <div class="text-xl font-semibold">Art</div>
                         <div class="gap-1">
                             <p>Logo designed by <a href="https://azrildrpna.carrd.co" target="_blank" rel="noopener noreferrer" class="text-link text-link-underline font-semibold">@azrildrpna</a></p>
-                            <p>Icons designed by <a href="https://heroicons.com" target="_blank" rel="noopener noreferrer" class="text-link text-link-underline font-semibold">Heroicons</a></p>
+                            <p>Icons designed by <a href="https://fontawesome.com/" target="_blank" rel="noopener noreferrer" class="text-link text-link-underline font-semibold">FontAwesome</a></p>
                         </div>
                     </div>
                     <div class="flex flex-col gap-2">

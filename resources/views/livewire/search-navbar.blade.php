@@ -10,13 +10,13 @@
         @keydown.shift.tab="searchOpen = false"
     />
     <div class="absolute inset-y-0 left-2 flex items-center justify-center">
-        <x-icons.search class="w-4" />
+        <i class="fa-solid fa-magnifying-glass"></i>
     </div>
     <div x-show="searchOpen" x-cloak class="absolute left-0 z-40 w-full mt-2 bg-emerald-900 rounded-lg text-emerald-50 dark:bg-gray-800">
         <div class="grid grid-cols-1 overflow-y-auto border border-emerald-400 divide-y-2 divide-emerald-800 rounded-lg shadow-md min-h-8 max-h-96 divide-solid scrollbar-extra-thin dark:border-gray-700 md:shadow-lg scrollbar-thumb-gray-400 scrollbar-track-gray-300 dark:scrollbar-thumb-gray-500 dark:scrollbar-track-gray-700 dark:divide-gray-700">
             <div wire:loading class="w-full h-auto">
                 <div class="flex items-center justify-center h-10 gap-4">
-                    <x-icons.spinner class="block w-5 h-5" />
+                    <i class="animate-spin fa-solid fa-spinner text-lg text-gray-800 dark:text-gray-100"></i>
                     {{ __('anime.search.loading') }}
                 </div>
             </div>
@@ -41,22 +41,22 @@
                                 {{ $anime['titles']['default'][0] }}
                             </div>
                             <div class="flex flex-row items-center justify-center gap-1 pt-2 text-left">
-                                <x-icons.star-solid class="flex-none w-4 h-4" />
+                                <div class="flex-none fa-solid fa-star w-4"></div>
                                 <p class="flex-auto">{{ $anime['score'] }}</p>
                             </div>
                             <div class="flex flex-row items-center justify-center gap-1 text-left">
-                                <x-icons.video-camera-solid class="flex-none w-4 h-4" />
+                                <div class="flex-none fa-solid fa-video w-4"></div>
                                 <p class="flex-auto">{{ $anime['type'] }}{{ ($anime['episodes'] > 1) ? ' ('.$anime['episodes'].' ep)' : '' }}</p>
                             </div>
                             <div class="flex flex-row items-center justify-center gap-1 text-left">
-                                <x-icons.calendar-solid class="flex-none w-4 h-4" />
+                                <div class="flex-none fa-solid fa-calendar-day w-4"></div>
                                 <p class="flex-auto">
                                     {{ $anime->airedFromFormat('M Y') }}
                                 </p>
                             </div>
                         </div>
                         <div class="flex-none">
-                            <x-icons.external-link-solid class="w-5 h-5" />
+                            <i class="fa-solid fa-up-right-from-square text-sm"></i>
                         </div>
                     </a>
                     @endforeach

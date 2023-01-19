@@ -2,14 +2,14 @@
     <x-slot name="title">{{ __('anime.producer.title') }} / {{ $producer['titles']['default']['title'] }}{{ ($page > 1) ? ' (Hal. ' . $page . ')' : '' }}</x-slot>
     <x-slot name="meta_title">{{ __('anime.producer.title') }} / {{ $producer['titles']['default']['title'] }}</x-slot>
     <x-slot name="meta_robots">noindex, nofollow</x-slot>
-    
+
     <div class="flex flex-col gap-3">
         <div class="flex flex-col xl:flex-row items-start gap-3">
             <div class="xl:w-2/3">
                 <div class="float-left mr-4 mb-2 lg:mr-8">
                     <div class="relative w-44 lg:w-56 anime-cover">
                         <div class="flex flex-col items-center justify-center w-full h-44 lg:h-48 spinner">
-                            <x-icons.spinner class="block w-5 h-5" />
+                            <i class="animate-spin fa-solid fa-spinner text-lg text-gray-800 dark:text-gray-100"></i>
                         </div>
                         <img data-src="{{ $producer['images']['jpg']['image_url'] }}" alt="{{ $producer['titles']['default']['title'] }}" class="absolute inset-x-0 top-0 max-w-full max-h-full mx-auto opacity-0" loading="lazy" />
                     </div>
@@ -43,10 +43,17 @@
                     @foreach ($producer['external'] as $site)
                         @php
                             $site_type = guess_site($site['url']);
-                            if (!in_array($site_type, ['twitter', 'instagram', 'youtube', 'facebook']))
-                                $site_type = 'globe-solid';
-    
-                            $logo_str = sprintf('<a href="%s"target="_blank" class="flex flex-row items-center text-link text-link-underline gap-2"><x-icons.%s class="w-6 h-6 dark:text-white lg:w-8 lg:h-8" fill="currentColor" /><span>%s</span></a>', $site['url'], $site_type, $site['name']);
+                            $site_classes = in_array($site_type, ['twitter', 'instagram', 'youtube', 'facebook', 'twitch']) ?
+                                'fa-brands fa-' . $site_type :
+                                'fa-solid fa-globe';
+
+                            $logo_str = sprintf(
+                                '<a href="%s" title="%s" target="_blank" class="flex flex-row items-center text-link gap-2 h-6 lg:h-8"><i class="%s dark:text-white w-6 lg:w-8 pl-1 no-underline text-lg lg:text-2xl"></i><span class="text-link-underline">%s</span></a>',
+                                $site['url'],
+                                $producer['titles']['default']['title'] . ' ' . ucwords($site_type),
+                                $site_classes,
+                                $site['name']
+                            );
                         @endphp
                         {!! \Blade::render($logo_str) !!}
                     @endforeach

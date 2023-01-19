@@ -8,15 +8,15 @@
             </div>
             <div class="flex-row items-center hidden gap-4 md:flex dark:text-white">
                 <a href="{{ config('anime.link.github') }}" target="_blank">
-                    <x-icons.github class="w-6 h-6 transition-colors duration-150 hover:text-emerald-300 dark:hover:text-gray-300" fill="currentColor" />
+                    <i class="fa-brands fa-github text-2xl transition-colors duration-150 hover:text-emerald-300 dark:hover:text-gray-300"></i>
                 </a>
                 {{--
                 <a href="{{ config('anime.link.twitter') }}" target="_blank">
-                    <x-icons.twitter class="w-6 h-6 transition-colors duration-150 hover:text-emerald-300 dark:hover:text-gray-300" fill="currentColor" />
+                    <i class="fa-brands fa-twitter text-2xl transition-colors duration-150 hover:text-emerald-300 dark:hover:text-gray-300"></i>
                 </a>
                 --}}
                 <a href="{{ config('anime.link.discord') }}" target="_blank">
-                    <x-icons.discord class="w-6 h-6 transition-colors duration-150 hover:text-emerald-300 dark:hover:text-gray-300" fill="currentColor" />
+                    <i class="fa-brands fa-discord text-xl transition-colors duration-150 hover:text-emerald-300 dark:hover:text-gray-300"></i>
                 </a>
             </div>
         </div>
@@ -26,15 +26,15 @@
         <x-footer-menu />
         <div class="flex flex-row items-center gap-4 md:hidden dark:text-white">
             <a href="{{ config('anime.link.github') }}" target="_blank">
-                <x-icons.github class="w-6 h-6" fill="currentColor" />
+                <i class="fa-brands fa-github text-2xl"></i>
             </a>
             {{--
             <a href="{{ config('anime.link.twitter') }}" target="_blank">
-                <x-icons.twitter class="w-6 h-6" fill="currentColor" />
+                <i class="fa-brands fa-twitter text-2xl"></i>
             </a>
             --}}
             <a href="{{ config('anime.link.discord') }}" target="_blank">
-                <x-icons.discord class="w-6 h-6" fill="currentColor" />
+                <i class="fa-brands fa-discord text-xl"></i>
             </a>
         </div>
     </div>

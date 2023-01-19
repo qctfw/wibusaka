@@ -7,7 +7,7 @@
         <div class="flex flex-col gap-2">
             <x-title>
                 <a href="{{ $section['route'] }}" class="text-link text-link-underline dark:text-emerald-200">{{ $section['title'] }}</a>
-                <x-icons.chevron-right-solid class="inline-block w-6 h-6" />
+                <i class="inline-block ml-2 fa-solid fa-chevron-right text-sm"></i>
             </x-title>
             @if ($section['component'] == 'anime-card-cover')
             <x-library-scroll>

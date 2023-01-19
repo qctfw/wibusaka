@@ -8,14 +8,14 @@
             <div class="w-full text-center">
                 <div class="relative mx-auto rounded-lg anime-cover">
                     <div class="flex flex-col items-center justify-center w-full h-96 spinner">
-                        <x-icons.spinner class="block w-5 h-5" />
+                        <i class="animate-spin fa-solid fa-spinner text-xl text-gray-800 dark:text-gray-100"></i>
                     </div>
-                    <img data-src="{{ $anime['images']['webp']['image_url'] }}" alt="'{{ $anime['titles']['default'][0] }}' Anime Poster" class="absolute inset-x-0 top-0 w-full mx-auto opacity-0" />
+                    <img data-src="{{ $anime['images']['webp']['image_url'] }}" srcset="{{ $anime['images']['webp']['large_image_url'] }} 1.1x" alt="'{{ $anime['titles']['default'][0] }}' Anime Poster" class="absolute inset-x-0 top-0 w-full mx-auto opacity-0" />
                 </div>
                 <div class="grid w-auto grid-cols-2 py-2 my-3 bg-gray-100 rounded-xl dark:bg-emerald-800 dark:bg-opacity-50">
                     <div class="text-center font-primary">
                         <span class="text-lg font-semibold md:text-2xl">
-                            <x-icons.star-solid class="inline-block w-3 h-3 md:w-5 md:h-5" />
+                            <i class="inline-block fa-solid fa-star text-xs md:text-sm"></i>
                             {{ $anime['score'] ?? 'T/A' }}
                         </span>
                         <p class="text-sm md:text-md">{{ __('anime.single.score') }}</p>
@@ -35,9 +35,9 @@
                             @if ($anime['rating'] != 'None')
                             <div class="relative flex flex-col items-center group">
                                 @if (in_array($anime['rating'], ['R', 'R+', 'Rx']))
-                                <x-icons.exclamation-solid class="hidden w-5 h-5 md:block" />
+                                <i class="hidden md:block fa-solid fa-triangle-exclamation text-xs md:text-sm"></i>
                                 @else
-                                <x-icons.information-circle-solid class="hidden w-4 h-4 md:block" />
+                                <i class="hidden md:block fa-solid fa-circle-info text-xs md:text-sm"></i>
                                 @endif
                                 <div class="absolute bottom-0 flex-col items-center hidden w-48 mb-6 group-hover:flex">
                                     <div class="relative z-20 p-2 text-sm leading-4 text-white whitespace-no-wrap bg-black shadow-xl rounded-xl">
@@ -94,7 +94,7 @@
                     <div class="flex flex-row items-center gap-2">
                         <p class="text-sm md:text-md">{{ $anime['broadcast']['string'] }}</p>
                         <div class="relative inline-flex flex-col items-center group">
-                            <x-icons.information-circle-solid class="hidden w-4 h-4 md:block" />
+                            <i class="hidden md:block fa-solid fa-circle-info text-xs md:text-sm"></i>
                             <div class="absolute bottom-0 flex-col items-center hidden w-48 mb-6 group-hover:flex">
                                 <div class="relative z-20 p-2 text-sm text-center leading-4 text-white whitespace-no-wrap bg-black shadow-xl rounded-xl">
                                     {{ __('anime.schedule.broadcast_disclaimer') }}
@@ -156,6 +156,7 @@
                         @foreach ($anime['demographics'] as $demo)
                             <a href="{{ route('anime.genre.show', ['slug' => str_replace(' ', '-', strtolower($demo['name']))]) }}" class="text-link text-link-underline">{{ $demo['name'] }}</a>{{ (!$loop->last) ? ',' : '' }}
                         @endforeach
+
                     </p>
                 </div>
                 @endif
@@ -166,7 +167,7 @@
                         @foreach ($anime['external_links'] as $link)
                         <div class="inline-flex gap-1">
                             <a href="{{ $link['url'] }}" class="text-link text-link-underline">{{ $link['name'] }}</a>
-                            <x-icons.external-link-solid class="inline-block w-4 h-4 ml-1" />
+                            <i class="inline-block ml-1 fa-solid fa-up-right-from-square text-sm"></i>
                         </div>
                         @endforeach
                     </div>
@@ -177,7 +178,7 @@
 
         @if ($anime['rating'] != 'None' && in_array($anime['rating'], ['R', 'R+', 'Rx']))
         <div class="flex flex-col items-center w-auto gap-2 p-2 my-4 bg-gray-200 md:hidden rounded-xl dark:bg-gray-800">
-            <x-icons.exclamation-solid class="w-8 h-8" />
+            <i class="fa-solid fa-triangle-exclamation text-2xl"></i>
             <p class="text-sm text-center">{{ __('anime.single.rating_note.' . $anime['rating']) }}</p>
         </div>
         @endif
@@ -211,7 +212,7 @@
                             <a href="{{ ($entry['type'] == 'anime') ? route('anime.show', ['id' => $entry['mal_id']]) : $entry['url'] }}" class="text-link text-link-underline">
                                 {{ $entry['name'] }}
                                 @if ($relation['relation'] == 'Adaptation')
-                                <x-icons.external-link-solid class="inline-block w-4 h-4 text-gray-200 dark:text-white" />
+                                <i class="inline-block fa-solid fa-up-right-from-square text-xs text-gray-200 dark:text-white"></i>
                                 @endif
                             </a>{{ (!$loop->last) ? ', ' : '' }}
                         @endforeach
@@ -229,7 +230,7 @@
                 <div class="flex items-center h-12 col-span-3 m-2">
                     <p class="w-full text-center text-sm text-gray-700 dark:text-gray-300">Bantu kami menemukan lebih banyak platform untuk menonton anime ini melalui
                         <a href="{{ config('anime.link.discord') }}" target="_blank" class="font-semibold text-link text-link-underline">
-                            Discord kami!<x-icons.discord class="inline-flex w-6 h-6 pl-2" fill="currentColor" />
+                            Discord kami!<i class="inline-flex fa-brands fa-discord pl-1 text-sm"></i>
                         </a>
                     </p>
                 </div>

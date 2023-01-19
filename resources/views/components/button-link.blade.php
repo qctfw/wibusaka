@@ -10,6 +10,6 @@
     @isset($icon)
     {{ $icon }}
     @else
-    <x-icons.external-link-solid class="w-6 h-6" />
+    <i class="fa-solid fa-up-right-from-square text-lg"></i>
     @endisset
 </a>

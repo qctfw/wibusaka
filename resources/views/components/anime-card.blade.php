@@ -34,7 +34,7 @@
     <div class="relative grid grid-cols-2 h-60 md:h-64 lg:h-80 xl:h-72">
         <a href="{{ route('anime.show', $anime['mal_id']) }}" rel="nofollow" class="relative w-full mx-auto h-60 md:h-64 lg:h-80 xl:h-72 anime-cover">
             <div class="flex flex-col items-center justify-center w-full h-72 spinner">
-                <x-icons.spinner class="block w-5 h-5" />
+                <i class="animate-spin fa-solid fa-spinner text-lg text-gray-800 dark:text-gray-100"></i>
             </div>
             <img alt="{{ $anime['titles']['default'][0] }} Anime Poster" data-src="{{ $anime['images']['webp']['image_url'] }}" class="absolute inset-x-0 top-0 max-w-full max-h-full mx-auto opacity-0" loading="lazy" />
             @if (filled($anime['explicit_genres']))
@@ -56,7 +56,7 @@
             <p class="text-sm leading-relaxed whitespace-pre-line">{{ $anime['synopsis'] ?? __('anime.single.synopsis_empty') }}</p>
             @if ($anime['is_airing'] && filled($anime['broadcast']))
             <div class="flex flex-row items-center gap-2 font-medium font-primary">
-                <x-icons.clock-solid class="w-5 h-5" />
+                <i class="fa-solid fa-clock"></i>
                 <span>{{ $anime['broadcast']['day'] }}, {{ $anime['broadcast']['time'] }} WIB</span>
             </div>
             @endif
@@ -65,12 +65,12 @@
     <div class="relative h-min flex flex-row items-center justify-between px-2 py-1 font-medium font-primary">
         @if (filled($anime['demographics']))
         <div class="flex flex-row items-center justify-center gap-2 text-center">
-            <x-icons.user-group-solid class="w-5 h-5" />
+            <i class="fa-solid fa-users"></i>
             <a href="{{ route('anime.genre.show', str_replace(' ', '-', strtolower($anime['demographics'][0]['name']))) }}" class="text-link text-link-underline">{{ $anime['demographics'][0]['name'] }}</a>
         </div>
         @endif
         <div class="flex flex-row items-center justify-center gap-2 text-center">
-            <x-icons.calendar-solid class="w-5 h-5" />
+            <i class="fa-solid fa-calendar-day"></i>
             @if (!is_null($anime['aired_from']))
             <span>{{ (count($anime['demographics']) > 0) ? $anime->airedFromLongFormat() : $anime->airedFromShortFormat() }}</span>
             @else
@@ -78,11 +78,11 @@
             @endif
         </div>
         <div class="flex flex-row items-center justify-center gap-2 text-center">
-            <x-icons.star-solid class="w-5 h-5" />
+            <i class="fa-solid fa-star"></i>
             <span>{{ $anime['score'] ?? 'T/A' }}</span>
         </div>
         <div class="flex flex-row items-center justify-center gap-2 text-center">
-            <x-icons.user-solid class="w-5 h-5" />
+            <div class="fa-solid fa-user"></div>
             <span>{{ abbreviate_number($anime['members']) }}</span>
         </div>
     </div>

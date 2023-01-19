@@ -5,13 +5,13 @@
             <img src="{{ randomize_logo() }}" alt="Logo" class="h-8" />
         </a>
         <button @click="mobileMenuOpen = !mobileMenuOpen" class="inline-block w-8 h-8 p-1 bg-emerald-900 text-emerald-50 dark:text-emerald-300 dark:bg-gray-900 md:hidden">
-            <x-icons.menu class="w-6 h-6" />
+            <i class="fa-solid fa-bars text-lg"></i>
         </button>
         <nav class="absolute left-0 z-20 flex-col justify-end flex-auto w-full font-semibold bg-emerald-900 rounded-lg shadow-md select-none font-primary lg:justify-start md:ml-4 dark:bg-gray-800 md:relative top-14 md:top-0 md:flex md:flex-row md:space-x-2 md:w-auto md:bg-transparent md:shadow-none" :class="{ 'flex' : mobileMenuOpen , 'hidden' : !mobileMenuOpen}">
             <div @click="topMenuOpen = !topMenuOpen" @click.away="topMenuOpen = false" class="relative rounded-lg cursor-pointer text-emerald-50">
                 <div class="flex flex-row items-center justify-between gap-4 p-3 transition-colors duration-200 rounded-lg hover:text-emerald-900 dark:hover:text-white hover:bg-emerald-300 dark:hover:bg-emerald-800 dark:text-emerald-300" :class="{'bg-emerald-300 text-emerald-900 dark:text-white dark:bg-emerald-800': topMenuOpen}">
                     <p>Top Anime</p>
-                    <x-icons.chevron-down-solid  class="w-5 h-5" x-bind:class="{'rotate-0': !topMenuOpen, 'rotate-180': topMenuOpen}" />
+                    <i class="fa-solid fa-chevron-down text-xs" x-bind:class="{'rotate-0': !topMenuOpen, 'rotate-180': topMenuOpen}"></i>
                 </div>
                 <div x-show="topMenuOpen" class="relative left-0 w-full bg-emerald-900 rounded-lg shadow-xl md:origin-top-left md:absolute md:w-56 dark:bg-gray-800 border border-emerald-200 border-opacity-30" x-cloak role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
                     <div role="none">
@@ -45,7 +45,7 @@
             <x-dropdown>
                 <x-slot name="menu">
                     <button class="inline-block w-8 h-8 p-1 rounded-md transition duration-100 text-emerald-50 hover:text-emerald-800 hover:bg-emerald-300 group-focus-within:text-emerald-800 group-focus-within:bg-emerald-300 dark:hover:text-white dark:text-emerald-300 dark:hover:bg-emerald-800 dark:group-focus-within:bg-emerald-800 dark:group-focus-within:text-white">
-                        <x-icons.sun class="w-6 h-6" />
+                        <i class="fa-solid fa-sun text-lg"></i>
                     </button>
                 </x-slot>
                 <div class="absolute -right-8 top-0 flex flex-col w-40 rounded-md text-sm bg-emerald-900 border border-emerald-200 border-opacity-30 text-emerald-50 dark:text-emerald-300 dark:bg-gray-800 shadow-lg outline-none" role="menu">

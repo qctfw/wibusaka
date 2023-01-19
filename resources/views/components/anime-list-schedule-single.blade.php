@@ -9,9 +9,9 @@
     <div class="flex flex-row h-44 md:h-40 lg:h-52 2xl:h-64 divide-x divide-gray-400 divide-dashed divide-opacity-50">
         <a href="{{ route('anime.show', $anime['mal_id']) }}" rel="nofollow" class="relative w-2/5 mx-auto h-44 md:h-40 lg:h-52 2xl:h-64 anime-cover">
             <div class="flex flex-col items-center justify-center w-1/2 mx-auto h-72 spinner">
-                <x-icons.spinner class="block w-5 h-5" />
+                <i class="animate-spin fa-solid fa-spinner text-lg text-gray-800 dark:text-gray-100"></i>
             </div>
-            <img alt="{{ $anime['titles']['default'][0] }} Anime Poster" data-src="{{ $anime['images']['webp']['image_url'] }}" class="absolute inset-x-0 top-0 max-w-full max-h-full mx-auto opacity-0 rounded-l" loading="lazy" />
+            <img alt="{{ $anime['titles']['default'][0] }} Anime Poster" data-src="{{ $anime['images']['webp']['small_image_url'] }}" srcset="{{ $anime['images']['webp']['large_image_url'] }} 1.25x" class="absolute inset-x-0 top-0 max-w-full max-h-full mx-auto opacity-0 rounded-l" loading="lazy" />
             @if (blank(!$anime['explicit_genres']))
             <div x-data="{showCover: false}" x-on:click.prevent="showCover = true" x-show="!showCover" class="absolute inset-x-0 top-0 flex items-center justify-center w-full h-full text-gray-200 backdrop-blur">
                 <div class="flex items-center px-2 py-1 bg-gray-800 rounded">Lihat</div>
@@ -48,15 +48,15 @@
                 @endif
                 <div class="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 lg:text-base">
                     <div class="flex flex-row items-center gap-2 text-left lg:text-md">
-                        <x-icons.user-solid class="w-5 h-5" />
+                        <div class="fa-solid fa-user"></div>
                         <span>{{ abbreviate_number($anime['members']) }}</span>
                     </div>
                     <div class="flex flex-row items-center gap-2 text-left lg:text-md">
-                        <x-icons.star-solid class="w-5 h-5" />
+                        <div class="fa-solid fa-star"></div>
                         <span>{{ $anime['score'] ?? 'T/A' }}</span>
                     </div>
                     <div class="flex flex-row items-center gap-2 text-left lg:text-md">
-                        <x-icons.clock-solid class="w-5 h-5" />
+                        <div class="fa-solid fa-clock"></div>
                         <span>{{ $anime['broadcast']['time'] }} WIB</span>
                     </div>
                 </div>
@@ -67,7 +67,7 @@
                             <img src="{{ logo_asset($resource->platform->icon_path) }}" alt="{{ $resource->platform->name }} Logo" />
                         </a>
                         @empty
-                        <x-icons.x class="w-6 h-6 lg:w-7 lg:h-7" />
+                        <i class="fa-solid fa-xmark text-2xl"></i>
                         <span class="text-center text-sm lg:text-md px-2">{{ __('anime.single.availability_empty_short') }}</span>
                         @endforelse
                     </div>

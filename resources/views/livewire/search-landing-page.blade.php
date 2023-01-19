@@ -7,13 +7,13 @@
         placeholder="Cari..."
         />
         <div class="absolute inset-y-0 flex items-center justify-center left-2">
-            <x-icons.search class="w-4" />
+            <i class="fa-solid fa-magnifying-glass"></i>
         </div>
     </div>
     <div x-cloak class="flex flex-col h-48 pt-2">
         <div wire:loading class="w-full h-auto">
             <div class="flex items-center justify-center h-10 gap-4">
-                <x-icons.spinner class="block w-5 h-5" />
+                <i class="animate-spin fa-solid fa-spinner text-lg text-gray-800 dark:text-gray-100"></i>
                 {{ __('anime.search.loading') }}
             </div>
         </div>
@@ -37,7 +37,7 @@
                         <img src="{{ logo_asset($resource->platform->icon_path) }}" alt="{{ $resource->platform->name }} Logo" />
                     </a>
                     @empty
-                    <x-icons.x class="w-6 h-6" />
+                    <div class="fa-solid fa-xmark text-2xl"></div>
                     <span>{{ __('anime.single.availability_empty_short') }}</span>
                     @endforelse
                 </div>

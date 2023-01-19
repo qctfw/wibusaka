@@ -9,7 +9,7 @@
             <x-dropdown>
                 <x-slot name="menu">
                     <button class="inline-block w-8 h-8 p-1 rounded-md transition duration-100 text-emerald-50 hover:text-emerald-800 hover:bg-emerald-300 group-focus-within:text-emerald-800 group-focus-within:bg-emerald-300 dark:hover:text-white dark:text-emerald-300 dark:hover:bg-emerald-800 dark:group-focus-within:bg-emerald-800 dark:group-focus-within:text-white">
-                        <x-icons.sun class="w-6 h-6" />
+                        <i class="fa-solid fa-sun text-lg"></i>
                     </button>
                 </x-slot>
                 <div class="absolute -right-8 top-0 flex flex-col w-40 rounded-md text-sm bg-emerald-900 border border-emerald-200 border-opacity-30 text-emerald-50 dark:text-emerald-300 dark:bg-gray-800 shadow-lg outline-none" role="menu">
