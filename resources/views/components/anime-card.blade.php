@@ -1,11 +1,22 @@
 <div class="relative flex flex-col py-1 mt-4 bg-gray-100 divide-y divide-gray-400 shadow divide-opacity-50 divide-dashed dark:bg-gray-800 rounded-xl">
-    <div x-data="{ title: `{{ $anime['titles']['default'][0] }}` }" class="flex items-center justify-center h-12">
+    <div x-data="{
+        title: {
+            romaji: `{{ $anime['titles']['default'][0] }}`,
+            english: `{{ $anime['titles']['english'][0] ?? '' }}`,
+            japanese: `{{ $anime['titles']['japanese'][0] ?? '' }}`,
+        },
+    }" class="flex items-center justify-center h-12">
         <a
             href="{{ route('anime.show', $anime['mal_id']) }}"
             rel="nofollow"
             class="p-1 font-semibold leading-none text-center font-primary text-link dark:text-emerald-200"
-            x-bind:class="title.length <= 50 ? 'text-lg lg:text-xl' : title.length <= 80 ? 'text-md lg:text-lg' : 'text-md'"
-            x-text="title"></a>
+            x-bind:class="{
+                'font-jp': ($store.titleLanguage == 'japanese'),
+                'text-lg lg:text-xl': title[$store.titleLanguage].length <= 50,
+                'text-md lg:text-lg': title[$store.titleLanguage].length <= 80,
+                'text-md': title[$store.titleLanguage].length > 80
+            }"
+            x-text="title[$store.titleLanguage].length > 0 ? title[$store.titleLanguage] : title.romaji">{{ $anime['titles']['default'][0] }}</a>
     </div>
     <div class="flex flex-row flex-wrap flex-grow items-center justify-center gap-x-4 py-2 text-sm">
         <div class="flex flex-row gap-1 text-center">

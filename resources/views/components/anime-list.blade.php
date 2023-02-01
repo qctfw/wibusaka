@@ -4,3 +4,17 @@
         {{ $slot }}
     </div>
 </div>
+<script>
+    document.addEventListener('alpine:init', () => {
+        if (!('titleLanguage' in localStorage)) {
+            localStorage.titleLanguage = 'romaji';
+        }
+
+        Alpine.store('titleLanguage', localStorage.titleLanguage);
+    });
+
+    function changeTitleLanguage(lang) {
+        localStorage.titleLanguage = lang;
+        console.log(localStorage.titleLanguage);
+    }
+</script>
