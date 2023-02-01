@@ -183,49 +183,55 @@
         </div>
         @endif
 
-        <div class="grow md:ml-12">
-            <h2 class="hidden text-3xl font-bold text-left text-emerald-700 dark:text-emerald-200 font-primary md:block lg:text-5xl">{{ $anime['titles']['default'][0] }}</h2>
-            <p class="hidden pt-2 text-sm italic text-left md:block">{{ $anime['titles']['english'][0] ?? '' }}{{ (!empty($anime['titles']['english'][0]) && !empty($anime['titles']['japanese'][0])) ? ' / ' : '' }}{{ $anime['titles']['japanese'][0] ?? '' }}</p>
+        <div class="flex flex-col gap-4 md:ml-12">
+            <div class="flex flex-col gap-1">
+                <h2 class="hidden text-3xl font-bold text-left text-emerald-700 dark:text-emerald-200 font-primary md:block lg:text-5xl">{{ $anime['titles']['default'][0] }}</h2>
+                <p class="hidden text-sm italic text-left md:block">{{ $anime['titles']['english'][0] ?? '' }}{{ (!empty($anime['titles']['english'][0]) && !empty($anime['titles']['japanese'][0])) ? ' / ' : '' }}{{ $anime['titles']['japanese'][0] ?? '' }}</p>
+            </div>
 
-            <h3 class="py-3 text-2xl font-semibold border-b border-gray-400 border-opacity-50 border-dashed font-primary">{{ __('anime.single.synopsis') }}</h3>
-            <div class="mt-3 whitespace-pre-line leading-relaxed">{{ (!empty($anime['synopsis'])) ? $anime['synopsis'] : __('anime.single.synopsis_empty') }}</div>
+            <div class="flex flex-col gap-2">
+                <h3 class="pb-2 text-2xl font-semibold border-b border-gray-400 border-opacity-50 border-dashed font-primary">{{ __('anime.single.synopsis') }}</h3>
+                <div class="whitespace-pre-line leading-relaxed">{{ (!empty($anime['synopsis'])) ? $anime['synopsis'] : __('anime.single.synopsis_empty') }}</div>
+            </div>
 
             @if (filled($anime['relations']))
-            <h3 class="py-3 text-2xl font-semibold border-b border-gray-400 border-opacity-50 border-dashed font-primary">{{ __('anime.single.related') }}</h3>
-            <table class="w-full mt-4 table-fixed">
-                <thead>
-                    <tr>
-                        <th class="w-1/4 lg:w-1/6"></th>
-                        <th class="w-auto"></th>
-                        <th class="w-3/4 lg:w-5/6"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($anime['relations'] as $relation)
-                    <tr class="border-b border-gray-400 border-dashed border-opacity-30">
-                        <td class="font-semibold align-top">
-                            {{ __('anime.single.relations.' . str($relation['relation'])->slug('_')) }}
-                        </td>
-                        <td class="align-top">:</td>
-                        <td class="pl-2 align-top">
-                        @foreach ($relation['entry'] as $entry)
-                            <a href="{{ ($entry['type'] == 'anime') ? route('anime.show', ['id' => $entry['mal_id']]) : $entry['url'] }}" class="text-link text-link-underline">
-                                {{ $entry['name'] }}
-                                @if ($relation['relation'] == 'Adaptation')
-                                <i class="inline-block fa-solid fa-up-right-from-square text-xs text-gray-200 dark:text-white"></i>
-                                @endif
-                            </a>{{ (!$loop->last) ? ', ' : '' }}
+            <div class="flex flex-col gap-2">
+                <h3 class="pb-2 text-2xl font-semibold border-b border-gray-400 border-opacity-50 border-dashed font-primary">{{ __('anime.single.related') }}</h3>
+                <table class="w-full table-fixed">
+                    <thead>
+                        <tr>
+                            <th class="w-1/4 lg:w-1/6"></th>
+                            <th class="w-auto"></th>
+                            <th class="w-3/4 lg:w-5/6"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($anime['relations'] as $relation)
+                        <tr class="border-b border-gray-400 border-dashed border-opacity-30">
+                            <td class="font-semibold align-top">
+                                {{ __('anime.single.relations.' . str($relation['relation'])->slug('_')) }}
+                            </td>
+                            <td class="align-top">:</td>
+                            <td class="pl-2 align-top">
+                            @foreach ($relation['entry'] as $entry)
+                                <a href="{{ ($entry['type'] == 'anime') ? route('anime.show', ['id' => $entry['mal_id']]) : $entry['url'] }}" class="text-link text-link-underline">
+                                    {{ $entry['name'] }}
+                                    @if ($relation['relation'] == 'Adaptation')
+                                    <i class="inline-block fa-solid fa-up-right-from-square text-xs text-gray-200 dark:text-white"></i>
+                                    @endif
+                                </a>{{ (!$loop->last) ? ', ' : '' }}
+                            @endforeach
+                            </td>
+                        </tr>
                         @endforeach
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
             @endif
 
             @if ($anime['status'] != 'Belum Tayang')
             <div class="flex flex-col mt-4">
-                <h3 class="pb-3 text-2xl font-semibold border-b border-gray-400 border-opacity-50 border-dashed font-primary">{{ __('anime.single.availability') }}</h3>
+                <h3 class="pb-2 text-2xl font-semibold border-b border-gray-400 border-opacity-50 border-dashed font-primary">{{ __('anime.single.availability') }}</h3>
                 <livewire:availability-grid :mal="$anime['mal_id']" />
                 <div class="flex items-center h-12 col-span-3 m-2">
                     <p class="w-full text-center text-sm text-gray-700 dark:text-gray-300">Bantu kami menemukan lebih banyak platform untuk menonton anime ini melalui
@@ -238,26 +244,24 @@
             @endif
 
             @if (count($anime['opening_themes']) > 0 && count($anime['ending_themes']) > 0)
-            <h3 class="py-3 text-2xl font-semibold border-b border-gray-400 border-opacity-50 border-dashed font-primary">{{ __('anime.single.theme_song') }}</h3>
-            <div class="grid justify-between grid-cols-1 md:grid-cols-2">
-                <div class="mt-3">
-                    <h4 class="text-lg font-semibold">{{ __('anime.single.theme_song_op') }}</h4>
-                    <p class="mt-1">
-                        {!! implode('<br />', $anime['opening_themes']) !!}
-                    </p>
-                </div>
-                <div class="mt-3">
-                    <h4 class="text-lg font-semibold">{{ __('anime.single.theme_song_ed') }}</h4>
-                    <p class="mt-1">
-                        {!! implode('<br />', $anime['ending_themes']) !!}
-                    </p>
+            <div class="flex flex-col gap-3">
+                <h3 class="pb-2 text-2xl font-semibold border-b border-gray-400 border-opacity-50 border-dashed font-primary">{{ __('anime.single.theme_song') }}</h3>
+                <div class="grid justify-between grid-cols-1 md:grid-cols-2 gap-3">
+                    <div class="flex flex-col gap-2">
+                        <h4 class="text-lg font-semibold">{{ __('anime.single.theme_song_op') }}</h4>
+                        <p class="whitespace-pre-line">{{ implode("\n", $anime['opening_themes']) }}</p>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <h4 class="text-lg font-semibold">{{ __('anime.single.theme_song_ed') }}</h4>
+                        <p class="whitespace-pre-line">{{ implode("\n", $anime['ending_themes']) }}</p>
+                    </div>
                 </div>
             </div>
             @endif
 
             @if ($anime['status'] != 'Belum Tayang')
             <div class="flex flex-col mt-4">
-                <h3 class="py-3 text-2xl font-semibold border-b border-gray-400 border-opacity-50 border-dashed font-primary">{{ __('anime.single.recommendation') }}</h3>
+                <h3 class="pb-2 text-2xl font-semibold border-b border-gray-400 border-opacity-50 border-dashed font-primary">{{ __('anime.single.recommendation') }}</h3>
                 <livewire:recommendation-list :mal="$anime['mal_id']" />
             </div>
             @endif
