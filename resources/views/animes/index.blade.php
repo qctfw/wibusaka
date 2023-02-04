@@ -16,7 +16,13 @@
                 @endforeach
             </x-library-scroll>
             @elseif ($section['component'] == 'anime-list-schedule')
-            @if ($section['animes']->isNotEmpty()) <p class="italic w-full mb-2">&bull; {{ __('anime.schedule.broadcast_disclaimer') }}</p> @endif
+            @if ($section['animes']->isNotEmpty())
+            <ul class="list-disc italic w-full mb-2">
+                @foreach (__('anime.schedule.broadcast_disclaimers') as $disclaimer)
+                <li>{{ $disclaimer }}</li>
+                @endforeach
+            </ul>
+            @endif
             <x-anime-list-schedule :animes="$section['animes']" :resources="$resources" />
             @endif
         </div>

@@ -85,7 +85,10 @@ return [
     ],
     'schedule' => [
         'title' => 'Jadwal Anime',
-        'broadcast_disclaimer' => 'Waktu yang ditampilkan adalah jadwal waktu perdana di Jepang. Waktu tayang mungkin dapat berubah tanpa adanya pemberitahuan.',
+        'broadcast_disclaimers' => [
+            'Waktu yang ditampilkan adalah jadwal waktu perdana di Jepang.',
+            'Waktu tayang mungkin dapat berubah tanpa adanya pemberitahuan.',
+        ],
     ],
     'search' => [
         'loading' => 'Mencari...',

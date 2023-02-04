@@ -96,9 +96,7 @@
                         <div class="relative inline-flex flex-col items-center group">
                             <i class="hidden md:block fa-solid fa-circle-info text-xs md:text-sm"></i>
                             <div class="absolute bottom-0 flex-col items-center hidden w-48 mb-6 group-hover:flex">
-                                <div class="relative z-20 p-2 text-sm text-center leading-4 text-white whitespace-no-wrap bg-black shadow-xl rounded-xl">
-                                    {{ __('anime.schedule.broadcast_disclaimer') }}
-                                </div>
+                                <div class="relative z-20 p-2 text-sm text-center leading-4 text-white whitespace-pre-line bg-black shadow-xl rounded-xl">{{ Arr::join(__('anime.schedule.broadcast_disclaimers'), "\n") }}</div>
                                 <div class="w-3 h-3 -mt-2 rotate-45 bg-black"></div>
                             </div>
                         </div>

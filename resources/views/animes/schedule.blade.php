@@ -25,7 +25,13 @@
         </x-dropdown>
     </div>
 
-    @if ($animes->isNotEmpty()) <p class="italic w-full mb-2">&bull; {{ __('anime.schedule.broadcast_disclaimer') }}</p> @endif
+    @if ($animes->isNotEmpty())
+    <ul class="list-disc italic w-full mb-2">
+        @foreach (__('anime.schedule.broadcast_disclaimers') as $disclaimer)
+        <li>{{ $disclaimer }}</li>
+        @endforeach
+    </ul>
+    @endif
 
     <x-anime-list-schedule :animes="$animes" :resources="$resources" />
 </x-app-layout>
