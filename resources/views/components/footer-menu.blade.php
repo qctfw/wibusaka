@@ -1,25 +1,35 @@
 <div x-data="{open: false, menu: ''}">
-    <section class="flex flex-row items-center justify-center gap-4">
+    <section class="flex flex-row flex-wrap items-center justify-center gap-x-2 xl:gap-x-4 gap-y-1">
         <a href="{{ config('anime.link.api-doc') }}" target="_blank" @class([
             'cursor-pointer',
             'text-link-underline',
-            'text-emerald-900 dark:text-emerald-100 hover:text-emerald-300 dark:hover:text-white' => request()->routeIs('index'),
-            'text-emerald-100 hover:text-white' => !request()->routeIs('index'),
-        ])>{{ __('anime.main.api') }}</a>&bull;
+            'text-emerald-900 dark:text-emerald-100 hover:text-emerald-300 dark:hover:text-white' => !request()->routeIs('anime.*'),
+            'text-emerald-100 hover:text-white' => request()->routeIs('anime.*'),
+        ])>{{ __('anime.main.api') }}<i class="fa-solid fa-up-right-from-square text-xs pl-1"></i></a>
+        <span>&bull;</span>
+        <a href="{{ route('donate') }}" @class([
+            'cursor-pointer',
+            'text-link-underline',
+            'text-emerald-900 dark:text-emerald-100 hover:text-emerald-300 dark:hover:text-white' => !request()->routeIs('anime.*'),
+            'text-emerald-100 hover:text-white' => request()->routeIs('anime.*'),
+        ])>{{ __('anime.main.donation') }}</a>
+        <span>&bull;</span>
         <div @class([
             'cursor-pointer',
-            'text-emerald-900 dark:text-emerald-100 hover:text-emerald-300 dark:hover:text-white' => request()->routeIs('index'),
-            'text-emerald-100 hover:text-white' => !request()->routeIs('index'),
-        ]) x-on:click="open = true; menu = 'privacy';">{{ __('anime.main.privacy') }}</div>&bull;
+            'text-emerald-900 dark:text-emerald-100 hover:text-emerald-300 dark:hover:text-white' => !request()->routeIs('anime.*'),
+            'text-emerald-100 hover:text-white' => request()->routeIs('anime.*'),
+        ]) x-on:click="open = true; menu = 'privacy';">{{ __('anime.main.privacy') }}</div>
+        <span>&bull;</span>
         <div @class([
             'cursor-pointer',
-            'text-emerald-900 dark:text-emerald-100 hover:text-emerald-300 dark:hover:text-white' => request()->routeIs('index'),
-            'text-emerald-100 hover:text-white' => !request()->routeIs('index'),
-        ]) x-on:click="open = true; menu = 'faq';">{{ __('anime.main.faq') }}</div>&bull;
+            'text-emerald-900 dark:text-emerald-100 hover:text-emerald-300 dark:hover:text-white' => !request()->routeIs('anime.*'),
+            'text-emerald-100 hover:text-white' => request()->routeIs('anime.*'),
+        ]) x-on:click="open = true; menu = 'faq';">{{ __('anime.main.faq') }}</div>
+        <span>&bull;</span>
         <div @class([
             'cursor-pointer',
-            'text-emerald-900 dark:text-emerald-100 hover:text-emerald-300 dark:hover:text-white' => request()->routeIs('index'),
-            'text-emerald-100 hover:text-white' => !request()->routeIs('index'),
+            'text-emerald-900 dark:text-emerald-100 hover:text-emerald-300 dark:hover:text-white' => !request()->routeIs('anime.*'),
+            'text-emerald-100 hover:text-white' => request()->routeIs('anime.*'),
         ]) x-on:click="open = true; menu = 'credits';">{{ __('anime.main.credits') }}</div>
     </section>
     <x-modal class="z-30 text-gray-900 dark:text-gray-200">

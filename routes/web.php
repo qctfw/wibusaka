@@ -18,14 +18,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [MainPageController::class, 'index'])->name('index');
-
-Route::get('docs', function () {
-    return redirect(config('anime.link.api-doc'));
-})->name('docs');
+Route::redirect('docs', config('anime.link.api-doc'))->name('docs');
+Route::view('donate', 'donate')->name('donate');
 
 Route::group(['as' => 'anime.', 'prefix' => 'anime', 'controller' => AnimeController::class], function () {
     Route::get('/', 'index')->name('index');
-    
+
     Route::group(['as' => 'top.', 'prefix' => 'top', 'controller' => TopAnimeController::class], function () {
         Route::get('rated', 'rated')->name('rated');
         Route::get('airing', 'airing')->name('airing');

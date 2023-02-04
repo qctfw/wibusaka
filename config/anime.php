@@ -18,6 +18,7 @@ return [
         'api-doc' => env('WIBUSAKA_LINK_API_DOCS', '#'),
         'discord' => env('WIBUSAKA_LINK_DISCORD', '#'),
         'github' => env('WIBUSAKA_LINK_GITHUB', '#'),
-        'twitter' => env('WIBUSAKA_LINK_TWITTER', '#')
+        'twitter' => env('WIBUSAKA_LINK_TWITTER', '#'),
+        'trakteer' => env('WIBUSAKA_LINK_TRAKTEER', '#'),
     ]
 ];

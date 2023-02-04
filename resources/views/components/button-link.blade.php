@@ -4,6 +4,9 @@
         <img src="{{ $img }}" alt="Icon" class="mx-auto">
     </div>
     @endisset
+    @isset($customImg)
+    {{ $customImg }}
+    @endisset
     <div class="flex flex-col flex-auto">
         {{ $slot }}
     </div>

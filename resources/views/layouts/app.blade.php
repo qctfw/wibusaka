@@ -73,7 +73,7 @@
     </style>
 </head>
 <body class="flex flex-col w-screen h-screen gap-8 overflow-x-hidden font-sans bg-gray-200 dark:bg-gray-900 dark:text-gray-200 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-300 dark:scrollbar-thumb-gray-500 dark:scrollbar-track-gray-700">
-    @if (request()->routeIs('index'))
+    @if (!request()->routeIs('anime.*'))
     <x-header-index />
     @else
     <x-header-navbar />
@@ -83,7 +83,7 @@
         {{ $slot }}
     </main>
 
-    @if (request()->routeIs('index'))
+    @if (!request()->routeIs('anime.*'))
     <x-footer-main-page />
     @else
     <x-footer />
