@@ -8,7 +8,7 @@ WibuSaka uses [Jikan.moe](https://jikan.moe) API to fetch anime datas.
 For API references, refer to our API's [repository](https://github.com/qctfw/wibusaka-api).
 
 ## Requirements
-- PHP 8.1+
+- PHP 8.2+
 - MySQL 5.7+
 - Redis
 
