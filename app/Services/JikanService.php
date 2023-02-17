@@ -166,7 +166,7 @@ class JikanService implements JikanServiceInterface
 
     public function getUpcomingBroadcastAnimes(Carbon $time = null)
     {
-        $time = $time ?: now()->setSecond(0)->setMicrosecond(0);
+        $time = $time ?: now()->startOfMinute();
 
         $cache = Cache::tags(['jikan', 'jikan-anime-schedule']);
         $cache_key = 'jikan-anime-schedule-all';
