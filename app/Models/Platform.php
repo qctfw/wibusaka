@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\ResourceType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Platform extends Model
@@ -17,7 +18,7 @@ class Platform extends Model
      * @var string
      */
     protected $table = 'anime_platforms';
-    
+
     /**
      * The "type" of the primary key ID.
      *
@@ -35,7 +36,7 @@ class Platform extends Model
     /**
      * Get the resources that owns the platform.
      */
-    public function resource()
+    public function resource(): HasMany
     {
         return $this->hasMany(Resource::class);
     }
@@ -43,7 +44,7 @@ class Platform extends Model
     /**
      * The attributes that should be cast.
      *
-     * @var array
+     * @var array<string, class-string|string>
      */
     protected $casts = [
         'type' => ResourceType::class,
@@ -51,10 +52,8 @@ class Platform extends Model
 
     /**
      * Bootstrap the model and its traits.
-     *
-     * @return void
      */
-    public static function boot()
+    public static function boot(): void
     {
         parent::boot();
 
@@ -65,10 +64,8 @@ class Platform extends Model
 
     /**
      * Generate random ID
-     * 
-     * @return string
      */
-    private static function generateId()
+    private static function generateId(): string
     {
         $id = bin2hex(random_bytes(12));
         if (self::find($id))

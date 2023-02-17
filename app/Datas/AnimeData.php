@@ -5,51 +5,52 @@ namespace App\Datas;
 use ArrayAccess;
 use Carbon\Carbon;
 use ErrorException;
+use ReflectionProperty;
 use stdClass;
 
-class AnimeData implements ArrayAccess
+readonly class AnimeData implements ArrayAccess
 {
     private const JIKAN_ANIME_EXPLICIT_GENRE_IDS = [9, 12, 49];
 
     public function __construct(
-        public readonly int $mal_id,
-        public readonly string $mal_url,
-        public readonly array $images,
-        public readonly ?string $trailer_url,
-        public readonly array $titles,
-        public readonly ?string $type,
-        public readonly string $source,
-        public readonly ?int $episodes,
-        public readonly string $status,
-        public readonly bool $is_airing,
-        public readonly ?Carbon $aired_from,
-        private readonly stdClass $aired_from_properties,
-        public readonly ?Carbon $aired_to,
-        private readonly stdClass $aired_to_properties,
-        public readonly ?Carbon $duration,
-        public readonly string $rating,
-        public readonly ?string $score,
-        public readonly ?int $rank,
-        public readonly int $popularity,
-        public readonly int $members,
-        public readonly int $favorites,
-        public readonly ?string $synopsis,
-        public readonly ?string $background,
-        public readonly ?string $season,
-        public readonly ?int $year,
-        public readonly ?array $broadcast,
-        public readonly ?string $premiered,
-        public readonly array $producers,
-        public readonly array $licensors,
-        public readonly array $studios,
-        public readonly array $genres,
-        public readonly array $explicit_genres,
-        public readonly array $themes,
-        public readonly array $demographics,
-        public readonly array $relations,
-        public readonly array $opening_themes,
-        public readonly array $ending_themes,
-        public readonly array $external_links,
+        public int $mal_id,
+        public string $mal_url,
+        public array $images,
+        public ?string $trailer_url,
+        public array $titles,
+        public ?string $type,
+        public string $source,
+        public ?int $episodes,
+        public string $status,
+        public bool $is_airing,
+        public ?Carbon $aired_from,
+        private stdClass $aired_from_properties,
+        public ?Carbon $aired_to,
+        private stdClass $aired_to_properties,
+        public ?Carbon $duration,
+        public string $rating,
+        public ?string $score,
+        public ?int $rank,
+        public int $popularity,
+        public int $members,
+        public int $favorites,
+        public ?string $synopsis,
+        public ?string $background,
+        public ?string $season,
+        public ?int $year,
+        public ?array $broadcast,
+        public ?string $premiered,
+        public array $producers,
+        public array $licensors,
+        public array $studios,
+        public array $genres,
+        public array $explicit_genres,
+        public array $themes,
+        public array $demographics,
+        public array $relations,
+        public array $opening_themes,
+        public array $ending_themes,
+        public array $external_links,
     ) {}
 
     public static function fromJikan(array $data): self
@@ -68,6 +69,7 @@ class AnimeData implements ArrayAccess
             $titles['synonym'] = [];
 
         $status = __('anime.single.status_enums.' . str($data['status'])->replace(' ', '_')->lower());
+        $status = __($status);
 
         $aired_from = null;
         if (filled($data['aired']['from']))
@@ -189,9 +191,17 @@ class AnimeData implements ArrayAccess
         throw new ErrorException('This class is read-only');
     }
 
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
-        return property_exists($this, $offset) ? $this->$offset : throw new ErrorException('Undefined key `'. $offset . '`');
+        if (!property_exists($this, $offset)) {
+            throw new ErrorException('Undefined key `'. $offset . '`');
+        }
+
+        if (!(new ReflectionProperty($this, $offset))->isPublic()) {
+            throw new ErrorException('Key `'. $offset . '` is not accessible');
+        }
+
+        return $this->$offset;
     }
 
     private function airedFormat(?Carbon $date, stdClass $date_properties, $format): string
@@ -259,7 +269,7 @@ class AnimeData implements ArrayAccess
      * @link https://github.com/jikan-me/jikan/issues/486#issuecomment-1289619241
      * @link https://onlinephp.io/c/34793
      */
-    private static function parseAiredProperties(?string $aired): ?stdClass
+    private static function parseAiredProperties(?string $aired): stdClass
     {
         $aired ??= '';
 

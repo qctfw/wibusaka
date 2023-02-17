@@ -9,7 +9,10 @@ use App\ViewModels\ProducerViewModel;
 use App\ViewModels\ScheduleViewModel;
 use App\ViewModels\SeasonViewModel;
 use App\ViewModels\TopIndexViewModel;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Collection;
 
 class AnimeController extends Controller
 {
@@ -23,28 +26,17 @@ class AnimeController extends Controller
         'sunday'
     ];
 
-    /**
-     * @var JikanServiceInterface
-     */
-    private $jikan_service;
-
-    /**
-     * @var ResourceServiceInterface
-     */
-    private $resource_service;
-
-    public function __construct(JikanServiceInterface $jikan_service, ResourceServiceInterface $resource_service)
+    public function __construct(
+        private JikanServiceInterface $jikan_service,
+        private ResourceServiceInterface $resource_service
+    )
     {
-        $this->jikan_service = $jikan_service;
-        $this->resource_service = $resource_service;
     }
 
     /**
      * Display the main page.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): Response
     {
         $current_season = $this->jikan_service->getCurrentSeason();
         $current_season['animes'] = $current_season['animes']->take(25);
@@ -72,15 +64,13 @@ class AnimeController extends Controller
 
         $top_index_view_model = new TopIndexViewModel($sections, $resources);
 
-        return view('animes.index', $top_index_view_model);
+        return response()->view('animes.index', $top_index_view_model);
     }
 
     /**
      * Display animes by season.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function season($year = null, $season = null)
+    public function season(int $year = null, string $season = null): Response
     {
         if (!is_null($season))
         {
@@ -95,16 +85,13 @@ class AnimeController extends Controller
 
         $season_view_model = new SeasonViewModel($result['seasons'], $result['animes'], $season_resources);
 
-        return view('animes.season', $season_view_model);
+        return response()->view('animes.season', $season_view_model);
     }
 
     /**
      * Display animes by schedule.
-     *
-     * @param  string|null $day
-     * @return \Illuminate\Http\Response
      */
-    public function schedule($day = null)
+    public function schedule(?string $day = null): Response|RedirectResponse
     {
         if (is_null($day))
         {
@@ -122,17 +109,13 @@ class AnimeController extends Controller
 
         $schedule_view_model = new ScheduleViewModel($animes, $resources);
 
-        return view('animes.schedule', $schedule_view_model);
+        return response()->view('animes.schedule', $schedule_view_model);
     }
 
     /**
      * Display producer's anime.
-     *
-     * @param string $id
-     * @param Request $request
-     * @return \Illuminate\Http\Response
      */
-    public function producer(string $id, Request $request)
+    public function producer(string $id, Request $request): Response|RedirectResponse
     {
         $page = $request->input('page', 1);
 
@@ -148,16 +131,13 @@ class AnimeController extends Controller
 
         $producer_view_model = new ProducerViewModel($producer, $page, $result['pagination'], $result['animes'], $resources);
 
-        return view('animes.producer', $producer_view_model);
+        return response()->view('animes.producer', $producer_view_model);
     }
 
     /**
      * Display the specified anime.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(int $id): Response
     {
         $result = $this->jikan_service->getAnime(intval($id));
 
@@ -165,10 +145,10 @@ class AnimeController extends Controller
 
         $anime_view_model = new AnimeViewModel($result);
 
-        return view('animes.single', $anime_view_model);
+        return response()->view('animes.single', $anime_view_model);
     }
 
-    private function buildIndexSection($title, $route, $component, $animes)
+    private function buildIndexSection(string $title, string $route, string $component, $animes): Collection
     {
         return collect([
             'title' => $title,

@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Arr;
 
@@ -17,7 +19,7 @@ class Resource extends Model
      * @var string
      */
     protected $table = 'anime_resources';
-    
+
     /**
      * The "type" of the primary key ID.
      *
@@ -51,19 +53,15 @@ class Resource extends Model
     /**
      * Get the platform associated with the anime resource.
      */
-    public function platform()
+    public function platform(): BelongsTo
     {
         return $this->belongsTo(Platform::class);
     }
 
     /**
      * Scope a query to only include resources of a given MyAnimeList ID.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @param  array|int  $mal_id
-     * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeByMalId($query, $mal_id)
+    public function scopeByMalId(Builder $query, array|int $mal_id): Builder
     {
         if (Arr::accessible($mal_id))
         {
@@ -75,10 +73,8 @@ class Resource extends Model
 
     /**
      * Get the resource's alternative note.
-     *
-     * @return string
      */
-    public function getAlternativeNoteAttribute()
+    public function getAlternativeNoteAttribute(): string
     {
         $alternative_note = $this->platform->name;
         $alternative_note .= ($this->paid) ? ' (Berbayar)' : '';
@@ -89,10 +85,8 @@ class Resource extends Model
 
     /**
      * Bootstrap the model and its traits.
-     *
-     * @return void
      */
-    public static function boot()
+    public static function boot(): void
     {
         parent::boot();
 
@@ -103,10 +97,8 @@ class Resource extends Model
 
     /**
      * Generate random ID
-     * 
-     * @return string
      */
-    private static function generateId()
+    private static function generateId(): string
     {
         $id = bin2hex(random_bytes(12));
         if (self::find($id))
