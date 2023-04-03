@@ -23,7 +23,7 @@ class JikanService implements JikanServiceInterface
 
     public function __construct()
     {
-        $this->base_uri = 'https://api.jikan.moe/v4/';
+        $this->base_uri = config('anime.jikan.base_url', 'https://api.jikan.moe/v4/');
     }
 
     public function getTopAnimes(string $category, int $page = 1)

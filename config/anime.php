@@ -14,6 +14,9 @@ return [
     'index' => [
         'max_schedule' => env('ANIME_UPCOMING_SCHEDULE_INDEX_MAXIMUM'),
     ],
+    'jikan' => [
+        'base_url' => env('JIKAN_BASE_URL'),
+    ],
     'link' => [
         'api-doc' => env('WIBUSAKA_LINK_API_DOCS', '#'),
         'discord' => env('WIBUSAKA_LINK_DISCORD', '#'),
