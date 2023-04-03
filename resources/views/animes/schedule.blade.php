@@ -1,10 +1,10 @@
 <x-app-layout>
-    <x-slot name="title">{{ __('anime.schedule.title') }} Hari {{ $active_day }}</x-slot>
+    <x-slot name="title">{{ __('anime.schedule.title') }} Hari {{ ucwords($day) }}</x-slot>
     <x-slot name="meta_title">{{ __('meta.schedule.description') }}</x-slot>
 
     <div class="flex flex-col items-center justify-between gap-2 pb-4 md:flex-row">
         <div class="flex flex-col items-center font-bold text-blue-700 dark:text-blue-300">
-            <x-title>{{ __('anime.schedule.title') }} Hari {{ $active_day }}</x-title>
+            <x-title>{{ __('anime.schedule.title') }} Hari {{ ucwords($day) }}</x-title>
         </div>
         <x-dropdown>
             <x-slot name="menu">
@@ -33,5 +33,5 @@
     </ul>
     @endif
 
-    <x-anime-list-schedule :animes="$animes" :resources="$resources" />
+    <x-anime-list-schedule :animes="$animes" :resources="$resources" :day="$day" />
 </x-app-layout>

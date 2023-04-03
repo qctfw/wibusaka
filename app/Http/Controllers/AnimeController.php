@@ -107,7 +107,7 @@ class AnimeController extends Controller
 
         $resources = $this->resource_service->getByMalIds($animes->pluck('mal_id'));
 
-        $schedule_view_model = new ScheduleViewModel($animes, $resources);
+        $schedule_view_model = new ScheduleViewModel($day, $animes, $resources);
 
         return response()->view('animes.schedule', $schedule_view_model);
     }
@@ -132,6 +132,11 @@ class AnimeController extends Controller
         $producer_view_model = new ProducerViewModel($producer, $page, $result['pagination'], $result['animes'], $resources);
 
         return response()->view('animes.producer', $producer_view_model);
+    }
+
+    public function theater(): Response
+    {
+        return response()->view('animes.theater');
     }
 
     /**

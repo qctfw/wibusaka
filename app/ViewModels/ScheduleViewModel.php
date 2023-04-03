@@ -2,6 +2,7 @@
 
 namespace App\ViewModels;
 
+use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Spatie\ViewModels\ViewModel;
@@ -9,16 +10,15 @@ use Spatie\ViewModels\ViewModel;
 class ScheduleViewModel extends ViewModel
 {
     public function __construct(
+        public string $day,
         public Collection $animes,
         public Collection $resources
     )
     {}
 
-    public function active_day()
+    public function day()
     {
-        return optional($this->animes->first(), function ($anime) {
-            return $anime['broadcast']['day'];
-        });
+        return Carbon::create($this->day)->dayName;
     }
 
     public function animes()
