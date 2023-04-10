@@ -21,7 +21,7 @@
             <span>{{ $anime['score'] }}</span>
             @else
             <div class="w-4 text-center"><i class="fa-solid fa-calendar-day"></i></div>
-            <span>{{ $anime->airedFromFormat('M Y') }}</span>
+            <span>{{ $anime->airedFromFormat('d M') }}</span>
             @endif
         </div>
         <div class="flex flex-row items-center gap-2 text-left">
