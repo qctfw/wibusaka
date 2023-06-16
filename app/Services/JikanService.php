@@ -65,21 +65,17 @@ class JikanService implements JikanServiceInterface
 
     public function getCurrentSeason()
     {
-        $cache = Cache::tags(['jikan', 'jikan-season']);
-        $cache_key = 'jikan-season-current';
+        $now = now();
 
-        $animes = $cache->get($cache_key);
+        $season = match (true) {
+            in_array($now->month, range(1, 3)) => 'winter',
+            in_array($now->month, range(4, 6)) => 'spring',
+            in_array($now->month, range(7, 9)) => 'summer',
+            in_array($now->month, range(10, 12)) => 'fall',
+            default => new \Exception('Can not generate current season')
+        };
 
-        if (is_null($animes)) {
-            $animes = $this->requestJikanAllPages('seasons/now');
-
-            $cache->put($cache_key, $animes, now()->endOfDay());
-        }
-
-        return [
-            'seasons' => $this->getSeasonNavigation($animes->first()['year'], $animes->first()['season']),
-            'animes' => $animes
-        ];
+        return $this->getAnimesBySeason($now->year, $season);
     }
 
     public function getAnimesBySeason(int $year, string $season)
@@ -93,6 +89,15 @@ class JikanService implements JikanServiceInterface
 
         if (is_null($animes)) {
             $animes = $this->requestJikanAllPages('seasons/' . $year . '/' . $season);
+
+            // Temp fix for unknown year anime appeared in Winter season
+            if ($year >= now()->year && $season == 'winter') {
+                $animes = $animes->filter(function ($anime) {
+                    return $anime->aired_from_properties->has_year === true
+                    && $anime->aired_from_properties->has_month === true
+                    && $anime->aired_from_properties->has_day === true;
+                });
+            }
 
             $cache->put($cache_key, $animes, now()->endOfDay());
         }
@@ -346,7 +351,7 @@ class JikanService implements JikanServiceInterface
         $has_next_page = true;
 
         while ($has_next_page) {
-            $result = $this->requestJikan($uri, ['page' => $page, 'limit' => 100, ...$query]);
+            $result = $this->requestJikan($uri, ['page' => $page, 'limit' => 25, ...$query]);
 
             $animes = array_merge($animes, $result['data']);
 
@@ -463,7 +468,7 @@ class JikanService implements JikanServiceInterface
             $jikan_response->effectiveUri()->getPath(),
             $exception_body['type'],
             $exception_body['status'],
-            $exception_body['message']
+            $exception_body['message'] ?? ''
         );
 
         throw new JikanException($jikan_response->status(), $exception_message);

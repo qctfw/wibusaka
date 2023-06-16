@@ -41,17 +41,66 @@
             </div>
         </div>
     </div>
-    <div class="flex flex-col gap-8 divide-y divide-gray-400 divide-dashed divide-opacity-50">
+    <div class="flex flex-col gap-8">
         <x-anime-list class="gap-2">
-
-            @forelse ($animes->where('members', '>=', config('anime.season.min_members')) as $anime)
+            <x-slot name="title">
+                <x-subtitle>TV <span class="text-xs normal-case">({{ abbreviate_number(config('anime.season.minimum.tv')) }}+ member)</span></x-subtitle>
+            </x-slot>
+            @forelse ($animes->where('type', 'TV')->where('continuing', false)->where('members', '>=', config('anime.season.minimum.tv')) as $anime)
             <x-anime-card :anime="$anime" :resources="$resources[$anime['mal_id']]" />
             @empty
             <div class="text-lg italic">
                 {{ __('anime.season.no_anime') }}
             </div>
             @endforelse
-
+        </x-anime-list>
+        <x-anime-list class="gap-2">
+            <x-slot name="title">
+                <x-subtitle>ONA <span class="text-xs normal-case">({{ abbreviate_number(config('anime.season.minimum.ona')) }}+ member)</span></x-subtitle>
+            </x-slot>
+            @forelse ($animes->where('type', 'ONA')->where('members', '>=', config('anime.season.minimum.ona')) as $anime)
+            <x-anime-card :anime="$anime" :resources="$resources[$anime['mal_id']]" />
+            @empty
+            <div class="text-lg italic">
+                {{ __('anime.season.no_anime') }}
+            </div>
+            @endforelse
+        </x-anime-list>
+        <x-anime-list class="gap-2">
+            <x-slot name="title">
+                <x-subtitle>OVA <span class="text-xs normal-case">({{ abbreviate_number(config('anime.season.minimum.ova')) }}+ member)</span></x-subtitle>
+            </x-slot>
+            @forelse ($animes->where('type', 'OVA')->where('members', '>=', config('anime.season.minimum.ova')) as $anime)
+            <x-anime-card :anime="$anime" :resources="$resources[$anime['mal_id']]" />
+            @empty
+            <div class="text-lg italic">
+                {{ __('anime.season.no_anime') }}
+            </div>
+            @endforelse
+        </x-anime-list>
+        <x-anime-list class="gap-2">
+            <x-slot name="title">
+                <x-subtitle>Movie <span class="text-xs normal-case">({{ abbreviate_number(config('anime.season.minimum.movie')) }}+ member)</span></x-subtitle>
+            </x-slot>
+            @forelse ($animes->where('type', 'Movie')->where('members', '>=', config('anime.season.minimum.movie')) as $anime)
+            <x-anime-card :anime="$anime" :resources="$resources[$anime['mal_id']]" />
+            @empty
+            <div class="text-lg italic">
+                {{ __('anime.season.no_anime') }}
+            </div>
+            @endforelse
+        </x-anime-list>
+        <x-anime-list class="gap-2">
+            <x-slot name="title">
+                <x-subtitle>Special <span class="text-xs normal-case">({{ abbreviate_number(config('anime.season.minimum.special')) }}+ member)</span></x-subtitle>
+            </x-slot>
+            @forelse ($animes->where('type', 'Special')->where('members', '>=', config('anime.season.minimum.special')) as $anime)
+            <x-anime-card :anime="$anime" :resources="$resources[$anime['mal_id']]" />
+            @empty
+            <div class="text-lg italic">
+                {{ __('anime.season.no_anime') }}
+            </div>
+            @endforelse
         </x-anime-list>
     </div>
 </x-app-layout>
