@@ -191,6 +191,7 @@ class JikanService implements JikanServiceInterface
             ->sortBy('broadcast.time');
 
         $result = $animes->filter(function ($value, $key) use ($time) {
+            if (is_null($value['broadcast'])) return false;
             $anime_max_time = Carbon::parse($value['broadcast']['time'])->addMinutes($value['duration']?->minute);
 
             return $time->dayName == $value['broadcast']['day'] && $time->lessThanOrEqualTo($anime_max_time);
