@@ -227,7 +227,7 @@
             </div>
             @endif
 
-            @if ($anime['status'] != 'Belum Tayang' || $anime['aired_from']->lessThanOrEqualTo(now()->addWeeks(2)))
+            @if ($anime['status'] != 'Belum Tayang' || $anime['aired_from']?->lessThanOrEqualTo(now()->addWeeks(2)))
             <div class="flex flex-col mt-4">
                 <h3 class="pb-2 text-2xl font-semibold border-b border-gray-400 border-opacity-50 border-dashed font-primary">{{ __('anime.single.availability') }}</h3>
                 <livewire:availability-grid :mal="$anime['mal_id']" />
