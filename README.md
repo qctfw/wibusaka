@@ -56,7 +56,7 @@ For API references, refer to our API's [repository](https://github.com/qctfw/wib
     ```
     > **Note**
     >
-    > Change `dev` into `prod` or `production` for purging unused styles and scripts.
+    > Change `dev` into `build` for purging unused styles and scripts.
 
 ## Contributing
 
