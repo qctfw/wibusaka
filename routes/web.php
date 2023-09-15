@@ -23,6 +23,7 @@ Route::view('donate', 'donate')->name('donate');
 
 Route::group(['as' => 'anime.', 'prefix' => 'anime', 'controller' => AnimeController::class], function () {
     Route::get('/', 'index')->name('index');
+    Route::redirect('extension', config('anime.link.extension'));
 
     Route::group(['as' => 'top.', 'prefix' => 'top', 'controller' => TopAnimeController::class], function () {
         Route::get('rated', 'rated')->name('rated');
