@@ -27,7 +27,7 @@ if (!function_exists('abbreviate_number'))
         }
 
         $first_three_numbers = substr($number, 0, 3);
-        
+
         $decimal_pos = strlen($number) % 3;
         if ($decimal_pos == 0)
         {
@@ -62,7 +62,7 @@ if (!function_exists('guess_site')) {
     {
         $parsed_url = ltrim(parse_url($url, PHP_URL_HOST), 'www.');
         $parsed_url = explode('.', $parsed_url, 2)[0];
-        
+
         return $parsed_url;
     }
 }
@@ -83,5 +83,21 @@ if (!function_exists('randomize_logo')) {
         }
 
         return (session('logorandom') <= $chance) ? logo_asset(config('anime.asset.logo.jp')) : logo_asset(config('anime.asset.logo.default'));
+    }
+}
+
+if (!function_exists('season')) {
+    function season(\Carbon\Carbon $date = null) {
+        if ($date === null) {
+            $date = now();
+        }
+
+        return match (true) {
+            in_array($date->month, range(1, 3)) => 'winter',
+            in_array($date->month, range(4, 6)) => 'spring',
+            in_array($date->month, range(7, 9)) => 'summer',
+            in_array($date->month, range(10, 12)) => 'fall',
+            default => throw new \Exception('Can not generate current season')
+        };
     }
 }

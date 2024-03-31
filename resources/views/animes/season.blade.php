@@ -46,7 +46,7 @@
             <x-slot name="title">
                 <x-subtitle>TV <span class="text-xs normal-case">({{ abbreviate_number(config('anime.season.minimum.tv')) }}+ member)</span></x-subtitle>
             </x-slot>
-            @forelse ($animes->where('type', 'TV')->where('continuing', false)->where('members', '>=', config('anime.season.minimum.tv')) as $anime)
+            @forelse ($animes->where('type', 'TV')->where('year', $seasons['current']['year'])->where('season', $seasons['current']['season'])->where('members', '>=', config('anime.season.minimum.tv')) as $anime)
             <x-anime-card :anime="$anime" :resources="$resources[$anime['mal_id']]" />
             @empty
             <div class="text-lg italic">

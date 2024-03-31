@@ -38,8 +38,13 @@ class AnimeController extends Controller
      */
     public function index(): Response
     {
+        $season = season();
+
         $current_season = $this->jikan_service->getCurrentSeason();
-        $current_season['animes'] = $current_season['animes']->take(25);
+        $current_season['animes'] = $current_season['animes']
+            ->where('year', now()->year)
+            ->where('season', $season)
+            ->take(25);
 
         $current_schedule_animes = $this->jikan_service->getUpcomingBroadcastAnimes();
 

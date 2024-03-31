@@ -67,13 +67,7 @@ class JikanService implements JikanServiceInterface
     {
         $now = now();
 
-        $season = match (true) {
-            in_array($now->month, range(1, 3)) => 'winter',
-            in_array($now->month, range(4, 6)) => 'spring',
-            in_array($now->month, range(7, 9)) => 'summer',
-            in_array($now->month, range(10, 12)) => 'fall',
-            default => new \Exception('Can not generate current season')
-        };
+        $season = season($now);
 
         return $this->getAnimesBySeason($now->year, $season);
     }
