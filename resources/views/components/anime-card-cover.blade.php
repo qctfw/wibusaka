@@ -3,7 +3,7 @@
         <div class="flex flex-col items-center justify-center w-full h-72 spinner">
             <i class="animate-spin fa-solid fa-spinner text-lg text-gray-800 dark:text-gray-100"></i>
         </div>
-        <img alt="{{ $anime['titles']['default'][0] }} Anime Poster" data-src="{{ $anime['images']['webp']['small_image_url'] }}" srcset="{{ $anime['images']['webp']['large_image_url'] }} 1.25x" class="absolute inset-x-0 top-0 max-w-full max-h-full mx-auto rounded-lg opacity-0" loading="lazy" />
+        <img alt="{{ $anime['titles']['default'][0] }} Anime Poster" data-src="{{ $anime['images']['webp']['small_image_url'] }}" srcset="{{ $anime['images']['webp']['large_image_url'] }} 720w" class="absolute inset-x-0 top-0 max-w-full max-h-full mx-auto rounded-lg opacity-0" loading="lazy" />
         <div class="absolute inset-x-0 bottom-0 py-1 bg-black bg-opacity-50">
             <h4 class="p-1 text-lg font-semibold leading-tight text-center text-emerald-100 transition-colors duration-200 group-hover:text-emerald-300 dark:group-hover:text-emerald-300">
                 {{ $anime['titles']['default'][0] }}

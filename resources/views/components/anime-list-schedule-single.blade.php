@@ -11,7 +11,7 @@
             <div class="flex flex-col items-center justify-center w-1/2 mx-auto h-72 spinner">
                 <i class="animate-spin fa-solid fa-spinner text-lg text-gray-800 dark:text-gray-100"></i>
             </div>
-            <img alt="{{ $anime['titles']['default'][0] }} Anime Poster" data-src="{{ $anime['images']['webp']['small_image_url'] }}" srcset="{{ $anime['images']['webp']['large_image_url'] }} 1.25x" class="absolute inset-x-0 top-0 max-w-full max-h-full mx-auto opacity-0 rounded-l" loading="lazy" />
+            <img alt="{{ $anime['titles']['default'][0] }} Anime Poster" data-src="{{ $anime['images']['webp']['small_image_url'] }}" srcset="{{ $anime['images']['webp']['large_image_url'] }} 720w" class="absolute inset-x-0 top-0 max-w-full max-h-full mx-auto opacity-0 rounded-l" loading="lazy" />
             @if (blank(!$anime['explicit_genres']))
             <div x-data="{showCover: false}" x-on:click.prevent="showCover = true" x-show="!showCover" class="absolute inset-x-0 top-0 flex items-center justify-center w-full h-full text-gray-200 backdrop-blur">
                 <div class="flex items-center px-2 py-1 bg-gray-800 rounded">Lihat</div>
